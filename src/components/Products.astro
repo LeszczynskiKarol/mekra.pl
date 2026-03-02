@@ -1,0 +1,170 @@
+---
+const frameTypes = [
+  {
+    size: '7',
+    unit: 'mm',
+    name: 'Nowoczesna Linia',
+    description: 'Delikatne podkreślenie formy. Subtelna ramka, która nadaje frontom nowoczesny, minimalistyczny charakter. Idealna do kuchni w duchu skandynawskim i loftowym.',
+    style: 'Nowoczesny design',
+    image: 'https://placehold.co/600x400/e6ddd0/866751?text=Ramka+7mm',
+    imageAlt: 'Front ramiakowy z ramką 7mm - nowoczesny design',
+  },
+  {
+    size: '18',
+    unit: 'mm',
+    name: 'Współczesna Elegancja',
+    description: 'Ramka w nowoczesnej formie z wyraźniejszym akcentem. Łączy współczesne wzornictwo z wyczuwalną strukturą materiału. Uniwersalny wybór do kuchni i zabudów.',
+    style: 'Uniwersalna forma',
+    image: 'https://placehold.co/600x400/e6ddd0/866751?text=Ramka+18mm',
+    imageAlt: 'Front ramiakowy z ramką 18mm - współczesna elegancja',
+  },
+  {
+    size: '36',
+    unit: 'mm',
+    name: 'Klasyczny Szyk',
+    description: 'Idziemy w stronę klasyku — kuchni farmerskich, skandynawskich, prowansalskich. Szersza ramka nadaje meblom charakteru i przytulności tradycyjnych wnętrz.',
+    style: 'Styl farmhouse & skandynawski',
+    image: 'https://placehold.co/600x400/e6ddd0/866751?text=Ramka+36mm',
+    imageAlt: 'Front ramiakowy z ramką 36mm - klasyczny styl farmhouse',
+  },
+  {
+    size: '60',
+    unit: 'mm',
+    name: 'Pełna Klasyka',
+    description: 'Standardowa, znana forma z frontów MDF lakierowanych — teraz w wersji z płyty laminowanej. Możliwość wpuszczenia lustra lub szkła w środek ramki, zamiast standardowego montażu od tyłu.',
+    style: 'Klasyka z lustrem lub szkłem',
+    image: 'https://placehold.co/600x400/e6ddd0/866751?text=Ramka+60mm',
+    imageAlt: 'Front ramiakowy z ramką 60mm - klasyczny front ze szkłem',
+  },
+];
+---
+
+<section id="oferta" class="section-spacing section-padding relative" style="background-color: var(--color-bg-secondary);">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto animate-on-scroll">
+      <span class="label-tag">Oferta</span>
+      <h2 class="mt-6 font-display text-3xl sm:text-4xl md:text-5xl tracking-tight" style="color: var(--color-text);">
+        Cztery szerokości ramek,<br />
+        <span class="text-gradient">nieograniczone możliwości</span>
+      </h2>
+      <p class="mt-6 text-base md:text-lg leading-relaxed font-body" style="color: var(--color-text-secondary);">
+        Każda ramka to inny charakter wnętrza. Od minimalizmu po pełną klasykę — dobierz szerokość
+        do swojego stylu. Wszystkie fronty mają grubość 22&nbsp;mm i&nbsp;pracują na standardowych
+        zawiasach Blum, Häfele i&nbsp;Hettich.
+      </p>
+    </div>
+
+    <!-- Frame types grid -->
+    <div class="mt-16 grid sm:grid-cols-2 gap-6">
+      {frameTypes.map((frame, i) => (
+        <article
+          class="animate-on-scroll card-base rounded-2xl overflow-hidden group"
+          style={`transition-delay: ${i * 0.1}s;`}
+        >
+          <!-- Image -->
+          <div class="aspect-[3/2] overflow-hidden">
+            <img
+              src={frame.image}
+              alt={frame.imageAlt}
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+
+          <!-- Content -->
+          <div class="p-6 md:p-8">
+            <div class="flex items-baseline gap-3">
+              <span class="font-display text-4xl md:text-5xl" style="color: var(--color-accent);">
+                {frame.size}
+              </span>
+              <span class="font-heading text-sm font-medium tracking-wider uppercase" style="color: var(--color-text-muted);">
+                {frame.unit}
+              </span>
+            </div>
+            <h3 class="mt-3 font-heading text-xl font-semibold" style="color: var(--color-text);">
+              {frame.name}
+            </h3>
+            <p class="mt-2 text-sm leading-relaxed font-body" style="color: var(--color-text-secondary);">
+              {frame.description}
+            </p>
+            <div class="mt-4">
+              <span class="inline-flex items-center gap-1.5 text-xs font-heading font-medium" style="color: var(--color-accent);">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
+                </svg>
+                {frame.style}
+              </span>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- 33-degree cut section -->
+    <div class="mt-20 animate-on-scroll">
+      <div class="card-base rounded-2xl overflow-hidden">
+        <div class="grid lg:grid-cols-2">
+          <!-- Image -->
+          <div class="aspect-[4/3] lg:aspect-auto overflow-hidden">
+            <img
+              src="https://placehold.co/800x600/2f241e/d4c5ae?text=Front+33%C2%B0"
+              alt="Front z uchwytem zacinanym na 33 stopnie - bezuchwytowy design"
+              class="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+
+          <!-- Content -->
+          <div class="p-8 md:p-12 lg:p-16 flex flex-col justify-center">
+            <span class="label-tag">Nowość</span>
+            <h3 class="mt-5 font-display text-2xl sm:text-3xl md:text-4xl tracking-tight" style="color: var(--color-text);">
+              Fronty z&nbsp;uchwytem zacinanym<br />
+              <span class="text-gradient">na 33°</span>
+            </h3>
+            <div class="mt-6 space-y-4 text-base leading-relaxed font-body" style="color: var(--color-text-secondary);">
+              <p>
+                Dzięki zacinaniu pod kątem 33&nbsp;stopni możesz pozbyć się tradycyjnych uchwytów
+                i&nbsp;zrezygnować z&nbsp;niewygodnego systemu tip-on. Gładka, bezuchwytowa forma
+                z&nbsp;wyczuwalną fakturą drewna pod palcami.
+              </p>
+              <p>
+                Kompatybilne z&nbsp;uchwytami korytkowych systemów Schüco i&nbsp;GTV. Front wybierasz
+                z&nbsp;pełnej palety płyt laminowanych — w&nbsp;tym drewnopodobnych z&nbsp;naturalną strukturą.
+              </p>
+              <p>
+                Wszystkie fronty z&nbsp;zacinaniem 33° są dodatkowo zabezpieczane specjalnym klejem
+                odpornym na wilgoć.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Glass & mirror note -->
+    <div class="mt-8 animate-on-scroll">
+      <div class="rounded-2xl p-6 md:p-8" style="background-color: var(--color-bg-tertiary); border: 1px solid var(--color-border);">
+        <div class="flex gap-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center" style="background-color: var(--color-accent); color: white;">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+            </svg>
+          </div>
+          <div>
+            <h4 class="font-heading font-semibold text-sm" style="color: var(--color-text);">Lustro i szkło w ramce 60 mm</h4>
+            <p class="mt-2 text-sm leading-relaxed font-body" style="color: var(--color-text-secondary);">
+              W&nbsp;ramce 60&nbsp;mm istnieje możliwość wpuszczenia lustra lub szkła bezpośrednio w&nbsp;środek
+              ramki — bez standardowego montażu od tyłu frontu. To daje znacznie lepszy wygląd niż
+              tradycyjne rozwiązania. Ramka bez środkowej płyciny jest składana inną technologią
+              i&nbsp;posiada widoczną linię łączenia w&nbsp;pionie po obu stronach.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

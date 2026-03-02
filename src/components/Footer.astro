@@ -1,0 +1,98 @@
+---
+const currentYear = new Date().getFullYear();
+
+const seoKeywords = [
+  'fronty ramiakowe Toruń',
+  'fronty laminowane Toruń',
+  'fronty kuchenne na wymiar',
+  'fronty do IKEA',
+  'fronty ramiakowe z płyty',
+  'MDF lakierowany alternatywa',
+  'płyty laminowane Toruń',
+  'wymiana frontów kuchennych',
+  'fronty meblowe kujawsko-pomorskie',
+  'fronty bezuchwytowe 33 stopnie',
+];
+---
+
+<footer class="section-padding pt-16 pb-8" style="border-top: 1px solid var(--color-border);">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
+      <!-- Brand -->
+      <div class="sm:col-span-2 lg:col-span-1">
+        <a href="/" class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background-color: var(--color-accent);">
+            <span class="text-white font-display text-lg leading-none">M</span>
+          </div>
+          <span class="font-display text-xl tracking-tight" style="color: var(--color-text);">Mekra</span>
+        </a>
+        <p class="mt-4 text-sm font-body leading-relaxed max-w-xs" style="color: var(--color-text-secondary);">
+          Producent frontów ramiakowych z&nbsp;płyty laminowanej, matowej i&nbsp;akrylowej.
+          Toruń i&nbsp;województwo kujawsko-pomorskie.
+        </p>
+      </div>
+
+      <!-- Quick links -->
+      <div>
+        <h4 class="font-heading font-semibold text-sm tracking-wider uppercase" style="color: var(--color-text);">Oferta</h4>
+        <nav class="mt-4 space-y-2.5">
+          {['Ramka 7 mm', 'Ramka 18 mm', 'Ramka 36 mm', 'Ramka 60 mm', 'Fronty 33°', 'Fronty do IKEA'].map(link => (
+            <a href="#oferta" class="block text-sm font-body transition-colors hover:text-[var(--color-accent)]" style="color: var(--color-text-secondary);">
+              {link}
+            </a>
+          ))}
+        </nav>
+      </div>
+
+      <!-- Company -->
+      <div>
+        <h4 class="font-heading font-semibold text-sm tracking-wider uppercase" style="color: var(--color-text);">Firma</h4>
+        <nav class="mt-4 space-y-2.5">
+          {[
+            { label: 'O nas', href: '#o-nas' },
+            { label: 'Realizacje', href: '#realizacje' },
+            { label: 'Współpraca', href: '#wspolpraca' },
+            { label: 'Kontakt', href: '#kontakt' },
+          ].map(link => (
+            <a href={link.href} class="block text-sm font-body transition-colors hover:text-[var(--color-accent)]" style="color: var(--color-text-secondary);">
+              {link.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+
+      <!-- Contact mini -->
+      <div>
+        <h4 class="font-heading font-semibold text-sm tracking-wider uppercase" style="color: var(--color-text);">Kontakt</h4>
+        <div class="mt-4 space-y-2.5 text-sm font-body" style="color: var(--color-text-secondary);">
+          <p>Toruń, kujawsko-pomorskie</p>
+          <a href="tel:+48000000000" class="block transition-colors hover:text-[var(--color-accent)]">+48 000 000 000</a>
+          <a href="mailto:kontakt@mekra.pl" class="block transition-colors hover:text-[var(--color-accent)]">kontakt@mekra.pl</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEO keywords (visible, subtle) -->
+    <div class="mt-12 pt-8" style="border-top: 1px solid var(--color-border);">
+      <div class="flex flex-wrap gap-2">
+        {seoKeywords.map(keyword => (
+          <span class="text-2xs font-body px-2.5 py-1 rounded-full" style="background-color: var(--color-bg-tertiary); color: var(--color-text-muted); border: 1px solid var(--color-border);">
+            {keyword}
+          </span>
+        ))}
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4" style="border-top: 1px solid var(--color-border);">
+      <p class="text-xs font-body" style="color: var(--color-text-muted);">
+        &copy; {currentYear} Mekra. Wszelkie prawa zastrzeżone.
+      </p>
+      <div class="flex items-center gap-6">
+        <a href="/polityka-prywatnosci" class="text-xs font-body transition-colors hover:text-[var(--color-accent)]" style="color: var(--color-text-muted);">
+          Polityka prywatności
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

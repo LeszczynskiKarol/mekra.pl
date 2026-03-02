@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="404 — Nie znaleziono strony"
+  description="Strona nie została znaleziona."
+>
+  <Navbar />
+  <main class="min-h-screen flex items-center justify-center section-padding">
+    <div class="text-center max-w-lg">
+      <div class="font-display text-8xl md:text-9xl" style="color: var(--color-accent); opacity: 0.2;">404</div>
+      <h1 class="mt-4 font-display text-3xl md:text-4xl" style="color: var(--color-text);">Strona nie znaleziona</h1>
+      <p class="mt-4 text-base font-body" style="color: var(--color-text-secondary);">
+        Przepraszamy, szukana strona nie istnieje lub została przeniesiona.
+      </p>
+      <a href="/" class="mt-8 btn-primary inline-flex">Wróć na stronę główną</a>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

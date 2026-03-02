@@ -1,0 +1,158 @@
+---
+const benefits = [
+  {
+    icon: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>`,
+    title: 'Najwyższa odporność',
+    description: 'Płyta laminowana to najtwardszy materiał dostępny na rynku meblowym. Odporna na zarysowania, odbarwienia i uszkodzenia mechaniczne — wielokrotnie bardziej niż MDF lakierowany czy folia.',
+  },
+  {
+    icon: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>`,
+    title: 'Wyczuwalna faktura',
+    description: 'W zależności od wybranej płyty, faktura może być gładka, perlistowa, super matowa, metalizowana lub z wyczuwalną strukturą drewna. Efekt premium, który poczujesz pod dłonią.',
+  },
+  {
+    icon: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`,
+    title: 'Lepsza cena niż fornir',
+    description: 'Uzyskujesz efekt naturalnego drewna przy około trzykrotnie niższym koszcie w porównaniu z fornirem. Pełna paleta dekorów drewnopodobnych z prawdziwą strukturą.',
+  },
+  {
+    icon: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182" /></svg>`,
+    title: 'Ekologia i recykling',
+    description: 'Płyty laminowane w części pochodzą z recyklingu, co idealnie wpisuje się w świadomą konsumpcję. Wybierając nasze fronty, wybierasz odpowiedzialne rozwiązanie.',
+  },
+  {
+    icon: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25a2.25 2.25 0 01-2.25-2.25v-2.25z" /></svg>`,
+    title: 'Bogactwo dekorów',
+    description: 'Pracujemy ze wszystkimi markami producentów płyt laminowanych i akrylowych. Setki dekorów, kolorów i faktur — od gładkich unikolorów po realistyczne imitacje drewna i kamienia.',
+  },
+  {
+    icon: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17l-5.658 3.286a.75.75 0 01-1.118-.791l1.399-6.352-4.938-4.27a.75.75 0 01.427-1.316l6.486-.548 2.554-6.014a.75.75 0 011.356 0l2.554 6.014 6.486.548a.75.75 0 01.427 1.316l-4.938 4.27 1.399 6.352a.75.75 0 01-1.118.791l-5.658-3.286z" /></svg>`,
+    title: 'Zabezpieczenie wilgoci',
+    description: 'Fronty narażone na kontakt z wilgocią — przy zmywarkach i ociekarkach — zabezpieczamy dodatkowo specjalnym klejem. Testowaliśmy je w bezpośrednim kontakcie z wodą.',
+  },
+];
+
+const comparison = [
+  { material: 'Płyta laminowana', odpornosc: 5, faktura: 4, cena: 4, kolory: 4, ramki: true, ekologia: true },
+  { material: 'MDF lakierowany', odpornosc: 2, faktura: 2, cena: 3, kolory: 5, ramki: true, ekologia: false },
+  { material: 'Fornir', odpornosc: 3, faktura: 5, cena: 2, kolory: 3, ramki: true, ekologia: false },
+  { material: 'Folia PVC', odpornosc: 1, faktura: 1, cena: 5, kolory: 3, ramki: false, ekologia: false },
+];
+---
+
+<section id="korzysci" class="section-spacing section-padding relative">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto animate-on-scroll">
+      <span class="label-tag">Korzyści</span>
+      <h2 class="mt-6 font-display text-3xl sm:text-4xl md:text-5xl tracking-tight" style="color: var(--color-text);">
+        Dlaczego płyta laminowana<br />
+        <span class="text-gradient">to przyszłość frontów?</span>
+      </h2>
+      <p class="mt-6 text-base md:text-lg leading-relaxed font-body" style="color: var(--color-text-secondary);">
+        To odpowiedź na potrzeby rynku. Trwalsze niż MDF, tańsze niż fornir,
+        bez problemu odklejania jak folia. Sprawdź, co zyskujesz.
+      </p>
+    </div>
+
+    <!-- Benefits grid -->
+    <div class="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {benefits.map((benefit, i) => (
+        <div
+          class="animate-on-scroll card-base rounded-2xl p-6 md:p-8"
+          style={`transition-delay: ${i * 0.08}s;`}
+        >
+          <div
+            class="w-12 h-12 rounded-xl flex items-center justify-center"
+            style="background-color: var(--color-bg-tertiary); color: var(--color-accent);"
+          >
+            <Fragment set:html={benefit.icon} />
+          </div>
+          <h3 class="mt-5 font-heading text-lg font-semibold" style="color: var(--color-text);">
+            {benefit.title}
+          </h3>
+          <p class="mt-3 text-sm leading-relaxed font-body" style="color: var(--color-text-secondary);">
+            {benefit.description}
+          </p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Material comparison -->
+    <div class="mt-24 animate-on-scroll">
+      <div class="text-center mb-12">
+        <h3 class="font-display text-2xl sm:text-3xl tracking-tight" style="color: var(--color-text);">
+          Porównanie materiałów
+        </h3>
+        <p class="mt-3 text-sm font-body" style="color: var(--color-text-secondary);">
+          Zobacz, jak nasze fronty wypadają na tle konkurencji
+        </p>
+      </div>
+
+      <div class="overflow-x-auto rounded-2xl" style="border: 1px solid var(--color-border);">
+        <table class="w-full min-w-[640px]">
+          <thead>
+            <tr style="background-color: var(--color-bg-tertiary);">
+              <th class="text-left py-4 px-6 font-heading text-sm font-semibold" style="color: var(--color-text);">Materiał</th>
+              <th class="text-center py-4 px-4 font-heading text-sm font-semibold" style="color: var(--color-text);">Odporność</th>
+              <th class="text-center py-4 px-4 font-heading text-sm font-semibold" style="color: var(--color-text);">Faktura</th>
+              <th class="text-center py-4 px-4 font-heading text-sm font-semibold" style="color: var(--color-text);">Cena</th>
+              <th class="text-center py-4 px-4 font-heading text-sm font-semibold" style="color: var(--color-text);">Paleta kolorów</th>
+              <th class="text-center py-4 px-4 font-heading text-sm font-semibold" style="color: var(--color-text);">Ramki</th>
+              <th class="text-center py-4 px-4 font-heading text-sm font-semibold" style="color: var(--color-text);">Eko</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparison.map((row, i) => (
+              <tr
+                class={`transition-colors duration-200 ${i === 0 ? '' : ''}`}
+                style={`border-top: 1px solid var(--color-border); ${i === 0 ? 'background-color: var(--color-card-bg);' : ''}`}
+              >
+                <td class="py-4 px-6 font-heading text-sm font-medium" style={`color: ${i === 0 ? 'var(--color-accent)' : 'var(--color-text)'};`}>
+                  {i === 0 && <span class="inline-block w-1.5 h-1.5 rounded-full mr-2" style="background-color: var(--color-accent);"></span>}
+                  {row.material}
+                </td>
+                {[row.odpornosc, row.faktura, row.cena, row.kolory].map((val) => (
+                  <td class="text-center py-4 px-4">
+                    <div class="flex justify-center gap-0.5">
+                      {Array.from({ length: 5 }, (_, j) => (
+                        <div
+                          class="w-2 h-2 rounded-full"
+                          style={`background-color: ${j < val ? (i === 0 ? 'var(--color-accent)' : 'var(--color-text-muted)') : 'var(--color-border)'};`}
+                        ></div>
+                      ))}
+                    </div>
+                  </td>
+                ))}
+                <td class="text-center py-4 px-4">
+                  {row.ramki ? (
+                    <svg class="w-5 h-5 mx-auto" style={`color: ${i === 0 ? 'var(--color-accent)' : 'var(--color-text-muted)'};`} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                  ) : (
+                    <svg class="w-5 h-5 mx-auto" style="color: var(--color-text-muted); opacity: 0.3;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                  )}
+                </td>
+                <td class="text-center py-4 px-4">
+                  {row.ekologia ? (
+                    <svg class="w-5 h-5 mx-auto" style={`color: ${i === 0 ? 'var(--color-accent)' : 'var(--color-text-muted)'};`} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                  ) : (
+                    <svg class="w-5 h-5 mx-auto" style="color: var(--color-text-muted); opacity: 0.3;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Foil warning -->
+      <div class="mt-6 rounded-xl p-5" style="background-color: var(--color-bg-secondary); border: 1px solid var(--color-border);">
+        <p class="text-sm font-body leading-relaxed" style="color: var(--color-text-secondary);">
+          <strong class="font-semibold" style="color: var(--color-text);">Uwaga na fronty foliowane.</strong>
+          Wielu stolarzy rezygnuje z&nbsp;frontów foliowanych (pokrywanych folią PVC), ponieważ w&nbsp;miejscach
+          o&nbsp;dużej wilgotności i&nbsp;temperaturze folia odparzą się i&nbsp;odkleja od podłoża.
+          Nasze rozwiązanie z&nbsp;płyty laminowanej eliminuje ten problem całkowicie.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,151 @@
+---
+const navLinks = [
+  { href: '#o-nas', label: 'O nas' },
+  { href: '#oferta', label: 'Oferta' },
+  { href: '#korzysci', label: 'Korzyści' },
+  { href: '#realizacje', label: 'Realizacje' },
+  { href: '#wspolpraca', label: 'Współpraca' },
+  { href: '#kontakt', label: 'Kontakt' },
+];
+---
+
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+  <div class="absolute inset-0 backdrop-blur-xl transition-all duration-500" style="background-color: var(--color-overlay);"></div>
+  <nav class="relative section-padding">
+    <div class="max-w-7xl mx-auto flex items-center justify-between h-16 md:h-20">
+      <!-- Logo -->
+      <a href="/" class="relative z-10 flex items-center gap-3 group" aria-label="Mekra - strona główna">
+        <div class="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-300" style="background-color: var(--color-accent);">
+          <span class="text-white font-display text-lg leading-none">M</span>
+        </div>
+        <span class="font-display text-xl tracking-tight" style="color: var(--color-text);">
+          Mekra
+        </span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <div class="hidden lg:flex items-center gap-1">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="px-4 py-2 text-sm font-body font-medium rounded-lg transition-all duration-300 hover:text-[var(--color-accent)]"
+            style="color: var(--color-text-secondary);"
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-3">
+        <!-- Theme Toggle -->
+        <button
+          id="theme-toggle"
+          aria-label="Przełącz motyw"
+          class="relative w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110"
+          style="border: 1px solid var(--color-border);"
+        >
+          <!-- Sun icon -->
+          <svg class="w-[18px] h-[18px] hidden dark:block" style="color: var(--color-text-secondary);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+          </svg>
+          <!-- Moon icon -->
+          <svg class="w-[18px] h-[18px] block dark:hidden" style="color: var(--color-text-secondary);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+          </svg>
+        </button>
+
+        <!-- CTA -->
+        <a href="#kontakt" class="hidden sm:inline-flex btn-primary !py-2.5 !px-5 !text-xs">
+          Zamów wycenę
+        </a>
+
+        <!-- Mobile Menu Toggle -->
+        <button
+          id="mobile-menu-toggle"
+          class="lg:hidden relative w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300"
+          style="border: 1px solid var(--color-border);"
+          aria-label="Menu"
+        >
+          <div class="flex flex-col gap-1.5" id="hamburger-icon">
+            <span class="block w-5 h-[1.5px] rounded-full transition-all duration-300" style="background-color: var(--color-text);"></span>
+            <span class="block w-5 h-[1.5px] rounded-full transition-all duration-300" style="background-color: var(--color-text);"></span>
+          </div>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div
+    id="mobile-menu"
+    class="lg:hidden fixed inset-x-0 top-16 md:top-20 bottom-0 pointer-events-none opacity-0 transition-all duration-500 -translate-y-4"
+    style="background-color: var(--color-bg);"
+  >
+    <div class="section-padding py-8 flex flex-col gap-2">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="mobile-nav-link block px-4 py-3 text-lg font-heading font-medium rounded-xl transition-all duration-300 hover:bg-[var(--color-bg-secondary)]"
+          style="color: var(--color-text);"
+        >
+          {link.label}
+        </a>
+      ))}
+      <div class="mt-4 pt-4" style="border-top: 1px solid var(--color-border);">
+        <a href="#kontakt" class="btn-primary w-full text-center">Zamów wycenę</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  // Theme toggle
+  document.getElementById('theme-toggle')?.addEventListener('click', () => {
+    document.documentElement.classList.toggle('dark');
+    localStorage.setItem(
+      'theme',
+      document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+    );
+  });
+
+  // Mobile menu
+  const menuToggle = document.getElementById('mobile-menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  let menuOpen = false;
+
+  menuToggle?.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    if (menuOpen) {
+      mobileMenu.classList.remove('pointer-events-none', 'opacity-0', '-translate-y-4');
+      mobileMenu.classList.add('pointer-events-auto', 'opacity-100', 'translate-y-0');
+      document.body.style.overflow = 'hidden';
+    } else {
+      mobileMenu.classList.add('pointer-events-none', 'opacity-0', '-translate-y-4');
+      mobileMenu.classList.remove('pointer-events-auto', 'opacity-100', 'translate-y-0');
+      document.body.style.overflow = '';
+    }
+  });
+
+  document.querySelectorAll('.mobile-nav-link').forEach((link) => {
+    link.addEventListener('click', () => {
+      menuOpen = false;
+      mobileMenu.classList.add('pointer-events-none', 'opacity-0', '-translate-y-4');
+      mobileMenu.classList.remove('pointer-events-auto', 'opacity-100', 'translate-y-0');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // Navbar scroll effect
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    const scrollY = window.scrollY;
+    if (scrollY > 80) {
+      navbar.style.borderBottom = `1px solid var(--color-border)`;
+    } else {
+      navbar.style.borderBottom = 'none';
+    }
+    lastScroll = scrollY;
+  }, { passive: true });
+</script>

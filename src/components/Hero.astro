@@ -1,0 +1,89 @@
+---
+// Hero section for Mekra landing page
+---
+
+<section id="hero" class="relative min-h-screen flex items-center overflow-hidden">
+  <!-- Background pattern -->
+  <div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23866751&quot; fill-opacity=&quot;1&quot;%3E%3Cpath d=&quot;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+
+  <!-- Gradient orbs -->
+  <div class="absolute top-20 -left-32 w-96 h-96 rounded-full opacity-20 dark:opacity-10 blur-3xl" style="background: radial-gradient(circle, #ae9070, transparent 70%);"></div>
+  <div class="absolute bottom-20 -right-32 w-96 h-96 rounded-full opacity-15 dark:opacity-10 blur-3xl" style="background: radial-gradient(circle, #d4c5ae, transparent 70%);"></div>
+
+  <div class="relative w-full section-padding pt-32 md:pt-40 pb-20">
+    <div class="max-w-7xl mx-auto">
+      <!-- Label -->
+      <div class="animate-fade-in" style="animation-delay: 0.1s;">
+        <span class="label-tag">
+          <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+          Producent frontów ramiakowych
+        </span>
+      </div>
+
+      <!-- Main heading -->
+      <h1 class="mt-8 md:mt-10 max-w-5xl animate-fade-up" style="animation-delay: 0.2s;">
+        <span class="block font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight leading-[0.95]" style="color: var(--color-text);">
+          Charakter wnętrza
+        </span>
+        <span class="block font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight leading-[0.95] mt-2 text-gradient">
+          zaczyna się od frontu
+        </span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="mt-8 max-w-2xl text-lg md:text-xl leading-relaxed font-body font-light animate-fade-up" style="color: var(--color-text-secondary); animation-delay: 0.4s;">
+        Tworzymy fronty ramiakowe z&nbsp;płyty laminowanej, matowej, akrylowej i&nbsp;fornirowanej.
+        Przetestowane rozwiązania, które dodają wnętrzom uroku — z&nbsp;odpornością, jakiej nie znajdziesz w&nbsp;tradycyjnych materiałach.
+      </p>
+
+      <!-- CTAs -->
+      <div class="mt-10 flex flex-wrap gap-4 animate-fade-up" style="animation-delay: 0.6s;">
+        <a href="#oferta" class="btn-primary">
+          <span>Poznaj ofertę</span>
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </a>
+        <a href="#kontakt" class="btn-secondary">
+          <span>Zamów wycenę</span>
+        </a>
+      </div>
+
+      <!-- Stats row -->
+      <div class="mt-20 md:mt-28 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 animate-fade-up" style="animation-delay: 0.8s;">
+        <div class="space-y-1">
+          <div class="font-display text-3xl md:text-4xl" style="color: var(--color-accent);">4</div>
+          <div class="text-sm font-body" style="color: var(--color-text-secondary);">Rodzaje ramek</div>
+          <div class="text-xs font-body" style="color: var(--color-text-muted);">7 / 18 / 36 / 60 mm</div>
+        </div>
+        <div class="space-y-1">
+          <div class="font-display text-3xl md:text-4xl" style="color: var(--color-accent);">22<span class="text-xl">mm</span></div>
+          <div class="text-sm font-body" style="color: var(--color-text-secondary);">Grubość frontu</div>
+          <div class="text-xs font-body" style="color: var(--color-text-muted);">Standardowe zawiasy</div>
+        </div>
+        <div class="space-y-1">
+          <div class="font-display text-3xl md:text-4xl" style="color: var(--color-accent);">100%</div>
+          <div class="text-sm font-body" style="color: var(--color-text-secondary);">Przetestowane</div>
+          <div class="text-xs font-body" style="color: var(--color-text-muted);">Wilgoć, odkształcenia, zachlapania</div>
+        </div>
+        <div class="space-y-1">
+          <div class="font-display text-3xl md:text-4xl" style="color: var(--color-accent);">
+            <svg class="w-8 h-8 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.745 3.745 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+            </svg>
+          </div>
+          <div class="text-sm font-body" style="color: var(--color-text-secondary);">Eco-friendly</div>
+          <div class="text-xs font-body" style="color: var(--color-text-muted);">Płyty częściowo z recyklingu</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+    <span class="text-2xs font-heading tracking-widest uppercase" style="color: var(--color-text-muted);">Przewiń</span>
+    <svg class="w-4 h-4" style="color: var(--color-text-muted);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+    </svg>
+  </div>
+</section>

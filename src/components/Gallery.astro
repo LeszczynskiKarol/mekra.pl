@@ -1,0 +1,90 @@
+---
+const galleryItems = [
+  {
+    src: 'https://placehold.co/600x800/e6ddd0/866751?text=Szafa+60mm+Lustro',
+    alt: 'Szafa z frontami ramiakowym 60mm z lustrem - realizacja Mekra',
+    caption: 'Szafa z lustrem — ramka 60 mm',
+    span: 'row-span-2',
+  },
+  {
+    src: 'https://placehold.co/600x400/d4c5ae/59463a?text=Kuchnia+36mm',
+    alt: 'Kuchnia w stylu farmhouse z frontami ramiakowym 36mm - Grudziądz',
+    caption: 'Kuchnia farmhouse — ramka 36 mm',
+    span: '',
+  },
+  {
+    src: 'https://placehold.co/600x400/bfa78a/2f241e?text=Zabudowa+Sypialni',
+    alt: 'Zabudowa sypialniana z frontami laminowanymi drewnopodobnymi',
+    caption: 'Zabudowa sypialni — dekor drewniany',
+    span: '',
+  },
+  {
+    src: 'https://placehold.co/600x400/2f241e/d4c5ae?text=Biblioteka+Szklo',
+    alt: 'Biblioteka ze szkłem i frontami ramiakowym w kolorze zielonym',
+    caption: 'Biblioteka z przeszkleniami',
+    span: '',
+  },
+  {
+    src: 'https://placehold.co/600x800/59463a/e6ddd0?text=Kuchnia+Nowoczesna',
+    alt: 'Nowoczesna kuchnia z frontami laminowanymi i złotymi uchwytami',
+    caption: 'Kuchnia nowoczesna — laminat + złoto',
+    span: 'row-span-2',
+  },
+  {
+    src: 'https://placehold.co/600x400/866751/f3efe8?text=Regał+Ciemny',
+    alt: 'Ciemny regał z frontami ramiakowym i przeszkleniem',
+    caption: 'Regał z drzwiami przesuwnymi',
+    span: '',
+  },
+];
+---
+
+<section id="realizacje" class="section-spacing section-padding relative" style="background-color: var(--color-bg-secondary);">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto animate-on-scroll">
+      <span class="label-tag">Realizacje</span>
+      <h2 class="mt-6 font-display text-3xl sm:text-4xl md:text-5xl tracking-tight" style="color: var(--color-text);">
+        Nasze fronty<br />
+        <span class="text-gradient">w Twoich wnętrzach</span>
+      </h2>
+      <p class="mt-6 text-base md:text-lg leading-relaxed font-body" style="color: var(--color-text-secondary);">
+        Kuchnie, szafy, regały, zabudowy — zobacz, jak płyta laminowana zamienia
+        proste formy w&nbsp;coś wyjątkowego. Każda realizacja to dowód na to,
+        że materiał ma znaczenie.
+      </p>
+    </div>
+
+    <!-- Gallery grid -->
+    <div class="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-[280px]">
+      {galleryItems.map((item, i) => (
+        <div
+          class={`animate-on-scroll group relative rounded-2xl overflow-hidden cursor-pointer ${item.span}`}
+          style={`transition-delay: ${i * 0.08}s;`}
+        >
+          <img
+            src={item.src}
+            alt={item.alt}
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            loading="lazy"
+            decoding="async"
+          />
+          <!-- Overlay -->
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+            <div class="absolute bottom-0 left-0 right-0 p-6">
+              <p class="text-white font-heading font-medium text-sm translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                {item.caption}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-12 text-center animate-on-scroll">
+      <p class="text-sm font-body" style="color: var(--color-text-muted);">
+        Więcej realizacji wkrótce — pracujemy nad nowymi projektami
+      </p>
+    </div>
+  </div>
+</section>
