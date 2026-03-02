@@ -1,5 +1,6 @@
 ---
-// Contact section
+// Contact section — connected to mekra-api (Lambda + SES)
+const API_URL = 'https://iedy003jrg.execute-api.eu-central-1.amazonaws.com';
 ---
 
 <section id="kontakt" class="section-spacing section-padding relative" style="background-color: var(--color-bg-secondary);">
@@ -44,7 +45,6 @@
             </div>
             <div>
               <div class="font-heading font-semibold text-sm" style="color: var(--color-text);">Email</div>
-              <!-- TODO: Replace with actual email -->
               <a href="mailto:kontakt@mekra.pl" class="text-base font-body transition-colors hover:text-[var(--color-accent)]" style="color: var(--color-text-secondary);">
                 kontakt@mekra.pl
               </a>
@@ -81,7 +81,7 @@
         </div>
       </div>
 
-      <!-- Right: quick contact form -->
+      <!-- Right: contact form -->
       <div class="animate-on-scroll" style="transition-delay: 0.2s;">
         <div class="card-base rounded-2xl p-6 md:p-10">
           <h3 class="font-heading text-xl font-semibold" style="color: var(--color-text);">Szybka wycena</h3>
@@ -89,7 +89,21 @@
             Opisz swoje potrzeby — odezwiemy się z wyceną
           </p>
 
-          <form class="mt-8 space-y-5" action="#" method="POST" id="contact-form">
+          <!-- Success message -->
+          <div id="form-success" class="hidden mt-8 p-6 rounded-xl text-center" style="background-color: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.2);">
+            <svg class="w-12 h-12 mx-auto mb-3" style="color: #22c55e;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <h4 class="font-heading font-semibold text-lg" style="color: var(--color-text);">Wiadomość wysłana!</h4>
+            <p class="mt-1 text-sm font-body" style="color: var(--color-text-secondary);">Odpowiemy najszybciej jak to możliwe.</p>
+          </div>
+
+          <!-- Error message -->
+          <div id="form-error" class="hidden mt-4 p-4 rounded-xl text-sm font-body" style="background-color: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); color: #ef4444;">
+            <span id="form-error-text"></span>
+          </div>
+
+          <form class="mt-8 space-y-5" id="contact-form">
             <div>
               <label for="name" class="block text-sm font-heading font-medium mb-2" style="color: var(--color-text);">Imię i nazwisko</label>
               <input
@@ -130,17 +144,34 @@
             </div>
 
             <div>
-              <label for="type" class="block text-sm font-heading font-medium mb-2" style="color: var(--color-text);">Rodzaj klienta</label>
+              <label for="productType" class="block text-sm font-heading font-medium mb-2" style="color: var(--color-text);">Rodzaj frontu</label>
               <select
-                id="type"
-                name="type"
+                id="productType"
+                name="productType"
                 class="w-full px-4 py-3 rounded-xl text-sm font-body outline-none transition-all duration-300 focus:ring-2"
                 style="background-color: var(--color-bg-tertiary); border: 1px solid var(--color-border); color: var(--color-text); --tw-ring-color: var(--color-accent);"
               >
-                <option value="individual">Klient indywidualny</option>
-                <option value="carpenter">Stolarz</option>
-                <option value="designer">Projektant wnętrz</option>
+                <option value="">Wybierz rodzaj (opcjonalnie)</option>
+                <option value="Ramka 7mm">Ramka 7 mm</option>
+                <option value="Ramka 18mm">Ramka 18 mm</option>
+                <option value="Ramka 36mm">Ramka 36 mm</option>
+                <option value="Ramka 60mm">Ramka 60 mm</option>
+                <option value="Front bezuchwytowy 33°">Front bezuchwytowy 33°</option>
+                <option value="Fronty do IKEA">Fronty do IKEA</option>
+                <option value="Inne / nie wiem">Inne / nie wiem</option>
               </select>
+            </div>
+
+            <div>
+              <label for="dimensions" class="block text-sm font-heading font-medium mb-2" style="color: var(--color-text);">Wymiary (opcjonalnie)</label>
+              <input
+                type="text"
+                id="dimensions"
+                name="dimensions"
+                class="w-full px-4 py-3 rounded-xl text-sm font-body outline-none transition-all duration-300 focus:ring-2"
+                style="background-color: var(--color-bg-tertiary); border: 1px solid var(--color-border); color: var(--color-text); --tw-ring-color: var(--color-accent);"
+                placeholder="np. 600×400 mm, 10 szt."
+              />
             </div>
 
             <div>
@@ -156,8 +187,54 @@
               ></textarea>
             </div>
 
-            <button type="submit" class="btn-primary w-full">
-              Wyślij zapytanie
+            <!-- File upload dropzone -->
+            <div>
+              <label class="block text-sm font-heading font-medium mb-2" style="color: var(--color-text);">
+                Załączniki
+                <span class="font-normal" style="color: var(--color-text-muted);">(opcjonalnie, maks. 10 MB/plik)</span>
+              </label>
+              <div
+                id="dropzone"
+                class="relative rounded-xl p-6 text-center cursor-pointer transition-all duration-300"
+                style="border: 2px dashed var(--color-border); background-color: var(--color-bg-tertiary);"
+              >
+                <input
+                  type="file"
+                  id="file-input"
+                  multiple
+                  accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png,.gif,.webp,.svg,.pptx,.xlsx,.xls,.csv,.zip,.rar,.7z,.dwg,.dxf"
+                  class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                />
+                <svg class="w-8 h-8 mx-auto mb-2" style="color: var(--color-text-muted);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                </svg>
+                <p class="text-sm font-body" style="color: var(--color-text-muted);">
+                  Przeciągnij pliki lub <span style="color: var(--color-accent);" class="font-medium">kliknij aby wybrać</span>
+                </p>
+                <p class="text-xs font-body mt-1" style="color: var(--color-text-muted);">
+                  PDF, zdjęcia, DWG, DXF, dokumenty
+                </p>
+              </div>
+              <div id="file-list" class="mt-3 space-y-2"></div>
+            </div>
+
+            <!-- Upload progress indicator -->
+            <div id="upload-progress" class="hidden">
+              <div class="flex items-center gap-3 text-sm font-body" style="color: var(--color-text-secondary);">
+                <svg class="w-4 h-4 animate-spin" style="color: var(--color-accent);" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span id="upload-status">Przesyłanie plików...</span>
+              </div>
+            </div>
+
+            <button type="submit" id="submit-btn" class="btn-primary w-full">
+              <span id="submit-text">Wyślij zapytanie</span>
+              <svg id="submit-spinner" class="hidden w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
             </button>
 
             <p class="text-xs text-center font-body" style="color: var(--color-text-muted);">
@@ -169,3 +246,219 @@
     </div>
   </div>
 </section>
+
+<script is:inline define:vars={{ API_URL }}>
+(function() {
+  const MAX_FILE_SIZE = 10 * 1024 * 1024;
+  const MAX_FILES = 5;
+  let selectedFiles = [];
+
+  const form = document.getElementById('contact-form');
+  const fileInput = document.getElementById('file-input');
+  const fileList = document.getElementById('file-list');
+  const dropzone = document.getElementById('dropzone');
+  const submitBtn = document.getElementById('submit-btn');
+  const submitText = document.getElementById('submit-text');
+  const submitSpinner = document.getElementById('submit-spinner');
+  const uploadProgress = document.getElementById('upload-progress');
+  const uploadStatus = document.getElementById('upload-status');
+  const formSuccess = document.getElementById('form-success');
+  const formError = document.getElementById('form-error');
+  const formErrorText = document.getElementById('form-error-text');
+
+  // Dropzone hover
+  dropzone.addEventListener('dragover', function(e) {
+    e.preventDefault();
+    dropzone.style.borderColor = 'var(--color-accent)';
+    dropzone.style.backgroundColor = 'var(--color-bg-secondary)';
+  });
+  dropzone.addEventListener('dragleave', function() {
+    dropzone.style.borderColor = 'var(--color-border)';
+    dropzone.style.backgroundColor = 'var(--color-bg-tertiary)';
+  });
+  dropzone.addEventListener('drop', function(e) {
+    e.preventDefault();
+    dropzone.style.borderColor = 'var(--color-border)';
+    dropzone.style.backgroundColor = 'var(--color-bg-tertiary)';
+    addFiles(e.dataTransfer.files);
+  });
+
+  fileInput.addEventListener('change', function(e) {
+    addFiles(e.target.files);
+    fileInput.value = '';
+  });
+
+  function addFiles(files) {
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+      if (selectedFiles.length >= MAX_FILES) {
+        showError('Maksymalnie ' + MAX_FILES + ' plików.');
+        break;
+      }
+      if (file.size > MAX_FILE_SIZE) {
+        showError(file.name + ' jest za duży (maks. 10 MB).');
+        continue;
+      }
+      var isDuplicate = false;
+      for (var j = 0; j < selectedFiles.length; j++) {
+        if (selectedFiles[j].name === file.name && selectedFiles[j].size === file.size) {
+          isDuplicate = true;
+          break;
+        }
+      }
+      if (!isDuplicate) selectedFiles.push(file);
+    }
+    renderFileList();
+  }
+
+  function renderFileList() {
+    fileList.innerHTML = '';
+    for (var i = 0; i < selectedFiles.length; i++) {
+      var file = selectedFiles[i];
+      var div = document.createElement('div');
+      div.className = 'flex items-center justify-between gap-3 px-3 py-2 rounded-lg text-sm font-body';
+      div.style.cssText = 'background-color: var(--color-bg-tertiary); border: 1px solid var(--color-border);';
+      div.innerHTML =
+        '<div class="flex items-center gap-2 min-w-0">' +
+          '<svg class="w-4 h-4 flex-shrink-0" style="color: var(--color-accent);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">' +
+            '<path stroke-linecap="round" stroke-linejoin="round" d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13" />' +
+          '</svg>' +
+          '<span class="truncate" style="color: var(--color-text);">' + file.name + '</span>' +
+          '<span style="color: var(--color-text-muted);">(' + formatSize(file.size) + ')</span>' +
+        '</div>' +
+        '<button type="button" data-idx="' + i + '" class="remove-file flex-shrink-0 p-1 rounded transition-colors" style="color: var(--color-text-muted);">' +
+          '<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">' +
+            '<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />' +
+          '</svg>' +
+        '</button>';
+      fileList.appendChild(div);
+    }
+    var removeBtns = fileList.querySelectorAll('.remove-file');
+    for (var k = 0; k < removeBtns.length; k++) {
+      removeBtns[k].addEventListener('click', function() {
+        selectedFiles.splice(parseInt(this.dataset.idx), 1);
+        renderFileList();
+      });
+    }
+  }
+
+  function formatSize(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+  }
+
+  function uploadFile(file) {
+    return fetch(API_URL + '/presign', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        filename: file.name,
+        contentType: file.type || 'application/octet-stream',
+        size: file.size,
+      }),
+    })
+    .then(function(res) {
+      if (!res.ok) return res.json().then(function(e) { throw new Error(e.error || 'Błąd presign'); });
+      return res.json();
+    })
+    .then(function(data) {
+      return fetch(data.uploadUrl, {
+        method: 'PUT',
+        headers: { 'Content-Type': file.type || 'application/octet-stream' },
+        body: file,
+      }).then(function(uploadRes) {
+        if (!uploadRes.ok) throw new Error('Błąd przesyłania: ' + file.name);
+        return { key: data.key, name: file.name, size: file.size };
+      });
+    });
+  }
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    hideError();
+
+    var name = form.querySelector('#name').value.trim();
+    var email = form.querySelector('#email').value.trim();
+    var phone = form.querySelector('#phone').value.trim();
+    var productType = form.querySelector('#productType').value;
+    var dimensions = form.querySelector('#dimensions').value.trim();
+    var message = form.querySelector('#message').value.trim();
+
+    if (!name || !email || !message) {
+      showError('Uzupełnij wymagane pola.');
+      return;
+    }
+
+    setLoading(true);
+
+    var attachments = [];
+    var uploadChain = Promise.resolve();
+
+    if (selectedFiles.length > 0) {
+      uploadProgress.classList.remove('hidden');
+      selectedFiles.forEach(function(file, idx) {
+        uploadChain = uploadChain.then(function() {
+          uploadStatus.textContent = 'Przesyłanie pliku ' + (idx + 1) + ' z ' + selectedFiles.length + '...';
+          return uploadFile(file).then(function(result) {
+            attachments.push(result);
+          });
+        });
+      });
+    }
+
+    uploadChain
+      .then(function() {
+        uploadProgress.classList.add('hidden');
+        return fetch(API_URL + '/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            phone: phone || undefined,
+            productType: productType || undefined,
+            dimensions: dimensions || undefined,
+            message: message,
+            attachments: attachments.length > 0 ? attachments : undefined,
+          }),
+        });
+      })
+      .then(function(res) {
+        if (!res.ok) return res.json().then(function(e) { throw new Error(e.error || 'Błąd wysyłania'); });
+        return res.json();
+      })
+      .then(function() {
+        form.classList.add('hidden');
+        formSuccess.classList.remove('hidden');
+        selectedFiles = [];
+        renderFileList();
+      })
+      .catch(function(err) {
+        console.error('Contact form error:', err);
+        showError(err.message || 'Wystąpił błąd. Spróbuj ponownie.');
+        uploadProgress.classList.add('hidden');
+      })
+      .then(function() {
+        setLoading(false);
+      });
+  });
+
+  function setLoading(loading) {
+    submitBtn.disabled = loading;
+    submitText.textContent = loading ? 'Wysyłanie...' : 'Wyślij zapytanie';
+    submitSpinner.classList.toggle('hidden', !loading);
+    submitBtn.style.opacity = loading ? '0.7' : '1';
+    submitBtn.style.cursor = loading ? 'not-allowed' : 'pointer';
+  }
+
+  function showError(msg) {
+    formErrorText.textContent = msg;
+    formError.classList.remove('hidden');
+  }
+
+  function hideError() {
+    formError.classList.add('hidden');
+  }
+})();
+</script>
