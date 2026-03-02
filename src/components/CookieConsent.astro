@@ -1,0 +1,412 @@
+---
+// CookieConsent.astro
+// GDPR/RODO compliant consent banner with Google Consent Mode v2
+// Supports: accept all, reject all, granular preferences, re-open from footer
+---
+
+<!-- Cookie Banner -->
+<div id="cookie-banner" class="fixed inset-x-0 bottom-0 z-[9999] hidden" role="dialog" aria-label="Zgody dotyczące plików cookie" aria-modal="false">
+  <div class="mx-auto max-w-4xl p-4 sm:p-6">
+    <div class="rounded-2xl p-5 sm:p-7 shadow-2xl" style="background-color: var(--color-card-bg); border: 1px solid var(--color-border); backdrop-filter: blur(20px);">
+
+      <div class="flex items-start gap-4">
+        <div class="flex-shrink-0 mt-0.5">
+          <svg class="w-6 h-6" style="color: var(--color-accent);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 010 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 010-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h3 class="font-heading font-semibold text-base" style="color: var(--color-text);">
+            Szanujemy Twoją prywatność
+          </h3>
+          <p class="mt-2 text-sm font-body leading-relaxed" style="color: var(--color-text-secondary);">
+            Używamy plików cookie, aby zapewnić prawidłowe działanie strony, analizować ruch
+            i&nbsp;doskonalić nasze usługi. Możesz zaakceptować wszystkie pliki cookie, odrzucić
+            opcjonalne lub dostosować swoje preferencje.
+            <a href="/polityka-prywatnosci" class="underline transition-colors hover:text-[var(--color-accent)]" style="color: var(--color-accent);">
+              Polityka prywatności
+            </a>
+          </p>
+
+          <div class="mt-5 flex flex-wrap items-center gap-3">
+            <button
+              id="cookie-accept-all"
+              class="inline-flex items-center justify-center px-5 py-2.5 rounded-xl text-sm font-heading font-semibold tracking-wide transition-all duration-300"
+              style="background-color: var(--color-accent); color: #fff;"
+              onmouseover="this.style.opacity='0.9'"
+              onmouseout="this.style.opacity='1'"
+            >
+              Akceptuję wszystkie
+            </button>
+            <button
+              id="cookie-reject-all"
+              class="inline-flex items-center justify-center px-5 py-2.5 rounded-xl text-sm font-heading font-semibold tracking-wide transition-all duration-300"
+              style="border: 1.5px solid var(--color-border); color: var(--color-text);"
+              onmouseover="this.style.borderColor='var(--color-accent)';this.style.color='var(--color-accent)'"
+              onmouseout="this.style.borderColor='var(--color-border)';this.style.color='var(--color-text)'"
+            >
+              Tylko niezbędne
+            </button>
+            <button
+              id="cookie-show-prefs"
+              class="inline-flex items-center justify-center px-4 py-2.5 text-sm font-heading font-medium transition-colors"
+              style="color: var(--color-text-secondary);"
+              onmouseover="this.style.color='var(--color-accent)'"
+              onmouseout="this.style.color='var(--color-text-secondary)'"
+            >
+              Dostosuj preferencje
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cookie Preferences Modal -->
+<div id="cookie-modal" class="fixed inset-0 z-[10000] hidden" role="dialog" aria-label="Ustawienia plików cookie" aria-modal="true">
+  <!-- Backdrop -->
+  <div id="cookie-modal-backdrop" class="absolute inset-0" style="background-color: rgba(0,0,0,0.5); backdrop-filter: blur(4px);"></div>
+
+  <!-- Modal content -->
+  <div class="absolute inset-0 flex items-center justify-center p-4 sm:p-6">
+    <div class="relative w-full max-w-xl max-h-[85vh] overflow-y-auto rounded-2xl p-6 sm:p-8 shadow-2xl" style="background-color: var(--color-card-bg); border: 1px solid var(--color-border);">
+
+      <!-- Close button -->
+      <button id="cookie-modal-close" class="absolute top-4 right-4 p-2 rounded-lg transition-colors" style="color: var(--color-text-muted);" onmouseover="this.style.color='var(--color-text)'" onmouseout="this.style.color='var(--color-text-muted)'">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <h3 class="font-heading font-semibold text-xl" style="color: var(--color-text);">Ustawienia plików cookie</h3>
+      <p class="mt-2 text-sm font-body leading-relaxed" style="color: var(--color-text-secondary);">
+        Poniżej możesz wybrać, na które kategorie plików cookie wyrażasz zgodę.
+        Niezbędne pliki cookie są zawsze aktywne, ponieważ zapewniają podstawowe
+        funkcjonowanie strony.
+      </p>
+
+      <!-- Cookie categories -->
+      <div class="mt-6 space-y-4">
+
+        <!-- Necessary — always on -->
+        <div class="p-4 rounded-xl" style="background-color: var(--color-bg-tertiary); border: 1px solid var(--color-border);">
+          <div class="flex items-center justify-between">
+            <div>
+              <h4 class="font-heading font-semibold text-sm" style="color: var(--color-text);">Niezbędne</h4>
+              <p class="mt-1 text-xs font-body" style="color: var(--color-text-muted);">
+                Podstawowe funkcje strony: nawigacja, formularz kontaktowy, wybór motywu.
+                Nie zbierają danych osobowych.
+              </p>
+            </div>
+            <div class="flex-shrink-0 ml-4">
+              <span class="inline-block px-3 py-1 rounded-full text-xs font-heading font-medium" style="background-color: rgba(34,197,94,0.1); color: #22c55e;">
+                Zawsze aktywne
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Analytics -->
+        <div class="p-4 rounded-xl" style="background-color: var(--color-bg-tertiary); border: 1px solid var(--color-border);">
+          <div class="flex items-center justify-between">
+            <div class="flex-1 min-w-0">
+              <h4 class="font-heading font-semibold text-sm" style="color: var(--color-text);">Analityczne</h4>
+              <p class="mt-1 text-xs font-body" style="color: var(--color-text-muted);">
+                Google Analytics — anonimowe statystyki odwiedzin, które pomagają nam
+                ulepszać stronę. Nie identyfikują użytkownika.
+              </p>
+            </div>
+            <div class="flex-shrink-0 ml-4">
+              <label class="cookie-toggle" for="consent-analytics">
+                <input type="checkbox" id="consent-analytics" class="sr-only" />
+                <div class="toggle-track"></div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Marketing / Ads -->
+        <div class="p-4 rounded-xl" style="background-color: var(--color-bg-tertiary); border: 1px solid var(--color-border);">
+          <div class="flex items-center justify-between">
+            <div class="flex-1 min-w-0">
+              <h4 class="font-heading font-semibold text-sm" style="color: var(--color-text);">Marketingowe</h4>
+              <p class="mt-1 text-xs font-body" style="color: var(--color-text-muted);">
+                Pliki cookie służące do personalizacji reklam i&nbsp;mierzenia skuteczności
+                kampanii. Mogą być współdzielone z partnerami reklamowymi.
+              </p>
+            </div>
+            <div class="flex-shrink-0 ml-4">
+              <label class="cookie-toggle" for="consent-marketing">
+                <input type="checkbox" id="consent-marketing" class="sr-only" />
+                <div class="toggle-track"></div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Actions -->
+      <div class="mt-6 flex flex-wrap items-center gap-3">
+        <button
+          id="cookie-save-prefs"
+          class="inline-flex items-center justify-center px-6 py-2.5 rounded-xl text-sm font-heading font-semibold tracking-wide transition-all duration-300"
+          style="background-color: var(--color-accent); color: #fff;"
+          onmouseover="this.style.opacity='0.9'"
+          onmouseout="this.style.opacity='1'"
+        >
+          Zapisz preferencje
+        </button>
+        <button
+          id="cookie-modal-accept-all"
+          class="inline-flex items-center justify-center px-5 py-2.5 rounded-xl text-sm font-heading font-medium tracking-wide transition-all duration-300"
+          style="border: 1.5px solid var(--color-border); color: var(--color-text);"
+          onmouseover="this.style.borderColor='var(--color-accent)';this.style.color='var(--color-accent)'"
+          onmouseout="this.style.borderColor='var(--color-border)';this.style.color='var(--color-text)'"
+        >
+          Akceptuję wszystkie
+        </button>
+      </div>
+
+      <!-- Info -->
+      <p class="mt-4 text-xs font-body" style="color: var(--color-text-muted);">
+        Możesz zmienić swoje preferencje w&nbsp;dowolnym momencie klikając „Cookies" w&nbsp;stopce strony.
+        Więcej informacji w&nbsp;<a href="/polityka-prywatnosci" class="underline" style="color: var(--color-accent);">polityce prywatności</a>.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Toggle switch styles -->
+<style>
+  .cookie-toggle {
+    display: block;
+    cursor: pointer;
+  }
+  .cookie-toggle .toggle-track {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    border-radius: 12px;
+    background-color: var(--color-border);
+    transition: background-color 0.3s ease;
+  }
+  .cookie-toggle .toggle-track::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease;
+  }
+  .cookie-toggle input:checked + .toggle-track {
+    background-color: var(--color-accent);
+  }
+  .cookie-toggle input:checked + .toggle-track::after {
+    transform: translateX(20px);
+  }
+  .cookie-toggle input:focus-visible + .toggle-track {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+</style>
+
+<!-- Consent logic -->
+<script is:inline>
+(function() {
+  'use strict';
+
+  // ── Config ──
+  var COOKIE_NAME = 'mekra_consent';
+  var COOKIE_DAYS = 365;
+  var GA_ID = 'G-5RQMRR2XPW';
+
+  // ── Elements ──
+  var banner = document.getElementById('cookie-banner');
+  var modal = document.getElementById('cookie-modal');
+  var modalBackdrop = document.getElementById('cookie-modal-backdrop');
+
+  var btnAcceptAll = document.getElementById('cookie-accept-all');
+  var btnRejectAll = document.getElementById('cookie-reject-all');
+  var btnShowPrefs = document.getElementById('cookie-show-prefs');
+  var btnSavePrefs = document.getElementById('cookie-save-prefs');
+  var btnModalAcceptAll = document.getElementById('cookie-modal-accept-all');
+  var btnModalClose = document.getElementById('cookie-modal-close');
+
+  var chkAnalytics = document.getElementById('consent-analytics');
+  var chkMarketing = document.getElementById('consent-marketing');
+
+  // ── Cookie helpers ──
+  function setCookie(name, value, days) {
+    var d = new Date();
+    d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
+    document.cookie = name + '=' + encodeURIComponent(JSON.stringify(value)) +
+      ';expires=' + d.toUTCString() +
+      ';path=/;SameSite=Lax;Secure';
+  }
+
+  function getCookie(name) {
+    var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    if (match) {
+      try { return JSON.parse(decodeURIComponent(match[2])); }
+      catch(e) { return null; }
+    }
+    return null;
+  }
+
+  function deleteCookiesByPrefix(prefixes) {
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+      var name = cookies[i].split('=')[0].trim();
+      for (var j = 0; j < prefixes.length; j++) {
+        if (name.indexOf(prefixes[j]) === 0) {
+          document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=' + location.hostname;
+          document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=.' + location.hostname;
+          document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
+        }
+      }
+    }
+  }
+
+  // ── Google Consent Mode v2 ──
+  function updateGoogleConsent(consent) {
+    if (typeof gtag !== 'function') return;
+
+    gtag('consent', 'update', {
+      'analytics_storage': consent.analytics ? 'granted' : 'denied',
+      'ad_storage': consent.marketing ? 'granted' : 'denied',
+      'ad_user_data': consent.marketing ? 'granted' : 'denied',
+      'ad_personalization': consent.marketing ? 'granted' : 'denied',
+    });
+
+    // If analytics just got granted, ensure GA fires
+    if (consent.analytics) {
+      gtag('config', GA_ID, { 'send_page_view': true });
+    }
+
+    // Clean up cookies if consent withdrawn
+    if (!consent.analytics) {
+      deleteCookiesByPrefix(['_ga', '_gid', '_gat']);
+    }
+    if (!consent.marketing) {
+      deleteCookiesByPrefix(['_gcl', '_fbp', '_fbc']);
+    }
+  }
+
+  // ── Save consent ──
+  function saveConsent(consent) {
+    consent.timestamp = new Date().toISOString();
+    consent.version = '2.0';
+    setCookie(COOKIE_NAME, consent, COOKIE_DAYS);
+    updateGoogleConsent(consent);
+  }
+
+  // ── UI ──
+  function showBanner() {
+    banner.classList.remove('hidden');
+    banner.style.animation = 'slideUp 0.4s ease-out';
+  }
+
+  function hideBanner() {
+    banner.style.animation = 'slideDown 0.3s ease-in forwards';
+    setTimeout(function() { banner.classList.add('hidden'); }, 300);
+  }
+
+  function showModal() {
+    // Load current state into checkboxes
+    var existing = getCookie(COOKIE_NAME);
+    if (existing) {
+      chkAnalytics.checked = !!existing.analytics;
+      chkMarketing.checked = !!existing.marketing;
+    } else {
+      chkAnalytics.checked = false;
+      chkMarketing.checked = false;
+    }
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function hideModal() {
+    modal.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  // ── Actions ──
+  function acceptAll() {
+    saveConsent({ necessary: true, analytics: true, marketing: true });
+    hideBanner();
+    hideModal();
+  }
+
+  function rejectAll() {
+    saveConsent({ necessary: true, analytics: false, marketing: false });
+    hideBanner();
+    hideModal();
+  }
+
+  function savePreferences() {
+    saveConsent({
+      necessary: true,
+      analytics: chkAnalytics.checked,
+      marketing: chkMarketing.checked,
+    });
+    hideBanner();
+    hideModal();
+  }
+
+  // ── Event listeners ──
+  btnAcceptAll.addEventListener('click', acceptAll);
+  btnRejectAll.addEventListener('click', rejectAll);
+  btnShowPrefs.addEventListener('click', function() {
+    hideBanner();
+    setTimeout(showModal, 350);
+  });
+  btnSavePrefs.addEventListener('click', savePreferences);
+  btnModalAcceptAll.addEventListener('click', acceptAll);
+  btnModalClose.addEventListener('click', hideModal);
+  modalBackdrop.addEventListener('click', hideModal);
+
+  // ESC to close modal
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+      hideModal();
+    }
+  });
+
+  // Footer "Cookies" link — open preferences
+  document.addEventListener('click', function(e) {
+    if (e.target && (e.target.id === 'open-cookie-settings' || e.target.closest('#open-cookie-settings'))) {
+      e.preventDefault();
+      showModal();
+    }
+  });
+
+  // ── Init ──
+  var existing = getCookie(COOKIE_NAME);
+  if (existing && existing.timestamp) {
+    // User already made a choice — apply it silently
+    updateGoogleConsent(existing);
+  } else {
+    // No consent yet — show banner after short delay
+    setTimeout(showBanner, 800);
+  }
+})();
+</script>
+
+<!-- Animations -->
+<style>
+  @keyframes slideUp {
+    from { transform: translateY(100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes slideDown {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(100%); opacity: 0; }
+  }
+</style>

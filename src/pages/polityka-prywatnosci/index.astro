@@ -1,0 +1,153 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Polityka Prywatności"
+  description="Polityka prywatności serwisu Mekra.pl — informacje o przetwarzaniu danych osobowych, plikach cookie i prawach użytkowników zgodnie z RODO."
+>
+  <Navbar />
+
+  <main class="section-padding pt-32 pb-20">
+    <article class="max-w-3xl mx-auto">
+      <h1 class="font-display text-3xl sm:text-4xl md:text-5xl tracking-tight" style="color: var(--color-text);">
+        Polityka prywatności
+      </h1>
+      <p class="mt-4 text-sm font-body" style="color: var(--color-text-muted);">
+        Ostatnia aktualizacja: marzec 2026
+      </p>
+
+      <div class="mt-12 space-y-10 font-body text-base leading-relaxed" style="color: var(--color-text-secondary);">
+
+        <section>
+          <h2 class="font-heading font-semibold text-lg mb-4" style="color: var(--color-text);">1. Administrator danych</h2>
+          <p>
+            Administratorem danych osobowych jest Mekra, z&nbsp;siedzibą w&nbsp;Toruniu,
+            województwo kujawsko-pomorskie (dalej: „Administrator").
+            Kontakt: <a href="mailto:kontakt@mekra.pl" class="underline" style="color: var(--color-accent);">kontakt@mekra.pl</a>.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-heading font-semibold text-lg mb-4" style="color: var(--color-text);">2. Zakres przetwarzanych danych</h2>
+          <p>
+            Przetwarzamy dane osobowe przekazane dobrowolnie przez formularz kontaktowy
+            (imię i&nbsp;nazwisko, adres e-mail, numer telefonu, treść wiadomości, załączniki)
+            oraz dane zbierane automatycznie za pomocą plików cookie (adres IP, typ przeglądarki,
+            czas wizyty, odwiedzone podstrony).
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-heading font-semibold text-lg mb-4" style="color: var(--color-text);">3. Cele i podstawy przetwarzania</h2>
+          <p>Dane osobowe przetwarzamy w&nbsp;następujących celach:</p>
+          <p class="mt-3">
+            <strong style="color: var(--color-text);">Obsługa zapytań</strong> — na podstawie art. 6 ust. 1 lit. b RODO
+            (podjęcie działań przed zawarciem umowy) oraz art. 6 ust. 1 lit. f RODO (prawnie uzasadniony
+            interes administratora w&nbsp;postaci obsługi korespondencji).
+          </p>
+          <p class="mt-3">
+            <strong style="color: var(--color-text);">Analityka</strong> — na podstawie art. 6 ust. 1 lit. a RODO
+            (zgoda wyrażona za pośrednictwem mechanizmu cookie consent). Wykorzystujemy Google Analytics 4
+            (identyfikator: G-5RQMRR2XPW) z&nbsp;anonimizacją adresu IP.
+          </p>
+          <p class="mt-3">
+            <strong style="color: var(--color-text);">Marketing</strong> — na podstawie art. 6 ust. 1 lit. a RODO
+            (odrębna zgoda). Dotyczy plików cookie marketingowych i&nbsp;reklamowych, jeśli użytkownik
+            wyrazi na nie zgodę.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-heading font-semibold text-lg mb-4" style="color: var(--color-text);">4. Pliki cookie</h2>
+          <p>Serwis wykorzystuje następujące kategorie plików cookie:</p>
+          <p class="mt-3">
+            <strong style="color: var(--color-text);">Niezbędne</strong> — zapewniają podstawowe funkcje strony
+            (zapamiętanie motywu jasny/ciemny, przechowywanie wyrażonych zgód). Nie wymagają zgody.
+          </p>
+          <p class="mt-3">
+            <strong style="color: var(--color-text);">Analityczne</strong> — pliki Google Analytics (_ga, _gid)
+            służące do anonimowej analizy ruchu na stronie. Wymagają zgody.
+          </p>
+          <p class="mt-3">
+            <strong style="color: var(--color-text);">Marketingowe</strong> — pliki służące do personalizacji
+            reklam i&nbsp;mierzenia skuteczności kampanii. Wymagają zgody.
+          </p>
+          <p class="mt-4">
+            Zgody na pliki cookie można w&nbsp;dowolnym momencie zmienić klikając
+            <button id="open-cookie-settings" class="underline font-medium" style="color: var(--color-accent); background: none; border: none; cursor: pointer; padding: 0; font-size: inherit;">
+              „Cookies"
+            </button>
+            w&nbsp;stopce strony.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-heading font-semibold text-lg mb-4" style="color: var(--color-text);">5. Google Consent Mode v2</h2>
+          <p>
+            Serwis wdraża Google Consent Mode w&nbsp;wersji 2, który zapewnia zgodność zbierania danych
+            przez usługi Google z&nbsp;wymogami RODO. Domyślnie wszystkie parametry zgody
+            (<em>analytics_storage</em>, <em>ad_storage</em>, <em>ad_user_data</em>,
+            <em>ad_personalization</em>) są ustawione na <em>denied</em> i&nbsp;zmieniane na
+            <em>granted</em> dopiero po udzieleniu odpowiedniej zgody przez użytkownika.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-heading font-semibold text-lg mb-4" style="color: var(--color-text);">6. Odbiorcy danych</h2>
+          <p>Dane mogą być przekazywane następującym podmiotom:</p>
+          <p class="mt-3">
+            <strong style="color: var(--color-text);">Google LLC</strong> — w&nbsp;zakresie usługi
+            Google Analytics (serwery mogą znajdować się poza EOG; transfer zabezpieczony
+            standardowymi klauzulami umownymi).
+          </p>
+          <p class="mt-3">
+            <strong style="color: var(--color-text);">Amazon Web Services (AWS)</strong> — hosting
+            strony, poczta SES, przechowywanie załączników z&nbsp;formularza (region EU).
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-heading font-semibold text-lg mb-4" style="color: var(--color-text);">7. Okres przechowywania</h2>
+          <p>
+            Dane z&nbsp;formularza kontaktowego przechowujemy do czasu zakończenia korespondencji,
+            nie dłużej niż 2 lata od ostatniego kontaktu. Załączniki przesłane do formularza są
+            automatycznie usuwane po 30 dniach. Pliki cookie analityczne wygasają po 14 miesiącach,
+            a&nbsp;cookie ze zgodami po 12 miesiącach.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-heading font-semibold text-lg mb-4" style="color: var(--color-text);">8. Prawa użytkownika</h2>
+          <p>Zgodnie z&nbsp;RODO przysługują Ci następujące prawa:</p>
+          <p class="mt-3">
+            Prawo dostępu do danych, sprostowania, usunięcia („prawo do bycia zapomnianym"),
+            ograniczenia przetwarzania, przenoszenia danych, sprzeciwu wobec przetwarzania
+            oraz cofnięcia zgody w&nbsp;dowolnym momencie (bez wpływu na zgodność z&nbsp;prawem
+            przetwarzania przed cofnięciem). Przysługuje Ci również prawo do wniesienia skargi
+            do Prezesa Urzędu Ochrony Danych Osobowych (PUODO).
+          </p>
+          <p class="mt-3">
+            W celu realizacji swoich praw skontaktuj się z&nbsp;nami:
+            <a href="mailto:kontakt@mekra.pl" class="underline" style="color: var(--color-accent);">kontakt@mekra.pl</a>.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-heading font-semibold text-lg mb-4" style="color: var(--color-text);">9. Bezpieczeństwo</h2>
+          <p>
+            Strona działa wyłącznie przez protokół HTTPS. Dane z&nbsp;formularza są przesyłane
+            szyfrowanym połączeniem do infrastruktury AWS (S3, Lambda, SES) w&nbsp;regionie EU.
+            Stosujemy odpowiednie środki techniczne i&nbsp;organizacyjne w&nbsp;celu ochrony
+            danych osobowych.
+          </p>
+        </section>
+
+      </div>
+    </article>
+  </main>
+
+  <Footer />
+</BaseLayout>

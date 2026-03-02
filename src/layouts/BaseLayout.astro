@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import CookieConsent from '../components/CookieConsent.astro';
 
 interface Props {
   title: string;
@@ -15,7 +16,7 @@ const {
   canonicalUrl = Astro.url.href,
 } = Astro.props;
 
-const siteName = 'Fronty ramiakowe z płyty laminowanej - produkcja, wykonanie';
+const siteName = 'Mekra — Producent Frontów Ramiakowych';
 const fullTitle = title === 'Strona Główna' ? siteName : `${title} | Mekra`;
 ---
 
@@ -63,6 +64,43 @@ const fullTitle = title === 'Strona Główna' ? siteName : `${title} | Mekra`;
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <!-- Google Consent Mode v2 — defaults BEFORE any Google tags -->
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+
+      // Set defaults to denied — updated when user gives consent
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'functionality_storage': 'granted',
+        'personalization_storage': 'denied',
+        'security_storage': 'granted',
+        'wait_for_update': 500,
+      });
+
+      // Region-specific: EU requires explicit consent
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'region': ['PL', 'EU'],
+      });
+    </script>
+
+    <!-- Google Analytics (gtag.js) — loads after consent defaults -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5RQMRR2XPW"></script>
+    <script is:inline>
+      gtag('js', new Date());
+      gtag('config', 'G-5RQMRR2XPW', {
+        'anonymize_ip': true,
+        'cookie_flags': 'SameSite=Lax;Secure',
+      });
+    </script>
 
     <!-- Theme initialization (prevents flash) -->
     <script is:inline>
@@ -131,5 +169,7 @@ const fullTitle = title === 'Strona Główna' ? siteName : `${title} | Mekra`;
         });
       });
     </script>
+
+    <CookieConsent />
   </body>
 </html>
