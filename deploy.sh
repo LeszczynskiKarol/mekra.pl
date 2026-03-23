@@ -6,6 +6,18 @@ set -e
 
 CF_WWW_DIST_ID="E26WECN75Q2HTH"
 
+
+echo "📦 Pushing to GitHub..."
+git add .
+git commit -m "git push from local"
+git push origin main
+
+if [ $? -ne 0 ]; then
+  echo "❌ Git push failed!"
+  exit 1
+fi
+
+
 echo ">>> Build..."
 npm run build
 
