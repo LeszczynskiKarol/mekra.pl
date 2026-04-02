@@ -7,6 +7,7 @@ interface Props {
   description: string;
   ogImage?: string;
   canonicalUrl?: string;
+  noindex?: boolean;
 }
 
 const {
@@ -42,7 +43,10 @@ const fullTitle = title === 'Strona Główna' ? siteName : `${title} | Mekra`;
     <meta name="title" content={fullTitle} />
     <meta name="description" content={description} />
     <meta name="author" content="Mekra" />
-    <meta name="robots" content="index, follow" />
+    {Astro.props.noindex
+    ? <meta name="robots" content="noindex, nofollow" />
+    : <meta name="robots" content="index, follow" />
+    }
     <link rel="canonical" href={canonicalUrl} />
 
     <!-- Open Graph / Facebook -->

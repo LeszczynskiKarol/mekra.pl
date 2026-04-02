@@ -429,10 +429,18 @@ const API_URL = 'https://iedy003jrg.execute-api.eu-central-1.amazonaws.com';
         return res.json();
       })
       .then(function() {
-        form.classList.add('hidden');
-        formSuccess.classList.remove('hidden');
-        selectedFiles = [];
-        renderFileList();
+          form.classList.add('hidden');
+          formSuccess.classList.remove('hidden');
+          selectedFiles = [];
+          renderFileList();
+
+          // GA4 — konwersja: złożenie zapytania
+          if (typeof gtag === 'function') {
+            gtag('event', 'generate_lead', {
+              event_category: 'formularz_kontaktowy',
+              event_label: productType || 'brak_typu',
+            });
+          }
       })
       .catch(function(err) {
         console.error('Contact form error:', err);
