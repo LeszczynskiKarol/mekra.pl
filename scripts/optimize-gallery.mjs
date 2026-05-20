@@ -6,6 +6,9 @@
  * variants in public/img/realizacje/<category>/<slug>.{jpg,webp} plus
  * 800w thumbnails, and writes a manifest at src/data/realizacje.json.
  *
+ * Categories mirror the offer in Products.astro (frame sizes 7/18/36/60 mm
+ * plus "zabudowy specjalne" for one-offs).
+ *
  * Run:  node scripts/optimize-gallery.mjs
  */
 
@@ -20,63 +23,76 @@ const RAW_DIR = path.join(ROOT, ".tmp", "drive_raw");
 const OUT_DIR = path.join(ROOT, "public", "img", "realizacje");
 const MANIFEST = path.join(ROOT, "src", "data", "realizacje.json");
 
-/**
- * Mapping: Drive folder name => { category, project, projectSlug }
- * - category: user-facing filter on the gallery (3 top-level groups)
- * - project: tooltip/label shown in lightbox
- * - projectSlug: subfolder under category in public/
- */
 const FOLDER_MAP = {
-  "FOTO 36 MM KUCHNIA GRUDZIADZ": {
-    category: "kuchnie",
-    project: "Kuchnia Grudziądz — ramka 36 mm",
-    projectSlug: "kuchnia-grudziadz-36mm",
+  "FOTO 7 MM BRAK ZDJEC": {
+    category: "ramka-7mm",
+    project: "Front z ramką 7 mm",
+    projectSlug: "ramka-7mm",
   },
   "RAMKA 18 RUBINOVA": {
-    category: "kuchnie",
+    category: "ramka-18mm",
     project: "Kuchnia Rubinova — ramka 18 mm",
-    projectSlug: "kuchnia-rubinova-18mm",
+    projectSlug: "ramka-18mm-rubinova",
   },
-  "FOTO 7 MM BRAK ZDJEC": {
-    category: "kuchnie",
-    project: "Kuchnia — ramka 7 mm",
-    projectSlug: "kuchnia-7mm",
+  "FOTO 36 MM KUCHNIA GRUDZIADZ": {
+    category: "ramka-36mm",
+    project: "Kuchnia Grudziądz — ramka 36 mm",
+    projectSlug: "ramka-36mm-grudziadz",
   },
   "SZAFA 60 MM": {
-    category: "szafy",
+    category: "ramka-60mm",
     project: "Szafa — ramka 60 mm",
-    projectSlug: "szafa-60mm",
+    projectSlug: "ramka-60mm-szafa",
   },
   "Szafa 60 MM z witrynką": {
-    category: "szafy",
+    category: "ramka-60mm",
     project: "Szafa z witrynką — ramka 60 mm",
-    projectSlug: "szafa-60mm-witrynka",
+    projectSlug: "ramka-60mm-witrynka",
   },
   "SZAFY 60 MM LUSTRA RAMIAK ŻWIRKI": {
-    category: "szafy",
-    project: "Szafy z lustrami — ramiak Żwirki",
-    projectSlug: "szafy-60mm-lustra-zwirki",
+    category: "ramka-60mm",
+    project: "Szafy z lustrami — ramka 60 mm",
+    projectSlug: "ramka-60mm-lustra",
   },
   "MEBEL NA WINO": {
     category: "zabudowy",
     project: "Zabudowa na wino",
-    projectSlug: "mebel-na-wino",
+    projectSlug: "zabudowa-wino",
   },
 };
 
+/**
+ * Order matters: filter / bento display order. Mirrors the offer (7 → 18 → 36 → 60),
+ * with "zabudowy specjalne" pinned at the end.
+ */
 const CATEGORY_META = {
-  kuchnie: {
-    title: "Kuchnie",
+  "ramka-7mm": {
+    title: "Ramka 7 mm",
+    subtitle: "Nowoczesna linia",
     description:
-      "Fronty ramiakowe w kuchniach na wymiar — od klasycznych białych po nowoczesne rubinowe.",
+      "Delikatne podkreślenie formy. Minimalistyczna ramka — duch skandynawski i loftowy.",
   },
-  szafy: {
-    title: "Szafy",
+  "ramka-18mm": {
+    title: "Ramka 18 mm",
+    subtitle: "Współczesna elegancja",
     description:
-      "Szafy ramiakowe z witrynami i lustrami — funkcjonalne zabudowy do garderoby i przedpokoju.",
+      "Nowoczesna forma z wyraźniejszym akcentem. Uniwersalny wybór do kuchni i zabudów.",
+  },
+  "ramka-36mm": {
+    title: "Ramka 36 mm",
+    subtitle: "Klasyczny szyk",
+    description:
+      "Farmhouse, skandynawski, prowansalski. Szersza ramka — charakter i przytulność klasycznych wnętrz.",
+  },
+  "ramka-60mm": {
+    title: "Ramka 60 mm",
+    subtitle: "Pełna klasyka",
+    description:
+      "Standardowa klasyczna forma. Możliwość wpuszczenia lustra lub szkła w środek ramki.",
   },
   zabudowy: {
     title: "Zabudowy specjalne",
+    subtitle: "Mebel na wino",
     description:
       "Zabudowy nietypowe — winiarnie, regały, meble pod konkretne pomieszczenie.",
   },
@@ -87,18 +103,6 @@ const FULL_WIDTH = 1920;
 const THUMB_WIDTH = 800;
 const JPEG_QUALITY = 85;
 const WEBP_QUALITY = 80;
-
-/** Strip diacritics + lowercase + dashify for safe URLs. */
-function slugify(s) {
-  return s
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/ł/gi, "l")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "")
-    .replace(/-{2,}/g, "-");
-}
 
 async function ensureDir(p) {
   await fs.mkdir(p, { recursive: true });
@@ -117,7 +121,6 @@ async function processImage(src, projectSlug, baseSlug, categorySlug, index) {
   const image = sharp(src, { failOn: "none" }).rotate(); // honor EXIF orientation
   const meta = await image.metadata();
 
-  // Full size (cap at 1920w if larger; otherwise keep)
   const fullPipeline = image.clone();
   if ((meta.width ?? 0) > FULL_WIDTH) {
     fullPipeline.resize({ width: FULL_WIDTH, withoutEnlargement: true });
@@ -131,7 +134,6 @@ async function processImage(src, projectSlug, baseSlug, categorySlug, index) {
     .webp({ quality: WEBP_QUALITY })
     .toFile(fullWebp);
 
-  // Thumb
   const thumbPipeline = image.clone().resize({
     width: THUMB_WIDTH,
     withoutEnlargement: true,
@@ -145,7 +147,6 @@ async function processImage(src, projectSlug, baseSlug, categorySlug, index) {
     .webp({ quality: WEBP_QUALITY })
     .toFile(thumbWebp);
 
-  // Re-read final dimensions for srcset
   const finalMeta = await sharp(fullJpg).metadata();
   const thumbMeta = await sharp(thumbJpg).metadata();
   const fullStats = await fs.stat(fullJpg);
@@ -172,22 +173,26 @@ async function main() {
   const t0 = Date.now();
   await ensureDir(path.dirname(MANIFEST));
 
-  // Clean out old optimized output to avoid stale files
   await fs.rm(OUT_DIR, { recursive: true, force: true });
   await ensureDir(OUT_DIR);
 
   const folders = await fs.readdir(RAW_DIR, { withFileTypes: true });
   const items = [];
 
-  for (const dirent of folders) {
-    if (!dirent.isDirectory()) continue;
-    const folderName = dirent.name;
-    const mapping = FOLDER_MAP[folderName];
-    if (!mapping) {
-      console.warn(`! Skipping unmapped folder: ${folderName}`);
-      continue;
-    }
-    const { category, project, projectSlug } = mapping;
+  // Process in category order (so items[] is grouped by category like the filters)
+  const orderedCategorySlugs = Object.keys(CATEGORY_META);
+  const folderEntries = folders
+    .filter((d) => d.isDirectory() && FOLDER_MAP[d.name])
+    .map((d) => ({ name: d.name, ...FOLDER_MAP[d.name] }))
+    .sort((a, b) => {
+      const ai = orderedCategorySlugs.indexOf(a.category);
+      const bi = orderedCategorySlugs.indexOf(b.category);
+      if (ai !== bi) return ai - bi;
+      return a.name.localeCompare(b.name);
+    });
+
+  for (const folder of folderEntries) {
+    const { name: folderName, category, project, projectSlug } = folder;
     const folderPath = path.join(RAW_DIR, folderName);
     const files = (await fs.readdir(folderPath))
       .filter((f) => /\.(jpe?g|png)$/i.test(f))
@@ -219,16 +224,15 @@ async function main() {
     }
   }
 
-  // Build manifest
   const manifest = {
     generatedAt: new Date().toISOString(),
     counts: {},
     categories: Object.fromEntries(
-      Object.entries(CATEGORY_META).map(([slug, meta]) => [
+      orderedCategorySlugs.map((slug) => [
         slug,
         {
           slug,
-          ...meta,
+          ...CATEGORY_META[slug],
           count: items.filter((x) => x.category === slug).length,
         },
       ]),

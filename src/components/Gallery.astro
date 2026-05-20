@@ -1,26 +1,64 @@
 ---
 import manifest from '../data/realizacje.json';
 
+const { categories, items, counts } = manifest;
+
 /**
- * Hero set for the home page: pick first 4 from each category for variety.
- * Full gallery lives at /realizacje/.
+ * Build hero tiles for the bento grid — one tile per category, hero photo
+ * = first item of that category.
+ *
+ * Layout is fixed (matches the four frame sizes from Products.astro plus
+ * the "zabudowy specjalne" tile):
+ *
+ *   Desktop (12 cols):                   Mobile (1 col):
+ *   ┌──────────────┬──────┐               ┌──────────────┐
+ *   │              │ 7mm  │               │   36 mm      │
+ *   │   36 mm      ├──────┤               ├──────────────┤
+ *   │   (hero)     │ 18mm │               │   7 mm       │
+ *   ├───────┬──────┴──────┤               ├──────────────┤
+ *   │ 60mm  │  zabudowy   │               │   18 mm      │
+ *   └───────┴─────────────┘               ├──────────────┤
+ *                                         │   60 mm      │
+ *                                         ├──────────────┤
+ *                                         │   zabudowy   │
+ *                                         └──────────────┘
  */
-const HERO_PER_CATEGORY = 4;
-const heroItems = Object.keys(manifest.categories).flatMap((catSlug) => {
-  return manifest.items
-    .filter((it) => it.category === catSlug)
-    .slice(0, HERO_PER_CATEGORY);
+const layoutOrder = ['ramka-36mm', 'ramka-7mm', 'ramka-18mm', 'ramka-60mm', 'zabudowy'];
+
+// span classes per category slug
+const SPAN = {
+  'ramka-36mm':  'lg:col-span-8 lg:row-span-2',
+  'ramka-7mm':   'lg:col-span-4 lg:row-span-1',
+  'ramka-18mm':  'lg:col-span-4 lg:row-span-1',
+  'ramka-60mm':  'lg:col-span-5 lg:row-span-1',
+  'zabudowy':    'lg:col-span-7 lg:row-span-1',
+};
+
+// frame size big label (extracted from category)
+const SIZE_LABEL = {
+  'ramka-7mm':  { size: '7',  unit: 'mm' },
+  'ramka-18mm': { size: '18', unit: 'mm' },
+  'ramka-36mm': { size: '36', unit: 'mm' },
+  'ramka-60mm': { size: '60', unit: 'mm' },
+  'zabudowy':   { size: '★',  unit: '' },
+};
+
+const tiles = layoutOrder.map((slug) => {
+  const cat = categories[slug];
+  const heroItem = items.find((it) => it.category === slug);
+  return {
+    slug,
+    title: cat.title,
+    subtitle: cat.subtitle,
+    description: cat.description,
+    count: cat.count,
+    heroItem,
+    span: SPAN[slug],
+    label: SIZE_LABEL[slug],
+  };
 });
 
-// Row-span pattern for visual rhythm in the grid
-const spanPattern = ['row-span-2', '', '', '', '', 'row-span-2', '', '', '', '', '', 'row-span-2'];
-const galleryItems = heroItems.map((it, i) => ({
-  ...it,
-  caption: it.project,
-  span: spanPattern[i % spanPattern.length],
-}));
-
-const totalCount = manifest.counts.total;
+const totalCount = counts.total;
 ---
 
 <section id="realizacje" class="section-spacing section-padding relative" style="background-color: var(--color-bg-secondary);">
@@ -29,59 +67,68 @@ const totalCount = manifest.counts.total;
     <div class="text-center max-w-3xl mx-auto animate-on-scroll">
       <span class="label-tag">Realizacje</span>
       <h2 class="mt-6 font-display text-3xl sm:text-4xl md:text-5xl tracking-tight" style="color: var(--color-text);">
-        Nasze fronty<br />
-        <span class="text-gradient">w Twoich wnętrzach</span>
+        Każda ramka<br />
+        <span class="text-gradient">we własnej galerii</span>
       </h2>
       <p class="mt-6 text-base md:text-lg leading-relaxed font-body" style="color: var(--color-text-secondary);">
-        Kuchnie, szafy, zabudowy — zobacz, jak płyta laminowana zamienia
-        proste formy w&nbsp;coś wyjątkowego. Każda realizacja to dowód na to,
-        że materiał ma znaczenie.
+        {totalCount} realizacji posegregowanych według szerokości ramki — od minimalistycznych
+        7&nbsp;mm po pełną klasykę 60&nbsp;mm. Kliknij kategorię, żeby zobaczyć wszystko.
       </p>
     </div>
 
-    <!-- Gallery grid -->
-    <div class="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-[280px]">
-      {galleryItems.map((item, i) => (
-        <div
-          class={`animate-on-scroll group relative rounded-2xl overflow-hidden cursor-pointer gallery-thumb ${item.span}`}
-          style={`transition-delay: ${i * 0.06}s;`}
-          data-gallery-index={i}
-          role="button"
-          tabindex="0"
-          aria-label={`Otwórz zdjęcie: ${item.caption}`}
+    <!-- Bento grid: one tile per category -->
+    <div class="mt-16 grid grid-cols-1 lg:grid-cols-12 gap-4 auto-rows-[280px] sm:auto-rows-[320px]">
+      {tiles.map((tile, i) => (
+        <a
+          href={`/realizacje/#${tile.slug}`}
+          class={`category-tile animate-on-scroll group relative rounded-2xl overflow-hidden ${tile.span}`}
+          style={`transition-delay: ${i * 0.08}s;`}
+          aria-label={`Zobacz realizacje: ${tile.title} (${tile.count} zdjęć)`}
         >
-          <picture>
-            <source srcset={item.paths.thumbWebp} type="image/webp" />
-            <img
-              src={item.paths.thumb}
-              alt={item.alt}
-              width={item.thumbWidth}
-              height={item.thumbHeight}
-              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              loading="lazy"
-              decoding="async"
-            />
-          </picture>
-          <!-- Overlay -->
-          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            <div class="absolute bottom-0 left-0 right-0 p-6 flex items-end justify-between">
-              <p class="text-white font-heading font-medium text-sm translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                {item.caption}
-              </p>
-              <svg class="w-5 h-5 text-white/70 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
+          {tile.heroItem && (
+            <picture>
+              <source srcset={tile.heroItem.paths.fullWebp} type="image/webp" />
+              <img
+                src={tile.heroItem.paths.full}
+                alt={`${tile.title} — ${tile.subtitle}`}
+                class="category-tile__img"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+          )}
+
+          <!-- Permanent bottom gradient + content -->
+          <div class="category-tile__overlay">
+            <div class="category-tile__top">
+              <span class="category-tile__count">{tile.count} realizacji</span>
+            </div>
+
+            <div class="category-tile__bottom">
+              <div class="category-tile__size">
+                <span class="category-tile__size-num">{tile.label.size}</span>
+                <span class="category-tile__size-unit">{tile.label.unit}</span>
+              </div>
+              <div class="category-tile__meta">
+                <h3 class="category-tile__title">{tile.title}</h3>
+                <p class="category-tile__subtitle">{tile.subtitle}</p>
+              </div>
+              <div class="category-tile__arrow">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                 </svg>
+              </div>
             </div>
           </div>
-        </div>
+        </a>
       ))}
     </div>
 
-    <!-- CTA: zobacz wszystkie -->
+    <!-- CTA -->
     <div class="mt-12 text-center animate-on-scroll">
       <a
         href="/realizacje/"
-        class="inline-flex items-center gap-2 btn-primary !py-3 !px-7"
+        class="inline-flex items-center gap-2 btn-primary"
       >
         <span>Zobacz wszystkie realizacje ({totalCount})</span>
         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -92,258 +139,163 @@ const totalCount = manifest.counts.total;
   </div>
 </section>
 
-<!-- Lightbox Modal -->
-<div id="gallery-lightbox" class="gallery-lightbox" aria-hidden="true" role="dialog" aria-label="Podgląd zdjęcia">
-  <div class="gallery-lightbox__backdrop" data-lightbox-close></div>
-
-  <button class="gallery-lightbox__close" data-lightbox-close aria-label="Zamknij">
-    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-    </svg>
-  </button>
-
-  <button class="gallery-lightbox__nav gallery-lightbox__nav--prev" data-lightbox-prev aria-label="Poprzednie zdjęcie">
-    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-    </svg>
-  </button>
-
-  <button class="gallery-lightbox__nav gallery-lightbox__nav--next" data-lightbox-next aria-label="Następne zdjęcie">
-    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-    </svg>
-  </button>
-
-  <div class="gallery-lightbox__content">
-    <picture>
-      <source id="lightbox-img-webp" srcset="" type="image/webp" />
-      <img id="lightbox-img" class="gallery-lightbox__img" src="" alt="" />
-    </picture>
-    <div class="gallery-lightbox__caption">
-      <p id="lightbox-caption" class="font-heading font-medium text-sm text-white"></p>
-      <p id="lightbox-counter" class="text-xs text-white/50 mt-1 font-body"></p>
-    </div>
-  </div>
-</div>
-
 <style>
-  .gallery-lightbox {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    pointer-events: none;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-                visibility 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  .category-tile {
+    display: block;
+    cursor: pointer;
+    isolation: isolate;
+    text-decoration: none;
+    background-color: #1a1a1a;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  .gallery-lightbox.is-open {
-    pointer-events: auto;
-    opacity: 1;
-    visibility: visible;
+  .category-tile:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
   }
-  .gallery-lightbox__backdrop {
+
+  .category-tile__img {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.92);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1),
+                filter 0.5s ease;
+    filter: saturate(0.95) brightness(0.92);
   }
-  .gallery-lightbox__close {
+  .category-tile:hover .category-tile__img {
+    transform: scale(1.06);
+    filter: saturate(1.1) brightness(1);
+  }
+
+  .category-tile__overlay {
     position: absolute;
-    top: 1.25rem;
-    right: 1.25rem;
-    z-index: 10;
-    width: 2.75rem;
-    height: 2.75rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 9999px;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
-  }
-  .gallery-lightbox__close:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: scale(1.05);
-  }
-  .gallery-lightbox__nav {
-    position: absolute;
-    top: 50%;
-    z-index: 10;
-    transform: translateY(-50%);
-    width: 3rem;
-    height: 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 9999px;
-    background: rgba(255, 255, 255, 0.08);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
-  }
-  .gallery-lightbox__nav:hover { background: rgba(255, 255, 255, 0.18); }
-  .gallery-lightbox__nav--prev { left: 1rem; }
-  .gallery-lightbox__nav--next { right: 1rem; }
-  @media (min-width: 768px) {
-    .gallery-lightbox__nav--prev { left: 1.5rem; }
-    .gallery-lightbox__nav--next { right: 1.5rem; }
-    .gallery-lightbox__close { top: 1.5rem; right: 1.5rem; }
-  }
-  .gallery-lightbox__content {
-    position: relative;
-    z-index: 5;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.85) 0%,
+      rgba(0, 0, 0, 0.5) 30%,
+      rgba(0, 0, 0, 0.1) 60%,
+      rgba(0, 0, 0, 0.35) 100%
+    );
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    padding: 1.5rem;
+    transition: background 0.4s ease;
+  }
+  @media (min-width: 1024px) {
+    .category-tile__overlay { padding: 1.75rem; }
+  }
+  .category-tile:hover .category-tile__overlay {
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.9) 0%,
+      rgba(0, 0, 0, 0.55) 30%,
+      rgba(0, 0, 0, 0.15) 60%,
+      rgba(0, 0, 0, 0.4) 100%
+    );
+  }
+
+  .category-tile__top {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .category-tile__count {
+    display: inline-block;
+    padding: 0.35rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: white;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .category-tile__bottom {
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    color: white;
+  }
+
+  .category-tile__size {
+    display: flex;
+    align-items: baseline;
+    gap: 0.2rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .category-tile__size-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3rem;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  @media (min-width: 1024px) {
+    .category-tile__size-num { font-size: 4rem; }
+  }
+  .category-tile__size-unit {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+  }
+
+  .category-tile__meta {
+    flex: 1;
+    min-width: 0;
+  }
+  .category-tile__title {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 1.125rem;
+    line-height: 1.2;
+    margin: 0;
+  }
+  .category-tile__subtitle {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.75rem;
+    margin: 0.25rem 0 0 0;
+    opacity: 0.7;
+    letter-spacing: 0.02em;
+  }
+
+  .category-tile__arrow {
+    flex-shrink: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
     align-items: center;
-    max-width: calc(100vw - 6rem);
-    max-height: calc(100vh - 6rem);
+    justify-content: center;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    transition: transform 0.3s ease, background 0.3s ease;
   }
-  @media (max-width: 767px) {
-    .gallery-lightbox__content {
-      max-width: calc(100vw - 1.5rem);
-      max-height: calc(100vh - 4rem);
+  .category-tile:hover .category-tile__arrow {
+    background: rgba(255, 255, 255, 0.22);
+    transform: translateX(4px);
+  }
+
+  /* Bigger hero tile gets a bigger size label */
+  .category-tile.lg\:col-span-8 .category-tile__size-num,
+  .category-tile:nth-child(1) .category-tile__size-num {
+    font-size: 4rem;
+  }
+  @media (min-width: 1024px) {
+    .category-tile.lg\:col-span-8 .category-tile__size-num,
+    .category-tile:nth-child(1) .category-tile__size-num {
+      font-size: 6rem;
     }
-  }
-  .gallery-lightbox__img {
-    max-width: 100%;
-    max-height: calc(100vh - 10rem);
-    object-fit: contain;
-    border-radius: 0.75rem;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
-    transform: scale(0.92) translateY(12px);
-    opacity: 0;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .gallery-lightbox.is-open .gallery-lightbox__img {
-    transform: scale(1) translateY(0);
-    opacity: 1;
-  }
-  .gallery-lightbox__img.is-switching {
-    transform: scale(0.96);
-    opacity: 0;
-    transition-duration: 0.18s;
-  }
-  .gallery-lightbox__caption {
-    text-align: center;
-    margin-top: 1rem;
-    transform: translateY(8px);
-    opacity: 0;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.1s,
-                opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
-  }
-  .gallery-lightbox.is-open .gallery-lightbox__caption {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  .gallery-lightbox__caption.is-switching {
-    opacity: 0;
-    transform: translateY(4px);
-    transition-duration: 0.15s;
-    transition-delay: 0s;
   }
 </style>
-
-<script define:vars={{ galleryItems }}>
-  document.addEventListener('DOMContentLoaded', () => {
-    const lightbox = document.getElementById('gallery-lightbox');
-    const lbImg = document.getElementById('lightbox-img');
-    const lbWebp = document.getElementById('lightbox-img-webp');
-    const lbCaption = document.getElementById('lightbox-caption');
-    const lbCounter = document.getElementById('lightbox-counter');
-    const thumbs = document.querySelectorAll('#realizacje .gallery-thumb');
-    const total = galleryItems.length;
-    let currentIndex = 0;
-    let isAnimating = false;
-
-    function applyImage(item) {
-      lbWebp.srcset = item.paths.fullWebp;
-      lbImg.src = item.paths.full;
-      lbImg.alt = item.alt;
-      lbCaption.textContent = item.caption;
-      lbCounter.textContent = `${currentIndex + 1} / ${total}`;
-    }
-
-    function openLightbox(index) {
-      currentIndex = index;
-      applyImage(galleryItems[currentIndex]);
-      lightbox.classList.add('is-open');
-      lightbox.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeLightbox() {
-      lightbox.classList.remove('is-open');
-      lightbox.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    }
-
-    function transitionTo(newIndex) {
-      if (isAnimating) return;
-      isAnimating = true;
-      lbImg.classList.add('is-switching');
-      lbCaption.parentElement.classList.add('is-switching');
-      setTimeout(() => {
-        currentIndex = newIndex;
-        applyImage(galleryItems[currentIndex]);
-        requestAnimationFrame(() => {
-          lbImg.classList.remove('is-switching');
-          lbCaption.parentElement.classList.remove('is-switching');
-          setTimeout(() => { isAnimating = false; }, 300);
-        });
-      }, 200);
-    }
-
-    function goNext() { transitionTo((currentIndex + 1) % total); }
-    function goPrev() { transitionTo((currentIndex - 1 + total) % total); }
-
-    thumbs.forEach((thumb) => {
-      thumb.addEventListener('click', () => {
-        const idx = parseInt(thumb.dataset.galleryIndex, 10);
-        openLightbox(idx);
-      });
-      thumb.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          const idx = parseInt(thumb.dataset.galleryIndex, 10);
-          openLightbox(idx);
-        }
-      });
-    });
-
-    document.querySelectorAll('[data-lightbox-close]').forEach((el) => {
-      el.addEventListener('click', closeLightbox);
-    });
-    document.querySelector('[data-lightbox-prev]').addEventListener('click', goPrev);
-    document.querySelector('[data-lightbox-next]').addEventListener('click', goNext);
-
-    document.addEventListener('keydown', (e) => {
-      if (!lightbox.classList.contains('is-open')) return;
-      if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowRight') goNext();
-      if (e.key === 'ArrowLeft') goPrev();
-    });
-
-    let touchStartX = 0;
-    let touchEndX = 0;
-    lightbox.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-    lightbox.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      const diff = touchStartX - touchEndX;
-      if (Math.abs(diff) > 50) {
-        if (diff > 0) goNext(); else goPrev();
-      }
-    }, { passive: true });
-  });
-</script>
