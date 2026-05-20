@@ -220,7 +220,8 @@ export const handler = async (event) => {
       },
     });
 
-    await ses.send(command);
+    const sesResult = await ses.send(command);
+    console.log("SES OK MessageId:", sesResult.MessageId, "to:", TO_EMAIL, "replyTo:", email);
 
     return {
       statusCode: 200,
