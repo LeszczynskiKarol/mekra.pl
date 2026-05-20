@@ -1,0 +1,2211 @@
+{
+  "generatedAt": "2026-05-20T15:37:20.445Z",
+  "counts": {
+    "total": 109,
+    "kuchnie": 86,
+    "szafy": 15,
+    "zabudowy": 8
+  },
+  "categories": {
+    "kuchnie": {
+      "slug": "kuchnie",
+      "title": "Kuchnie",
+      "description": "Fronty ramiakowe w kuchniach na wymiar — od klasycznych białych po nowoczesne rubinowe.",
+      "count": 86
+    },
+    "szafy": {
+      "slug": "szafy",
+      "title": "Szafy",
+      "description": "Szafy ramiakowe z witrynami i lustrami — funkcjonalne zabudowy do garderoby i przedpokoju.",
+      "count": 15
+    },
+    "zabudowy": {
+      "slug": "zabudowy",
+      "title": "Zabudowy specjalne",
+      "description": "Zabudowy nietypowe — winiarnie, regały, meble pod konkretne pomieszczenie.",
+      "count": 8
+    }
+  },
+  "items": [
+    {
+      "id": "kuchnia-grudziadz-36mm-01",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-01",
+      "width": 1920,
+      "height": 2880,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 598,
+      "thumbJpgKb": 74,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-01.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-01.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-01-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-01-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-02",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-02",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 157,
+      "thumbJpgKb": 27,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-02.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-02.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-02-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-02-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-03",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-03",
+      "width": 1920,
+      "height": 2880,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 406,
+      "thumbJpgKb": 67,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-03.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-03.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-03-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-03-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-04",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-04",
+      "width": 1920,
+      "height": 2880,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 513,
+      "thumbJpgKb": 62,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-04.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-04.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-04-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-04-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-05",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-05",
+      "width": 1920,
+      "height": 2880,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 581,
+      "thumbJpgKb": 74,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-05.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-05.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-05-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-05-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-06",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-06",
+      "width": 1920,
+      "height": 2880,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 530,
+      "thumbJpgKb": 66,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-06.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-06.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-06-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-06-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-07",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-07",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 170,
+      "thumbJpgKb": 34,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-07.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-07.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-07-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-07-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-08",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-08",
+      "width": 1920,
+      "height": 1440,
+      "thumbWidth": 800,
+      "thumbHeight": 600,
+      "fullJpgKb": 219,
+      "thumbJpgKb": 49,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-08.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-08.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-08-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-08-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-09",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-09",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 123,
+      "thumbJpgKb": 29,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-09.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-09.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-09-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-09-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-10",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-10",
+      "width": 1920,
+      "height": 3050,
+      "thumbWidth": 800,
+      "thumbHeight": 1271,
+      "fullJpgKb": 454,
+      "thumbJpgKb": 68,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-10.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-10.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-10-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-10-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-11",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-11",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 117,
+      "thumbJpgKb": 26,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-11.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-11.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-11-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-11-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-12",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-12",
+      "width": 1920,
+      "height": 2880,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 571,
+      "thumbJpgKb": 67,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-12.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-12.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-12-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-12-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-13",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-13",
+      "width": 1920,
+      "height": 2880,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 553,
+      "thumbJpgKb": 46,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-13.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-13.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-13-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-13-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-14",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-14",
+      "width": 1920,
+      "height": 2560,
+      "thumbWidth": 800,
+      "thumbHeight": 1067,
+      "fullJpgKb": 327,
+      "thumbJpgKb": 68,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-14.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-14.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-14-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-14-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-15",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-15",
+      "width": 1920,
+      "height": 1440,
+      "thumbWidth": 800,
+      "thumbHeight": 600,
+      "fullJpgKb": 204,
+      "thumbJpgKb": 46,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-15.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-15.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-15-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-15-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-16",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-16",
+      "width": 1920,
+      "height": 1440,
+      "thumbWidth": 800,
+      "thumbHeight": 600,
+      "fullJpgKb": 202,
+      "thumbJpgKb": 46,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-16.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-16.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-16-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-16-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-17",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-17",
+      "width": 1920,
+      "height": 2560,
+      "thumbWidth": 800,
+      "thumbHeight": 1067,
+      "fullJpgKb": 357,
+      "thumbJpgKb": 81,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-17.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-17.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-17-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-17-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-18",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-18",
+      "width": 1920,
+      "height": 2560,
+      "thumbWidth": 800,
+      "thumbHeight": 1067,
+      "fullJpgKb": 309,
+      "thumbJpgKb": 59,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-18.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-18.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-18-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-18-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-19",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-19",
+      "width": 1920,
+      "height": 2560,
+      "thumbWidth": 800,
+      "thumbHeight": 1067,
+      "fullJpgKb": 285,
+      "thumbJpgKb": 59,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-19.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-19.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-19-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-19-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-20",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-20",
+      "width": 1920,
+      "height": 2560,
+      "thumbWidth": 800,
+      "thumbHeight": 1066,
+      "fullJpgKb": 259,
+      "thumbJpgKb": 55,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-20.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-20.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-20-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-20-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-21",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-21",
+      "width": 1920,
+      "height": 1278,
+      "thumbWidth": 800,
+      "thumbHeight": 532,
+      "fullJpgKb": 140,
+      "thumbJpgKb": 34,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-21.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-21.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-21-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-21-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-22",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-22",
+      "width": 1920,
+      "height": 2560,
+      "thumbWidth": 800,
+      "thumbHeight": 1067,
+      "fullJpgKb": 427,
+      "thumbJpgKb": 88,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-22.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-22.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-22-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-22-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-23",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-23",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 151,
+      "thumbJpgKb": 32,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-23.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-23.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-23-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-23-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-24",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-24",
+      "width": 998,
+      "height": 1497,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 189,
+      "thumbJpgKb": 123,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-24.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-24.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-24-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-24-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-25",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-25",
+      "width": 998,
+      "height": 1497,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 191,
+      "thumbJpgKb": 124,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-25.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-25.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-25-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-25-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-26",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-26",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 192,
+      "thumbJpgKb": 42,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-26.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-26.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-26-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-26-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-27",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-27",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 269,
+      "thumbJpgKb": 57,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-27.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-27.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-27-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-27-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-28",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-28",
+      "width": 998,
+      "height": 1497,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 131,
+      "thumbJpgKb": 88,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-28.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-28.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-28-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-28-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-29",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-29",
+      "width": 998,
+      "height": 1497,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 139,
+      "thumbJpgKb": 92,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-29.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-29.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-29-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-29-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-30",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-30",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 175,
+      "thumbJpgKb": 40,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-30.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-30.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-30-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-30-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-31",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-31",
+      "width": 998,
+      "height": 1497,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 153,
+      "thumbJpgKb": 101,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-31.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-31.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-31-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-31-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-32",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-32",
+      "width": 998,
+      "height": 1497,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 179,
+      "thumbJpgKb": 115,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-32.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-32.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-32-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-32-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-33",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-33",
+      "width": 998,
+      "height": 1497,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 165,
+      "thumbJpgKb": 105,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-33.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-33.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-33-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-33-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-34",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-34",
+      "width": 998,
+      "height": 1497,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 160,
+      "thumbJpgKb": 101,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-34.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-34.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-34-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-34-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-35",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-35",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 116,
+      "thumbJpgKb": 28,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-35.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-35.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-35-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-35-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-36",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-36",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 269,
+      "thumbJpgKb": 52,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-36.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-36.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-36-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-36-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-37",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-37",
+      "width": 998,
+      "height": 1497,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 140,
+      "thumbJpgKb": 92,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-37.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-37.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-37-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-37-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-38",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-38",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 248,
+      "thumbJpgKb": 47,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-38.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-38.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-38-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-38-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-39",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-39",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 238,
+      "thumbJpgKb": 45,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-39.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-39.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-39-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-39-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-40",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-40",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 370,
+      "thumbJpgKb": 58,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-40.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-40.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-40-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-40-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-41",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-41",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 288,
+      "thumbJpgKb": 55,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-41.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-41.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-41-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-41-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-42",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-42",
+      "width": 998,
+      "height": 1497,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 235,
+      "thumbJpgKb": 146,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-42.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-42.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-42-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-42-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-43",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-43",
+      "width": 998,
+      "height": 1497,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 217,
+      "thumbJpgKb": 139,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-43.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-43.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-43-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-43-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-44",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-44",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 310,
+      "thumbJpgKb": 63,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-44.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-44.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-44-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-44-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-45",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-45",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 136,
+      "thumbJpgKb": 29,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-45.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-45.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-45-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-45-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-46",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-46",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 340,
+      "thumbJpgKb": 66,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-46.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-46.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-46-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-46-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-47",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-47",
+      "width": 998,
+      "height": 1497,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 152,
+      "thumbJpgKb": 99,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-47.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-47.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-47-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-47-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-48",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-48",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 285,
+      "thumbJpgKb": 50,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-48.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-48.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-48-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-48-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-49",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-49",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 252,
+      "thumbJpgKb": 42,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-49.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-49.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-49-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-49-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-grudziadz-36mm-50",
+      "category": "kuchnie",
+      "project": "Kuchnia Grudziądz — ramka 36 mm",
+      "projectSlug": "kuchnia-grudziadz-36mm",
+      "alt": "Kuchnia Grudziądz — ramka 36 mm — realizacja Mekra",
+      "slug": "kuchnia-grudziadz-36mm-50",
+      "width": 998,
+      "height": 1497,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 131,
+      "thumbJpgKb": 86,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-50.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-50.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-50-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-grudziadz-36mm-50-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-7mm-01",
+      "category": "kuchnie",
+      "project": "Kuchnia — ramka 7 mm",
+      "projectSlug": "kuchnia-7mm",
+      "alt": "Kuchnia — ramka 7 mm — realizacja Mekra",
+      "slug": "kuchnia-7mm-01",
+      "width": 1920,
+      "height": 2880,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 486,
+      "thumbJpgKb": 91,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-7mm-01.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-7mm-01.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-7mm-01-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-7mm-01-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-7mm-02",
+      "category": "kuchnie",
+      "project": "Kuchnia — ramka 7 mm",
+      "projectSlug": "kuchnia-7mm",
+      "alt": "Kuchnia — ramka 7 mm — realizacja Mekra",
+      "slug": "kuchnia-7mm-02",
+      "width": 1920,
+      "height": 2880,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 459,
+      "thumbJpgKb": 91,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-7mm-02.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-7mm-02.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-7mm-02-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-7mm-02-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-7mm-03",
+      "category": "kuchnie",
+      "project": "Kuchnia — ramka 7 mm",
+      "projectSlug": "kuchnia-7mm",
+      "alt": "Kuchnia — ramka 7 mm — realizacja Mekra",
+      "slug": "kuchnia-7mm-03",
+      "width": 1920,
+      "height": 2925,
+      "thumbWidth": 800,
+      "thumbHeight": 1219,
+      "fullJpgKb": 445,
+      "thumbJpgKb": 64,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-7mm-03.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-7mm-03.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-7mm-03-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-7mm-03-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-7mm-04",
+      "category": "kuchnie",
+      "project": "Kuchnia — ramka 7 mm",
+      "projectSlug": "kuchnia-7mm",
+      "alt": "Kuchnia — ramka 7 mm — realizacja Mekra",
+      "slug": "kuchnia-7mm-04",
+      "width": 1920,
+      "height": 1306,
+      "thumbWidth": 800,
+      "thumbHeight": 544,
+      "fullJpgKb": 212,
+      "thumbJpgKb": 41,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-7mm-04.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-7mm-04.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-7mm-04-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-7mm-04-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-7mm-05",
+      "category": "kuchnie",
+      "project": "Kuchnia — ramka 7 mm",
+      "projectSlug": "kuchnia-7mm",
+      "alt": "Kuchnia — ramka 7 mm — realizacja Mekra",
+      "slug": "kuchnia-7mm-05",
+      "width": 1920,
+      "height": 2880,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 526,
+      "thumbJpgKb": 95,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-7mm-05.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-7mm-05.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-7mm-05-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-7mm-05-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-7mm-06",
+      "category": "kuchnie",
+      "project": "Kuchnia — ramka 7 mm",
+      "projectSlug": "kuchnia-7mm",
+      "alt": "Kuchnia — ramka 7 mm — realizacja Mekra",
+      "slug": "kuchnia-7mm-06",
+      "width": 1920,
+      "height": 2880,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 388,
+      "thumbJpgKb": 79,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-7mm-06.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-7mm-06.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-7mm-06-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-7mm-06-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-7mm-07",
+      "category": "kuchnie",
+      "project": "Kuchnia — ramka 7 mm",
+      "projectSlug": "kuchnia-7mm",
+      "alt": "Kuchnia — ramka 7 mm — realizacja Mekra",
+      "slug": "kuchnia-7mm-07",
+      "width": 1920,
+      "height": 2880,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 725,
+      "thumbJpgKb": 126,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-7mm-07.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-7mm-07.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-7mm-07-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-7mm-07-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-7mm-08",
+      "category": "kuchnie",
+      "project": "Kuchnia — ramka 7 mm",
+      "projectSlug": "kuchnia-7mm",
+      "alt": "Kuchnia — ramka 7 mm — realizacja Mekra",
+      "slug": "kuchnia-7mm-08",
+      "width": 1920,
+      "height": 1066,
+      "thumbWidth": 800,
+      "thumbHeight": 444,
+      "fullJpgKb": 131,
+      "thumbJpgKb": 27,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-7mm-08.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-7mm-08.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-7mm-08-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-7mm-08-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-7mm-09",
+      "category": "kuchnie",
+      "project": "Kuchnia — ramka 7 mm",
+      "projectSlug": "kuchnia-7mm",
+      "alt": "Kuchnia — ramka 7 mm — realizacja Mekra",
+      "slug": "kuchnia-7mm-09",
+      "width": 1920,
+      "height": 3094,
+      "thumbWidth": 800,
+      "thumbHeight": 1289,
+      "fullJpgKb": 378,
+      "thumbJpgKb": 76,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-7mm-09.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-7mm-09.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-7mm-09-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-7mm-09-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-7mm-10",
+      "category": "kuchnie",
+      "project": "Kuchnia — ramka 7 mm",
+      "projectSlug": "kuchnia-7mm",
+      "alt": "Kuchnia — ramka 7 mm — realizacja Mekra",
+      "slug": "kuchnia-7mm-10",
+      "width": 1920,
+      "height": 3189,
+      "thumbWidth": 800,
+      "thumbHeight": 1329,
+      "fullJpgKb": 518,
+      "thumbJpgKb": 90,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-7mm-10.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-7mm-10.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-7mm-10-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-7mm-10-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-7mm-11",
+      "category": "kuchnie",
+      "project": "Kuchnia — ramka 7 mm",
+      "projectSlug": "kuchnia-7mm",
+      "alt": "Kuchnia — ramka 7 mm — realizacja Mekra",
+      "slug": "kuchnia-7mm-11",
+      "width": 1920,
+      "height": 2880,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 439,
+      "thumbJpgKb": 81,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-7mm-11.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-7mm-11.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-7mm-11-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-7mm-11-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-7mm-12",
+      "category": "kuchnie",
+      "project": "Kuchnia — ramka 7 mm",
+      "projectSlug": "kuchnia-7mm",
+      "alt": "Kuchnia — ramka 7 mm — realizacja Mekra",
+      "slug": "kuchnia-7mm-12",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 175,
+      "thumbJpgKb": 33,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-7mm-12.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-7mm-12.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-7mm-12-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-7mm-12-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-7mm-13",
+      "category": "kuchnie",
+      "project": "Kuchnia — ramka 7 mm",
+      "projectSlug": "kuchnia-7mm",
+      "alt": "Kuchnia — ramka 7 mm — realizacja Mekra",
+      "slug": "kuchnia-7mm-13",
+      "width": 1920,
+      "height": 2880,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 402,
+      "thumbJpgKb": 76,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-7mm-13.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-7mm-13.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-7mm-13-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-7mm-13-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-7mm-14",
+      "category": "kuchnie",
+      "project": "Kuchnia — ramka 7 mm",
+      "projectSlug": "kuchnia-7mm",
+      "alt": "Kuchnia — ramka 7 mm — realizacja Mekra",
+      "slug": "kuchnia-7mm-14",
+      "width": 1920,
+      "height": 2880,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 507,
+      "thumbJpgKb": 90,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-7mm-14.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-7mm-14.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-7mm-14-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-7mm-14-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-7mm-15",
+      "category": "kuchnie",
+      "project": "Kuchnia — ramka 7 mm",
+      "projectSlug": "kuchnia-7mm",
+      "alt": "Kuchnia — ramka 7 mm — realizacja Mekra",
+      "slug": "kuchnia-7mm-15",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 189,
+      "thumbJpgKb": 41,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-7mm-15.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-7mm-15.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-7mm-15-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-7mm-15-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-7mm-16",
+      "category": "kuchnie",
+      "project": "Kuchnia — ramka 7 mm",
+      "projectSlug": "kuchnia-7mm",
+      "alt": "Kuchnia — ramka 7 mm — realizacja Mekra",
+      "slug": "kuchnia-7mm-16",
+      "width": 1920,
+      "height": 2880,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 506,
+      "thumbJpgKb": 99,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-7mm-16.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-7mm-16.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-7mm-16-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-7mm-16-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-7mm-17",
+      "category": "kuchnie",
+      "project": "Kuchnia — ramka 7 mm",
+      "projectSlug": "kuchnia-7mm",
+      "alt": "Kuchnia — ramka 7 mm — realizacja Mekra",
+      "slug": "kuchnia-7mm-17",
+      "width": 1920,
+      "height": 3059,
+      "thumbWidth": 800,
+      "thumbHeight": 1274,
+      "fullJpgKb": 423,
+      "thumbJpgKb": 75,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-7mm-17.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-7mm-17.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-7mm-17-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-7mm-17-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-7mm-18",
+      "category": "kuchnie",
+      "project": "Kuchnia — ramka 7 mm",
+      "projectSlug": "kuchnia-7mm",
+      "alt": "Kuchnia — ramka 7 mm — realizacja Mekra",
+      "slug": "kuchnia-7mm-18",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 187,
+      "thumbJpgKb": 35,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-7mm-18.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-7mm-18.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-7mm-18-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-7mm-18-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-7mm-19",
+      "category": "kuchnie",
+      "project": "Kuchnia — ramka 7 mm",
+      "projectSlug": "kuchnia-7mm",
+      "alt": "Kuchnia — ramka 7 mm — realizacja Mekra",
+      "slug": "kuchnia-7mm-19",
+      "width": 1920,
+      "height": 2880,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 466,
+      "thumbJpgKb": 90,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-7mm-19.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-7mm-19.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-7mm-19-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-7mm-19-800.webp"
+      }
+    },
+    {
+      "id": "mebel-na-wino-01",
+      "category": "zabudowy",
+      "project": "Zabudowa na wino",
+      "projectSlug": "mebel-na-wino",
+      "alt": "Zabudowa na wino — realizacja Mekra",
+      "slug": "mebel-na-wino-01",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 255,
+      "thumbJpgKb": 72,
+      "paths": {
+        "full": "/img/realizacje/zabudowy/mebel-na-wino-01.jpg",
+        "fullWebp": "/img/realizacje/zabudowy/mebel-na-wino-01.webp",
+        "thumb": "/img/realizacje/zabudowy/mebel-na-wino-01-800.jpg",
+        "thumbWebp": "/img/realizacje/zabudowy/mebel-na-wino-01-800.webp"
+      }
+    },
+    {
+      "id": "mebel-na-wino-02",
+      "category": "zabudowy",
+      "project": "Zabudowa na wino",
+      "projectSlug": "mebel-na-wino",
+      "alt": "Zabudowa na wino — realizacja Mekra",
+      "slug": "mebel-na-wino-02",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 182,
+      "thumbJpgKb": 40,
+      "paths": {
+        "full": "/img/realizacje/zabudowy/mebel-na-wino-02.jpg",
+        "fullWebp": "/img/realizacje/zabudowy/mebel-na-wino-02.webp",
+        "thumb": "/img/realizacje/zabudowy/mebel-na-wino-02-800.jpg",
+        "thumbWebp": "/img/realizacje/zabudowy/mebel-na-wino-02-800.webp"
+      }
+    },
+    {
+      "id": "mebel-na-wino-03",
+      "category": "zabudowy",
+      "project": "Zabudowa na wino",
+      "projectSlug": "mebel-na-wino",
+      "alt": "Zabudowa na wino — realizacja Mekra",
+      "slug": "mebel-na-wino-03",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 182,
+      "thumbJpgKb": 37,
+      "paths": {
+        "full": "/img/realizacje/zabudowy/mebel-na-wino-03.jpg",
+        "fullWebp": "/img/realizacje/zabudowy/mebel-na-wino-03.webp",
+        "thumb": "/img/realizacje/zabudowy/mebel-na-wino-03-800.jpg",
+        "thumbWebp": "/img/realizacje/zabudowy/mebel-na-wino-03-800.webp"
+      }
+    },
+    {
+      "id": "mebel-na-wino-04",
+      "category": "zabudowy",
+      "project": "Zabudowa na wino",
+      "projectSlug": "mebel-na-wino",
+      "alt": "Zabudowa na wino — realizacja Mekra",
+      "slug": "mebel-na-wino-04",
+      "width": 1920,
+      "height": 1272,
+      "thumbWidth": 800,
+      "thumbHeight": 530,
+      "fullJpgKb": 217,
+      "thumbJpgKb": 42,
+      "paths": {
+        "full": "/img/realizacje/zabudowy/mebel-na-wino-04.jpg",
+        "fullWebp": "/img/realizacje/zabudowy/mebel-na-wino-04.webp",
+        "thumb": "/img/realizacje/zabudowy/mebel-na-wino-04-800.jpg",
+        "thumbWebp": "/img/realizacje/zabudowy/mebel-na-wino-04-800.webp"
+      }
+    },
+    {
+      "id": "mebel-na-wino-05",
+      "category": "zabudowy",
+      "project": "Zabudowa na wino",
+      "projectSlug": "mebel-na-wino",
+      "alt": "Zabudowa na wino — realizacja Mekra",
+      "slug": "mebel-na-wino-05",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 285,
+      "thumbJpgKb": 65,
+      "paths": {
+        "full": "/img/realizacje/zabudowy/mebel-na-wino-05.jpg",
+        "fullWebp": "/img/realizacje/zabudowy/mebel-na-wino-05.webp",
+        "thumb": "/img/realizacje/zabudowy/mebel-na-wino-05-800.jpg",
+        "thumbWebp": "/img/realizacje/zabudowy/mebel-na-wino-05-800.webp"
+      }
+    },
+    {
+      "id": "mebel-na-wino-06",
+      "category": "zabudowy",
+      "project": "Zabudowa na wino",
+      "projectSlug": "mebel-na-wino",
+      "alt": "Zabudowa na wino — realizacja Mekra",
+      "slug": "mebel-na-wino-06",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 300,
+      "thumbJpgKb": 65,
+      "paths": {
+        "full": "/img/realizacje/zabudowy/mebel-na-wino-06.jpg",
+        "fullWebp": "/img/realizacje/zabudowy/mebel-na-wino-06.webp",
+        "thumb": "/img/realizacje/zabudowy/mebel-na-wino-06-800.jpg",
+        "thumbWebp": "/img/realizacje/zabudowy/mebel-na-wino-06-800.webp"
+      }
+    },
+    {
+      "id": "mebel-na-wino-07",
+      "category": "zabudowy",
+      "project": "Zabudowa na wino",
+      "projectSlug": "mebel-na-wino",
+      "alt": "Zabudowa na wino — realizacja Mekra",
+      "slug": "mebel-na-wino-07",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 303,
+      "thumbJpgKb": 61,
+      "paths": {
+        "full": "/img/realizacje/zabudowy/mebel-na-wino-07.jpg",
+        "fullWebp": "/img/realizacje/zabudowy/mebel-na-wino-07.webp",
+        "thumb": "/img/realizacje/zabudowy/mebel-na-wino-07-800.jpg",
+        "thumbWebp": "/img/realizacje/zabudowy/mebel-na-wino-07-800.webp"
+      }
+    },
+    {
+      "id": "mebel-na-wino-08",
+      "category": "zabudowy",
+      "project": "Zabudowa na wino",
+      "projectSlug": "mebel-na-wino",
+      "alt": "Zabudowa na wino — realizacja Mekra",
+      "slug": "mebel-na-wino-08",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 179,
+      "thumbJpgKb": 38,
+      "paths": {
+        "full": "/img/realizacje/zabudowy/mebel-na-wino-08.jpg",
+        "fullWebp": "/img/realizacje/zabudowy/mebel-na-wino-08.webp",
+        "thumb": "/img/realizacje/zabudowy/mebel-na-wino-08-800.jpg",
+        "thumbWebp": "/img/realizacje/zabudowy/mebel-na-wino-08-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-rubinova-18mm-01",
+      "category": "kuchnie",
+      "project": "Kuchnia Rubinova — ramka 18 mm",
+      "projectSlug": "kuchnia-rubinova-18mm",
+      "alt": "Kuchnia Rubinova — ramka 18 mm — realizacja Mekra",
+      "slug": "kuchnia-rubinova-18mm-01",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 170,
+      "thumbJpgKb": 38,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-01.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-01.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-01-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-01-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-rubinova-18mm-02",
+      "category": "kuchnie",
+      "project": "Kuchnia Rubinova — ramka 18 mm",
+      "projectSlug": "kuchnia-rubinova-18mm",
+      "alt": "Kuchnia Rubinova — ramka 18 mm — realizacja Mekra",
+      "slug": "kuchnia-rubinova-18mm-02",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 183,
+      "thumbJpgKb": 42,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-02.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-02.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-02-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-02-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-rubinova-18mm-03",
+      "category": "kuchnie",
+      "project": "Kuchnia Rubinova — ramka 18 mm",
+      "projectSlug": "kuchnia-rubinova-18mm",
+      "alt": "Kuchnia Rubinova — ramka 18 mm — realizacja Mekra",
+      "slug": "kuchnia-rubinova-18mm-03",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 219,
+      "thumbJpgKb": 45,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-03.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-03.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-03-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-03-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-rubinova-18mm-04",
+      "category": "kuchnie",
+      "project": "Kuchnia Rubinova — ramka 18 mm",
+      "projectSlug": "kuchnia-rubinova-18mm",
+      "alt": "Kuchnia Rubinova — ramka 18 mm — realizacja Mekra",
+      "slug": "kuchnia-rubinova-18mm-04",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 199,
+      "thumbJpgKb": 44,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-04.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-04.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-04-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-04-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-rubinova-18mm-05",
+      "category": "kuchnie",
+      "project": "Kuchnia Rubinova — ramka 18 mm",
+      "projectSlug": "kuchnia-rubinova-18mm",
+      "alt": "Kuchnia Rubinova — ramka 18 mm — realizacja Mekra",
+      "slug": "kuchnia-rubinova-18mm-05",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 209,
+      "thumbJpgKb": 47,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-05.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-05.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-05-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-05-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-rubinova-18mm-06",
+      "category": "kuchnie",
+      "project": "Kuchnia Rubinova — ramka 18 mm",
+      "projectSlug": "kuchnia-rubinova-18mm",
+      "alt": "Kuchnia Rubinova — ramka 18 mm — realizacja Mekra",
+      "slug": "kuchnia-rubinova-18mm-06",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 176,
+      "thumbJpgKb": 40,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-06.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-06.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-06-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-06-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-rubinova-18mm-07",
+      "category": "kuchnie",
+      "project": "Kuchnia Rubinova — ramka 18 mm",
+      "projectSlug": "kuchnia-rubinova-18mm",
+      "alt": "Kuchnia Rubinova — ramka 18 mm — realizacja Mekra",
+      "slug": "kuchnia-rubinova-18mm-07",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 181,
+      "thumbJpgKb": 37,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-07.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-07.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-07-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-07-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-rubinova-18mm-08",
+      "category": "kuchnie",
+      "project": "Kuchnia Rubinova — ramka 18 mm",
+      "projectSlug": "kuchnia-rubinova-18mm",
+      "alt": "Kuchnia Rubinova — ramka 18 mm — realizacja Mekra",
+      "slug": "kuchnia-rubinova-18mm-08",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 167,
+      "thumbJpgKb": 36,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-08.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-08.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-08-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-08-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-rubinova-18mm-09",
+      "category": "kuchnie",
+      "project": "Kuchnia Rubinova — ramka 18 mm",
+      "projectSlug": "kuchnia-rubinova-18mm",
+      "alt": "Kuchnia Rubinova — ramka 18 mm — realizacja Mekra",
+      "slug": "kuchnia-rubinova-18mm-09",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 173,
+      "thumbJpgKb": 33,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-09.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-09.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-09-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-09-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-rubinova-18mm-10",
+      "category": "kuchnie",
+      "project": "Kuchnia Rubinova — ramka 18 mm",
+      "projectSlug": "kuchnia-rubinova-18mm",
+      "alt": "Kuchnia Rubinova — ramka 18 mm — realizacja Mekra",
+      "slug": "kuchnia-rubinova-18mm-10",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 175,
+      "thumbJpgKb": 33,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-10.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-10.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-10-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-10-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-rubinova-18mm-11",
+      "category": "kuchnie",
+      "project": "Kuchnia Rubinova — ramka 18 mm",
+      "projectSlug": "kuchnia-rubinova-18mm",
+      "alt": "Kuchnia Rubinova — ramka 18 mm — realizacja Mekra",
+      "slug": "kuchnia-rubinova-18mm-11",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 345,
+      "thumbJpgKb": 52,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-11.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-11.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-11-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-11-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-rubinova-18mm-12",
+      "category": "kuchnie",
+      "project": "Kuchnia Rubinova — ramka 18 mm",
+      "projectSlug": "kuchnia-rubinova-18mm",
+      "alt": "Kuchnia Rubinova — ramka 18 mm — realizacja Mekra",
+      "slug": "kuchnia-rubinova-18mm-12",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 183,
+      "thumbJpgKb": 37,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-12.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-12.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-12-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-12-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-rubinova-18mm-13",
+      "category": "kuchnie",
+      "project": "Kuchnia Rubinova — ramka 18 mm",
+      "projectSlug": "kuchnia-rubinova-18mm",
+      "alt": "Kuchnia Rubinova — ramka 18 mm — realizacja Mekra",
+      "slug": "kuchnia-rubinova-18mm-13",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 176,
+      "thumbJpgKb": 35,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-13.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-13.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-13-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-13-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-rubinova-18mm-14",
+      "category": "kuchnie",
+      "project": "Kuchnia Rubinova — ramka 18 mm",
+      "projectSlug": "kuchnia-rubinova-18mm",
+      "alt": "Kuchnia Rubinova — ramka 18 mm — realizacja Mekra",
+      "slug": "kuchnia-rubinova-18mm-14",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 161,
+      "thumbJpgKb": 32,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-14.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-14.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-14-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-14-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-rubinova-18mm-15",
+      "category": "kuchnie",
+      "project": "Kuchnia Rubinova — ramka 18 mm",
+      "projectSlug": "kuchnia-rubinova-18mm",
+      "alt": "Kuchnia Rubinova — ramka 18 mm — realizacja Mekra",
+      "slug": "kuchnia-rubinova-18mm-15",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 92,
+      "thumbJpgKb": 19,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-15.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-15.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-15-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-15-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-rubinova-18mm-16",
+      "category": "kuchnie",
+      "project": "Kuchnia Rubinova — ramka 18 mm",
+      "projectSlug": "kuchnia-rubinova-18mm",
+      "alt": "Kuchnia Rubinova — ramka 18 mm — realizacja Mekra",
+      "slug": "kuchnia-rubinova-18mm-16",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 192,
+      "thumbJpgKb": 36,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-16.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-16.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-16-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-16-800.webp"
+      }
+    },
+    {
+      "id": "kuchnia-rubinova-18mm-17",
+      "category": "kuchnie",
+      "project": "Kuchnia Rubinova — ramka 18 mm",
+      "projectSlug": "kuchnia-rubinova-18mm",
+      "alt": "Kuchnia Rubinova — ramka 18 mm — realizacja Mekra",
+      "slug": "kuchnia-rubinova-18mm-17",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 160,
+      "thumbJpgKb": 36,
+      "paths": {
+        "full": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-17.jpg",
+        "fullWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-17.webp",
+        "thumb": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-17-800.jpg",
+        "thumbWebp": "/img/realizacje/kuchnie/kuchnia-rubinova-18mm-17-800.webp"
+      }
+    },
+    {
+      "id": "szafa-60mm-01",
+      "category": "szafy",
+      "project": "Szafa — ramka 60 mm",
+      "projectSlug": "szafa-60mm",
+      "alt": "Szafa — ramka 60 mm — realizacja Mekra",
+      "slug": "szafa-60mm-01",
+      "width": 998,
+      "height": 1497,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 169,
+      "thumbJpgKb": 112,
+      "paths": {
+        "full": "/img/realizacje/szafy/szafa-60mm-01.jpg",
+        "fullWebp": "/img/realizacje/szafy/szafa-60mm-01.webp",
+        "thumb": "/img/realizacje/szafy/szafa-60mm-01-800.jpg",
+        "thumbWebp": "/img/realizacje/szafy/szafa-60mm-01-800.webp"
+      }
+    },
+    {
+      "id": "szafa-60mm-02",
+      "category": "szafy",
+      "project": "Szafa — ramka 60 mm",
+      "projectSlug": "szafa-60mm",
+      "alt": "Szafa — ramka 60 mm — realizacja Mekra",
+      "slug": "szafa-60mm-02",
+      "width": 998,
+      "height": 1497,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 211,
+      "thumbJpgKb": 128,
+      "paths": {
+        "full": "/img/realizacje/szafy/szafa-60mm-02.jpg",
+        "fullWebp": "/img/realizacje/szafy/szafa-60mm-02.webp",
+        "thumb": "/img/realizacje/szafy/szafa-60mm-02-800.jpg",
+        "thumbWebp": "/img/realizacje/szafy/szafa-60mm-02-800.webp"
+      }
+    },
+    {
+      "id": "szafa-60mm-03",
+      "category": "szafy",
+      "project": "Szafa — ramka 60 mm",
+      "projectSlug": "szafa-60mm",
+      "alt": "Szafa — ramka 60 mm — realizacja Mekra",
+      "slug": "szafa-60mm-03",
+      "width": 998,
+      "height": 1497,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 131,
+      "thumbJpgKb": 91,
+      "paths": {
+        "full": "/img/realizacje/szafy/szafa-60mm-03.jpg",
+        "fullWebp": "/img/realizacje/szafy/szafa-60mm-03.webp",
+        "thumb": "/img/realizacje/szafy/szafa-60mm-03-800.jpg",
+        "thumbWebp": "/img/realizacje/szafy/szafa-60mm-03-800.webp"
+      }
+    },
+    {
+      "id": "szafa-60mm-04",
+      "category": "szafy",
+      "project": "Szafa — ramka 60 mm",
+      "projectSlug": "szafa-60mm",
+      "alt": "Szafa — ramka 60 mm — realizacja Mekra",
+      "slug": "szafa-60mm-04",
+      "width": 998,
+      "height": 1497,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 178,
+      "thumbJpgKb": 121,
+      "paths": {
+        "full": "/img/realizacje/szafy/szafa-60mm-04.jpg",
+        "fullWebp": "/img/realizacje/szafy/szafa-60mm-04.webp",
+        "thumb": "/img/realizacje/szafy/szafa-60mm-04-800.jpg",
+        "thumbWebp": "/img/realizacje/szafy/szafa-60mm-04-800.webp"
+      }
+    },
+    {
+      "id": "szafa-60mm-05",
+      "category": "szafy",
+      "project": "Szafa — ramka 60 mm",
+      "projectSlug": "szafa-60mm",
+      "alt": "Szafa — ramka 60 mm — realizacja Mekra",
+      "slug": "szafa-60mm-05",
+      "width": 998,
+      "height": 1497,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 221,
+      "thumbJpgKb": 143,
+      "paths": {
+        "full": "/img/realizacje/szafy/szafa-60mm-05.jpg",
+        "fullWebp": "/img/realizacje/szafy/szafa-60mm-05.webp",
+        "thumb": "/img/realizacje/szafy/szafa-60mm-05-800.jpg",
+        "thumbWebp": "/img/realizacje/szafy/szafa-60mm-05-800.webp"
+      }
+    },
+    {
+      "id": "szafa-60mm-witrynka-01",
+      "category": "szafy",
+      "project": "Szafa z witrynką — ramka 60 mm",
+      "projectSlug": "szafa-60mm-witrynka",
+      "alt": "Szafa z witrynką — ramka 60 mm — realizacja Mekra",
+      "slug": "szafa-60mm-witrynka-01",
+      "width": 1920,
+      "height": 2879,
+      "thumbWidth": 800,
+      "thumbHeight": 1199,
+      "fullJpgKb": 500,
+      "thumbJpgKb": 71,
+      "paths": {
+        "full": "/img/realizacje/szafy/szafa-60mm-witrynka-01.jpg",
+        "fullWebp": "/img/realizacje/szafy/szafa-60mm-witrynka-01.webp",
+        "thumb": "/img/realizacje/szafy/szafa-60mm-witrynka-01-800.jpg",
+        "thumbWebp": "/img/realizacje/szafy/szafa-60mm-witrynka-01-800.webp"
+      }
+    },
+    {
+      "id": "szafa-60mm-witrynka-02",
+      "category": "szafy",
+      "project": "Szafa z witrynką — ramka 60 mm",
+      "projectSlug": "szafa-60mm-witrynka",
+      "alt": "Szafa z witrynką — ramka 60 mm — realizacja Mekra",
+      "slug": "szafa-60mm-witrynka-02",
+      "width": 1920,
+      "height": 2886,
+      "thumbWidth": 800,
+      "thumbHeight": 1203,
+      "fullJpgKb": 414,
+      "thumbJpgKb": 42,
+      "paths": {
+        "full": "/img/realizacje/szafy/szafa-60mm-witrynka-02.jpg",
+        "fullWebp": "/img/realizacje/szafy/szafa-60mm-witrynka-02.webp",
+        "thumb": "/img/realizacje/szafy/szafa-60mm-witrynka-02-800.jpg",
+        "thumbWebp": "/img/realizacje/szafy/szafa-60mm-witrynka-02-800.webp"
+      }
+    },
+    {
+      "id": "szafa-60mm-witrynka-03",
+      "category": "szafy",
+      "project": "Szafa z witrynką — ramka 60 mm",
+      "projectSlug": "szafa-60mm-witrynka",
+      "alt": "Szafa z witrynką — ramka 60 mm — realizacja Mekra",
+      "slug": "szafa-60mm-witrynka-03",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 118,
+      "thumbJpgKb": 20,
+      "paths": {
+        "full": "/img/realizacje/szafy/szafa-60mm-witrynka-03.jpg",
+        "fullWebp": "/img/realizacje/szafy/szafa-60mm-witrynka-03.webp",
+        "thumb": "/img/realizacje/szafy/szafa-60mm-witrynka-03-800.jpg",
+        "thumbWebp": "/img/realizacje/szafy/szafa-60mm-witrynka-03-800.webp"
+      }
+    },
+    {
+      "id": "szafa-60mm-witrynka-04",
+      "category": "szafy",
+      "project": "Szafa z witrynką — ramka 60 mm",
+      "projectSlug": "szafa-60mm-witrynka",
+      "alt": "Szafa z witrynką — ramka 60 mm — realizacja Mekra",
+      "slug": "szafa-60mm-witrynka-04",
+      "width": 1920,
+      "height": 2880,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 412,
+      "thumbJpgKb": 62,
+      "paths": {
+        "full": "/img/realizacje/szafy/szafa-60mm-witrynka-04.jpg",
+        "fullWebp": "/img/realizacje/szafy/szafa-60mm-witrynka-04.webp",
+        "thumb": "/img/realizacje/szafy/szafa-60mm-witrynka-04-800.jpg",
+        "thumbWebp": "/img/realizacje/szafy/szafa-60mm-witrynka-04-800.webp"
+      }
+    },
+    {
+      "id": "szafa-60mm-witrynka-05",
+      "category": "szafy",
+      "project": "Szafa z witrynką — ramka 60 mm",
+      "projectSlug": "szafa-60mm-witrynka",
+      "alt": "Szafa z witrynką — ramka 60 mm — realizacja Mekra",
+      "slug": "szafa-60mm-witrynka-05",
+      "width": 1920,
+      "height": 2880,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 522,
+      "thumbJpgKb": 73,
+      "paths": {
+        "full": "/img/realizacje/szafy/szafa-60mm-witrynka-05.jpg",
+        "fullWebp": "/img/realizacje/szafy/szafa-60mm-witrynka-05.webp",
+        "thumb": "/img/realizacje/szafy/szafa-60mm-witrynka-05-800.jpg",
+        "thumbWebp": "/img/realizacje/szafy/szafa-60mm-witrynka-05-800.webp"
+      }
+    },
+    {
+      "id": "szafy-60mm-lustra-zwirki-01",
+      "category": "szafy",
+      "project": "Szafy z lustrami — ramiak Żwirki",
+      "projectSlug": "szafy-60mm-lustra-zwirki",
+      "alt": "Szafy z lustrami — ramiak Żwirki — realizacja Mekra",
+      "slug": "szafy-60mm-lustra-zwirki-01",
+      "width": 978,
+      "height": 1467,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 138,
+      "thumbJpgKb": 96,
+      "paths": {
+        "full": "/img/realizacje/szafy/szafy-60mm-lustra-zwirki-01.jpg",
+        "fullWebp": "/img/realizacje/szafy/szafy-60mm-lustra-zwirki-01.webp",
+        "thumb": "/img/realizacje/szafy/szafy-60mm-lustra-zwirki-01-800.jpg",
+        "thumbWebp": "/img/realizacje/szafy/szafy-60mm-lustra-zwirki-01-800.webp"
+      }
+    },
+    {
+      "id": "szafy-60mm-lustra-zwirki-02",
+      "category": "szafy",
+      "project": "Szafy z lustrami — ramiak Żwirki",
+      "projectSlug": "szafy-60mm-lustra-zwirki",
+      "alt": "Szafy z lustrami — ramiak Żwirki — realizacja Mekra",
+      "slug": "szafy-60mm-lustra-zwirki-02",
+      "width": 978,
+      "height": 1467,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 115,
+      "thumbJpgKb": 80,
+      "paths": {
+        "full": "/img/realizacje/szafy/szafy-60mm-lustra-zwirki-02.jpg",
+        "fullWebp": "/img/realizacje/szafy/szafy-60mm-lustra-zwirki-02.webp",
+        "thumb": "/img/realizacje/szafy/szafy-60mm-lustra-zwirki-02-800.jpg",
+        "thumbWebp": "/img/realizacje/szafy/szafy-60mm-lustra-zwirki-02-800.webp"
+      }
+    },
+    {
+      "id": "szafy-60mm-lustra-zwirki-03",
+      "category": "szafy",
+      "project": "Szafy z lustrami — ramiak Żwirki",
+      "projectSlug": "szafy-60mm-lustra-zwirki",
+      "alt": "Szafy z lustrami — ramiak Żwirki — realizacja Mekra",
+      "slug": "szafy-60mm-lustra-zwirki-03",
+      "width": 1920,
+      "height": 1280,
+      "thumbWidth": 800,
+      "thumbHeight": 533,
+      "fullJpgKb": 152,
+      "thumbJpgKb": 27,
+      "paths": {
+        "full": "/img/realizacje/szafy/szafy-60mm-lustra-zwirki-03.jpg",
+        "fullWebp": "/img/realizacje/szafy/szafy-60mm-lustra-zwirki-03.webp",
+        "thumb": "/img/realizacje/szafy/szafy-60mm-lustra-zwirki-03-800.jpg",
+        "thumbWebp": "/img/realizacje/szafy/szafy-60mm-lustra-zwirki-03-800.webp"
+      }
+    },
+    {
+      "id": "szafy-60mm-lustra-zwirki-04",
+      "category": "szafy",
+      "project": "Szafy z lustrami — ramiak Żwirki",
+      "projectSlug": "szafy-60mm-lustra-zwirki",
+      "alt": "Szafy z lustrami — ramiak Żwirki — realizacja Mekra",
+      "slug": "szafy-60mm-lustra-zwirki-04",
+      "width": 978,
+      "height": 1467,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 125,
+      "thumbJpgKb": 86,
+      "paths": {
+        "full": "/img/realizacje/szafy/szafy-60mm-lustra-zwirki-04.jpg",
+        "fullWebp": "/img/realizacje/szafy/szafy-60mm-lustra-zwirki-04.webp",
+        "thumb": "/img/realizacje/szafy/szafy-60mm-lustra-zwirki-04-800.jpg",
+        "thumbWebp": "/img/realizacje/szafy/szafy-60mm-lustra-zwirki-04-800.webp"
+      }
+    },
+    {
+      "id": "szafy-60mm-lustra-zwirki-05",
+      "category": "szafy",
+      "project": "Szafy z lustrami — ramiak Żwirki",
+      "projectSlug": "szafy-60mm-lustra-zwirki",
+      "alt": "Szafy z lustrami — ramiak Żwirki — realizacja Mekra",
+      "slug": "szafy-60mm-lustra-zwirki-05",
+      "width": 978,
+      "height": 1467,
+      "thumbWidth": 800,
+      "thumbHeight": 1200,
+      "fullJpgKb": 116,
+      "thumbJpgKb": 80,
+      "paths": {
+        "full": "/img/realizacje/szafy/szafy-60mm-lustra-zwirki-05.jpg",
+        "fullWebp": "/img/realizacje/szafy/szafy-60mm-lustra-zwirki-05.webp",
+        "thumb": "/img/realizacje/szafy/szafy-60mm-lustra-zwirki-05-800.jpg",
+        "thumbWebp": "/img/realizacje/szafy/szafy-60mm-lustra-zwirki-05-800.webp"
+      }
+    }
+  ]
+}

@@ -1,90 +1,26 @@
 ---
-const galleryItems = [
-  {
-    src: 'img/szafa-65m-lustro.jpg',
-    alt: 'Szafa z frontami ramiakowym 60mm z lustrem - realizacja Mekra',
-    caption: 'Szafa z lustrem — ramka 60 mm',
-    span: 'row-span-2',
-  },
-  {
-    src: 'img/kuchnia-36mm.jpg',
-    alt: 'Kuchnia w stylu farmhouse z frontami ramiakowym 36mm - Grudziądz',
-    caption: 'Kuchnia farmhouse — ramka 36 mm',
-    span: '',
-  },
-  {
-    src: 'img/nowoczesna-kuchnia.jpg',
-    alt: 'Nowoczesna kuchnia z frontami laminowanymi drewnopodobnymi',
-    caption: 'Nowoczesna kuchnia',
-    span: '',
-  },
-  {
-    src: 'img/biblioteka-szklo.jpg',
-    alt: 'Biblioteka ze szkłem i frontami ramiakowym w kolorze zielonym',
-    caption: 'Biblioteka z przeszkleniami',
-    span: '',
-  },
-  {
-    src: 'img/kuchnia-nowoczesna.jpg',
-    alt: 'Nowoczesna kuchnia z frontami laminowanymi i złotymi uchwytami',
-    caption: 'Kuchnia nowoczesna — laminat + złoto',
-    span: 'row-span-2',
-  },
-  {
-    src: 'img/regal-ciemny.jpg',
-    alt: 'Ciemny regał z frontami ramiakowym i przeszkleniem',
-    caption: 'Regał z drzwiami przesuwnymi',
-    span: '',
-  },
-  {
-    src: 'img/detale-front-ramka.jpg',
-    alt: 'Detal frontu ramiakowego z płyty laminowanej — faktura drewna',
-    caption: 'Detal ramki — faktura drewna',
-    span: '',
-  },
-  {
-    src: 'img/meble_na_wino.jpg',
-    alt: 'Meble na wino — zabudowa winiarni na wymiar',
-    caption: 'Zabudowa winiarni',
-    span: 'row-span-2',
-  },
-  {
-    src: 'img/meble_na_wino1.jpg',
-    alt: 'Meble na wino — detal regału na butelki',
-    caption: 'Regał na wino — detal',
-    span: '',
-  },
-  {
-    src: 'img/szafka_przedpokoj.jpg',
-    alt: 'Szafka do przedpokoju na wymiar — fronty ramiakowe',
-    caption: 'Szafka do przedpokoju',
-    span: '',
-  },
-  {
-    src: 'img/kuchnia_biala.jpg',
-    alt: 'Biała kuchnia z frontami ramiakowym — realizacja Mekra',
-    caption: 'Biała kuchnia klasyczna',
-    span: '',
-  },
-  {
-    src: 'img/kuchnia_biala1.jpg',
-    alt: 'Biała kuchnia — widok ogólny, fronty na wymiar',
-    caption: 'Biała kuchnia — widok ogólny',
-    span: 'row-span-2',
-  },
-  {
-    src: 'img/kuchnia_biala2.jpg',
-    alt: 'Biała kuchnia — detal frontów i uchwytów',
-    caption: 'Biała kuchnia — detal',
-    span: '',
-  },
-  {
-    src: 'img/biblioteka-szklo1.jpg',
-    alt: 'Biblioteka z przeszkleniami — detal frontu ramiakowego',
-    caption: 'Biblioteka z przeszkleniami — detal',
-    span: '',
-  },
-];
+import manifest from '../data/realizacje.json';
+
+/**
+ * Hero set for the home page: pick first 4 from each category for variety.
+ * Full gallery lives at /realizacje/.
+ */
+const HERO_PER_CATEGORY = 4;
+const heroItems = Object.keys(manifest.categories).flatMap((catSlug) => {
+  return manifest.items
+    .filter((it) => it.category === catSlug)
+    .slice(0, HERO_PER_CATEGORY);
+});
+
+// Row-span pattern for visual rhythm in the grid
+const spanPattern = ['row-span-2', '', '', '', '', 'row-span-2', '', '', '', '', '', 'row-span-2'];
+const galleryItems = heroItems.map((it, i) => ({
+  ...it,
+  caption: it.project,
+  span: spanPattern[i % spanPattern.length],
+}));
+
+const totalCount = manifest.counts.total;
 ---
 
 <section id="realizacje" class="section-spacing section-padding relative" style="background-color: var(--color-bg-secondary);">
@@ -97,7 +33,7 @@ const galleryItems = [
         <span class="text-gradient">w Twoich wnętrzach</span>
       </h2>
       <p class="mt-6 text-base md:text-lg leading-relaxed font-body" style="color: var(--color-text-secondary);">
-        Kuchnie, szafy, regały, zabudowy — zobacz, jak płyta laminowana zamienia
+        Kuchnie, szafy, zabudowy — zobacz, jak płyta laminowana zamienia
         proste formy w&nbsp;coś wyjątkowego. Każda realizacja to dowód na to,
         że materiał ma znaczenie.
       </p>
@@ -108,19 +44,24 @@ const galleryItems = [
       {galleryItems.map((item, i) => (
         <div
           class={`animate-on-scroll group relative rounded-2xl overflow-hidden cursor-pointer gallery-thumb ${item.span}`}
-          style={`transition-delay: ${i * 0.08}s;`}
+          style={`transition-delay: ${i * 0.06}s;`}
           data-gallery-index={i}
           role="button"
           tabindex="0"
           aria-label={`Otwórz zdjęcie: ${item.caption}`}
         >
-          <img
-            src={item.src}
-            alt={item.alt}
-            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-            loading="lazy"
-            decoding="async"
-          />
+          <picture>
+            <source srcset={item.paths.thumbWebp} type="image/webp" />
+            <img
+              src={item.paths.thumb}
+              alt={item.alt}
+              width={item.thumbWidth}
+              height={item.thumbHeight}
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
           <!-- Overlay -->
           <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
             <div class="absolute bottom-0 left-0 right-0 p-6 flex items-end justify-between">
@@ -129,50 +70,55 @@ const galleryItems = [
               </p>
               <svg class="w-5 h-5 text-white/70 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
-              </svg>
+                </svg>
             </div>
           </div>
         </div>
       ))}
     </div>
 
+    <!-- CTA: zobacz wszystkie -->
     <div class="mt-12 text-center animate-on-scroll">
-      <p class="text-sm font-body" style="color: var(--color-text-muted);">
-        Więcej realizacji wkrótce — pracujemy nad nowymi projektami
-      </p>
+      <a
+        href="/realizacje/"
+        class="inline-flex items-center gap-2 btn-primary !py-3 !px-7"
+      >
+        <span>Zobacz wszystkie realizacje ({totalCount})</span>
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+        </svg>
+      </a>
     </div>
   </div>
 </section>
 
 <!-- Lightbox Modal -->
 <div id="gallery-lightbox" class="gallery-lightbox" aria-hidden="true" role="dialog" aria-label="Podgląd zdjęcia">
-  <!-- Backdrop -->
   <div class="gallery-lightbox__backdrop" data-lightbox-close></div>
 
-  <!-- Close button -->
   <button class="gallery-lightbox__close" data-lightbox-close aria-label="Zamknij">
     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
       <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
     </svg>
   </button>
 
-  <!-- Nav prev -->
   <button class="gallery-lightbox__nav gallery-lightbox__nav--prev" data-lightbox-prev aria-label="Poprzednie zdjęcie">
     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
       <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
     </svg>
   </button>
 
-  <!-- Nav next -->
   <button class="gallery-lightbox__nav gallery-lightbox__nav--next" data-lightbox-next aria-label="Następne zdjęcie">
     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
       <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
     </svg>
   </button>
 
-  <!-- Image container -->
   <div class="gallery-lightbox__content">
-    <img id="lightbox-img" class="gallery-lightbox__img" src="" alt="" />
+    <picture>
+      <source id="lightbox-img-webp" srcset="" type="image/webp" />
+      <img id="lightbox-img" class="gallery-lightbox__img" src="" alt="" />
+    </picture>
     <div class="gallery-lightbox__caption">
       <p id="lightbox-caption" class="font-heading font-medium text-sm text-white"></p>
       <p id="lightbox-counter" class="text-xs text-white/50 mt-1 font-body"></p>
@@ -181,7 +127,6 @@ const galleryItems = [
 </div>
 
 <style>
-  /* ── Lightbox base ── */
   .gallery-lightbox {
     position: fixed;
     inset: 0;
@@ -195,14 +140,11 @@ const galleryItems = [
     transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
                 visibility 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
-
   .gallery-lightbox.is-open {
     pointer-events: auto;
     opacity: 1;
     visibility: visible;
   }
-
-  /* ── Backdrop ── */
   .gallery-lightbox__backdrop {
     position: absolute;
     inset: 0;
@@ -210,8 +152,6 @@ const galleryItems = [
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
   }
-
-  /* ── Close ── */
   .gallery-lightbox__close {
     position: absolute;
     top: 1.25rem;
@@ -229,13 +169,10 @@ const galleryItems = [
     cursor: pointer;
     transition: background 0.2s, transform 0.2s;
   }
-
   .gallery-lightbox__close:hover {
     background: rgba(255, 255, 255, 0.2);
     transform: scale(1.05);
   }
-
-  /* ── Nav arrows ── */
   .gallery-lightbox__nav {
     position: absolute;
     top: 50%;
@@ -253,26 +190,14 @@ const galleryItems = [
     cursor: pointer;
     transition: background 0.2s, transform 0.2s;
   }
-
-  .gallery-lightbox__nav:hover {
-    background: rgba(255, 255, 255, 0.18);
-  }
-
-  .gallery-lightbox__nav--prev {
-    left: 1rem;
-  }
-
-  .gallery-lightbox__nav--next {
-    right: 1rem;
-  }
-
+  .gallery-lightbox__nav:hover { background: rgba(255, 255, 255, 0.18); }
+  .gallery-lightbox__nav--prev { left: 1rem; }
+  .gallery-lightbox__nav--next { right: 1rem; }
   @media (min-width: 768px) {
     .gallery-lightbox__nav--prev { left: 1.5rem; }
     .gallery-lightbox__nav--next { right: 1.5rem; }
     .gallery-lightbox__close { top: 1.5rem; right: 1.5rem; }
   }
-
-  /* ── Content ── */
   .gallery-lightbox__content {
     position: relative;
     z-index: 5;
@@ -282,15 +207,12 @@ const galleryItems = [
     max-width: calc(100vw - 6rem);
     max-height: calc(100vh - 6rem);
   }
-
   @media (max-width: 767px) {
     .gallery-lightbox__content {
       max-width: calc(100vw - 1.5rem);
       max-height: calc(100vh - 4rem);
     }
   }
-
-  /* ── Image ── */
   .gallery-lightbox__img {
     max-width: 100%;
     max-height: calc(100vh - 10rem);
@@ -302,19 +224,15 @@ const galleryItems = [
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
                 opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
-
   .gallery-lightbox.is-open .gallery-lightbox__img {
     transform: scale(1) translateY(0);
     opacity: 1;
   }
-
   .gallery-lightbox__img.is-switching {
     transform: scale(0.96);
     opacity: 0;
     transition-duration: 0.18s;
   }
-
-  /* ── Caption ── */
   .gallery-lightbox__caption {
     text-align: center;
     margin-top: 1rem;
@@ -323,12 +241,10 @@ const galleryItems = [
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.1s,
                 opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
   }
-
   .gallery-lightbox.is-open .gallery-lightbox__caption {
     transform: translateY(0);
     opacity: 1;
   }
-
   .gallery-lightbox__caption.is-switching {
     opacity: 0;
     transform: translateY(4px);
@@ -341,16 +257,25 @@ const galleryItems = [
   document.addEventListener('DOMContentLoaded', () => {
     const lightbox = document.getElementById('gallery-lightbox');
     const lbImg = document.getElementById('lightbox-img');
+    const lbWebp = document.getElementById('lightbox-img-webp');
     const lbCaption = document.getElementById('lightbox-caption');
     const lbCounter = document.getElementById('lightbox-counter');
-    const thumbs = document.querySelectorAll('.gallery-thumb');
+    const thumbs = document.querySelectorAll('#realizacje .gallery-thumb');
     const total = galleryItems.length;
     let currentIndex = 0;
     let isAnimating = false;
 
+    function applyImage(item) {
+      lbWebp.srcset = item.paths.fullWebp;
+      lbImg.src = item.paths.full;
+      lbImg.alt = item.alt;
+      lbCaption.textContent = item.caption;
+      lbCounter.textContent = `${currentIndex + 1} / ${total}`;
+    }
+
     function openLightbox(index) {
       currentIndex = index;
-      updateImage(false);
+      applyImage(galleryItems[currentIndex]);
       lightbox.classList.add('is-open');
       lightbox.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
@@ -362,47 +287,25 @@ const galleryItems = [
       document.body.style.overflow = '';
     }
 
-    function updateImage(animate = true) {
-      const item = galleryItems[currentIndex];
-
-      if (animate && !isAnimating) {
-        isAnimating = true;
-        lbImg.classList.add('is-switching');
-        lbCaption.parentElement.classList.add('is-switching');
-
-        setTimeout(() => {
-          lbImg.src = item.src;
-          lbImg.alt = item.alt;
-          lbCaption.textContent = item.caption;
-          lbCounter.textContent = `${currentIndex + 1} / ${total}`;
-
-          requestAnimationFrame(() => {
-            lbImg.classList.remove('is-switching');
-            lbCaption.parentElement.classList.remove('is-switching');
-            setTimeout(() => { isAnimating = false; }, 300);
-          });
-        }, 200);
-      } else {
-        lbImg.src = item.src;
-        lbImg.alt = item.alt;
-        lbCaption.textContent = item.caption;
-        lbCounter.textContent = `${currentIndex + 1} / ${total}`;
-      }
-    }
-
-    function goNext() {
+    function transitionTo(newIndex) {
       if (isAnimating) return;
-      currentIndex = (currentIndex + 1) % total;
-      updateImage(true);
+      isAnimating = true;
+      lbImg.classList.add('is-switching');
+      lbCaption.parentElement.classList.add('is-switching');
+      setTimeout(() => {
+        currentIndex = newIndex;
+        applyImage(galleryItems[currentIndex]);
+        requestAnimationFrame(() => {
+          lbImg.classList.remove('is-switching');
+          lbCaption.parentElement.classList.remove('is-switching');
+          setTimeout(() => { isAnimating = false; }, 300);
+        });
+      }, 200);
     }
 
-    function goPrev() {
-      if (isAnimating) return;
-      currentIndex = (currentIndex - 1 + total) % total;
-      updateImage(true);
-    }
+    function goNext() { transitionTo((currentIndex + 1) % total); }
+    function goPrev() { transitionTo((currentIndex - 1 + total) % total); }
 
-    // Thumb clicks
     thumbs.forEach((thumb) => {
       thumb.addEventListener('click', () => {
         const idx = parseInt(thumb.dataset.galleryIndex, 10);
@@ -417,16 +320,12 @@ const galleryItems = [
       });
     });
 
-    // Close buttons
     document.querySelectorAll('[data-lightbox-close]').forEach((el) => {
       el.addEventListener('click', closeLightbox);
     });
-
-    // Nav
     document.querySelector('[data-lightbox-prev]').addEventListener('click', goPrev);
     document.querySelector('[data-lightbox-next]').addEventListener('click', goNext);
 
-    // Keyboard
     document.addEventListener('keydown', (e) => {
       if (!lightbox.classList.contains('is-open')) return;
       if (e.key === 'Escape') closeLightbox();
@@ -434,20 +333,16 @@ const galleryItems = [
       if (e.key === 'ArrowLeft') goPrev();
     });
 
-    // Swipe support (touch)
     let touchStartX = 0;
     let touchEndX = 0;
-
     lightbox.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].screenX;
     }, { passive: true });
-
     lightbox.addEventListener('touchend', (e) => {
       touchEndX = e.changedTouches[0].screenX;
       const diff = touchStartX - touchEndX;
       if (Math.abs(diff) > 50) {
-        if (diff > 0) goNext();
-        else goPrev();
+        if (diff > 0) goNext(); else goPrev();
       }
     }, { passive: true });
   });

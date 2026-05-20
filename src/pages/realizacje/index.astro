@@ -1,0 +1,523 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import manifest from '../../data/realizacje.json';
+
+const { items, categories, counts } = manifest;
+const categorySlugs = Object.keys(categories);
+const totalCount = counts.total;
+
+// JSON-LD ImageGallery schema
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ImageGallery',
+  name: 'Realizacje Mekra — fronty ramiakowe, kuchnie, szafy, zabudowy',
+  description: `Galeria ${totalCount} realizacji frontów ramiakowych Mekra: kuchnie, szafy, zabudowy specjalne.`,
+  url: 'https://mekra.pl/realizacje/',
+  numberOfItems: totalCount,
+  image: items.slice(0, 20).map((it) => ({
+    '@type': 'ImageObject',
+    contentUrl: `https://mekra.pl${it.paths.full}`,
+    thumbnailUrl: `https://mekra.pl${it.paths.thumb}`,
+    width: it.width,
+    height: it.height,
+    name: it.project,
+    description: it.alt,
+  })),
+};
+
+const firstImage = items[0]?.paths.full ?? '/og-image.jpg';
+---
+
+<BaseLayout
+  title="Realizacje — galeria frontów, kuchni, szaf i zabudów"
+  description={`Galeria ${totalCount} realizacji Mekra: kuchnie z frontami ramiakowymi 7mm, 18mm, 36mm, szafy z ramką 60mm i lustrami, zabudowy specjalne — winiarnie. Toruń i okolice.`}
+  ogImage={`https://mekra.pl${firstImage}`}
+  canonicalUrl="https://mekra.pl/realizacje/"
+>
+  <Navbar />
+
+  <main class="pt-20 md:pt-24" style="background-color: var(--color-bg);">
+    <!-- Hero -->
+    <section class="section-padding pt-12 pb-8 md:pt-20 md:pb-12">
+      <div class="max-w-7xl mx-auto">
+        <div class="max-w-3xl">
+          <span class="label-tag">Galeria</span>
+          <h1 class="mt-6 font-display text-4xl sm:text-5xl md:text-6xl tracking-tight leading-[1.05]" style="color: var(--color-text);">
+            Realizacje <span class="text-gradient">w pełnym wymiarze</span>
+          </h1>
+          <p class="mt-6 text-base md:text-lg leading-relaxed font-body" style="color: var(--color-text-secondary);">
+            {totalCount} zdjęć z naszych ostatnich projektów. Każdy front, każdy detal —
+            od kuchni przez szafy po nietypowe zabudowy. Filtruj po kategorii,
+            powiększaj i porównuj.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filter bar -->
+    <section class="sticky top-16 md:top-20 z-40 section-padding py-4 backdrop-blur-xl border-b" style="background-color: var(--color-overlay); border-color: var(--color-border);">
+      <div class="max-w-7xl mx-auto flex flex-wrap items-center gap-2 md:gap-3">
+        <button
+          class="gallery-filter is-active"
+          data-filter="all"
+          aria-pressed="true"
+        >
+          Wszystkie <span class="opacity-60 ml-1">({totalCount})</span>
+        </button>
+        {categorySlugs.map((slug) => (
+          <button
+            class="gallery-filter"
+            data-filter={slug}
+            aria-pressed="false"
+          >
+            {categories[slug].title} <span class="opacity-60 ml-1">({categories[slug].count})</span>
+          </button>
+        ))}
+      </div>
+    </section>
+
+    <!-- Masonry gallery -->
+    <section class="section-padding py-10 md:py-16">
+      <div class="max-w-7xl mx-auto">
+        <div id="gallery-masonry" class="gallery-masonry">
+          {items.map((item, i) => (
+            <article
+              class={`gallery-card gallery-card--${item.category}`}
+              data-gallery-index={i}
+              data-category={item.category}
+              role="button"
+              tabindex="0"
+              aria-label={`Otwórz zdjęcie: ${item.project}`}
+            >
+              <picture>
+                <source srcset={item.paths.thumbWebp} type="image/webp" />
+                <img
+                  src={item.paths.thumb}
+                  alt={item.alt}
+                  width={item.thumbWidth}
+                  height={item.thumbHeight}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
+              <div class="gallery-card__overlay">
+                <div class="gallery-card__meta">
+                  <span class="gallery-card__category">{categories[item.category].title}</span>
+                  <p class="gallery-card__project">{item.project}</p>
+                </div>
+                <svg class="gallery-card__icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
+                </svg>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <p id="gallery-empty" class="text-center py-12 font-body hidden" style="color: var(--color-text-muted);">
+          Brak realizacji w tej kategorii.
+        </p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section-padding py-16 md:py-24" style="background-color: var(--color-bg-secondary);">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="font-display text-3xl md:text-4xl tracking-tight" style="color: var(--color-text);">
+          Podoba Ci się to, co widzisz?
+        </h2>
+        <p class="mt-4 text-base md:text-lg font-body leading-relaxed" style="color: var(--color-text-secondary);">
+          Każda z tych realizacji zaczęła się od rozmowy. Powiedz nam, co masz w głowie —
+          oddzwonimy w 24h z wstępną wyceną.
+        </p>
+        <div class="mt-8 flex flex-wrap justify-center gap-3">
+          <a href="/#kontakt" class="btn-primary">Zamów wycenę</a>
+          <a href="/" class="btn-secondary">Wróć na stronę główną</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+
+  <!-- Lightbox -->
+  <div id="gallery-lightbox" class="gallery-lightbox" aria-hidden="true" role="dialog" aria-label="Podgląd zdjęcia">
+    <div class="gallery-lightbox__backdrop" data-lightbox-close></div>
+
+    <button class="gallery-lightbox__close" data-lightbox-close aria-label="Zamknij">
+      <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <button class="gallery-lightbox__nav gallery-lightbox__nav--prev" data-lightbox-prev aria-label="Poprzednie zdjęcie">
+      <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+      </svg>
+    </button>
+
+    <button class="gallery-lightbox__nav gallery-lightbox__nav--next" data-lightbox-next aria-label="Następne zdjęcie">
+      <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+      </svg>
+    </button>
+
+    <div class="gallery-lightbox__content">
+      <picture>
+        <source id="lightbox-img-webp" srcset="" type="image/webp" />
+        <img id="lightbox-img" class="gallery-lightbox__img" src="" alt="" />
+      </picture>
+      <div class="gallery-lightbox__caption">
+        <p id="lightbox-category" class="text-[10px] uppercase tracking-[0.15em] text-white/50 font-body mb-1"></p>
+        <p id="lightbox-caption" class="font-heading font-medium text-sm text-white"></p>
+        <p id="lightbox-counter" class="text-xs text-white/50 mt-1 font-body"></p>
+      </div>
+    </div>
+  </div>
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</BaseLayout>
+
+<style>
+  /* ── Filter buttons ── */
+  .gallery-filter {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-family: var(--font-body, sans-serif);
+    font-weight: 500;
+    border-radius: 9999px;
+    border: 1px solid var(--color-border);
+    background: transparent;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+  .gallery-filter:hover {
+    border-color: var(--color-accent);
+    color: var(--color-text);
+  }
+  .gallery-filter.is-active {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    color: white;
+  }
+
+  /* ── Masonry layout via CSS columns ── */
+  .gallery-masonry {
+    column-count: 1;
+    column-gap: 1rem;
+  }
+  @media (min-width: 640px) { .gallery-masonry { column-count: 2; column-gap: 1.25rem; } }
+  @media (min-width: 1024px) { .gallery-masonry { column-count: 3; column-gap: 1.5rem; } }
+  @media (min-width: 1536px) { .gallery-masonry { column-count: 4; } }
+
+  .gallery-card {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin-bottom: 1.25rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    cursor: pointer;
+    break-inside: avoid;
+    background-color: var(--color-bg-secondary);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.3s ease,
+                visibility 0.3s ease;
+  }
+  .gallery-card.is-hidden {
+    display: none;
+  }
+  .gallery-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  }
+  .gallery-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .gallery-card:hover img {
+    transform: scale(1.06);
+  }
+  .gallery-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 50%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 1.25rem;
+    pointer-events: none;
+  }
+  .gallery-card:hover .gallery-card__overlay,
+  .gallery-card:focus-visible .gallery-card__overlay {
+    opacity: 1;
+  }
+  .gallery-card__meta {
+    color: white;
+    transform: translateY(8px);
+    transition: transform 0.4s ease;
+  }
+  .gallery-card:hover .gallery-card__meta {
+    transform: translateY(0);
+  }
+  .gallery-card__category {
+    display: inline-block;
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 0.35rem;
+    font-family: var(--font-body, sans-serif);
+  }
+  .gallery-card__project {
+    font-size: 0.875rem;
+    font-family: var(--font-heading, serif);
+    font-weight: 500;
+    margin: 0;
+    line-height: 1.3;
+  }
+  .gallery-card__icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: rgba(255,255,255,0.7);
+    transform: translateY(8px);
+    transition: transform 0.4s ease;
+    flex-shrink: 0;
+    margin-left: 1rem;
+  }
+  .gallery-card:hover .gallery-card__icon {
+    transform: translateY(0);
+  }
+
+  /* ── Lightbox (re-uses Gallery.astro styles) ── */
+  .gallery-lightbox {
+    position: fixed; inset: 0; z-index: 9999;
+    display: flex; align-items: center; justify-content: center;
+    pointer-events: none; opacity: 0; visibility: hidden;
+    transition: opacity 0.35s cubic-bezier(0.4,0,0.2,1), visibility 0.35s cubic-bezier(0.4,0,0.2,1);
+  }
+  .gallery-lightbox.is-open { pointer-events: auto; opacity: 1; visibility: visible; }
+  .gallery-lightbox__backdrop {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.92);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  }
+  .gallery-lightbox__close {
+    position: absolute; top: 1.25rem; right: 1.25rem; z-index: 10;
+    width: 2.75rem; height: 2.75rem;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 9999px;
+    background: rgba(255,255,255,0.1); color: white;
+    border: 1px solid rgba(255,255,255,0.15); cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .gallery-lightbox__close:hover { background: rgba(255,255,255,0.2); transform: scale(1.05); }
+  .gallery-lightbox__nav {
+    position: absolute; top: 50%; z-index: 10; transform: translateY(-50%);
+    width: 3rem; height: 3rem;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 9999px;
+    background: rgba(255,255,255,0.08); color: white;
+    border: 1px solid rgba(255,255,255,0.12); cursor: pointer;
+    transition: background 0.2s;
+  }
+  .gallery-lightbox__nav:hover { background: rgba(255,255,255,0.18); }
+  .gallery-lightbox__nav--prev { left: 1rem; }
+  .gallery-lightbox__nav--next { right: 1rem; }
+  @media (min-width: 768px) {
+    .gallery-lightbox__nav--prev { left: 1.5rem; }
+    .gallery-lightbox__nav--next { right: 1.5rem; }
+    .gallery-lightbox__close { top: 1.5rem; right: 1.5rem; }
+  }
+  .gallery-lightbox__content {
+    position: relative; z-index: 5;
+    display: flex; flex-direction: column; align-items: center;
+    max-width: calc(100vw - 6rem); max-height: calc(100vh - 6rem);
+  }
+  @media (max-width: 767px) {
+    .gallery-lightbox__content {
+      max-width: calc(100vw - 1.5rem);
+      max-height: calc(100vh - 4rem);
+    }
+  }
+  .gallery-lightbox__img {
+    max-width: 100%; max-height: calc(100vh - 10rem);
+    object-fit: contain; border-radius: 0.75rem;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+    transform: scale(0.92) translateY(12px); opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.35s cubic-bezier(0.4,0,0.2,1);
+  }
+  .gallery-lightbox.is-open .gallery-lightbox__img {
+    transform: scale(1) translateY(0); opacity: 1;
+  }
+  .gallery-lightbox__img.is-switching {
+    transform: scale(0.96); opacity: 0; transition-duration: 0.18s;
+  }
+  .gallery-lightbox__caption {
+    text-align: center; margin-top: 1rem;
+    transform: translateY(8px); opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.4,0,0.2,1) 0.1s, opacity 0.35s cubic-bezier(0.4,0,0.2,1) 0.1s;
+  }
+  .gallery-lightbox.is-open .gallery-lightbox__caption {
+    transform: translateY(0); opacity: 1;
+  }
+  .gallery-lightbox__caption.is-switching {
+    opacity: 0; transform: translateY(4px); transition-duration: 0.15s; transition-delay: 0s;
+  }
+
+  /* btn-secondary fallback (in case it's not in global) */
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem; font-weight: 500;
+    border-radius: 9999px;
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    background: transparent;
+    transition: all 0.2s ease;
+  }
+  .btn-secondary:hover {
+    border-color: var(--color-text);
+  }
+</style>
+
+<script define:vars={{ items, categories }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const lightbox = document.getElementById('gallery-lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    const lbWebp = document.getElementById('lightbox-img-webp');
+    const lbCaption = document.getElementById('lightbox-caption');
+    const lbCategory = document.getElementById('lightbox-category');
+    const lbCounter = document.getElementById('lightbox-counter');
+    const cards = Array.from(document.querySelectorAll('.gallery-card'));
+    const filterButtons = document.querySelectorAll('.gallery-filter');
+    const emptyEl = document.getElementById('gallery-empty');
+
+    let activeFilter = 'all';
+    let visibleIndexes = items.map((_, i) => i); // index into `items`
+    let lightboxPos = 0; // position within visibleIndexes
+    let isAnimating = false;
+
+    function applyFilter(filter) {
+      activeFilter = filter;
+      visibleIndexes = [];
+      cards.forEach((card, i) => {
+        const cat = card.dataset.category;
+        const show = filter === 'all' || cat === filter;
+        card.classList.toggle('is-hidden', !show);
+        if (show) visibleIndexes.push(i);
+      });
+      filterButtons.forEach((btn) => {
+        const isActive = btn.dataset.filter === filter;
+        btn.classList.toggle('is-active', isActive);
+        btn.setAttribute('aria-pressed', String(isActive));
+      });
+      emptyEl.classList.toggle('hidden', visibleIndexes.length > 0);
+    }
+
+    filterButtons.forEach((btn) => {
+      btn.addEventListener('click', () => applyFilter(btn.dataset.filter));
+    });
+
+    // ── Lightbox ──
+    function applyImage(item) {
+      lbWebp.srcset = item.paths.fullWebp;
+      lbImg.src = item.paths.full;
+      lbImg.alt = item.alt;
+      lbCategory.textContent = categories[item.category].title;
+      lbCaption.textContent = item.project;
+      lbCounter.textContent = `${lightboxPos + 1} / ${visibleIndexes.length}`;
+    }
+
+    function openLightbox(itemIndex) {
+      lightboxPos = visibleIndexes.indexOf(itemIndex);
+      if (lightboxPos < 0) return;
+      applyImage(items[itemIndex]);
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    function transitionTo(newPos) {
+      if (isAnimating) return;
+      isAnimating = true;
+      lbImg.classList.add('is-switching');
+      lbCaption.parentElement.classList.add('is-switching');
+      setTimeout(() => {
+        lightboxPos = newPos;
+        applyImage(items[visibleIndexes[lightboxPos]]);
+        requestAnimationFrame(() => {
+          lbImg.classList.remove('is-switching');
+          lbCaption.parentElement.classList.remove('is-switching');
+          setTimeout(() => { isAnimating = false; }, 300);
+        });
+      }, 200);
+    }
+
+    function goNext() { transitionTo((lightboxPos + 1) % visibleIndexes.length); }
+    function goPrev() { transitionTo((lightboxPos - 1 + visibleIndexes.length) % visibleIndexes.length); }
+
+    cards.forEach((card) => {
+      card.addEventListener('click', () => {
+        const idx = parseInt(card.dataset.galleryIndex, 10);
+        openLightbox(idx);
+      });
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const idx = parseInt(card.dataset.galleryIndex, 10);
+          openLightbox(idx);
+        }
+      });
+    });
+
+    document.querySelectorAll('[data-lightbox-close]').forEach((el) => {
+      el.addEventListener('click', closeLightbox);
+    });
+    document.querySelector('[data-lightbox-prev]').addEventListener('click', goPrev);
+    document.querySelector('[data-lightbox-next]').addEventListener('click', goNext);
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('is-open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') goNext();
+      if (e.key === 'ArrowLeft') goPrev();
+    });
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+    lightbox.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    lightbox.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) goNext(); else goPrev();
+      }
+    }, { passive: true });
+
+    // Support deep-link to a filter: /realizacje/#kuchnie etc.
+    const hash = window.location.hash.replace('#', '');
+    if (hash && (hash === 'all' || categories[hash])) {
+      applyFilter(hash);
+    }
+  });
+</script>
