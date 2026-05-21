@@ -1,0 +1,448 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import { ofertaVariants } from '../../data/oferta';
+import manifest from '../../data/realizacje.json';
+
+export function getStaticPaths() {
+  return ofertaVariants.map((v) => ({
+    params: { slug: v.slug },
+    props: { variant: v },
+  }));
+}
+
+const { variant } = Astro.props;
+const { items, categories } = manifest;
+
+const galleryItems = items.filter((it) => it.category === variant.slug);
+const galleryCount = galleryItems.length;
+
+// Hero image: first realisation photo, fall back to landing image
+const heroFromGallery = galleryItems[0];
+const heroFull = heroFromGallery?.paths.full ?? variant.heroImage;
+const heroFullWebp = heroFromGallery?.paths.fullWebp;
+
+// Pick a couple of secondary photos for inline showcase
+const showcase = galleryItems.slice(1, 5);
+
+// Cross-link other variants
+const otherVariants = ofertaVariants.filter((v) => v.slug !== variant.slug);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: `${variant.name} — fronty ramiakowe z ramką ${variant.size}${variant.unit}`,
+  description: variant.shortDescription,
+  brand: { '@type': 'Brand', name: 'Mekra' },
+  manufacturer: { '@type': 'Organization', name: 'Mekra', url: 'https://mekra.pl' },
+  category: 'Fronty meblowe ramiakowe',
+  image: galleryItems.slice(0, 6).map((it) => `https://mekra.pl${it.paths.full}`),
+  offers: {
+    '@type': 'Offer',
+    availability: 'https://schema.org/InStock',
+    url: `https://mekra.pl/oferta/${variant.slug}/`,
+    priceCurrency: 'PLN',
+    priceSpecification: {
+      '@type': 'PriceSpecification',
+      description: 'Cena indywidualna — wycena na podstawie wymiarów i dekoru',
+    },
+  },
+};
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Strona główna', item: 'https://mekra.pl/' },
+    { '@type': 'ListItem', position: 2, name: 'Oferta', item: 'https://mekra.pl/oferta/' },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: variant.unit ? `${variant.name} (${variant.size}${variant.unit})` : variant.name,
+      item: `https://mekra.pl/oferta/${variant.slug}/`,
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={variant.seo.title}
+  description={variant.seo.description}
+  ogImage={`https://mekra.pl${heroFull}`}
+  canonicalUrl={`https://mekra.pl/oferta/${variant.slug}/`}
+>
+  <Navbar />
+
+  <main class="pt-20 md:pt-24" style="background-color: var(--color-bg);">
+    <!-- Breadcrumb -->
+    <nav class="section-padding pt-6 pb-4" aria-label="Breadcrumb">
+      <div class="max-w-7xl mx-auto">
+        <ol class="flex flex-wrap items-center gap-2 text-xs font-body" style="color: var(--color-text-muted);">
+          <li><a href="/" class="hover:text-[var(--color-accent)] transition-colors">Strona główna</a></li>
+          <li>›</li>
+          <li><a href="/oferta/" class="hover:text-[var(--color-accent)] transition-colors">Oferta</a></li>
+          <li>›</li>
+          <li style="color: var(--color-text-secondary);">{variant.unit ? `${variant.name} (${variant.size}${variant.unit})` : variant.name}</li>
+        </ol>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="section-padding pt-6 pb-12 md:pt-10 md:pb-20 relative overflow-hidden">
+      <div class="absolute -top-32 -right-32 w-[28rem] h-[28rem] rounded-full opacity-20 dark:opacity-10 blur-3xl pointer-events-none" style="background: radial-gradient(circle, #ae9070, transparent 70%);"></div>
+
+      <div class="max-w-7xl mx-auto relative">
+        <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+          <!-- Text -->
+          <div class="lg:col-span-6 animate-fade-up">
+            <span class="label-tag">
+              {variant.unit ? (
+                <Fragment>
+                  Wariant
+                  <span class="ml-1 font-heading font-semibold" style="color: var(--color-accent);">
+                    {variant.size}{variant.unit}
+                  </span>
+                </Fragment>
+              ) : (
+                <Fragment>Wariant specjalny</Fragment>
+              )}
+            </span>
+
+            <h1 class="mt-6 font-display text-4xl sm:text-5xl md:text-6xl tracking-tight leading-[1.05]" style="color: var(--color-text);">
+              <span class="block" style="color: var(--color-text);">{variant.name}</span>
+              <span class="block text-gradient mt-1">{variant.tagline}</span>
+            </h1>
+
+            <p class="mt-6 text-base md:text-lg leading-relaxed font-body" style="color: var(--color-text-secondary);">
+              {variant.heroIntro}
+            </p>
+
+            <!-- Style tags -->
+            <div class="mt-8 flex flex-wrap gap-2">
+              {variant.styles.map((s) => (
+                <span class="text-xs font-body font-medium px-3 py-1.5 rounded-full" style="background-color: var(--color-bg-tertiary); color: var(--color-text-secondary); border: 1px solid var(--color-border);">
+                  {s}
+                </span>
+              ))}
+            </div>
+
+            <!-- CTAs -->
+            <div class="mt-10 flex flex-wrap gap-3">
+              <a href="/#kontakt" class="btn-primary">
+                <span>Zamów wycenę</span>
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
+              </a>
+              {galleryCount > 0 && (
+                <a href={`/realizacje/#${variant.slug}`} class="btn-secondary">
+                  Zobacz {galleryCount} realizacji
+                </a>
+              )}
+            </div>
+          </div>
+
+          <!-- Image -->
+          <div class="lg:col-span-6 animate-fade-up" style="animation-delay: 0.15s;">
+            <div class="relative rounded-3xl overflow-hidden aspect-[4/5] sm:aspect-[3/2] lg:aspect-[4/5] card-base">
+              <picture>
+                {heroFullWebp && <source srcset={heroFullWebp} type="image/webp" />}
+                <img
+                  src={heroFull}
+                  alt={`Front ramiakowy ${variant.name} — ramka ${variant.size}${variant.unit}`}
+                  class="w-full h-full object-cover"
+                  loading="eager"
+                  decoding="async"
+                />
+              </picture>
+              <!-- Size / variant badge -->
+              <div class="absolute top-5 left-5 px-4 py-2 rounded-full backdrop-blur-md" style="background-color: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.18);">
+                <span class="text-white font-heading text-xs font-semibold tracking-[0.15em] uppercase">
+                  {variant.unit ? `Ramka ${variant.size}${variant.unit}` : variant.tagline}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Highlights (3 cards) -->
+    <section class="section-padding py-12 md:py-20" style="background-color: var(--color-bg-secondary);">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <span class="label-tag">{variant.slug === 'zabudowy' ? 'Dlaczego zabudowy na wymiar' : 'Dlaczego ta szerokość'}</span>
+          <h2 class="mt-6 font-display text-3xl sm:text-4xl tracking-tight" style="color: var(--color-text);">
+            {variant.slug === 'zabudowy' ? (
+              <Fragment>Co wyróżnia <span class="text-gradient">nasze zabudowy</span></Fragment>
+            ) : (
+              <Fragment>Co wyróżnia <span class="text-gradient">ramkę {variant.size}{variant.unit}</span></Fragment>
+            )}
+          </h2>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {variant.highlights.map((h, i) => (
+            <div
+              class="animate-on-scroll card-base rounded-2xl p-6 md:p-8"
+              style={`transition-delay: ${i * 0.08}s;`}
+            >
+              <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background-color: var(--color-bg-tertiary); color: var(--color-accent);">
+                <span class="font-display text-xl">{i + 1}</span>
+              </div>
+              <h3 class="mt-5 font-heading text-lg font-semibold" style="color: var(--color-text);">
+                {h.title}
+              </h3>
+              <p class="mt-3 text-sm leading-relaxed font-body" style="color: var(--color-text-secondary);">
+                {h.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Long-form description + showcase -->
+    <section class="section-padding py-12 md:py-20">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid lg:grid-cols-12 gap-10 lg:gap-16">
+          <!-- Text column -->
+          <div class="lg:col-span-7 animate-on-scroll">
+            <span class="label-tag">Opis wariantu</span>
+            <h2 class="mt-6 font-display text-2xl sm:text-3xl md:text-4xl tracking-tight" style="color: var(--color-text);">
+              {variant.name} — szczegółowo
+            </h2>
+            <div class="mt-8 space-y-5 text-base font-body leading-relaxed" style="color: var(--color-text-secondary);">
+              {variant.longDescription.map((p) => (<p>{p}</p>))}
+            </div>
+
+            <!-- Pros list -->
+            <h3 class="mt-12 font-heading text-xl font-semibold" style="color: var(--color-text);">
+              Zalety wariantu
+            </h3>
+            <ul class="mt-5 space-y-3">
+              {variant.pros.map((p) => (
+                <li class="flex gap-3 text-sm md:text-base font-body" style="color: var(--color-text-secondary);">
+                  <svg class="w-5 h-5 flex-shrink-0 mt-0.5" style="color: var(--color-accent);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                  </svg>
+                  <span>{p}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Side: showcase + info card -->
+          <aside class="lg:col-span-5 space-y-6">
+            {showcase.length > 0 && (
+              <div class="grid grid-cols-2 gap-3 animate-on-scroll">
+                {showcase.map((it) => (
+                  <a
+                    href={`/realizacje/#${variant.slug}`}
+                    class="block aspect-square rounded-xl overflow-hidden group relative"
+                    style="background-color: var(--color-bg-secondary);"
+                  >
+                    <picture>
+                      <source srcset={it.paths.thumbWebp} type="image/webp" />
+                      <img
+                        src={it.paths.thumb}
+                        alt={it.alt}
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </picture>
+                  </a>
+                ))}
+              </div>
+            )}
+
+            <!-- Info card: best for -->
+            <div class="animate-on-scroll rounded-2xl p-6 md:p-8" style="background-color: var(--color-bg-tertiary); border: 1px solid var(--color-border);">
+              <h3 class="font-heading text-base font-semibold flex items-center gap-2" style="color: var(--color-text);">
+                <svg class="w-5 h-5" style="color: var(--color-accent);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.562.562 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.562.562 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                </svg>
+                Najlepiej sprawdza się
+              </h3>
+              <p class="mt-3 text-sm font-body leading-relaxed" style="color: var(--color-text-secondary);">
+                {variant.bestFor}
+              </p>
+            </div>
+
+            {variant.notFor && (
+              <div class="animate-on-scroll rounded-2xl p-6 md:p-8" style="background-color: var(--color-bg-secondary); border: 1px solid var(--color-border);">
+                <h3 class="font-heading text-base font-semibold flex items-center gap-2" style="color: var(--color-text);">
+                  <svg class="w-5 h-5" style="color: var(--color-text-muted);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                  </svg>
+                  Mniej polecane do
+                </h3>
+                <p class="mt-3 text-sm font-body leading-relaxed" style="color: var(--color-text-secondary);">
+                  {variant.notFor}
+                </p>
+              </div>
+            )}
+
+            <!-- Rooms -->
+            <div class="animate-on-scroll rounded-2xl p-6 md:p-8 card-base">
+              <h3 class="font-heading text-base font-semibold" style="color: var(--color-text);">
+                Gdzie się sprawdza
+              </h3>
+              <div class="mt-4 flex flex-wrap gap-2">
+                {variant.rooms.map((r) => (
+                  <span class="text-xs px-2.5 py-1 rounded-full font-body" style="background-color: var(--color-bg-tertiary); color: var(--color-text-secondary);">
+                    {r}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- Inline gallery preview (up to 8) -->
+    {galleryItems.length > 0 && (
+      <section class="section-padding py-12 md:py-20" style="background-color: var(--color-bg-secondary);">
+        <div class="max-w-7xl mx-auto">
+          <div class="flex flex-wrap items-end justify-between gap-6 mb-10">
+            <div>
+              <span class="label-tag">Realizacje</span>
+              <h2 class="mt-4 font-display text-2xl sm:text-3xl md:text-4xl tracking-tight" style="color: var(--color-text);">
+                {variant.slug === 'zabudowy' ? (
+                  <Fragment>Zabudowy <span class="text-gradient">w naszych projektach</span></Fragment>
+                ) : (
+                  <Fragment>Ramka {variant.size}{variant.unit} <span class="text-gradient">w naszych projektach</span></Fragment>
+                )}
+              </h2>
+              <p class="mt-3 text-sm md:text-base font-body" style="color: var(--color-text-secondary);">
+                {galleryCount} realizacji w tej kategorii — kliknij, żeby otworzyć pełną galerię z lightboxem.
+              </p>
+            </div>
+            <a href={`/realizacje/#${variant.slug}`} class="btn-secondary">
+              Otwórz galerię ({galleryCount})
+            </a>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+            {galleryItems.slice(0, 8).map((it) => (
+              <a
+                href={`/realizacje/#${variant.slug}`}
+                class="block aspect-[4/5] rounded-xl overflow-hidden group relative"
+                style="background-color: var(--color-bg);"
+                aria-label={`Zobacz w galerii: ${it.project}`}
+              >
+                <picture>
+                  <source srcset={it.paths.thumbWebp} type="image/webp" />
+                  <img
+                    src={it.paths.thumb}
+                    alt={it.alt}
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Specs strip -->
+    <section class="section-padding py-12 md:py-16">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="rounded-2xl p-6" style="background-color: var(--color-card-bg); border: 1px solid var(--color-border);">
+            <div class="text-2xs font-body tracking-[0.15em] uppercase" style="color: var(--color-text-muted);">Grubość frontu</div>
+            <div class="mt-2 font-display text-3xl" style="color: var(--color-text);">21 <span class="text-base font-body">mm</span></div>
+            <p class="mt-2 text-xs font-body" style="color: var(--color-text-secondary);">z ramką 3 mm w standardzie</p>
+          </div>
+          <div class="rounded-2xl p-6" style="background-color: var(--color-card-bg); border: 1px solid var(--color-border);">
+            <div class="text-2xs font-body tracking-[0.15em] uppercase" style="color: var(--color-text-muted);">Klej</div>
+            <div class="mt-2 font-display text-3xl" style="color: var(--color-text);">PUR</div>
+            <p class="mt-2 text-xs font-body" style="color: var(--color-text-secondary);">poliuretanowy, wodoodporny</p>
+          </div>
+          <div class="rounded-2xl p-6" style="background-color: var(--color-card-bg); border: 1px solid var(--color-border);">
+            <div class="text-2xs font-body tracking-[0.15em] uppercase" style="color: var(--color-text-muted);">Dekor</div>
+            <div class="mt-2 font-display text-3xl" style="color: var(--color-text);">2-stronny</div>
+            <p class="mt-2 text-xs font-body" style="color: var(--color-text-secondary);">setki dekorów do wyboru</p>
+          </div>
+          <div class="rounded-2xl p-6" style="background-color: var(--color-card-bg); border: 1px solid var(--color-border);">
+            <div class="text-2xs font-body tracking-[0.15em] uppercase" style="color: var(--color-text-muted);">Zawiasy</div>
+            <div class="mt-2 font-display text-xl" style="color: var(--color-text);">Blum / Häfele / Hettich</div>
+            <p class="mt-2 text-xs font-body" style="color: var(--color-text-secondary);">w pełni kompatybilny</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Other variants -->
+    <section class="section-padding py-12 md:py-20" style="background-color: var(--color-bg-secondary);">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <span class="label-tag">Pozostałe warianty</span>
+          <h2 class="mt-6 font-display text-2xl sm:text-3xl md:text-4xl tracking-tight" style="color: var(--color-text);">
+            Sprawdź inne szerokości
+          </h2>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {otherVariants.map((v) => (
+            <a href={`/oferta/${v.slug}/`} class="card-base rounded-2xl p-6 group block" style="text-decoration: none;">
+              <div class="flex items-baseline gap-2">
+                <span class="font-display text-3xl" style="color: var(--color-accent);">{v.size}</span>
+                <span class="font-heading text-xs uppercase tracking-wider" style="color: var(--color-text-muted);">{v.unit}</span>
+              </div>
+              <h3 class="mt-2 font-heading text-base font-semibold" style="color: var(--color-text);">
+                {v.name}
+              </h3>
+              <p class="mt-2 text-xs font-body line-clamp-3" style="color: var(--color-text-secondary);">
+                {v.shortDescription}
+              </p>
+              <div class="mt-4 inline-flex items-center gap-1 text-xs font-heading font-medium" style="color: var(--color-accent);">
+                <span>Zobacz</span>
+                <svg class="w-3 h-3 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section-padding py-16 md:py-24">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="font-display text-3xl md:text-4xl tracking-tight" style="color: var(--color-text);">
+          {variant.slug === 'zabudowy' ? 'Masz pomysł na zabudowę?' : `Wybrałeś ramkę ${variant.size}${variant.unit}?`}
+        </h2>
+        <p class="mt-4 text-base md:text-lg font-body leading-relaxed" style="color: var(--color-text-secondary);">
+          Wyślij wymiary lub opisz, co masz w&nbsp;głowie. Odpowiemy w&nbsp;24h z propozycją dekoru i&nbsp;wstępną wyceną.
+        </p>
+        <div class="mt-8 flex flex-wrap justify-center gap-3">
+          <a href="/#kontakt" class="btn-primary">Zamów wycenę</a>
+          <a href="/oferta/" class="btn-secondary">Wróć do oferty</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />
+</BaseLayout>
+
+<style>
+  .animate-fade-up {
+    animation: fadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .text-2xs { font-size: 0.625rem; line-height: 1; }
+</style>

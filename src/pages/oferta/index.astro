@@ -1,0 +1,292 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import { ofertaVariants } from '../../data/oferta';
+import manifest from '../../data/realizacje.json';
+
+const { categories, items } = manifest;
+
+// Pick one hero photo per variant from the gallery (when available)
+const heroByCat = Object.fromEntries(
+  Object.keys(categories).map((slug) => [slug, items.find((it) => it.category === slug)])
+);
+
+// Frame-size grid uses 4 frame variants first, then zabudowy as wider feature card
+const frameVariants = ofertaVariants.filter((v) => v.slug !== 'zabudowy');
+const zabudowy = ofertaVariants.find((v) => v.slug === 'zabudowy')!;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'OfferCatalog',
+  name: 'Oferta frontów ramiakowych Mekra',
+  url: 'https://mekra.pl/oferta/',
+  itemListElement: ofertaVariants.map((v, i) => ({
+    '@type': 'Offer',
+    position: i + 1,
+    name: `${v.name} — ramka ${v.size}${v.unit}`,
+    url: `https://mekra.pl/oferta/${v.slug}/`,
+    description: v.shortDescription,
+  })),
+};
+---
+
+<BaseLayout
+  title="Oferta — fronty ramiakowe 7, 18, 36, 60 mm i zabudowy specjalne"
+  description="Pełna oferta Mekra: fronty ramiakowe z płyty laminowanej w czterech szerokościach ramki (7, 18, 36, 60 mm) oraz zabudowy meblowe na wymiar. Dwustronny dekor, klej PUR, kompatybilność z systemami Blum, Häfele i Hettich. Producent — Toruń."
+  canonicalUrl="https://mekra.pl/oferta/"
+>
+  <Navbar />
+
+  <main class="pt-20 md:pt-24" style="background-color: var(--color-bg);">
+    <!-- Hero -->
+    <section class="section-padding pt-12 pb-12 md:pt-20 md:pb-16 relative overflow-hidden">
+      <!-- Gradient orbs -->
+      <div class="absolute top-20 -left-32 w-96 h-96 rounded-full opacity-20 dark:opacity-10 blur-3xl pointer-events-none" style="background: radial-gradient(circle, #ae9070, transparent 70%);"></div>
+      <div class="absolute -bottom-20 -right-32 w-96 h-96 rounded-full opacity-15 dark:opacity-10 blur-3xl pointer-events-none" style="background: radial-gradient(circle, #d4c5ae, transparent 70%);"></div>
+
+      <div class="max-w-7xl mx-auto relative">
+        <div class="max-w-3xl">
+          <span class="label-tag">Oferta</span>
+          <h1 class="mt-6 font-display text-4xl sm:text-5xl md:text-6xl tracking-tight leading-[1.05]" style="color: var(--color-text);">
+            Pięć wariantów<br />
+            <span class="text-gradient">jednego mebla z charakterem</span>
+          </h1>
+          <p class="mt-6 text-base md:text-lg leading-relaxed font-body" style="color: var(--color-text-secondary);">
+            Cztery szerokości ramek — 7, 18, 36 i 60 mm — plus zabudowy specjalne na wymiar.
+            Wszystkie fronty mają grubość 21&nbsp;mm, dwustronny dekor i klej PUR w&nbsp;standardzie.
+            Pasują na zawiasy Blum, Häfele i Hettich.
+          </p>
+        </div>
+
+        <!-- Quick anchors -->
+        <div class="mt-10 flex flex-wrap gap-2">
+          {ofertaVariants.map((v) => (
+            <a
+              href={`/oferta/${v.slug}/`}
+              class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-body font-medium transition-all duration-200 hover:scale-105"
+              style="border: 1px solid var(--color-border); color: var(--color-text-secondary); background-color: var(--color-card-bg);"
+            >
+              {v.unit ? (
+                <span class="font-heading font-semibold" style="color: var(--color-accent);">{v.size}{v.unit}</span>
+              ) : (
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="color: var(--color-accent);">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.562.562 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.562.562 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                </svg>
+              )}
+              <span>{v.name}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Frame variants grid (4 sizes) -->
+    <section class="section-padding pb-12">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <h2 class="font-display text-3xl sm:text-4xl tracking-tight" style="color: var(--color-text);">
+            Cztery szerokości ramek
+          </h2>
+          <p class="mt-4 text-base font-body leading-relaxed" style="color: var(--color-text-secondary);">
+            Każda ramka to inny charakter wnętrza. Kliknij wariant, żeby zobaczyć
+            opis, korzyści i pełną galerię realizacji.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-6">
+          {frameVariants.map((v, i) => {
+            const hero = heroByCat[v.slug];
+            const imgSrc = hero?.paths.thumb ?? v.heroImage;
+            const imgWebp = hero?.paths.thumbWebp;
+            return (
+              <a
+                href={`/oferta/${v.slug}/`}
+                class="animate-on-scroll card-base rounded-2xl overflow-hidden group block"
+                style={`transition-delay: ${i * 0.08}s; text-decoration: none;`}
+              >
+                <!-- Image -->
+                <div class="aspect-[3/2] overflow-hidden relative">
+                  <picture>
+                    {imgWebp && <source srcset={imgWebp} type="image/webp" />}
+                    <img
+                      src={imgSrc}
+                      alt={`Front ramiakowy z ramką ${v.size}${v.unit} — ${v.name}`}
+                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </picture>
+                  <!-- Size badge -->
+                  <div class="absolute top-4 left-4 px-3 py-1.5 rounded-full backdrop-blur-md" style="background-color: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.18);">
+                    <span class="text-white font-heading text-xs font-semibold tracking-wider uppercase">
+                      Ramka {v.size}{v.unit}
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Content -->
+                <div class="p-6 md:p-8">
+                  <div class="flex items-baseline gap-3">
+                    <span class="font-display text-4xl md:text-5xl" style="color: var(--color-accent);">{v.size}</span>
+                    <span class="font-heading text-sm font-medium tracking-wider uppercase" style="color: var(--color-text-muted);">{v.unit}</span>
+                  </div>
+                  <h3 class="mt-3 font-heading text-xl font-semibold" style="color: var(--color-text);">
+                    {v.name}
+                  </h3>
+                  <p class="mt-2 text-sm leading-relaxed font-body" style="color: var(--color-text-secondary);">
+                    {v.shortDescription}
+                  </p>
+                  <div class="mt-5 flex flex-wrap gap-2">
+                    {v.styles.slice(0, 3).map((s) => (
+                      <span class="text-xs px-2.5 py-1 rounded-full font-body" style="background-color: var(--color-bg-tertiary); color: var(--color-text-secondary);">
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+                  <div class="mt-5 inline-flex items-center gap-1.5 text-sm font-heading font-medium" style="color: var(--color-accent);">
+                    <span>Zobacz wariant</span>
+                    <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                    </svg>
+                  </div>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    <!-- Zabudowy feature -->
+    <section class="section-padding py-12 md:py-20">
+      <div class="max-w-7xl mx-auto">
+        <a
+          href="/oferta/zabudowy/"
+          class="animate-on-scroll card-base rounded-3xl overflow-hidden block group"
+          style="text-decoration: none;"
+        >
+          <div class="grid lg:grid-cols-2">
+            <div class="aspect-[4/3] lg:aspect-auto overflow-hidden relative">
+              {(() => {
+                const hero = heroByCat['zabudowy'];
+                const imgSrc = hero?.paths.full ?? zabudowy.heroImage;
+                const imgWebp = hero?.paths.fullWebp;
+                return (
+                  <picture>
+                    {imgWebp && <source srcset={imgWebp} type="image/webp" />}
+                    <img
+                      src={imgSrc}
+                      alt="Zabudowa meblowa na wymiar — winiarnia"
+                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </picture>
+                );
+              })()}
+            </div>
+            <div class="p-8 md:p-12 lg:p-16 flex flex-col justify-center">
+              <span class="label-tag">Wariant specjalny</span>
+              <h2 class="mt-5 font-display text-3xl sm:text-4xl tracking-tight" style="color: var(--color-text);">
+                {zabudowy.name}
+              </h2>
+              <p class="mt-4 text-base md:text-lg font-body leading-relaxed" style="color: var(--color-text-secondary);">
+                {zabudowy.shortDescription}
+              </p>
+              <div class="mt-6 flex flex-wrap gap-2">
+                {zabudowy.rooms.slice(0, 4).map((r) => (
+                  <span class="text-xs px-2.5 py-1 rounded-full font-body" style="background-color: var(--color-bg-tertiary); color: var(--color-text-secondary);">
+                    {r}
+                  </span>
+                ))}
+              </div>
+              <div class="mt-8 inline-flex items-center gap-2 text-sm font-heading font-semibold" style="color: var(--color-accent);">
+                <span>Poznaj zabudowy</span>
+                <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Comparison table -->
+    <section class="section-padding py-12 md:py-20" style="background-color: var(--color-bg-secondary);">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <span class="label-tag">Porównanie</span>
+          <h2 class="mt-6 font-display text-3xl sm:text-4xl tracking-tight" style="color: var(--color-text);">
+            Którą szerokość wybrać?
+          </h2>
+          <p class="mt-4 text-base font-body leading-relaxed" style="color: var(--color-text-secondary);">
+            Szybki przegląd — porównaj cztery szerokości ramek bok w&nbsp;bok.
+          </p>
+        </div>
+
+        <div class="overflow-x-auto rounded-2xl" style="border: 1px solid var(--color-border); background-color: var(--color-card-bg);">
+          <table class="w-full min-w-[720px]">
+            <thead>
+              <tr style="background-color: var(--color-bg-tertiary);">
+                <th class="text-left py-4 px-6 font-heading text-sm font-semibold" style="color: var(--color-text);">Wariant</th>
+                <th class="text-left py-4 px-6 font-heading text-sm font-semibold" style="color: var(--color-text);">Charakter</th>
+                <th class="text-left py-4 px-6 font-heading text-sm font-semibold" style="color: var(--color-text);">Najlepsze do</th>
+                <th class="text-center py-4 px-6 font-heading text-sm font-semibold" style="color: var(--color-text);"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {frameVariants.map((v) => (
+                <tr style="border-top: 1px solid var(--color-border);">
+                  <td class="py-4 px-6">
+                    <div class="flex items-baseline gap-2">
+                      <span class="font-display text-2xl" style="color: var(--color-accent);">{v.size}</span>
+                      <span class="font-heading text-xs uppercase tracking-wider" style="color: var(--color-text-muted);">{v.unit}</span>
+                    </div>
+                    <span class="block text-xs font-body mt-1" style="color: var(--color-text-secondary);">{v.name}</span>
+                  </td>
+                  <td class="py-4 px-6 text-sm font-body" style="color: var(--color-text-secondary);">
+                    {v.styles.slice(0, 3).join(', ')}
+                  </td>
+                  <td class="py-4 px-6 text-sm font-body" style="color: var(--color-text-secondary);">
+                    {v.rooms.slice(0, 3).join(', ')}
+                  </td>
+                  <td class="py-4 px-6 text-center">
+                    <a href={`/oferta/${v.slug}/`} class="inline-flex items-center gap-1 text-sm font-heading font-medium hover:underline" style="color: var(--color-accent);">
+                      Szczegóły
+                      <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                      </svg>
+                    </a>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section-padding py-16 md:py-24">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="font-display text-3xl md:text-4xl tracking-tight" style="color: var(--color-text);">
+          Nie wiesz, którą szerokość wybrać?
+        </h2>
+        <p class="mt-4 text-base md:text-lg font-body leading-relaxed" style="color: var(--color-text-secondary);">
+          Doradzimy. Wyślij wymiary lub opisz wizję — odpowiemy w&nbsp;24h
+          z propozycją wariantu i&nbsp;wstępną wyceną.
+        </p>
+        <div class="mt-8 flex flex-wrap justify-center gap-3">
+          <a href="/#kontakt" class="btn-primary">Zamów wycenę</a>
+          <a href="/realizacje/" class="btn-secondary">Zobacz realizacje</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</BaseLayout>
