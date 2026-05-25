@@ -1,0 +1,15 @@
+{
+  "Name": "mekra-security-headers",
+  "Comment": "HSTS + basic security headers for mekra.pl",
+  "SecurityHeadersConfig": {
+    "StrictTransportSecurity": {
+      "AccessControlMaxAgeSec": 31536000,
+      "IncludeSubdomains": true,
+      "Preload": false,
+      "Override": true
+    },
+    "ContentTypeOptions": { "Override": true },
+    "FrameOptions": { "FrameOption": "SAMEORIGIN", "Override": true },
+    "ReferrerPolicy": { "ReferrerPolicy": "strict-origin-when-cross-origin", "Override": true }
+  }
+}

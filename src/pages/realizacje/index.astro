@@ -3,8 +3,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
 import manifest from '../../data/realizacje.json';
+import { projects } from '../../data/projects';
 
 const { items, categories, counts } = manifest;
+
+// Project hero photo lookup (first photo of each project)
+const projectHero = Object.fromEntries(
+  projects.map((p) => [p.slug, items.find((it) => it.projectSlug === p.slug)])
+);
 const categorySlugs = Object.keys(categories);
 const totalCount = counts.total;
 
@@ -75,6 +81,58 @@ const firstImage = items[0]?.paths.full ?? '/og-image.jpg';
             {categories[slug].title} <span class="opacity-60 ml-1">({categories[slug].count})</span>
           </button>
         ))}
+      </div>
+    </section>
+
+    <!-- Project case-studies (long-tail landing pages) -->
+    <section class="section-padding pt-2 pb-10 md:pt-4 md:pb-16">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex items-end justify-between gap-6 mb-8">
+          <div>
+            <span class="label-tag">Projekty</span>
+            <h2 class="mt-4 font-display text-2xl sm:text-3xl md:text-4xl tracking-tight" style="color: var(--color-text);">
+              Wybrane realizacje — pełne case-study
+            </h2>
+            <p class="mt-3 text-sm md:text-base font-body" style="color: var(--color-text-secondary);">
+              Każdy projekt to osobna podstrona ze wszystkimi zdjęciami, opisem i lokalizacją.
+            </p>
+          </div>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          {projects.map((p) => {
+            const hero = projectHero[p.slug];
+            return (
+              <a href={`/realizacje/${p.slug}/`} class="block group rounded-2xl overflow-hidden relative aspect-[4/5]" style="background-color: var(--color-bg-secondary);">
+                {hero && (
+                  <picture>
+                    <source srcset={hero.paths.thumbWebp} type="image/webp" />
+                    <img
+                      src={hero.paths.thumb}
+                      alt={`${p.title} — pierwsza zdjęcie z realizacji`}
+                      width={hero.thumbWidth}
+                      height={hero.thumbHeight}
+                      class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </picture>
+                )}
+                <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
+                <div class="absolute inset-0 p-5 md:p-6 flex flex-col justify-end text-white">
+                  {p.location && (
+                    <span class="text-[10px] uppercase tracking-[0.15em] font-body opacity-70 mb-1">{p.location}</span>
+                  )}
+                  <h3 class="font-heading text-base md:text-lg font-semibold leading-tight">
+                    {p.title}
+                  </h3>
+                  <p class="mt-2 text-xs md:text-sm font-body opacity-80 line-clamp-2">
+                    {p.subtitle}
+                  </p>
+                </div>
+              </a>
+            );
+          })}
+        </div>
       </div>
     </section>
 

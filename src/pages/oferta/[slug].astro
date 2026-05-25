@@ -22,6 +22,10 @@ const galleryCount = galleryItems.length;
 const heroFromGallery = galleryItems[0];
 const heroFull = heroFromGallery?.paths.full ?? variant.heroImage;
 const heroFullWebp = heroFromGallery?.paths.fullWebp;
+const heroThumb = heroFromGallery?.paths.thumb ?? variant.heroImage;
+const heroThumbWebp = heroFromGallery?.paths.thumbWebp;
+const heroThumbW = heroFromGallery?.thumbWidth ?? 800;
+const heroThumbH = heroFromGallery?.thumbHeight ?? 1200;
 
 // Pick a couple of secondary photos for inline showcase
 const showcase = galleryItems.slice(1, 5);
@@ -61,6 +65,10 @@ const breadcrumbLd = {
   description={variant.seo.description}
   ogImage={`https://www.mekra.pl${heroFull}`}
   canonicalUrl={`https://www.mekra.pl/oferta/${variant.slug}/`}
+  preloadImage={heroThumbWebp ?? heroThumb}
+  preloadImageType={heroThumbWebp ? 'image/webp' : 'image/jpeg'}
+  preloadImageSrcset={heroThumbWebp && heroFullWebp ? `${heroThumbWebp} 800w, ${heroFullWebp} 1920w` : undefined}
+  preloadImageSizes="(min-width: 1024px) 50vw, 100vw"
 >
   <Navbar />
 
@@ -137,13 +145,24 @@ const breadcrumbLd = {
           <div class="lg:col-span-6 animate-fade-up" style="animation-delay: 0.15s;">
             <div class="relative rounded-3xl overflow-hidden aspect-[4/5] sm:aspect-[3/2] lg:aspect-[4/5] card-base">
               <picture>
-                {heroFullWebp && <source srcset={heroFullWebp} type="image/webp" />}
+                {heroThumbWebp && heroFullWebp && (
+                  <source
+                    type="image/webp"
+                    srcset={`${heroThumbWebp} 800w, ${heroFullWebp} 1920w`}
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                  />
+                )}
                 <img
-                  src={heroFull}
+                  src={heroThumb}
+                  srcset={heroFromGallery ? `${heroThumb} 800w, ${heroFull} 1920w` : undefined}
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  width={heroThumbW}
+                  height={heroThumbH}
                   alt={`Front ramiakowy ${variant.name} — ramka ${variant.size}${variant.unit}`}
                   class="w-full h-full object-cover"
                   loading="eager"
                   decoding="async"
+                  fetchpriority="high"
                 />
               </picture>
               <!-- Size / variant badge -->

@@ -1,0 +1,235 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import manifest from '../../data/realizacje.json';
+import { projects } from '../../data/projects';
+import { ofertaVariants } from '../../data/oferta';
+
+export function getStaticPaths() {
+  return projects.map((p) => ({
+    params: { project: p.slug },
+    props: { project: p },
+  }));
+}
+
+const { project } = Astro.props;
+const { items, categories } = manifest;
+
+const projectItems = items.filter((it) => it.projectSlug === project.slug);
+const photoCount = projectItems.length;
+const hero = projectItems[0];
+const ofertaVariant = ofertaVariants.find((v) => v.slug === project.category);
+const categoryMeta = categories[project.category];
+
+// prev / next project navigation within same site
+const projectIndex = projects.findIndex((p) => p.slug === project.slug);
+const prevProject = projects[(projectIndex - 1 + projects.length) % projects.length];
+const nextProject = projects[(projectIndex + 1) % projects.length];
+
+const canonicalUrl = `https://www.mekra.pl/realizacje/${project.slug}/`;
+
+const creativeWorkLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: project.title,
+  description: project.intro,
+  url: canonicalUrl,
+  creator: { '@type': 'Organization', name: 'Mekra', url: 'https://www.mekra.pl' },
+  ...(project.location ? { contentLocation: { '@type': 'Place', name: project.location } } : {}),
+  image: projectItems.slice(0, 10).map((it) => `https://www.mekra.pl${it.paths.full}`),
+  about: {
+    '@type': 'Product',
+    name: ofertaVariant ? `${ofertaVariant.name} — ramka ${ofertaVariant.size}${ofertaVariant.unit}` : project.title,
+    brand: { '@type': 'Brand', name: 'Mekra' },
+  },
+};
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Strona główna', item: 'https://www.mekra.pl/' },
+    { '@type': 'ListItem', position: 2, name: 'Realizacje', item: 'https://www.mekra.pl/realizacje/' },
+    { '@type': 'ListItem', position: 3, name: project.title, item: canonicalUrl },
+  ],
+};
+
+const seoDescription = `${project.intro} ${photoCount} zdjęć, realizacja Mekra — producent frontów ramiakowych z Torunia.`.slice(0, 158);
+---
+
+<BaseLayout
+  title={project.title}
+  description={seoDescription}
+  canonicalUrl={canonicalUrl}
+  ogImage={hero ? `https://www.mekra.pl${hero.paths.full}` : undefined}
+  preloadImage={hero?.paths.thumbWebp ?? hero?.paths.thumb}
+  preloadImageType={hero?.paths.thumbWebp ? 'image/webp' : 'image/jpeg'}
+  preloadImageSrcset={hero ? `${hero.paths.thumbWebp} 800w, ${hero.paths.fullWebp} 1920w` : undefined}
+  preloadImageSizes="(min-width: 1024px) 50vw, 100vw"
+>
+  <Navbar />
+
+  <main class="pt-20 md:pt-24" style="background-color: var(--color-bg);">
+    <!-- Breadcrumb -->
+    <nav class="section-padding pt-6 pb-4" aria-label="Breadcrumb">
+      <div class="max-w-7xl mx-auto">
+        <ol class="flex flex-wrap items-center gap-2 text-xs font-body" style="color: var(--color-text-muted);">
+          <li><a href="/" class="hover:text-[var(--color-accent)] transition-colors">Strona główna</a></li>
+          <li>›</li>
+          <li><a href="/realizacje/" class="hover:text-[var(--color-accent)] transition-colors">Realizacje</a></li>
+          <li>›</li>
+          <li style="color: var(--color-text-secondary);">{project.subtitle}</li>
+        </ol>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="section-padding pt-6 pb-12 md:pt-10 md:pb-20">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+          <div class="lg:col-span-6">
+            <span class="label-tag">
+              Realizacja
+              {project.location && (
+                <span class="ml-1 font-heading font-semibold" style="color: var(--color-accent);">{project.location}</span>
+              )}
+            </span>
+            <h1 class="mt-6 font-display text-4xl sm:text-5xl md:text-6xl tracking-tight leading-[1.05]" style="color: var(--color-text);">
+              {project.title}
+            </h1>
+            <p class="mt-4 text-lg font-body" style="color: var(--color-text-secondary);">
+              {project.subtitle} — {photoCount} zdjęć
+            </p>
+            <p class="mt-6 text-base md:text-lg leading-relaxed font-body" style="color: var(--color-text-secondary);">
+              {project.intro}
+            </p>
+            <div class="mt-8 flex flex-wrap gap-3">
+              <a href="/#kontakt" class="btn-primary">Zamów wycenę</a>
+              {ofertaVariant && (
+                <a href={`/oferta/${ofertaVariant.slug}/`} class="btn-secondary">
+                  Zobacz wariant {ofertaVariant.size}{ofertaVariant.unit}
+                </a>
+              )}
+            </div>
+          </div>
+
+          {hero && (
+            <div class="lg:col-span-6">
+              <div class="relative rounded-3xl overflow-hidden aspect-[4/5] sm:aspect-[3/2] lg:aspect-[4/5] card-base">
+                <picture>
+                  <source
+                    type="image/webp"
+                    srcset={`${hero.paths.thumbWebp} 800w, ${hero.paths.fullWebp} 1920w`}
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                  />
+                  <img
+                    src={hero.paths.thumb}
+                    srcset={`${hero.paths.thumb} 800w, ${hero.paths.full} 1920w`}
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    alt={hero.alt}
+                    width={hero.thumbWidth}
+                    height={hero.thumbHeight}
+                    class="w-full h-full object-cover"
+                    loading="eager"
+                    decoding="async"
+                    fetchpriority="high"
+                  />
+                </picture>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+
+    <!-- Long-form description -->
+    <section class="section-padding py-12 md:py-20" style="background-color: var(--color-bg-secondary);">
+      <div class="max-w-3xl mx-auto">
+        <span class="label-tag">O tej realizacji</span>
+        <h2 class="mt-4 font-display text-2xl sm:text-3xl md:text-4xl tracking-tight" style="color: var(--color-text);">
+          Co znajdziesz w tym projekcie
+        </h2>
+        <div class="mt-8 space-y-5 text-base md:text-lg font-body leading-relaxed" style="color: var(--color-text-secondary);">
+          {project.body.map((p) => (<p>{p}</p>))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery — all project photos -->
+    <section class="section-padding py-12 md:py-20">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex items-end justify-between gap-6 mb-10">
+          <div>
+            <span class="label-tag">Galeria</span>
+            <h2 class="mt-4 font-display text-2xl sm:text-3xl md:text-4xl tracking-tight" style="color: var(--color-text);">
+              Wszystkie zdjęcia ({photoCount})
+            </h2>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+          {projectItems.map((it, i) => (
+            <a
+              href={`/realizacje/#${project.category}`}
+              class="block aspect-[4/5] rounded-xl overflow-hidden group relative"
+              style="background-color: var(--color-bg-secondary);"
+              aria-label={`Zobacz w lightboxie: ${it.project}`}
+            >
+              <picture>
+                <source srcset={it.paths.thumbWebp} type="image/webp" />
+                <img
+                  src={it.paths.thumb}
+                  alt={it.alt}
+                  width={it.thumbWidth}
+                  height={it.thumbHeight}
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  loading={i < 4 ? 'eager' : 'lazy'}
+                  decoding="async"
+                />
+              </picture>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Prev / Next -->
+    <section class="section-padding py-12 md:py-16" style="background-color: var(--color-bg-secondary);">
+      <div class="max-w-5xl mx-auto grid sm:grid-cols-2 gap-6">
+        <a href={`/realizacje/${prevProject.slug}/`} class="card-base rounded-2xl p-6 group">
+          <div class="text-xs uppercase tracking-[0.15em] font-body" style="color: var(--color-text-muted);">← Poprzednia realizacja</div>
+          <div class="mt-3 font-heading text-lg font-semibold" style="color: var(--color-text);">
+            {prevProject.title}
+          </div>
+        </a>
+        <a href={`/realizacje/${nextProject.slug}/`} class="card-base rounded-2xl p-6 group text-right">
+          <div class="text-xs uppercase tracking-[0.15em] font-body" style="color: var(--color-text-muted);">Następna realizacja →</div>
+          <div class="mt-3 font-heading text-lg font-semibold" style="color: var(--color-text);">
+            {nextProject.title}
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section-padding py-16 md:py-24">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="font-display text-3xl md:text-4xl tracking-tight" style="color: var(--color-text);">
+          Chcesz podobny projekt?
+        </h2>
+        <p class="mt-4 text-base md:text-lg font-body leading-relaxed" style="color: var(--color-text-secondary);">
+          Wyślij wymiary lub opisz, co masz w&nbsp;głowie. Odpowiemy w&nbsp;24h z propozycją dekoru i&nbsp;wstępną wyceną.
+        </p>
+        <div class="mt-8 flex flex-wrap justify-center gap-3">
+          <a href="/#kontakt" class="btn-primary">Zamów wycenę</a>
+          <a href="/realizacje/" class="btn-secondary">Wszystkie realizacje</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(creativeWorkLd)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />
+</BaseLayout>
