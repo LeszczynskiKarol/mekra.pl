@@ -1,0 +1,18 @@
+Mekra heartbeat — synthetic test attachment
+============================================
+
+This file exists solely to verify the end-to-end attachment flow of the contact form Lambda pipeline:
+
+  EventBridge → mekra-heartbeat Lambda → SES (us-east-1) → kontakt@mekra.pl
+                                       → S3 presigned URL → this file
+
+If you can open this file via the link in the heartbeat email, the entire pipeline is working:
+- Lambda execution
+- SES send permission
+- DKIM/SPF/from-domain alignment
+- S3 GetObject + presigned URL generation
+- Email delivery to inbox
+
+You are safe to ignore / archive the heartbeat email.
+
+If you stop receiving these every 2 days, check Slack — failures alert there.
