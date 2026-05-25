@@ -35,32 +35,22 @@ const jsonLd = {
   name: `${variant.name} — fronty ramiakowe z ramką ${variant.size}${variant.unit}`,
   description: variant.shortDescription,
   brand: { '@type': 'Brand', name: 'Mekra' },
-  manufacturer: { '@type': 'Organization', name: 'Mekra', url: 'https://mekra.pl' },
+  manufacturer: { '@type': 'Organization', name: 'Mekra', url: 'https://www.mekra.pl' },
   category: 'Fronty meblowe ramiakowe',
-  image: galleryItems.slice(0, 6).map((it) => `https://mekra.pl${it.paths.full}`),
-  offers: {
-    '@type': 'Offer',
-    availability: 'https://schema.org/InStock',
-    url: `https://mekra.pl/oferta/${variant.slug}/`,
-    priceCurrency: 'PLN',
-    priceSpecification: {
-      '@type': 'PriceSpecification',
-      description: 'Cena indywidualna — wycena na podstawie wymiarów i dekoru',
-    },
-  },
+  image: galleryItems.slice(0, 6).map((it) => `https://www.mekra.pl${it.paths.full}`),
 };
 
 const breadcrumbLd = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Strona główna', item: 'https://mekra.pl/' },
-    { '@type': 'ListItem', position: 2, name: 'Oferta', item: 'https://mekra.pl/oferta/' },
+    { '@type': 'ListItem', position: 1, name: 'Strona główna', item: 'https://www.mekra.pl/' },
+    { '@type': 'ListItem', position: 2, name: 'Oferta', item: 'https://www.mekra.pl/oferta/' },
     {
       '@type': 'ListItem',
       position: 3,
       name: variant.unit ? `${variant.name} (${variant.size}${variant.unit})` : variant.name,
-      item: `https://mekra.pl/oferta/${variant.slug}/`,
+      item: `https://www.mekra.pl/oferta/${variant.slug}/`,
     },
   ],
 };
@@ -69,8 +59,8 @@ const breadcrumbLd = {
 <BaseLayout
   title={variant.seo.title}
   description={variant.seo.description}
-  ogImage={`https://mekra.pl${heroFull}`}
-  canonicalUrl={`https://mekra.pl/oferta/${variant.slug}/`}
+  ogImage={`https://www.mekra.pl${heroFull}`}
+  canonicalUrl={`https://www.mekra.pl/oferta/${variant.slug}/`}
 >
   <Navbar />
 

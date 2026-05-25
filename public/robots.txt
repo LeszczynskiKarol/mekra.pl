@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mekra.pl/sitemap-index.xml
+Sitemap: https://www.mekra.pl/sitemap-index.xml

@@ -14,12 +14,12 @@ const jsonLd = {
   '@type': 'ImageGallery',
   name: 'Realizacje Mekra — fronty ramiakowe, kuchnie, szafy, zabudowy',
   description: `Galeria ${totalCount} realizacji frontów ramiakowych Mekra: kuchnie, szafy, zabudowy specjalne.`,
-  url: 'https://mekra.pl/realizacje/',
+  url: 'https://www.mekra.pl/realizacje/',
   numberOfItems: totalCount,
   image: items.slice(0, 20).map((it) => ({
     '@type': 'ImageObject',
-    contentUrl: `https://mekra.pl${it.paths.full}`,
-    thumbnailUrl: `https://mekra.pl${it.paths.thumb}`,
+    contentUrl: `https://www.mekra.pl${it.paths.full}`,
+    thumbnailUrl: `https://www.mekra.pl${it.paths.thumb}`,
     width: it.width,
     height: it.height,
     name: it.project,
@@ -33,8 +33,8 @@ const firstImage = items[0]?.paths.full ?? '/og-image.jpg';
 <BaseLayout
   title="Realizacje — galeria frontów, kuchni, szaf i zabudów"
   description={`Galeria ${totalCount} realizacji Mekra: kuchnie z frontami ramiakowymi 7mm, 18mm, 36mm, szafy z ramką 60mm i lustrami, zabudowy specjalne — winiarnie. Toruń i okolice.`}
-  ogImage={`https://mekra.pl${firstImage}`}
-  canonicalUrl="https://mekra.pl/realizacje/"
+  ogImage={`https://www.mekra.pl${firstImage}`}
+  canonicalUrl="https://www.mekra.pl/realizacje/"
 >
   <Navbar />
 

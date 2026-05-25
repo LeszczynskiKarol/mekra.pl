@@ -19,6 +19,9 @@ const {
 
 const siteName = 'Fronty ramiakowe z płyty - producent, sprzedaż, oferta';
 const fullTitle = title === 'Strona Główna' ? siteName : `${title} | Mekra`;
+const absoluteOgImage = ogImage.startsWith('http')
+  ? ogImage
+  : new URL(ogImage, Astro.site).href;
 ---
 
 <!doctype html>
@@ -54,7 +57,7 @@ const fullTitle = title === 'Strona Główna' ? siteName : `${title} | Mekra`;
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:image" content={absoluteOgImage} />
     <meta property="og:locale" content="pl_PL" />
     <meta property="og:site_name" content="Mekra" />
 
@@ -63,7 +66,7 @@ const fullTitle = title === 'Strona Główna' ? siteName : `${title} | Mekra`;
     <meta property="twitter:url" content={canonicalUrl} />
     <meta property="twitter:title" content={fullTitle} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={ogImage} />
+    <meta property="twitter:image" content={absoluteOgImage} />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -124,7 +127,7 @@ const fullTitle = title === 'Strona Główna' ? siteName : `${title} | Mekra`;
       "@type": "LocalBusiness",
       "name": "Mekra",
       "description": "Producent frontów ramiakowych z płyty laminowanej. Fronty kuchenne, ramki 7mm, 18mm, 36mm, 60mm. Toruń i okolice.",
-      "url": "https://mekra.pl",
+      "url": "https://www.mekra.pl",
       "telephone": "+48792456094",
       "address": {
         "@type": "PostalAddress",

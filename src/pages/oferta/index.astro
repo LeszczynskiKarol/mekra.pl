@@ -20,12 +20,12 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'OfferCatalog',
   name: 'Oferta frontów ramiakowych Mekra',
-  url: 'https://mekra.pl/oferta/',
+  url: 'https://www.mekra.pl/oferta/',
   itemListElement: ofertaVariants.map((v, i) => ({
     '@type': 'Offer',
     position: i + 1,
     name: `${v.name} — ramka ${v.size}${v.unit}`,
-    url: `https://mekra.pl/oferta/${v.slug}/`,
+    url: `https://www.mekra.pl/oferta/${v.slug}/`,
     description: v.shortDescription,
   })),
 };
@@ -33,8 +33,8 @@ const jsonLd = {
 
 <BaseLayout
   title="Oferta — fronty ramiakowe 7, 18, 36, 60 mm i zabudowy specjalne"
-  description="Pełna oferta Mekra: fronty ramiakowe z płyty laminowanej w czterech szerokościach ramki (7, 18, 36, 60 mm) oraz zabudowy meblowe na wymiar. Dwustronny dekor, klej PUR, kompatybilność z systemami Blum, Häfele i Hettich. Producent — Toruń."
-  canonicalUrl="https://mekra.pl/oferta/"
+  description="Pełna oferta Mekra: fronty ramiakowe 7/18/36/60 mm + zabudowy na wymiar. Dwustronny dekor, klej PUR, kompatybilność z Blum, Häfele, Hettich."
+  canonicalUrl="https://www.mekra.pl/oferta/"
 >
   <Navbar />
 
