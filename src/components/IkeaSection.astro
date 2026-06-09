@@ -4,17 +4,24 @@
 
 <section class="section-spacing section-padding relative overflow-hidden">
   <div class="max-w-7xl mx-auto">
-    <div class="animate-on-scroll card-base rounded-3xl overflow-hidden relative">
-      <!-- Background accent -->
-      <div class="absolute top-0 right-0 w-1/2 h-full opacity-5">
-        <svg viewBox="0 0 400 400" class="w-full h-full">
-          <rect x="50" y="50" width="300" height="300" stroke="currentColor" stroke-width="2" fill="none" style="color: var(--color-accent);"/>
-          <rect x="100" y="100" width="200" height="200" stroke="currentColor" stroke-width="1.5" fill="none" style="color: var(--color-accent);"/>
-          <rect x="150" y="150" width="100" height="100" stroke="currentColor" stroke-width="1" fill="none" style="color: var(--color-accent);"/>
-        </svg>
+    <div class="animate-on-scroll card-base rounded-3xl overflow-hidden relative grid lg:grid-cols-2">
+      <!-- Right: realizacja w stylu IKEA (front 36 mm, Grudziądz) -->
+      <div class="ikea-photo lg:col-start-2 lg:row-start-1">
+        <picture>
+          <source srcset="/img/realizacje/ramka-36mm/ramka-36mm-grudziadz-01.webp" type="image/webp" />
+          <img
+            src="/img/realizacje/ramka-36mm/ramka-36mm-grudziadz-01.jpg"
+            alt="Kuchnia z frontami ramiakowymi Mekra dopasowanymi do korpusów IKEA"
+            width="1920"
+            height="2880"
+            loading="lazy"
+            decoding="async"
+            class="ikea-photo__img"
+          />
+        </picture>
       </div>
 
-      <div class="relative p-8 md:p-12 lg:p-16 xl:p-20">
+      <div class="relative p-8 md:p-12 lg:p-16 xl:p-20 lg:col-start-1 lg:row-start-1">
         <div class="max-w-2xl">
           <span class="label-tag">Dla właścicieli mebli IKEA</span>
 
@@ -62,3 +69,28 @@
     </div>
   </div>
 </section>
+
+<style>
+  /* ── IKEA section photo ─────────────────────────────────────────────────
+     Replaces the decorative nested rectangles with a real realizacja. Sits in
+     the right column on desktop (a top band on mobile) and feathers into the
+     card on the text side via --color-card-bg, so it reads as one surface. */
+  .ikea-photo {
+    position: relative;
+    min-height: 280px;
+    overflow: hidden;
+  }
+  @media (min-width: 1024px) {
+    .ikea-photo { min-height: 100%; }
+  }
+
+  .ikea-photo__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 38%;
+    filter: saturate(0.98);
+  }
+</style>

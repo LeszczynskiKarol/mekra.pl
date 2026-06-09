@@ -10,6 +10,21 @@
   <div class="absolute top-20 -left-32 w-96 h-96 rounded-full opacity-20 dark:opacity-10 blur-3xl" style="background: radial-gradient(circle, #ae9070, transparent 70%);"></div>
   <div class="absolute bottom-20 -right-32 w-96 h-96 rounded-full opacity-15 dark:opacity-10 blur-3xl" style="background: radial-gradient(circle, #d4c5ae, transparent 70%);"></div>
 
+  <!-- Hero photo — front z ramką 36 mm (Grudziądz), zakotwiczony z prawej i wtopiony w tło strony -->
+  <div class="hero-photo" aria-hidden="true">
+    <picture>
+      <source srcset="/img/realizacje/ramka-36mm/ramka-36mm-grudziadz-40.webp" type="image/webp" />
+      <img
+        src="/img/realizacje/ramka-36mm/ramka-36mm-grudziadz-40.jpg"
+        alt=""
+        width="1920"
+        height="1280"
+        decoding="async"
+        fetchpriority="low"
+      />
+    </picture>
+  </div>
+
   <div class="relative w-full section-padding pt-32 md:pt-40 pb-20">
     <div class="max-w-7xl mx-auto">
       <!-- Label -->
@@ -82,5 +97,85 @@
     </div>
   </div>
 
-  
+
 </section>
+
+<style>
+  /* ── Hero background photo ──────────────────────────────────────────────
+     Warm front detail anchored on the right, feathered into the page so the
+     left column (heading + CTAs) sits on clean background and the photo fills
+     the previously-empty right side. Uses the existing --color-hero-gradient-*
+     vars, so it stays correct in both light and dark themes. */
+  .hero-photo {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .hero-photo img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 72% 42%;
+    opacity: 0.9;
+    /* warm + lift slightly so dark text stays legible where they overlap */
+    filter: saturate(1.03) brightness(1.04) contrast(0.98);
+    animation: heroPhotoIn 1.2s cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+
+  .dark .hero-photo img {
+    opacity: 0.8;
+    /* darken so light text reads and the photo melts into the dark canvas */
+    filter: saturate(0.92) brightness(0.6) contrast(1.02);
+  }
+
+  @keyframes heroPhotoIn {
+    from { opacity: 0; transform: scale(1.04); }
+    to   { opacity: 0.9; transform: scale(1); }
+  }
+
+  /* Feather: opaque on the text side (left + bottom), clear on the upper-right */
+  .hero-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        100deg,
+        var(--color-hero-gradient-end) 0%,
+        var(--color-hero-gradient-end) 40%,
+        var(--color-hero-gradient-start) 90%
+      ),
+      linear-gradient(
+        to top,
+        var(--color-hero-gradient-end) 0%,
+        var(--color-hero-gradient-end) 14%,
+        var(--color-hero-gradient-start) 58%
+      );
+  }
+
+  /* Phones: keep it a faint warm wash — text legibility comes first */
+  @media (max-width: 767px) {
+    .hero-photo img {
+      opacity: 0.18;
+      object-position: 62% 40%;
+      animation: none;
+    }
+    .hero-photo::after {
+      background: linear-gradient(
+        to top,
+        var(--color-hero-gradient-end) 0%,
+        var(--color-hero-gradient-end) 18%,
+        var(--color-hero-gradient-start) 70%
+      );
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-photo img { animation: none; }
+  }
+</style>
