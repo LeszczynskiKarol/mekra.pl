@@ -22,7 +22,7 @@
             To pierwsza rzecz, którą widzisz i&nbsp;dotykasz każdego dnia.
           </p>
           <p>
-            Pracujemy w dwóch głównych technologiach. Pierwsza to płyta laminowana — z pełną paletą dekorów: unikolory, reprodukcje drewna, kamienia, betonu i&nbsp;innych materiałów. Korzystamy z&nbsp;płyt renomowanych producentów, takich jak Saviola, Forner Cleaf czy Nieman — w&nbsp;tym z&nbsp;płyt głęboko strukturyzowanych, które oddają charakter prawdziwego drewna. Druga to płyta powlekana matą akrylową lub akrylem (marki takie jak Forner, AGT) — to dwie odrębne technologie, dostępne wyłącznie w&nbsp;jednolitych wybarwieniach, w&nbsp;wariantach ultramat, mat i&nbsp;połysk. Każdy materiał dobieramy pod kątem trwałości, estetyki i&nbsp;Twoich indywidualnych oczekiwań. Niezależnie od wybranej technologii, każdy nasz front jest oklejany wodoodpornym klejem poliuretanowym PUR — w&nbsp;standardzie, bez dopłat.
+            Pracujemy w dwóch głównych technologiach. Pierwsza to płyta laminowana — z pełną paletą dekorów: unikolory, reprodukcje drewna, kamienia, betonu i&nbsp;innych materiałów. Korzystamy z&nbsp;płyt renomowanych producentów, takich jak Saviola, Egger, Forner Cleaf czy Nieman — w&nbsp;tym z&nbsp;płyt głęboko strukturyzowanych, które oddają charakter prawdziwego drewna. Druga to płyta powlekana matą akrylową lub akrylem (marki takie jak Forner, AGT) — to dwie odrębne technologie, dostępne wyłącznie w&nbsp;jednolitych wybarwieniach, w&nbsp;wariantach ultramat, mat i&nbsp;połysk. Każdy materiał dobieramy pod kątem trwałości, estetyki i&nbsp;Twoich indywidualnych oczekiwań. Niezależnie od wybranej technologii, każdy nasz front jest oklejany wodoodpornym klejem poliuretanowym PUR — w&nbsp;standardzie, bez dopłat.
           </p>
           <p>
             Nasze fronty przeszły szereg testów przedprodukcyjnych — na wyginanie, odkształcanie, wilgotność
@@ -36,14 +36,22 @@
       <div class="animate-on-scroll" style="transition-delay: 0.2s;">
         <div class="relative">
           <div class="aspect-[4/5] rounded-2xl overflow-hidden card-base !shadow-none">
-            <!-- PLACEHOLDER: Replace src with actual image URL -->
-            <img
-              src="img/mekra-produkcja.jpg"
-              alt="Produkcja frontów ramiakowych Mekra"
-              class="w-full h-full object-cover"
-              loading="lazy"
-              decoding="async"
-            />
+            <picture>
+              <source
+                type="image/webp"
+                srcset="/img/mekra-produkcja-400.webp 400w, /img/mekra-produkcja-600.webp 600w, /img/mekra-produkcja-800.webp 800w, /img/mekra-produkcja-1000.webp 1000w"
+                sizes="(min-width: 1024px) 500px, (min-width: 640px) 80vw, 90vw"
+              />
+              <img
+                src="img/mekra-produkcja.jpg"
+                alt="Produkcja frontów ramiakowych Mekra"
+                width="800"
+                height="1000"
+                class="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
           </div>
           <!-- Floating badge -->
           <div class="absolute -bottom-6 -left-6 md:-left-8 card-base rounded-2xl p-5 md:p-6">

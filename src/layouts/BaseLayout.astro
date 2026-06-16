@@ -120,14 +120,37 @@ const FONTS_URL = 'https://fonts.googleapis.com/css2?family=DM+Serif+Display:ita
       });
     </script>
 
-    <!-- Google Analytics (gtag.js) — loads after consent defaults -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5RQMRR2XPW"></script>
+    <!-- Google Analytics (gtag.js) — queued now, heavy script deferred off the
+         critical path. Consent defaults above + the gtag() calls below push to
+         dataLayer immediately; gtag.js is downloaded on first interaction or
+         when the main thread is idle, so it no longer blocks LCP/TBT. -->
     <script is:inline>
       gtag('js', new Date());
       gtag('config', 'G-5RQMRR2XPW', {
         'anonymize_ip': true,
         'cookie_flags': 'SameSite=Lax;Secure',
       });
+
+      (function () {
+        var loaded = false;
+        function loadGtag() {
+          if (loaded) return;
+          loaded = true;
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-5RQMRR2XPW';
+          document.head.appendChild(s);
+        }
+        var events = ['scroll', 'mousemove', 'touchstart', 'keydown', 'click'];
+        events.forEach(function (e) {
+          window.addEventListener(e, loadGtag, { once: true, passive: true });
+        });
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(loadGtag, { timeout: 5000 });
+        } else {
+          window.addEventListener('load', function () { setTimeout(loadGtag, 3000); });
+        }
+      })();
     </script>
 
     <!-- Theme initialization (prevents flash) -->

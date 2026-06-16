@@ -70,13 +70,22 @@ const frameTypes = [
         >
           <!-- Image -->
           <div class="aspect-[3/2] overflow-hidden">
-            <img
-              src={frame.image}
-              alt={frame.imageAlt}
-              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              loading="lazy"
-              decoding="async"
-            />
+            <picture>
+              <source
+                type="image/webp"
+                srcset={`/${frame.image.replace('.jpg', '')}-400.webp 400w, /${frame.image.replace('.jpg', '')}-640.webp 640w, /${frame.image.replace('.jpg', '')}-900.webp 900w, /${frame.image.replace('.jpg', '')}-1280.webp 1280w`}
+                sizes="(min-width: 1280px) 620px, (min-width: 640px) 45vw, 90vw"
+              />
+              <img
+                src={frame.image}
+                alt={frame.imageAlt}
+                width="900"
+                height="600"
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
           </div>
 
           <!-- Content -->

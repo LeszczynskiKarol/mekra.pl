@@ -110,7 +110,7 @@ export const ofertaVariants: OfertaVariant[] = [
       {
         title: 'Skala faktury',
         description:
-          'Na szerszej ramce wyraźniej widać strukturę głęboko strukturyzowanych płyt Saviola czy Forner Cleaf.',
+          'Na szerszej ramce wyraźniej widać strukturę głęboko strukturyzowanych płyt Saviola, Egger czy Forner Cleaf.',
       },
     ],
     longDescription: [

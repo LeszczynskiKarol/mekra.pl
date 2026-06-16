@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Metric-matched fallback for the body font (Plus Jakarta Sans).
+   Renders as Arial with overridden metrics so the line-box height matches the
+   web font — when Plus Jakarta Sans swaps in, text barely reflows (kills the
+   font-swap CLS measured on the hero paragraph). */
+@font-face {
+  font-family: 'Jakarta Fallback';
+  src: local('Arial');
+  ascent-override: 96.54%;
+  descent-override: 24.13%;
+  line-gap-override: 0%;
+  size-adjust: 102.21%;
+}
+
 @layer base {
   :root {
     --color-bg: #fafaf8;
@@ -48,7 +61,7 @@
   body {
     background-color: var(--color-bg);
     color: var(--color-text);
-    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-family: 'Plus Jakarta Sans', 'Jakarta Fallback', system-ui, sans-serif;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 

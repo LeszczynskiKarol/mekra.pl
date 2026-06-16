@@ -32,7 +32,7 @@ export default {
       fontFamily: {
         display: ['"DM Serif Display"', 'Georgia', 'serif'],
         heading: ['"Outfit"', 'system-ui', 'sans-serif'],
-        body: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        body: ['"Plus Jakarta Sans"', '"Jakarta Fallback"', 'system-ui', 'sans-serif'],
       },
       fontSize: {
         '2xs': ['0.65rem', { lineHeight: '1rem' }],
