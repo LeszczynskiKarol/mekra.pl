@@ -201,6 +201,19 @@ const FONTS_URL = 'https://fonts.googleapis.com/css2?family=DM+Serif+Display:ita
   <body class="min-h-screen overflow-x-hidden">
     <slot />
 
+    <!-- Click-to-call tracking — fires `phone_call` on any tel: link (Contact, Footer, …) -->
+    <script is:inline>
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest && e.target.closest('a[href^="tel:"]');
+        if (!a) return;
+        if (typeof gtag === 'function') {
+          gtag('event', 'phone_call', {
+            'phone_number': a.getAttribute('href').replace('tel:', ''),
+          });
+        }
+      }, { passive: true });
+    </script>
+
     <!-- Scroll animations -->
     <script is:inline>
       document.addEventListener('DOMContentLoaded', () => {
