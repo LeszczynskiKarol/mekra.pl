@@ -246,11 +246,14 @@ const breadcrumbLd = {
           <aside class="lg:col-span-5 space-y-6">
             {showcase.length > 0 && (
               <div class="grid grid-cols-2 gap-3 animate-on-scroll">
-                {showcase.map((it) => (
-                  <a
-                    href={`/realizacje/#${variant.slug}`}
-                    class="block aspect-square rounded-xl overflow-hidden group relative"
+                {showcase.map((it, j) => (
+                  <article
+                    class="gallery-card block aspect-square rounded-xl overflow-hidden group relative"
                     style="background-color: var(--color-bg-secondary);"
+                    data-gallery-index={j + 1}
+                    role="button"
+                    tabindex="0"
+                    aria-label={`Otwórz zdjęcie: ${it.project}`}
                   >
                     <picture>
                       <source srcset={it.paths.thumbWebp} type="image/webp" />
@@ -262,7 +265,7 @@ const breadcrumbLd = {
                         decoding="async"
                       />
                     </picture>
-                  </a>
+                  </article>
                 ))}
               </div>
             )}
@@ -316,32 +319,29 @@ const breadcrumbLd = {
     {galleryItems.length > 0 && (
       <section class="section-padding py-12 md:py-20" style="background-color: var(--color-bg-secondary);">
         <div class="max-w-7xl mx-auto">
-          <div class="flex flex-wrap items-end justify-between gap-6 mb-10">
-            <div>
-              <span class="label-tag">Realizacje</span>
-              <h2 class="mt-4 font-display text-2xl sm:text-3xl md:text-4xl tracking-tight" style="color: var(--color-text);">
-                {variant.slug === 'zabudowy' ? (
-                  <Fragment>Zabudowy <span class="text-gradient">w naszych projektach</span></Fragment>
-                ) : (
-                  <Fragment>Ramka {variant.size}{variant.unit} <span class="text-gradient"> w naszych projektach</span></Fragment>
-                )}
-              </h2>
-              <p class="mt-3 text-sm md:text-base font-body" style="color: var(--color-text-secondary);">
-                {galleryCount} realizacji w tej kategorii — kliknij, żeby otworzyć pełną galerię z lightboxem.
-              </p>
-            </div>
-            <a href={`/realizacje/#${variant.slug}`} class="btn-secondary">
-              Otwórz galerię ({galleryCount})
-            </a>
+          <div class="mb-10">
+            <span class="label-tag">Realizacje</span>
+            <h2 class="mt-4 font-display text-2xl sm:text-3xl md:text-4xl tracking-tight" style="color: var(--color-text);">
+              {variant.slug === 'zabudowy' ? (
+                <Fragment>Zabudowy <span class="text-gradient">w naszych projektach</span></Fragment>
+              ) : (
+                <Fragment>Ramka {variant.size}{variant.unit} <span class="text-gradient"> w naszych projektach</span></Fragment>
+              )}
+            </h2>
+            <p class="mt-3 text-sm md:text-base font-body" style="color: var(--color-text-secondary);">
+              {galleryCount} realizacji w tej kategorii — kliknij zdjęcie, żeby powiększyć.
+            </p>
           </div>
 
           <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
-            {galleryItems.slice(0, 8).map((it) => (
-              <a
-                href={`/realizacje/#${variant.slug}`}
-                class="block aspect-[4/5] rounded-xl overflow-hidden group relative"
+            {galleryItems.slice(0, 8).map((it, i) => (
+              <article
+                class="gallery-card block aspect-[4/5] rounded-xl overflow-hidden group relative"
                 style="background-color: var(--color-bg);"
-                aria-label={`Zobacz w galerii: ${it.project}`}
+                data-gallery-index={i}
+                role="button"
+                tabindex="0"
+                aria-label={`Otwórz zdjęcie: ${it.project}`}
               >
                 <picture>
                   <source srcset={it.paths.thumbWebp} type="image/webp" />
@@ -353,8 +353,17 @@ const breadcrumbLd = {
                     decoding="async"
                   />
                 </picture>
-              </a>
+              </article>
             ))}
+          </div>
+
+          <div class="mt-10">
+            <a href={`/realizacje/#${variant.slug}`} class="inline-flex items-center gap-2 btn-secondary">
+              <span>Zobacz wszystkie realizacje ({galleryCount})</span>
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </a>
           </div>
         </div>
       </section>
@@ -441,6 +450,43 @@ const breadcrumbLd = {
 
   <Footer />
 
+  <!-- Lightbox -->
+  {galleryItems.length > 0 && (
+    <div id="gallery-lightbox" class="gallery-lightbox" aria-hidden="true" role="dialog" aria-label="Podgląd zdjęcia">
+      <div class="gallery-lightbox__backdrop" data-lightbox-close></div>
+
+      <button class="gallery-lightbox__close" data-lightbox-close aria-label="Zamknij">
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <button class="gallery-lightbox__nav gallery-lightbox__nav--prev" data-lightbox-prev aria-label="Poprzednie zdjęcie">
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+        </svg>
+      </button>
+
+      <button class="gallery-lightbox__nav gallery-lightbox__nav--next" data-lightbox-next aria-label="Następne zdjęcie">
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+        </svg>
+      </button>
+
+      <div class="gallery-lightbox__content">
+        <picture>
+          <source id="lightbox-img-webp" srcset="" type="image/webp" />
+          <img id="lightbox-img" class="gallery-lightbox__img" src="" alt="" />
+        </picture>
+        <div class="gallery-lightbox__caption">
+          <p id="lightbox-category" class="text-[10px] uppercase tracking-[0.15em] text-white/50 font-body mb-1"></p>
+          <p id="lightbox-caption" class="font-heading font-medium text-sm text-white"></p>
+          <p id="lightbox-counter" class="text-xs text-white/50 mt-1 font-body"></p>
+        </div>
+      </div>
+    </div>
+  )}
+
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />
 </BaseLayout>
@@ -454,4 +500,180 @@ const breadcrumbLd = {
     to   { opacity: 1; transform: translateY(0); }
   }
   .text-2xs { font-size: 0.625rem; line-height: 1; }
+
+  /* Gallery cards act as buttons */
+  .gallery-card { cursor: pointer; }
+  .gallery-card:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  /* ── Lightbox (shared with realizacje pages) ── */
+  .gallery-lightbox {
+    position: fixed; inset: 0; z-index: 9999;
+    display: flex; align-items: center; justify-content: center;
+    pointer-events: none; opacity: 0; visibility: hidden;
+    transition: opacity 0.35s cubic-bezier(0.4,0,0.2,1), visibility 0.35s cubic-bezier(0.4,0,0.2,1);
+  }
+  .gallery-lightbox.is-open { pointer-events: auto; opacity: 1; visibility: visible; }
+  .gallery-lightbox__backdrop {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.92);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  }
+  .gallery-lightbox__close {
+    position: absolute; top: 1.25rem; right: 1.25rem; z-index: 10;
+    width: 2.75rem; height: 2.75rem;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 9999px;
+    background: rgba(255,255,255,0.1); color: white;
+    border: 1px solid rgba(255,255,255,0.15); cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .gallery-lightbox__close:hover { background: rgba(255,255,255,0.2); transform: scale(1.05); }
+  .gallery-lightbox__nav {
+    position: absolute; top: 50%; z-index: 10; transform: translateY(-50%);
+    width: 3rem; height: 3rem;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 9999px;
+    background: rgba(255,255,255,0.08); color: white;
+    border: 1px solid rgba(255,255,255,0.12); cursor: pointer;
+    transition: background 0.2s;
+  }
+  .gallery-lightbox__nav:hover { background: rgba(255,255,255,0.18); }
+  .gallery-lightbox__nav--prev { left: 1rem; }
+  .gallery-lightbox__nav--next { right: 1rem; }
+  @media (min-width: 768px) {
+    .gallery-lightbox__nav--prev { left: 1.5rem; }
+    .gallery-lightbox__nav--next { right: 1.5rem; }
+    .gallery-lightbox__close { top: 1.5rem; right: 1.5rem; }
+  }
+  .gallery-lightbox__content {
+    position: relative; z-index: 5;
+    display: flex; flex-direction: column; align-items: center;
+    max-width: calc(100vw - 6rem); max-height: calc(100vh - 6rem);
+  }
+  @media (max-width: 767px) {
+    .gallery-lightbox__content {
+      max-width: calc(100vw - 1.5rem);
+      max-height: calc(100vh - 4rem);
+    }
+  }
+  .gallery-lightbox__img {
+    max-width: 100%; max-height: calc(100vh - 10rem);
+    object-fit: contain; border-radius: 0.75rem;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+    transform: scale(0.92) translateY(12px); opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.35s cubic-bezier(0.4,0,0.2,1);
+  }
+  .gallery-lightbox.is-open .gallery-lightbox__img {
+    transform: scale(1) translateY(0); opacity: 1;
+  }
+  .gallery-lightbox__img.is-switching {
+    transform: scale(0.96); opacity: 0; transition-duration: 0.18s;
+  }
+  .gallery-lightbox__caption {
+    text-align: center; margin-top: 1rem;
+    transform: translateY(8px); opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.4,0,0.2,1) 0.1s, opacity 0.35s cubic-bezier(0.4,0,0.2,1) 0.1s;
+  }
+  .gallery-lightbox.is-open .gallery-lightbox__caption {
+    transform: translateY(0); opacity: 1;
+  }
+  .gallery-lightbox__caption.is-switching {
+    opacity: 0; transform: translateY(4px); transition-duration: 0.15s; transition-delay: 0s;
+  }
 </style>
+
+<script define:vars={{ galleryItems: galleryItems.slice(0, 8), categoryTitle: categories[variant.slug]?.title ?? variant.name }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const lightbox = document.getElementById('gallery-lightbox');
+    if (!lightbox) return;
+    const lbImg = document.getElementById('lightbox-img');
+    const lbWebp = document.getElementById('lightbox-img-webp');
+    const lbCaption = document.getElementById('lightbox-caption');
+    const lbCategory = document.getElementById('lightbox-category');
+    const lbCounter = document.getElementById('lightbox-counter');
+    const cards = Array.from(document.querySelectorAll('.gallery-card'));
+    let pos = 0;
+    let isAnimating = false;
+
+    function applyImage(item) {
+      lbWebp.srcset = item.paths.fullWebp;
+      lbImg.src = item.paths.full;
+      lbImg.alt = item.alt;
+      lbCategory.textContent = categoryTitle;
+      lbCaption.textContent = item.project;
+      lbCounter.textContent = `${pos + 1} / ${galleryItems.length}`;
+    }
+
+    function openLightbox(index) {
+      pos = index;
+      applyImage(galleryItems[pos]);
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    function transitionTo(newPos) {
+      if (isAnimating) return;
+      isAnimating = true;
+      lbImg.classList.add('is-switching');
+      lbCaption.parentElement.classList.add('is-switching');
+      setTimeout(() => {
+        pos = newPos;
+        applyImage(galleryItems[pos]);
+        requestAnimationFrame(() => {
+          lbImg.classList.remove('is-switching');
+          lbCaption.parentElement.classList.remove('is-switching');
+          setTimeout(() => { isAnimating = false; }, 300);
+        });
+      }, 200);
+    }
+
+    function goNext() { transitionTo((pos + 1) % galleryItems.length); }
+    function goPrev() { transitionTo((pos - 1 + galleryItems.length) % galleryItems.length); }
+
+    cards.forEach((card) => {
+      card.addEventListener('click', () => {
+        openLightbox(parseInt(card.dataset.galleryIndex, 10));
+      });
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openLightbox(parseInt(card.dataset.galleryIndex, 10));
+        }
+      });
+    });
+
+    document.querySelectorAll('[data-lightbox-close]').forEach((el) => {
+      el.addEventListener('click', closeLightbox);
+    });
+    document.querySelector('[data-lightbox-prev]').addEventListener('click', goPrev);
+    document.querySelector('[data-lightbox-next]').addEventListener('click', goNext);
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('is-open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') goNext();
+      if (e.key === 'ArrowLeft') goPrev();
+    });
+
+    let touchStartX = 0;
+    lightbox.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    lightbox.addEventListener('touchend', (e) => {
+      const diff = touchStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) goNext(); else goPrev();
+      }
+    }, { passive: true });
+  });
+</script>
