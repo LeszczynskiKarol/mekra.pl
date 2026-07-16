@@ -47,7 +47,7 @@ export const projects: Project[] = [
   {
     slug: 'ramka-60mm-lustra',
     category: 'ramka-60mm',
-    title: 'Szafy z lustrem — ramka 60 mm',
+    title: 'Szafy z lustrem — fronty ramiakowe 60 mm',
     subtitle: 'Klasyczne szafy z lustrem wpuszczonym w ramkę',
     intro:
       'Szafy w wariancie ramki 60 mm z lustrem wpuszczonym w środek ramki. Klasyczne rozwiązanie — zamiast płyciny montujemy lustro lub szkło ozdobne.',
@@ -61,7 +61,7 @@ export const projects: Project[] = [
   {
     slug: 'ramka-60mm-szafa',
     category: 'ramka-60mm',
-    title: 'Szafy klasyczne — ramka 60 mm',
+    title: 'Szafy klasyczne — fronty ramiakowe 60 mm',
     subtitle: 'Klasyczna szafa z frontem ramiakowym',
     intro:
       'Szafy z frontami ramiakowymi w wariancie 60 mm — pełny klasyczny charakter, najszersza ramka z oferty Mekra.',
@@ -75,7 +75,7 @@ export const projects: Project[] = [
   {
     slug: 'ramka-60mm-witrynka',
     category: 'ramka-60mm',
-    title: 'Witrynki ze szkłem — ramka 60 mm',
+    title: 'Witrynki ze szkłem — fronty ramiakowe 60 mm',
     subtitle: 'Witrynki kuchenne ze szkłem wpuszczonym w ramkę',
     intro:
       'Witrynki kuchenne i jadalniane z frontami ramiakowymi 60 mm — szkło lub szkło ozdobne wpuszczone w środek ramki, alternatywa dla MDF lakierowanego.',
@@ -89,7 +89,7 @@ export const projects: Project[] = [
   {
     slug: 'ramka-7mm',
     category: 'ramka-7mm',
-    title: 'Realizacje w wariancie 7 mm — minimalistyczne fronty',
+    title: 'Kuchnie minimalistyczne — fronty ramiakowe 7 mm',
     subtitle: 'Galeria realizacji z najwęższą ramką 7 mm',
     intro:
       '19 zdjęć z realizacji w wariancie ramki 7 mm — najwęższej w naszej ofercie. Minimalistyczna linia, idealna do kuchni nowoczesnych i skandynawskich.',

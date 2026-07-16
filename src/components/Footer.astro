@@ -1,16 +1,16 @@
 ---
 const currentYear = new Date().getFullYear();
 
-const seoKeywords = [
-  'fronty ramiakowe Toruń',
-  'fronty laminowane Toruń',
-  'fronty kuchenne na wymiar',
-  'fronty do IKEA',
-  'fronty ramiakowe z płyty',
-  'MDF lakierowany alternatywa',
-  'płyty laminowane Toruń',
-  'wymiana frontów kuchennych',
-  'fronty meblowe kujawsko-pomorskie',  
+const seoKeywords: { label: string; href?: string }[] = [
+  { label: 'fronty ramiakowe Toruń', href: '/oferta/' },
+  { label: 'fronty laminowane Toruń', href: '/oferta/fronty-laminowane/' },
+  { label: 'fronty kuchenne na wymiar', href: '/oferta/fronty-laminowane/' },
+  { label: 'fronty do IKEA', href: '/#ikea' },
+  { label: 'fronty ramiakowe z płyty', href: '/oferta/' },
+  { label: 'MDF lakierowany alternatywa', href: '/fronty-laminowane-czy-lakierowane/' },
+  { label: 'płyty laminowane Toruń' },
+  { label: 'wymiana frontów kuchennych', href: '/cennik/' },
+  { label: 'fronty meblowe kujawsko-pomorskie', href: '/realizacje/' },
 ];
 ---
 
@@ -44,7 +44,10 @@ const seoKeywords = [
             { label: 'Ramka 36 mm', href: '/oferta/ramka-36mm/' },
             { label: 'Ramka 60 mm', href: '/oferta/ramka-60mm/' },
             { label: 'Zabudowy specjalne', href: '/oferta/zabudowy/' },
+            { label: 'Fronty laminowane', href: '/oferta/fronty-laminowane/' },
+            { label: 'Laminat czy lakier?', href: '/fronty-laminowane-czy-lakierowane/' },
             { label: 'Fronty do IKEA', href: '/#ikea' },
+            { label: 'Cennik', href: '/cennik/' },
           ].map(link => (
             <a href={link.href} class="block text-sm font-body transition-colors hover:text-[var(--color-accent)]" style="color: var(--color-text-secondary);">
               {link.label}
@@ -61,6 +64,7 @@ const seoKeywords = [
             { label: 'O nas', href: '/#o-nas' },
             { label: 'Realizacje', href: '/#realizacje' },
             { label: 'Współpraca', href: '/#wspolpraca' },
+            { label: 'Warunki i gwarancja', href: '/warunki-gwarancji/' },
             { label: 'Kontakt', href: '/#kontakt' },
           ].map(link => (
             <a href={link.href} class="block text-sm font-body transition-colors hover:text-[var(--color-accent)]" style="color: var(--color-text-secondary);">
@@ -84,9 +88,13 @@ const seoKeywords = [
     <!-- SEO keywords (visible, subtle) -->
     <div class="mt-12 pt-8" style="border-top: 1px solid var(--color-border);">
       <div class="flex flex-wrap gap-2">
-        {seoKeywords.map(keyword => (
+        {seoKeywords.map(keyword => keyword.href ? (
+          <a href={keyword.href} class="text-2xs font-body px-2.5 py-1 rounded-full transition-colors hover:text-[var(--color-accent)]" style="background-color: var(--color-bg-tertiary); color: var(--color-text-muted); border: 1px solid var(--color-border); text-decoration: none;">
+            {keyword.label}
+          </a>
+        ) : (
           <span class="text-2xs font-body px-2.5 py-1 rounded-full" style="background-color: var(--color-bg-tertiary); color: var(--color-text-muted); border: 1px solid var(--color-border);">
-            {keyword}
+            {keyword.label}
           </span>
         ))}
       </div>

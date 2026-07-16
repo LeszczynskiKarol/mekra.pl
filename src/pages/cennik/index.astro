@@ -1,0 +1,305 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+
+// Pozycje cennika — źródło: cennik Mekra (fronty ramiakowe)
+const mainOffer = {
+  name: 'Fronty ramiakowe',
+  sizes: '7 / 18 / 36 / 60 mm',
+  price: 'od 350 zł',
+  unit: 'm² netto',
+  note: 'Cena zależna od wybranego dekoru — każde zamówienie wyceniamy indywidualnie.',
+};
+
+const addons = [
+  {
+    name: 'Front ze szkłem (mały)',
+    price: '+190 zł',
+    unit: 'netto / front',
+    description: 'Front ramiakowy z wpuszczonym szkłem w rozmiarze szafek kuchennych.',
+    icon: 'glass',
+  },
+  {
+    name: 'Front z lustrem (mały)',
+    price: '+250 zł',
+    unit: 'netto / front',
+    description: 'Front ramiakowy z wpuszczonym lustrem w rozmiarze szafek kuchennych.',
+    icon: 'mirror',
+  },
+  {
+    name: 'Front ze szkłem (duży)',
+    price: '+300 zł',
+    unit: 'netto / front',
+    description: 'Front ramiakowy z wpuszczonym szkłem w rozmiarze frontów szaf.',
+    icon: 'glass',
+  },
+  {
+    name: 'Front z lustrem (duży)',
+    price: '+400 zł',
+    unit: 'netto / front',
+    description: 'Front ramiakowy z wpuszczonym lustrem w rozmiarze frontów szaf.',
+    icon: 'mirror',
+  },
+  {
+    name: 'Zacinanie na 45°',
+    price: '+60 zł',
+    unit: 'netto / front',
+    description: 'Kwotę doliczamy do ceny pojedynczego frontu zacinanego pod kątem.',
+    icon: 'angle',
+  },
+  {
+    name: 'Zamówienie poniżej 3 m²',
+    price: '+30%',
+    unit: 'do kwoty frontów',
+    description: 'Dopłata do zamówienia poniżej minimum logistycznego (3 m²).',
+    icon: 'minimum',
+  },
+];
+
+const infoItems = [
+  {
+    title: 'Klej PUR w standardzie',
+    description: 'Wszystkie fronty oklejamy wilgocioodpornym klejem PUR — bez dopłat.',
+  },
+  {
+    title: 'Czas realizacji 6–8 tygodni',
+    description: 'Tyle standardowo czeka się na zamówienie od potwierdzenia specyfikacji.',
+  },
+  {
+    title: 'Dostawa pod Twój adres',
+    description: 'Fronty wysyłamy kurierem. Koszt dostawy szacujemy po złożeniu zamówienia.',
+  },
+  {
+    title: 'Transport dedykowany dla dużych gabarytów',
+    description: 'Fronty z lustrem lub szkłem o dużym gabarycie dostarczamy transportem dedykowanym, nie przesyłką kurierską.',
+  },
+  {
+    title: 'Dowolna płyta z rynku',
+    description: 'Wykonamy fronty z każdej płyty laminowanej dostępnej na rynku — laminaty, folie PPV i akryle w połysku.',
+  },
+  {
+    title: 'Sprawdzeni producenci płyt',
+    description: 'Pracujemy na płytach Egger, Kronospan, Swiss Krono i Forner.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'OfferCatalog',
+  name: 'Cennik frontów ramiakowych Mekra',
+  url: 'https://www.mekra.pl/cennik/',
+  itemListElement: [
+    {
+      '@type': 'Offer',
+      position: 1,
+      name: 'Fronty ramiakowe 7/18/36/60 mm',
+      priceSpecification: {
+        '@type': 'UnitPriceSpecification',
+        price: 350,
+        priceCurrency: 'PLN',
+        unitText: 'm²',
+        valueAddedTaxIncluded: false,
+      },
+      description: 'Fronty ramiakowe z płyty laminowanej — cena od 350 zł/m² netto, zależna od dekoru.',
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Cennik frontów ramiakowych — fronty od 350 zł/m²"
+  description="Cennik frontów ramiakowych Mekra: fronty 7/18/36/60 mm od 350 zł/m² netto, fronty ze szkłem i lustrem, zacinanie na 45°. Klej PUR w standardzie, dostawa w całej Polsce."
+  canonicalUrl="https://www.mekra.pl/cennik/"
+>
+  <Navbar />
+
+  <main class="pt-20 md:pt-24" style="background-color: var(--color-bg);">
+    <!-- Hero -->
+    <section class="section-padding pt-12 pb-12 md:pt-20 md:pb-16 relative overflow-hidden">
+      <div class="absolute top-20 -left-32 w-96 h-96 rounded-full opacity-20 dark:opacity-10 blur-3xl pointer-events-none" style="background: radial-gradient(circle, #ae9070, transparent 70%);"></div>
+      <div class="absolute -bottom-20 -right-32 w-96 h-96 rounded-full opacity-15 dark:opacity-10 blur-3xl pointer-events-none" style="background: radial-gradient(circle, #d4c5ae, transparent 70%);"></div>
+
+      <div class="max-w-7xl mx-auto relative">
+        <div class="max-w-3xl">
+          <span class="label-tag">Cennik</span>
+          <h1 class="mt-6 font-display text-4xl sm:text-5xl md:text-6xl tracking-tight leading-[1.05]" style="color: var(--color-text);">
+            Ile kosztują<br />
+            <span class="text-gradient">fronty ramiakowe?</span>
+          </h1>
+          <p class="mt-6 text-base md:text-lg leading-relaxed font-body" style="color: var(--color-text-secondary);">
+            Solidna konstrukcja frontów ramiakowych z&nbsp;trwałej płyty laminowanej — odporna
+            na wilgoć i&nbsp;uszkodzenia, łatwa w&nbsp;pielęgnacji. Wykonamy je z&nbsp;każdej płyty
+            laminowanej dostępnej na rynku: laminaty, folie PPV i&nbsp;akryle w&nbsp;połysku.
+          </p>
+
+          <div class="mt-8">
+            <a
+              href="/docs/cennik-mekra.pdf"
+              download
+              class="inline-flex items-center gap-2.5 px-5 py-3 rounded-xl text-sm font-heading font-semibold transition-all duration-300 hover:scale-[1.02]"
+              style="border: 1.5px solid var(--color-border); color: var(--color-text); background-color: var(--color-card-bg);"
+            >
+              <svg class="w-5 h-5" style="color: var(--color-accent);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v2.625a3.375 3.375 0 01-3.375 3.375h-8.25A3.375 3.375 0 014.5 16.875V14.25M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5" />
+              </svg>
+              Pobierz cennik PDF
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main price card -->
+    <section class="section-padding pb-12">
+      <div class="max-w-7xl mx-auto">
+        <div class="animate-on-scroll card-base rounded-3xl overflow-hidden">
+          <div class="grid lg:grid-cols-[1fr_auto] items-center gap-6 p-8 md:p-12">
+            <div>
+              <span class="label-tag">Pozycja podstawowa</span>
+              <h2 class="mt-5 font-display text-3xl sm:text-4xl tracking-tight" style="color: var(--color-text);">
+                {mainOffer.name}
+              </h2>
+              <div class="mt-3 flex flex-wrap gap-2">
+                {mainOffer.sizes.split(' / ').map((s) => (
+                  <span class="inline-flex items-baseline gap-0.5 px-3 py-1.5 rounded-full text-sm font-heading font-semibold" style="background-color: var(--color-bg-tertiary); color: var(--color-accent); border: 1px solid var(--color-border);">
+                    {s.replace(' mm', '')}<span class="text-[10px] uppercase tracking-wider opacity-80">mm</span>
+                  </span>
+                ))}
+              </div>
+              <p class="mt-4 text-base font-body leading-relaxed max-w-xl" style="color: var(--color-text-secondary);">
+                {mainOffer.note}
+              </p>
+            </div>
+            <div class="lg:text-right lg:pl-10" style="border-left: none;">
+              <div class="flex lg:justify-end items-baseline gap-2">
+                <span class="font-display text-5xl md:text-6xl" style="color: var(--color-accent);">{mainOffer.price}</span>
+              </div>
+              <span class="block mt-2 font-heading text-sm font-medium tracking-wider uppercase" style="color: var(--color-text-muted);">
+                / {mainOffer.unit}
+              </span>
+              <a href="/#kontakt" class="btn-primary mt-6">Zamów wycenę</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Addons grid -->
+    <section class="section-padding py-12 md:py-16" style="background-color: var(--color-bg-secondary);">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <span class="label-tag">Opcje dodatkowe</span>
+          <h2 class="mt-6 font-display text-3xl sm:text-4xl tracking-tight" style="color: var(--color-text);">
+            Szkło, lustro i&nbsp;dopłaty
+          </h2>
+          <p class="mt-4 text-base font-body leading-relaxed" style="color: var(--color-text-secondary);">
+            Kwoty doliczane do ceny pojedynczego frontu lub całego zamówienia.
+            Wszystkie ceny są cenami netto.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {addons.map((a, i) => (
+            <div class="animate-on-scroll card-base rounded-2xl p-6 md:p-8 flex flex-col" style={`transition-delay: ${i * 0.06}s;`}>
+              <div class="w-11 h-11 rounded-xl flex items-center justify-center mb-5" style="background-color: var(--color-bg-tertiary); color: var(--color-accent);">
+                {a.icon === 'glass' && (
+                  <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75h16.5v16.5H3.75z M3.75 9h16.5 M9 3.75v16.5" />
+                  </svg>
+                )}
+                {a.icon === 'mirror' && (
+                  <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18z M8.25 9.75l3-3 M8.25 14.25l6-6" />
+                  </svg>
+                )}
+                {a.icon === 'angle' && (
+                  <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15 M4.5 19.5h15 M9.75 19.5a5.25 5.25 0 00-5.25-5.25" />
+                  </svg>
+                )}
+                {a.icon === 'minimum' && (
+                  <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+                  </svg>
+                )}
+              </div>
+              <h3 class="font-heading text-lg font-semibold" style="color: var(--color-text);">{a.name}</h3>
+              <p class="mt-2 text-sm font-body leading-relaxed flex-1" style="color: var(--color-text-secondary);">
+                {a.description}
+              </p>
+              <div class="mt-5 pt-5 flex items-baseline gap-2" style="border-top: 1px solid var(--color-border);">
+                <span class="font-display text-3xl" style="color: var(--color-accent);">{a.price}</span>
+                <span class="text-xs font-heading font-medium tracking-wider uppercase" style="color: var(--color-text-muted);">{a.unit}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Good to know -->
+    <section class="section-padding py-12 md:py-20">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-10 lg:gap-16 items-start">
+          <div class="lg:sticky lg:top-28">
+            <span class="label-tag">Warto wiedzieć</span>
+            <h2 class="mt-6 font-display text-3xl sm:text-4xl tracking-tight" style="color: var(--color-text);">
+              Co jest wliczone<br />w&nbsp;cenę?
+            </h2>
+            <p class="mt-4 text-base font-body leading-relaxed" style="color: var(--color-text-secondary);">
+              Kilka rzeczy, które u&nbsp;nas dostajesz w&nbsp;standardzie — i&nbsp;kilka,
+              o&nbsp;których warto pamiętać przy planowaniu zamówienia.
+            </p>
+            <div class="mt-8 flex flex-wrap gap-3">
+              <a href="/#kontakt" class="btn-primary">Zamów wycenę</a>
+              <a href="/oferta/" class="btn-secondary">Zobacz ofertę</a>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            {infoItems.map((item, i) => (
+              <div class="animate-on-scroll card-base rounded-2xl p-6 flex gap-4" style={`transition-delay: ${i * 0.05}s;`}>
+                <div class="w-9 h-9 rounded-lg flex-shrink-0 flex items-center justify-center" style="background-color: var(--color-bg-tertiary); color: var(--color-accent);">
+                  <svg class="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-heading text-base font-semibold" style="color: var(--color-text);">{item.title}</h3>
+                  <p class="mt-1 text-sm font-body leading-relaxed" style="color: var(--color-text-secondary);">{item.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section-padding py-16 md:py-24" style="background-color: var(--color-bg-secondary);">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="font-display text-3xl md:text-4xl tracking-tight" style="color: var(--color-text);">
+          Chcesz znać dokładną cenę?
+        </h2>
+        <p class="mt-4 text-base md:text-lg font-body leading-relaxed" style="color: var(--color-text-secondary);">
+          Cena frontów zależy od wybranego dekoru, więc każdy projekt wyceniamy
+          indywidualnie. Wyślij wymiary i&nbsp;wybrany dekor — odpowiemy z&nbsp;konkretną wyceną.
+        </p>
+        <div class="mt-8 flex flex-wrap justify-center gap-3">
+          <a href="/#kontakt" class="btn-primary">Zamów wycenę</a>
+          <a href="tel:+48792456094" class="btn-secondary">Zadzwoń: 792 456 094</a>
+          <a href="/docs/cennik-mekra.pdf" download class="btn-secondary">Pobierz cennik PDF</a>
+        </div>
+        <p class="mt-6 text-xs font-body" style="color: var(--color-text-muted);">
+          Podane ceny są cenami netto i&nbsp;mają charakter orientacyjny — nie stanowią oferty handlowej
+          w&nbsp;rozumieniu Kodeksu cywilnego.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</BaseLayout>
