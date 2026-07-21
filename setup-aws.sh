@@ -85,8 +85,8 @@ echo "    CORS OK"
 
 aws s3api put-bucket-lifecycle-configuration \
   --bucket "$BUCKET_NAME" \
-  --lifecycle-configuration "{\"Rules\":[{\"ID\":\"DeleteOldAttachments\",\"Status\":\"Enabled\",\"Filter\":{\"Prefix\":\"uploads/\"},\"Expiration\":{\"Days\":30}}]}"
-echo "    Lifecycle: auto-delete 30 dni"
+  --lifecycle-configuration "{\"Rules\":[{\"ID\":\"DeleteOldAttachments\",\"Status\":\"Enabled\",\"Filter\":{\"Prefix\":\"uploads/\"},\"Expiration\":{\"Days\":365}}]}"
+echo "    Lifecycle: auto-delete 365 dni"
 
 aws s3api put-public-access-block \
   --bucket "$BUCKET_NAME" \
@@ -174,8 +174,8 @@ aws lambda create-function \
   --role "$ROLE_ARN" \
   --handler "index.handler" \
   --zip-file "$CONTACT_ZIP" \
-  --timeout 15 \
-  --memory-size 128 \
+  --timeout 60 \
+  --memory-size 1024 \
   --environment "Variables={BUCKET_NAME=${BUCKET_NAME}}" \
   --region "$REGION" \
   2>/dev/null || {
@@ -188,6 +188,8 @@ aws lambda create-function \
     aws lambda update-function-configuration \
       --function-name "$CONTACT_FUNCTION" \
       --environment "Variables={BUCKET_NAME=${BUCKET_NAME}}" \
+      --timeout 60 \
+      --memory-size 1024 \
       --region "$REGION" > /dev/null
   }
 echo "    OK"

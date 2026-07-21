@@ -2,9 +2,10 @@
 // Lambda: mekra-contact
 // Przetwarza formularz kontaktowy i wysyła email przez SES
 
-import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
+import { SESClient, SendRawEmailCommand } from "@aws-sdk/client-ses";
 import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { randomUUID } from "node:crypto";
 
 const REGION = process.env.AWS_REGION || "eu-central-1";
 const SES_REGION = "us-east-1";
@@ -15,6 +16,100 @@ const BUCKET = process.env.BUCKET_NAME || "mekra-attachments";
 const TO_EMAIL = "kontakt@mekra.pl";
 const FROM_EMAIL = "formularz@mekra.pl";
 const FROM_NAME = "Mekra.pl";
+
+// Załączniki wchodzą do maila jako realne pliki MIME, więc zostają w skrzynce
+// na zawsze i nie zależą od presigned URL (te wygasają razem z sesją roli Lambdy).
+// Powyżej progu SES odrzuciłby wiadomość (limit 40 MB na surowy mail, a base64
+// puchnie o ~37%) — wtedy lecą same linki, jak dawniej.
+const MAX_INLINE_TOTAL = 20 * 1024 * 1024;
+
+const MIME_TYPES = {
+  pdf: "application/pdf",
+  jpg: "image/jpeg",
+  jpeg: "image/jpeg",
+  png: "image/png",
+  gif: "image/gif",
+  webp: "image/webp",
+  dwg: "image/vnd.dwg",
+  dxf: "image/vnd.dxf",
+  doc: "application/msword",
+  docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  xls: "application/vnd.ms-excel",
+  xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  zip: "application/zip",
+  txt: "text/plain",
+};
+
+function mimeFor(filename) {
+  const ext = String(filename || "").split(".").pop().toLowerCase();
+  return MIME_TYPES[ext] || "application/octet-stream";
+}
+
+// Nazwa pliku pochodzi od użytkownika i trafia do nagłówków MIME — bez tego
+// CR/LF w nazwie pozwoliłby wstrzyknąć własne nagłówki do wiadomości.
+function sanitizeFilename(name) {
+  return String(name || "zalacznik")
+    .replace(/[\r\n"\\]/g, "")
+    .slice(0, 200)
+    .trim() || "zalacznik";
+}
+
+// RFC 2047 — nagłówki muszą być ASCII, a polskie znaki w nazwach plików
+// i w temacie są tu normą.
+function encodeHeader(str) {
+  const s = String(str || "");
+  if (/^[\x20-\x7E]*$/.test(s)) return s;
+  return `=?UTF-8?B?${Buffer.from(s, "utf8").toString("base64")}?=`;
+}
+
+function base64Lines(buffer) {
+  return buffer.toString("base64").replace(/(.{76})/g, "$1\r\n");
+}
+
+async function fetchAttachment(key) {
+  const res = await s3.send(
+    new GetObjectCommand({ Bucket: BUCKET, Key: key }),
+  );
+  return Buffer.from(await res.Body.transformToByteArray());
+}
+
+function buildRawEmail({ subject, replyTo, htmlBody, files }) {
+  const boundary = `----=_Mekra_${randomUUID()}`;
+  const headers = [
+    `From: ${encodeHeader(FROM_NAME)} <${FROM_EMAIL}>`,
+    `To: ${TO_EMAIL}`,
+    `Reply-To: ${replyTo}`,
+    `Subject: ${encodeHeader(subject)}`,
+    "MIME-Version: 1.0",
+    `Content-Type: multipart/mixed; boundary="${boundary}"`,
+  ].join("\r\n");
+
+  const parts = [
+    [
+      `--${boundary}`,
+      'Content-Type: text/html; charset="UTF-8"',
+      "Content-Transfer-Encoding: base64",
+      "",
+      base64Lines(Buffer.from(htmlBody, "utf8")),
+    ].join("\r\n"),
+  ];
+
+  for (const file of files) {
+    const name = sanitizeFilename(file.name);
+    parts.push(
+      [
+        `--${boundary}`,
+        `Content-Type: ${mimeFor(name)}; name="${encodeHeader(name)}"`,
+        "Content-Transfer-Encoding: base64",
+        `Content-Disposition: attachment; filename="${encodeHeader(name)}"`,
+        "",
+        base64Lines(file.body),
+      ].join("\r\n"),
+    );
+  }
+
+  return `${headers}\r\n\r\n${parts.join("\r\n")}\r\n--${boundary}--\r\n`;
+}
 
 const ALLOWED_ORIGINS = [
   "https://www.mekra.pl",
@@ -85,35 +180,63 @@ export const handler = async (event) => {
       };
     }
 
-    // Generuj linki do pobrania załączników (ważne 7 dni)
+    // Załączniki: pliki dołączamy do maila na stałe, a link zostaje pod spodem
+    // jako zapas (działa tylko chwilę, ale nic nie kosztuje i ratuje sytuację,
+    // gdyby plik nie zmieścił się w mailu).
     let attachmentsHtml = "";
+    const inlineFiles = [];
     if (attachments && attachments.length > 0) {
-      const attachmentLinks = [];
+      const attachmentRows = [];
+      let inlineTotal = 0;
+
       for (const att of attachments) {
+        let attached = false;
+        const size = att.size || 0;
+
+        if (inlineTotal + size <= MAX_INLINE_TOTAL) {
+          try {
+            const body = await fetchAttachment(att.key);
+            inlineFiles.push({ name: att.name, body });
+            inlineTotal += body.length;
+            attached = true;
+          } catch (err) {
+            console.error("Nie udało się pobrać załącznika:", att.key, err);
+          }
+        } else {
+          console.warn("Załącznik pominięty (limit rozmiaru maila):", att.key, size);
+        }
+
+        let linkHtml = "";
         try {
-          const command = new GetObjectCommand({
-            Bucket: BUCKET,
-            Key: att.key,
-          });
-          const downloadUrl = await getSignedUrl(s3, command, {
-            expiresIn: 7 * 24 * 60 * 60,
-          });
-          attachmentLinks.push(
-            `<li style="margin-bottom:4px"><a href="${downloadUrl}" style="color:#866751;text-decoration:underline">${escapeHtml(att.name)}</a> <span style="color:#aaa;font-size:12px">(${formatSize(att.size || 0)})</span></li>`,
+          const downloadUrl = await getSignedUrl(
+            s3,
+            new GetObjectCommand({ Bucket: BUCKET, Key: att.key }),
+            { expiresIn: 7 * 24 * 60 * 60 },
           );
+          linkHtml = ` <a href="${downloadUrl}" style="color:#866751;text-decoration:underline;font-size:12px">pobierz z serwera</a>`;
         } catch (err) {
           console.error("Error generating download URL for:", att.key, err);
-          attachmentLinks.push(
-            `<li>${escapeHtml(att.name)} — <em style="color:#999">błąd generowania linku</em></li>`,
-          );
         }
+
+        attachmentRows.push(
+          `<li style="margin-bottom:4px">${
+            attached ? "📎 " : ""
+          }${escapeHtml(att.name)} <span style="color:#aaa;font-size:12px">(${formatSize(size)})</span>${
+            attached ? "" : " — <em style='color:#999;font-size:12px'>za duży, tylko link</em>"
+          }${linkHtml}</li>`,
+        );
       }
+
+      const note = inlineFiles.length
+        ? "Pliki oznaczone 📎 są dołączone do tej wiadomości — zostają w skrzynce na stałe. Linki działają krótko i służą tylko awaryjnie."
+        : "Linki działają krótko — pliki są przechowywane na serwerze przez rok.";
+
       attachmentsHtml = `
         <tr>
           <td style="padding:12px 20px;font-family:'Georgia',serif;font-weight:600;color:#1a1a1a;vertical-align:top;width:140px;border-bottom:1px solid #e8e3db">Załączniki:</td>
           <td style="padding:12px 20px;font-family:'Georgia',serif;color:#555;border-bottom:1px solid #e8e3db">
-            <ul style="margin:0;padding-left:20px;list-style:none">${attachmentLinks.join("")}</ul>
-            <p style="font-size:11px;color:#aaa;margin-top:6px">Linki ważne 7 dni</p>
+            <ul style="margin:0;padding-left:20px;list-style:none">${attachmentRows.join("")}</ul>
+            <p style="font-size:11px;color:#aaa;margin-top:6px">${note}</p>
           </td>
         </tr>`;
     }
@@ -205,23 +328,27 @@ export const handler = async (event) => {
 </body>
 </html>`;
 
-    const command = new SendEmailCommand({
+    const rawMessage = buildRawEmail({
+      subject: `Nowe zapytanie: ${name}${productType ? " — " + productType : ""}`,
+      replyTo: email,
+      htmlBody,
+      files: inlineFiles,
+    });
+
+    const command = new SendRawEmailCommand({
       Source: `${FROM_NAME} <${FROM_EMAIL}>`,
-      Destination: { ToAddresses: [TO_EMAIL] },
-      ReplyToAddresses: [email],
-      Message: {
-        Subject: {
-          Data: `Nowe zapytanie: ${name}${productType ? " — " + productType : ""}`,
-          Charset: "UTF-8",
-        },
-        Body: {
-          Html: { Data: htmlBody, Charset: "UTF-8" },
-        },
-      },
+      Destinations: [TO_EMAIL],
+      RawMessage: { Data: Buffer.from(rawMessage, "utf8") },
     });
 
     const sesResult = await ses.send(command);
-    console.log("SES OK MessageId:", sesResult.MessageId, "to:", TO_EMAIL, "replyTo:", email);
+    console.log(
+      "SES OK MessageId:", sesResult.MessageId,
+      "to:", TO_EMAIL,
+      "replyTo:", email,
+      "attached:", inlineFiles.length,
+      "rawBytes:", Buffer.byteLength(rawMessage),
+    );
 
     return {
       statusCode: 200,
