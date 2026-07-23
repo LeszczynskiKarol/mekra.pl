@@ -66,6 +66,37 @@ function base64Lines(buffer) {
   return buffer.toString("base64").replace(/(.{76})/g, "$1\r\n");
 }
 
+// Treść (tekst/HTML) kodujemy quoted-printable, nie base64 — filtry antyspamowe
+// (reguły typu MIME_BASE64_TEXT) traktują tekst w base64 jako maskowanie treści.
+// Base64 zostaje wyłącznie dla binarnych załączników.
+function qpEncode(str) {
+  const bytes = Buffer.from(String(str).replace(/\r?\n/g, "\r\n"), "utf8");
+  let out = "", line = "";
+  const push = (tok) => { if (line.length + tok.length > 75) { out += line + "=\r\n"; line = ""; } line += tok; };
+  for (let i = 0; i < bytes.length; i++) {
+    const b = bytes[i];
+    if (b === 13 && bytes[i + 1] === 10) { // koniec linii; spacja/tab na końcu musi być zakodowana
+      if (/[ \t]$/.test(line)) { const c = line.slice(-1); line = line.slice(0, -1); push(c === " " ? "=20" : "=09"); }
+      out += line + "\r\n"; line = ""; i++;
+    } else if (b === 61) push("=3D");
+    else if ((b >= 33 && b <= 126) || b === 32 || b === 9) push(String.fromCharCode(b));
+    else push("=" + b.toString(16).toUpperCase().padStart(2, "0"));
+  }
+  return out + line;
+}
+
+// Mail wyłącznie w HTML podpada pod regułę MIME_HTML_ONLY — dokładamy równoległą
+// wersję tekstową w multipart/alternative.
+function htmlToText(html) {
+  return String(html || "")
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<\/(p|div|tr|h\d)>/gi, "\n")
+    .replace(/<\/td>/gi, "\t")
+    .replace(/<[^>]+>/g, "")
+    .replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"')
+    .replace(/[ \t]+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
+}
+
 async function fetchAttachment(key) {
   const res = await s3.send(
     new GetObjectCommand({ Bucket: BUCKET, Key: key }),
@@ -73,24 +104,48 @@ async function fetchAttachment(key) {
   return Buffer.from(await res.Body.transformToByteArray());
 }
 
+// RFC 5322 wymaga Date, a brak Date/Message-ID to mocny sygnał spamu dla filtrów.
+// SendEmail dodawał te nagłówki sam — przy SendRawEmail musimy je złożyć my.
+function rfc2822Date(d) {
+  const D = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const M = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const p = (n) => String(n).padStart(2, "0");
+  return `${D[d.getUTCDay()]}, ${p(d.getUTCDate())} ${M[d.getUTCMonth()]} ${d.getUTCFullYear()} ${p(d.getUTCHours())}:${p(d.getUTCMinutes())}:${p(d.getUTCSeconds())} +0000`;
+}
+
 function buildRawEmail({ subject, replyTo, htmlBody, files }) {
   const boundary = `----=_Mekra_${randomUUID()}`;
+  // Domena Message-ID musi zgadzać się z domeną From (DKIM/DMARC alignment).
+  const fromDomain = FROM_EMAIL.split("@")[1] || "mekra.pl";
   const headers = [
     `From: ${encodeHeader(FROM_NAME)} <${FROM_EMAIL}>`,
     `To: ${TO_EMAIL}`,
     `Reply-To: ${replyTo}`,
     `Subject: ${encodeHeader(subject)}`,
+    `Date: ${rfc2822Date(new Date())}`,
+    `Message-ID: <${randomUUID()}@${fromDomain}>`,
     "MIME-Version: 1.0",
     `Content-Type: multipart/mixed; boundary="${boundary}"`,
   ].join("\r\n");
 
+  // multipart/alternative: ta sama treść jako tekst i jako HTML, oba w QP.
+  const altBoundary = `----=_Alt_${randomUUID()}`;
   const parts = [
     [
       `--${boundary}`,
-      'Content-Type: text/html; charset="UTF-8"',
-      "Content-Transfer-Encoding: base64",
+      `Content-Type: multipart/alternative; boundary="${altBoundary}"`,
       "",
-      base64Lines(Buffer.from(htmlBody, "utf8")),
+      `--${altBoundary}`,
+      'Content-Type: text/plain; charset="UTF-8"',
+      "Content-Transfer-Encoding: quoted-printable",
+      "",
+      qpEncode(htmlToText(htmlBody)),
+      `--${altBoundary}`,
+      'Content-Type: text/html; charset="UTF-8"',
+      "Content-Transfer-Encoding: quoted-printable",
+      "",
+      qpEncode(htmlBody),
+      `--${altBoundary}--`,
     ].join("\r\n"),
   ];
 
