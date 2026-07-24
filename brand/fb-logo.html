@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@400;500;600;700&display=block" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1080px; height: 1080px; overflow: hidden; }
+  body {
+    position: relative;
+    background:
+      radial-gradient(720px 720px at 50% 26%, rgba(255,255,255,0.14), rgba(255,255,255,0) 62%),
+      linear-gradient(148deg, #93725a 0%, #866751 46%, #6d5445 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* subtelny ring — trzyma kompozycję w kadrze kołowym FB */
+  .ring {
+    position: absolute;
+    inset: 74px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.16);
+  }
+  .ring-outer {
+    position: absolute;
+    inset: 58px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .stack {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transform: translateY(-14px);
+  }
+  .mark {
+    width: 410px;
+    height: 410px;
+    color: #ffffff;
+    filter: drop-shadow(0 10px 40px rgba(47,36,30,0.28));
+  }
+  .divider {
+    width: 150px;
+    height: 2px;
+    background: rgba(255,255,255,0.42);
+    margin: 44px 0 46px;
+  }
+  .name {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 74px;
+    letter-spacing: 0.24em;
+    text-indent: 0.24em; /* wyrównanie optyczne letter-spacingu */
+    color: #ffffff;
+  }
+  .tagline {
+    margin-top: 30px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    font-size: 27px;
+    letter-spacing: 0.42em;
+    text-indent: 0.42em;
+    color: rgba(255,255,255,0.72);
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+  <div class="ring-outer"></div>
+  <div class="ring"></div>
+  <div class="stack">
+    <svg class="mark" viewBox="0 0 100 100" fill="none">
+      <rect x="20" y="20" width="60" height="60" stroke="currentColor" stroke-width="2.6"/>
+      <path d="M42 12H88V56" stroke="currentColor" stroke-width="2.6"/>
+      <path d="M12 44V88H58" stroke="currentColor" stroke-width="2.6"/>
+      <path d="M36 68V33L50 64L64 33V68" stroke="currentColor" stroke-width="4"/>
+    </svg>
+    <div class="divider"></div>
+    <div class="name">MEKRA.PL</div>
+    <div class="tagline">Fronty ramiakowe</div>
+  </div>
+</body>
+</html>

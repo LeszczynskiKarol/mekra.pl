@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=block" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #fafaf8; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; color: #1f2937; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  .sheet {
+    width: 210mm; height: 297mm;
+    position: relative;
+    padding: 18mm 19mm 22mm;
+    page-break-after: always;
+    overflow: hidden;
+    background: #fafaf8;
+  }
+  .sheet:last-child { page-break-after: auto; }
+
+  /* ── wspólne ─────────────────────────────────────────────── */
+  .label-tag {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: #eae8e2;
+    border: 1px solid #e5e5e0;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #866751;
+  }
+  .serif { font-family: 'DM Serif Display', Georgia, serif; font-weight: 400; }
+  .accent { color: #866751; }
+  .gradient-text {
+    background: linear-gradient(90deg, #866751, #ae9070 60%, #a17e60);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .footer {
+    position: absolute;
+    left: 19mm; right: 19mm; bottom: 10mm;
+    padding-top: 12px;
+    border-top: 1px solid #e5e5e0;
+    display: flex;
+    justify-content: space-between;
+    font-size: 8.5px;
+    color: #9ca3af;
+  }
+
+  /* ── nagłówek strony 1 ───────────────────────────────────── */
+  .header { display: flex; align-items: center; justify-content: space-between; }
+  .logo-row { display: flex; align-items: center; gap: 11px; }
+  .logo-mark {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: linear-gradient(148deg, #93725a, #6d5445);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .logo-mark svg { width: 26px; height: 26px; color: #fff; }
+  .logo-name { font-family: 'DM Serif Display', serif; font-size: 21px; line-height: 1; color: #1f2937; }
+  .logo-tag { margin-top: 4px; font-size: 8px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: #9ca3af; }
+
+  .header-rule { margin-top: 18px; border: none; border-top: 1px solid #e5e5e0; }
+
+  h1 { margin-top: 22px; font-size: 37px; line-height: 1.04; letter-spacing: -0.01em; }
+  .intro { margin-top: 12px; max-width: 150mm; font-size: 11px; line-height: 1.6; color: #6b7280; }
+
+  /* ── karta główna ────────────────────────────────────────── */
+  .main-card {
+    margin-top: 18px;
+    background: #ffffff;
+    border: 1px solid #e5e5e0;
+    border-radius: 20px;
+    padding: 20px 26px 18px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .main-card-top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .main-name { margin-top: 11px; font-size: 24px; }
+  .main-price { text-align: right; }
+  .main-price .val { font-size: 36px; line-height: 1; }
+  .main-price .unit { display: block; margin-top: 7px; font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: #9ca3af; }
+  .chips { margin-top: 10px; display: flex; gap: 7px; }
+  .chip {
+    padding: 5px 13px;
+    border-radius: 999px;
+    background: #eae8e2;
+    border: 1px solid #e5e5e0;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 10.5px;
+    color: #866751;
+  }
+  .main-note { margin-top: 10px; font-size: 10px; line-height: 1.55; color: #6b7280; max-width: 105mm; }
+
+  /* ── sekcja dopłat ───────────────────────────────────────── */
+  .addons-head { margin-top: 18px; }
+  .addons-head h2 { margin-top: 8px; font-size: 20px; }
+  .rows { margin-top: 4px; }
+  .row {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 24px;
+    padding: 8px 0;
+    border-bottom: 1px solid #eceae4;
+  }
+  .row:last-child { border-bottom: none; }
+  .row-title { font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 12px; color: #1f2937; }
+  .row-desc { margin-top: 3px; font-size: 10px; line-height: 1.5; color: #6b7280; max-width: 118mm; }
+  .row-price { text-align: right; white-space: nowrap; }
+  .row-price .val { font-family: 'DM Serif Display', serif; font-size: 19px; color: #866751; }
+  .row-price .val .plus { color: #ae9070; }
+  .row-price .unit { display: block; margin-top: 2px; font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 7.5px; letter-spacing: 0.12em; text-transform: uppercase; color: #9ca3af; }
+
+  .disclaimer { margin-top: 12px; font-size: 8.5px; font-style: italic; color: #9ca3af; line-height: 1.5; }
+
+  /* ── strona 2 ────────────────────────────────────────────── */
+  .p2 h2 { margin-top: 14px; font-size: 30px; }
+  .grid {
+    margin-top: 22px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .info-card {
+    background: #ffffff;
+    border: 1px solid #e5e5e0;
+    border-radius: 14px;
+    padding: 16px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .check {
+    width: 26px; height: 26px; flex-shrink: 0;
+    border-radius: 8px;
+    background: #eae8e2;
+    color: #866751;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+  }
+  .info-card h3 { font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 11.5px; color: #1f2937; }
+  .info-card p { margin-top: 3px; font-size: 9.5px; line-height: 1.55; color: #6b7280; }
+
+  .brands {
+    margin-top: 22px;
+    background: #f5f4f0;
+    border: 1px solid #e5e5e0;
+    border-radius: 14px;
+    padding: 18px 22px;
+  }
+  .brands h3 { font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 11.5px; color: #1f2937; }
+  .brands .chips { margin-top: 11px; }
+  .brands .chip { background: #eae8e2; color: #59463a; }
+
+  .cta {
+    margin-top: 26px;
+    background: #ffffff;
+    border: 1px solid #e5e5e0;
+    border-radius: 20px;
+    padding: 30px 34px 28px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .cta h2 { font-size: 25px; }
+  .cta p { margin: 12px auto 0; max-width: 118mm; font-size: 10.5px; line-height: 1.6; color: #6b7280; }
+  .cta-cols { margin-top: 20px; display: flex; justify-content: center; gap: 46px; }
+  .cta-col .k { font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 8px; letter-spacing: 0.16em; text-transform: uppercase; color: #9ca3af; }
+  .cta-col .v { margin-top: 5px; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 13.5px; color: #866751; }
+</style>
+</head>
+<body>
+
+  <!-- ═════════ STRONA 1 ═════════ -->
+  <div class="sheet">
+    <div class="header">
+      <div class="logo-row">
+        <div class="logo-mark">
+          <svg viewBox="0 0 100 100" fill="none">
+            <rect x="20" y="20" width="60" height="60" stroke="currentColor" stroke-width="4"/>
+            <path d="M42 12H88V56" stroke="currentColor" stroke-width="4"/>
+            <path d="M12 44V88H58" stroke="currentColor" stroke-width="4"/>
+            <path d="M36 68V33L50 64L64 33V68" stroke="currentColor" stroke-width="5.5"/>
+          </svg>
+        </div>
+        <div>
+          <div class="logo-name">Mekra.pl</div>
+          <div class="logo-tag">Fronty ramiakowe</div>
+        </div>
+      </div>
+      <span class="label-tag">Cennik</span>
+    </div>
+    <hr class="header-rule">
+
+    <h1 class="serif">Cennik frontów<br><span class="gradient-text">ramiakowych</span></h1>
+    <p class="intro">
+      Solidna konstrukcja frontów ramiakowych z&nbsp;trwałej płyty laminowanej — odporna na wilgoć
+      i&nbsp;uszkodzenia, łatwa w&nbsp;pielęgnacji. Wykonamy je z&nbsp;każdej płyty laminowanej dostępnej
+      na rynku: laminaty, folie PPV i&nbsp;akryle w&nbsp;połysku.
+    </p>
+
+    <div class="main-card">
+      <div class="main-card-top">
+        <div>
+          <span class="label-tag">Pozycja podstawowa</span>
+          <div class="main-name serif">Fronty ramiakowe</div>
+          <div class="chips">
+            <span class="chip">7 mm</span>
+            <span class="chip">18 mm</span>
+            <span class="chip">36 mm</span>
+            <span class="chip">60 mm</span>
+          </div>
+          <p class="main-note">Cena zależna od wybranego dekoru — każde zamówienie wyceniamy indywidualnie.</p>
+        </div>
+        <div class="main-price">
+          <div class="val serif accent">od 350 zł</div>
+          <span class="unit">/ m² netto</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="addons-head">
+      <span class="label-tag">Opcje dodatkowe i dopłaty</span>
+      <h2 class="serif">Szkło, lustro i&nbsp;usługi</h2>
+    </div>
+
+    <div class="rows">
+      <div class="row">
+        <div>
+          <div class="row-title">Front ramiakowy ze szkłem — mały</div>
+          <div class="row-desc">Front z wpuszczonym szkłem w rozmiarze szafek kuchennych.</div>
+        </div>
+        <div class="row-price"><span class="val"><span class="plus">+</span> 190 zł</span><span class="unit">netto / front</span></div>
+      </div>
+      <div class="row">
+        <div>
+          <div class="row-title">Front ramiakowy z lustrem — mały</div>
+          <div class="row-desc">Front z wpuszczonym lustrem w rozmiarze szafek kuchennych.</div>
+        </div>
+        <div class="row-price"><span class="val"><span class="plus">+</span> 250 zł</span><span class="unit">netto / front</span></div>
+      </div>
+      <div class="row">
+        <div>
+          <div class="row-title">Front ramiakowy ze szkłem — duży</div>
+          <div class="row-desc">Front z wpuszczonym szkłem w rozmiarze frontów szaf.</div>
+        </div>
+        <div class="row-price"><span class="val"><span class="plus">+</span> 300 zł</span><span class="unit">netto / front</span></div>
+      </div>
+      <div class="row">
+        <div>
+          <div class="row-title">Front ramiakowy z lustrem — duży</div>
+          <div class="row-desc">Front z wpuszczonym lustrem w rozmiarze frontów szaf.</div>
+        </div>
+        <div class="row-price"><span class="val"><span class="plus">+</span> 400 zł</span><span class="unit">netto / front</span></div>
+      </div>
+      <div class="row">
+        <div>
+          <div class="row-title">Zacinanie na 45°</div>
+          <div class="row-desc">Kwotę doliczamy do ceny pojedynczego frontu zacinanego pod kątem.</div>
+        </div>
+        <div class="row-price"><span class="val"><span class="plus">+</span> 60 zł</span><span class="unit">netto / front</span></div>
+      </div>
+      <div class="row">
+        <div>
+          <div class="row-title">Słój przechodzący — ciągłość usłojenia</div>
+          <div class="row-desc">Rysunek dekoru przechodzi płynnie przez sąsiednie fronty — układ słojów zachowuje ciągłość.</div>
+        </div>
+        <div class="row-price"><span class="val"><span class="plus">+</span> 20%</span><span class="unit">wartości zamówienia netto</span></div>
+      </div>
+      <div class="row">
+        <div>
+          <div class="row-title">Zamówienie poniżej minimum logistycznego</div>
+          <div class="row-desc">Dopłata do zamówienia poniżej 4 m².</div>
+        </div>
+        <div class="row-price"><span class="val"><span class="plus">+</span> 30%</span><span class="unit">wartości zamówienia netto</span></div>
+      </div>
+    </div>
+
+    <p class="disclaimer">
+      Wszystkie podane ceny są cenami netto. Cennik ma charakter orientacyjny i&nbsp;nie stanowi oferty handlowej
+      w&nbsp;rozumieniu Kodeksu cywilnego.
+    </p>
+
+    <div class="footer">
+      <span>MEKRA · ul. Batorego 92 e/f, 87-100 Toruń · tel. 792 456 094 · kontakt@mekra.pl · www.mekra.pl</span>
+      <span>1 / 2</span>
+    </div>
+  </div>
+
+  <!-- ═════════ STRONA 2 ═════════ -->
+  <div class="sheet p2">
+    <span class="label-tag">Warto wiedzieć</span>
+    <h2 class="serif">Co jest wliczone w&nbsp;cenę?</h2>
+
+    <div class="grid">
+      <div class="info-card">
+        <div class="check">✓</div>
+        <div>
+          <h3>Klej PUR w standardzie</h3>
+          <p>Wszystkie fronty oklejamy wilgocioodpornym klejem PUR — z&nbsp;dostawą na Twój adres, bez dopłat.</p>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="check">✓</div>
+        <div>
+          <h3>Czas realizacji 8–10 tygodni</h3>
+          <p>Tyle standardowo czeka się na zamówienie od potwierdzenia specyfikacji.</p>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="check">✓</div>
+        <div>
+          <h3>Dostawa kurierem</h3>
+          <p>Fronty wysyłamy kurierem. Koszt dostawy szacujemy po złożeniu zamówienia.</p>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="check">✓</div>
+        <div>
+          <h3>Transport dedykowany</h3>
+          <p>Fronty z lustrem lub szkłem o dużym gabarycie dostarczamy transportem dedykowanym — nie przesyłką kurierską.</p>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="check">✓</div>
+        <div>
+          <h3>Cena zależna od dekoru</h3>
+          <p>Ostateczna cena frontów zależy od wybranego dekoru płyty — stąd wycena indywidualna.</p>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="check">✓</div>
+        <div>
+          <h3>Dowolna płyta z rynku</h3>
+          <p>Wykonamy fronty z każdej płyty laminowanej dostępnej na rynku — laminaty, folie PPV i&nbsp;akryle w&nbsp;połysku.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="brands">
+      <h3>Pracujemy na płytach sprawdzonych producentów</h3>
+      <div class="chips">
+        <span class="chip">Egger</span>
+        <span class="chip">Kronospan</span>
+        <span class="chip">Swiss Krono</span>
+        <span class="chip">Forner</span>
+      </div>
+    </div>
+
+    <div class="cta">
+      <h2 class="serif">Chcesz znać dokładną cenę?</h2>
+      <p>Wyślij wymiary i&nbsp;wybrany dekor — odpowiemy z&nbsp;konkretną wyceną dopasowaną do Twojego projektu.</p>
+      <div class="cta-cols">
+        <div class="cta-col">
+          <div class="k">Telefon</div>
+          <div class="v">792 456 094</div>
+        </div>
+        <div class="cta-col">
+          <div class="k">E-mail</div>
+          <div class="v">kontakt@mekra.pl</div>
+        </div>
+        <div class="cta-col">
+          <div class="k">WWW</div>
+          <div class="v">www.mekra.pl</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <span>MEKRA · ul. Batorego 92 e/f, 87-100 Toruń · tel. 792 456 094 · kontakt@mekra.pl · www.mekra.pl</span>
+      <span>2 / 2</span>
+    </div>
+  </div>
+
+</body>
+</html>
