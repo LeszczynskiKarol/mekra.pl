@@ -36,7 +36,7 @@ export const ofertaVariants: OfertaVariant[] = [
       'Delikatne podkreślenie formy. Subtelna ramka, która nadaje frontom nowoczesny, minimalistyczny charakter.',
     heroIntro:
       'Najwęższa z naszych ramek. 7 mm to ledwie zauważalna linia, która zostawia całą scenę dekorowi płyty — idealna do kuchni minimalistycznych, skandynawskich i loftowych, gdzie liczy się czystość formy.',
-    heroImage: '/img/ramka77mm.jpg',
+    heroImage: '/img/ramka77mm.webp',
     styles: ['Minimalizm', 'Skandynawski', 'Loftowy', 'Modern'],
     rooms: ['Kuchnia otwarta', 'Salon z aneksem', 'Pralnia', 'Łazienka'],
     highlights: [
@@ -93,7 +93,7 @@ export const ofertaVariants: OfertaVariant[] = [
       'Ramka w nowoczesnej formie z wyraźniejszym akcentem. Łączy współczesne wzornictwo z wyczuwalną strukturą materiału.',
     heroIntro:
       'Ramka 18 mm to nasz najbardziej uniwersalny wybór. Jest na tyle wyraźna, że nadaje frontowi charakter, ale na tyle wąska, żeby nie ciążyć w nowoczesnym wnętrzu. Sprawdza się w kuchni, w zabudowie pralni i w meblach na wymiar.',
-    heroImage: '/img/ramka18mm.jpg',
+    heroImage: '/img/ramka18mm.webp',
     styles: ['Modern', 'Współczesny', 'Klasyka w odświeżonej formie', 'Japandi'],
     rooms: ['Kuchnia', 'Pralnia', 'Garderoba', 'Zabudowy meblowe'],
     highlights: [
@@ -150,7 +150,7 @@ export const ofertaVariants: OfertaVariant[] = [
       'Idziemy w stronę klasyku — kuchni farmerskich, skandynawskich, prowansalskich. Szersza ramka nadaje meblom charakteru i przytulności.',
     heroIntro:
       'Ramka 36 mm to nasz bestseller wśród klasycznych projektów. Szersza ramka buduje przytulny, ciepły charakter wnętrza — to wybór dla kuchni farmhouse, skandynawskich, prowansalskich i wszystkich tych, w których chcesz, żeby front był jednym z głównych bohaterów.',
-    heroImage: '/img/ramka36mm.jpg',
+    heroImage: '/img/ramka36mm.webp',
     styles: ['Farmhouse', 'Skandynawski klasyczny', 'Prowansalski', 'Hampton', 'Vintage'],
     rooms: ['Kuchnia klasyczna', 'Spiżarnia', 'Wyspa kuchenna', 'Zabudowa kuchenna z okapem'],
     highlights: [
@@ -207,7 +207,7 @@ export const ofertaVariants: OfertaVariant[] = [
       'Standardowa, znana forma z frontów MDF lakierowanych — teraz w wersji z płyty laminowanej. Możliwość wpuszczenia lustra lub szkła w środek ramki.',
     heroIntro:
       'Ramka 60 mm to pełna klasyka — najszersza w naszej ofercie, dedykowana szafom, witrynkom i zabudowom z lustrem lub szkłem. Tylko w tej szerokości oferujemy wpuszczenie lustra lub szkła bezpośrednio w środek ramki, zamiast standardowego montażu od tyłu frontu.',
-    heroImage: '/img/ramka60mm.jpg',
+    heroImage: '/img/ramka60mm.webp',
     styles: ['Klasyka', 'Hampton', 'Glamour', 'Eklektyka', 'Vintage z lustrem'],
     rooms: ['Garderoba', 'Sypialnia (szafy)', 'Witrynki w salonie', 'Wiatrołap', 'Łazienka (szafki z lustrem)'],
     highlights: [
@@ -266,7 +266,7 @@ export const ofertaVariants: OfertaVariant[] = [
       'Zabudowy nietypowe — winiarnie, regały, meble pod konkretne pomieszczenie. Projektujemy razem z Tobą i dopasowujemy do milimetra.',
     heroIntro:
       'Czasem projekt nie mieści się w kategoriach „kuchnia" czy „szafa". Wtedy robimy zabudowy nietypowe: winiarnie z chłodzeniem, regały do gabinetów, ścianki TV, zabudowy pod skosami, meble na zamówienie pod konkretne pomieszczenie i jego ograniczenia.',
-    heroImage: '/img/realizacje/zabudowy/zabudowa-wino-01.jpg',
+    heroImage: '/img/realizacje/zabudowy/zabudowa-wino-01.webp',
     styles: ['Mebel na wymiar', 'Projekt unikatowy', 'Pod konkretne pomieszczenie'],
     rooms: ['Winiarnia w salonie', 'Gabinet domowy', 'Ścianka TV', 'Zabudowy pod skosami', 'Wnęki nietypowe'],
     highlights: [
