@@ -1,0 +1,223 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { ofertaVariants } from '../data/oferta';
+
+// Strona-przewodnik pod frazę „fronty z ramką" (GSC: 321 wyśw., poz. ~16,6 —
+// dziś rankuje strona główna bez treści pod tę intencję). Intencja informacyjna;
+// stronę katalogową /oferta/ linkujemy jako cel transakcyjny. Fakty wyłącznie
+// z publikowanych danych (oferta.ts, Benefits, cennik).
+const frameVariants = ofertaVariants.filter((v) => v.slug !== 'zabudowy');
+
+const faq = [
+  {
+    q: 'Czym jest front z ramką (front ramiakowy)?',
+    a: 'To front meblowy zbudowany z widocznej ramki i środkowej płyciny — w odróżnieniu od gładkiego frontu płytowego ma wyraźny rysunek i rytm. W naszej technologii ramka, płycina i krawędzie są wykończone tym samym dekorem z obu stron frontu.',
+  },
+  {
+    q: 'Czym front z ramką różni się od zwykłego frontu płytowego?',
+    a: 'Formą i charakterem: płytowy front to jedna gładka płaszczyzna, ramiakowy porządkuje bryłę ramką — od ledwie zauważalnych 7 mm po klasyczne 60 mm. Konstrukcyjnie nasz front ma 21 mm grubości i pracuje na standardowych zawiasach Blum, Häfele i Hettich.',
+  },
+  {
+    q: 'Jakie szerokości ramki są dostępne?',
+    a: 'Cztery: 7 mm (minimalistyczna), 18 mm (uniwersalna), 36 mm (klasyczna proporcja) i 60 mm — w której można dodatkowo wpuścić lustro lub szkło w środek frontu. Do tego zabudowy specjalne na wymiar.',
+  },
+  {
+    q: 'Czy fronty z ramką nadają się tylko do kuchni?',
+    a: 'Nie — poza kuchniami trafiają do szaf, łazienek, pralni i zabudów salonowych. Płyta laminowana dobrze znosi codzienną eksploatację, a setki dekorów pozwalają dopasować front do każdego wnętrza.',
+  },
+  {
+    q: 'Ile kosztuje front z ramką?',
+    a: 'Od 350 zł/m² netto — ostateczna cena zależy od płyty, dekoru i szerokości ramki. Wycenę przygotowujemy po otrzymaniu wymiarów.',
+  },
+];
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Strona główna', item: 'https://www.mekra.pl/' },
+    { '@type': 'ListItem', position: 2, name: 'Fronty z ramką — przewodnik', item: 'https://www.mekra.pl/fronty-z-ramka/' },
+  ],
+};
+---
+
+<BaseLayout
+  title="Fronty z ramką (ramiakowe) — przewodnik po szerokościach i materiałach"
+  description="Fronty z ramką: czym są, jak są zbudowane i którą szerokość ramki wybrać — 7, 18, 36 czy 60 mm. Płyta laminowana, matowa i akrylowa, dwustronny dekor, klej PUR. Przewodnik od producenta."
+  canonicalUrl="https://www.mekra.pl/fronty-z-ramka/"
+>
+  <Navbar />
+
+  <main class="pt-20 md:pt-24" style="background-color: var(--color-bg);">
+    <!-- Hero -->
+    <section class="section-padding pt-12 pb-12 md:pt-20 md:pb-16 relative overflow-hidden">
+      <div class="absolute top-20 -left-32 w-96 h-96 rounded-full opacity-20 dark:opacity-10 blur-3xl pointer-events-none" style="background: radial-gradient(circle, #ae9070, transparent 70%);"></div>
+      <div class="absolute -bottom-20 -right-32 w-96 h-96 rounded-full opacity-15 dark:opacity-10 blur-3xl pointer-events-none" style="background: radial-gradient(circle, #d4c5ae, transparent 70%);"></div>
+
+      <div class="max-w-7xl mx-auto relative">
+        <div class="max-w-3xl">
+          <span class="label-tag">Przewodnik</span>
+          <h1 class="mt-6 font-display text-4xl sm:text-5xl md:text-6xl tracking-tight leading-[1.05]" style="color: var(--color-text);">
+            Fronty z ramką<br />
+            <span class="text-gradient">bez tajemnic</span>
+          </h1>
+          <p class="mt-6 text-base md:text-lg leading-relaxed font-body" style="color: var(--color-text-secondary);">
+            Front z&nbsp;ramką — nazywany też frontem ramiakowym — to front zbudowany
+            z&nbsp;widocznej <strong style="color: var(--color-text);">ramki i&nbsp;środkowej płyciny</strong>.
+            Ten prosty zabieg zmienia wszystko: gładka płaszczyzna zamienia się w&nbsp;rysunek,
+            który niesie cały charakter kuchni. Poniżej wyjaśniamy, jak taki front jest
+            zbudowany i&nbsp;jak wybrać szerokość ramki do swojego wnętrza.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Budowa -->
+    <section class="section-padding py-12 md:py-20" style="background-color: var(--color-bg-secondary);">
+      <div class="max-w-5xl mx-auto">
+        <div class="max-w-3xl">
+          <span class="label-tag">Konstrukcja</span>
+          <h2 class="mt-6 font-display text-3xl sm:text-4xl tracking-tight" style="color: var(--color-text);">
+            Jak zbudowany jest nasz front ramiakowy
+          </h2>
+        </div>
+        <div class="mt-10 grid sm:grid-cols-2 gap-5">
+          <div class="card-base rounded-2xl p-6">
+            <h3 class="font-heading text-base font-semibold" style="color: var(--color-text);">Ramka + płycina, 21 mm</h3>
+            <p class="mt-2 text-sm font-body leading-relaxed" style="color: var(--color-text-secondary);">
+              Ramka ogranicza środkową płycinę i&nbsp;nadaje frontowi rysunek. Całość ma
+              21&nbsp;mm grubości i&nbsp;bez adaptacji pracuje na standardowych zawiasach
+              Blum, Häfele i&nbsp;Hettich.
+            </p>
+          </div>
+          <div class="card-base rounded-2xl p-6">
+            <h3 class="font-heading text-base font-semibold" style="color: var(--color-text);">Dwustronny dekor</h3>
+            <p class="mt-2 text-sm font-body leading-relaxed" style="color: var(--color-text-secondary);">
+              Ramka, płycina i&nbsp;krawędzie są pokryte wybranym materiałem z&nbsp;obu stron —
+              widok od wewnątrz szafki jest tak samo estetyczny, jak od frontu.
+            </p>
+          </div>
+          <div class="card-base rounded-2xl p-6">
+            <h3 class="font-heading text-base font-semibold" style="color: var(--color-text);">Krawędzie na klej PUR</h3>
+            <p class="mt-2 text-sm font-body leading-relaxed" style="color: var(--color-text-secondary);">
+              Wszystkie krawędzie oklejamy klejem poliuretanowym — wodoodpornym
+              i&nbsp;odpornym na temperaturę, co w&nbsp;kuchni ma znaczenie codzienne.
+            </p>
+          </div>
+          <div class="card-base rounded-2xl p-6">
+            <h3 class="font-heading text-base font-semibold" style="color: var(--color-text);">Setki dekorów</h3>
+            <p class="mt-2 text-sm font-body leading-relaxed" style="color: var(--color-text-secondary);">
+              Płyty laminowane, matowe i&nbsp;akrylowe: struktury drewna, kamień, beton,
+              unikolory — z&nbsp;wyczuwalną fakturą materiału i&nbsp;możliwą ramką w&nbsp;połysku.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Szerokości -->
+    <section class="section-padding py-12 md:py-20">
+      <div class="max-w-7xl mx-auto">
+        <div class="max-w-3xl">
+          <span class="label-tag">Szerokości ramki</span>
+          <h2 class="mt-6 font-display text-3xl sm:text-4xl tracking-tight" style="color: var(--color-text);">
+            Którą ramkę wybrać?
+          </h2>
+          <p class="mt-4 text-base font-body leading-relaxed" style="color: var(--color-text-secondary);">
+            Szerokość ramki to najważniejsza decyzja projektowa przy frontach ramiakowych —
+            od niej zależy, czy front będzie dyskretnym tłem, czy głównym bohaterem wnętrza.
+          </p>
+        </div>
+        <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {frameVariants.map((v) => (
+            <a href={`/oferta/${v.slug}/`} class="card-base rounded-2xl p-6 block transition-transform hover:-translate-y-1">
+              <p class="font-display text-3xl" style="color: var(--color-accent);">{v.size}&nbsp;{v.unit}</p>
+              <h3 class="mt-2 font-heading text-base font-semibold" style="color: var(--color-text);">{v.name}</h3>
+              <p class="mt-2 text-sm font-body leading-relaxed" style="color: var(--color-text-secondary);">{v.tagline}</p>
+              <p class="mt-3 text-xs font-body leading-relaxed" style="color: var(--color-text-muted);">{v.bestFor}</p>
+            </a>
+          ))}
+        </div>
+        <p class="mt-6 text-sm font-body" style="color: var(--color-text-secondary);">
+          W&nbsp;ramce 60&nbsp;mm można dodatkowo
+          <a href="/oferta/ramka-60mm/" class="font-medium hover:underline" style="color: var(--color-accent);">wpuścić lustro lub szkło w&nbsp;środek frontu</a>,
+          a&nbsp;nietypowe projekty realizujemy jako
+          <a href="/oferta/zabudowy/" class="font-medium hover:underline" style="color: var(--color-accent);">zabudowy specjalne</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- Laminat vs lakier -->
+    <section class="section-padding py-12 md:py-20" style="background-color: var(--color-bg-secondary);">
+      <div class="max-w-3xl mx-auto text-center">
+        <span class="label-tag">Materiał</span>
+        <h2 class="mt-6 font-display text-3xl sm:text-4xl tracking-tight" style="color: var(--color-text);">
+          Laminat czy lakier?
+        </h2>
+        <p class="mt-4 text-base font-body leading-relaxed" style="color: var(--color-text-secondary);">
+          Klasyczne fronty z&nbsp;ramką kojarzą się z&nbsp;MDF-em lakierowanym — my wykonujemy je
+          z&nbsp;płyty laminowanej, którą uważamy za trwalszą alternatywę: wielokrotnie większa
+          odporność na zarysowania, wyczuwalna faktura i&nbsp;dwustronny dekor. Lakier ma jednak
+          swoje realne zalety — zestawiliśmy oba materiały uczciwie, punkt po punkcie.
+        </p>
+        <div class="mt-8">
+          <a href="/fronty-laminowane-czy-lakierowane/" class="btn-secondary">Porównanie: laminat vs lakier</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section-padding py-12 md:py-20">
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-12">
+          <span class="label-tag">FAQ</span>
+          <h2 class="mt-6 font-display text-3xl sm:text-4xl tracking-tight" style="color: var(--color-text);">
+            Najczęstsze pytania
+          </h2>
+        </div>
+        <div class="space-y-4">
+          {faq.map((f) => (
+            <div class="card-base rounded-2xl p-6 md:p-8">
+              <h3 class="font-heading text-base font-semibold" style="color: var(--color-text);">{f.q}</h3>
+              <p class="mt-3 text-sm leading-relaxed font-body" style="color: var(--color-text-secondary);">{f.a}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section-padding py-16 md:py-24" style="background-color: var(--color-bg-secondary);">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="font-display text-3xl md:text-4xl tracking-tight" style="color: var(--color-text);">
+          Zobacz fronty z ramką w realnych kuchniach
+        </h2>
+        <p class="mt-4 text-base md:text-lg font-body leading-relaxed" style="color: var(--color-text-secondary);">
+          Najwięcej mówią realizacje — a&nbsp;jeśli już wiesz, czego szukasz,
+          przejdź do oferty albo poproś o&nbsp;wycenę.
+        </p>
+        <div class="mt-8 flex flex-wrap justify-center gap-3">
+          <a href="/realizacje/" class="btn-primary">Zobacz realizacje</a>
+          <a href="/oferta/" class="btn-secondary">Oferta frontów ramiakowych</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />
+</BaseLayout>
