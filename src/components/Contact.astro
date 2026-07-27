@@ -390,6 +390,29 @@ const API_URL = 'https://iedy003jrg.execute-api.eu-central-1.amazonaws.com';
       return;
     }
 
+    // Fire-and-forget: lead do wspólnego panelu (OBOK istniejącej wysyłki, nic nie zmienia)
+    try {
+      var __q = new URLSearchParams(location.search);
+      fetch("https://elk3bw9gj4.execute-api.eu-central-1.amazonaws.com/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        keepalive: true,
+        body: JSON.stringify({
+          domain: "mekra.pl",
+          name: name,
+          email: email,
+          phone: phone || "",
+          message: message || "",
+          source: __leadSource(),
+          referrer: document.referrer || "",
+          utm_source: __q.get("utm_source") || "",
+          utm_medium: __q.get("utm_medium") || "",
+          utm_campaign: __q.get("utm_campaign") || "",
+          landing: location.pathname,
+        }),
+      }).catch(function() {});
+    } catch (e) {}
+
     setLoading(true);
 
     var attachments = [];
@@ -468,5 +491,7 @@ const API_URL = 'https://iedy003jrg.execute-api.eu-central-1.amazonaws.com';
   function hideError() {
     formError.classList.add('hidden');
   }
+
+  function __leadSource(){try{const p=new URLSearchParams(location.search);const u=p.get("utm_source");if(u)return u;const r=document.referrer;if(!r)return "direct";const h=new URL(r).hostname;if(h.includes(location.hostname))return "direct";if(/google\./.test(h))return "google";if(/bing\./.test(h))return "bing";if(/facebook|fb\.|instagram|t\.co/.test(h))return "social";return h;}catch(e){return "referral";}}
 })();
 </script>
