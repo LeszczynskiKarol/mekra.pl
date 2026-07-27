@@ -1,0 +1,88 @@
+---
+// Photo background for subpage heroes — the same treatment as the homepage Hero:
+// realizacja photo anchored on the right, feathered into the page background on
+// the text side, so the heading column stays fully legible. Drop it inside a
+// `relative overflow-hidden` hero section, before the content container
+// (the content container must be `relative` so it stacks above the photo).
+interface Props {
+  /** Absolute path under public/, e.g. /img/realizacje/... */
+  src: string;
+  /** CSS object-position tuning the visible crop, e.g. '72% 45%' */
+  position?: string;
+}
+const { src, position = '72% 45%' } = Astro.props;
+---
+
+<div class="page-hero-photo" aria-hidden="true">
+  <img
+    src={src}
+    alt=""
+    width="1920"
+    height="1280"
+    decoding="async"
+    fetchpriority="low"
+    style={`object-position: ${position};`}
+  />
+</div>
+
+<style>
+  .page-hero-photo {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .page-hero-photo img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.9;
+    /* warm + lift slightly so dark text stays legible where they overlap */
+    filter: saturate(1.03) brightness(1.04) contrast(0.98);
+  }
+
+  .dark .page-hero-photo img {
+    opacity: 0.8;
+    /* darken so light text reads and the photo melts into the dark canvas */
+    filter: saturate(0.92) brightness(0.6) contrast(1.02);
+  }
+
+  /* Feather: opaque on the text side (left + bottom), clear on the upper-right */
+  .page-hero-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        100deg,
+        var(--color-hero-gradient-end) 0%,
+        var(--color-hero-gradient-end) 40%,
+        var(--color-hero-gradient-start) 90%
+      ),
+      linear-gradient(
+        to top,
+        var(--color-hero-gradient-end) 0%,
+        var(--color-hero-gradient-end) 14%,
+        var(--color-hero-gradient-start) 58%
+      );
+  }
+
+  /* Phones: keep it a faint warm wash — text legibility comes first */
+  @media (max-width: 767px) {
+    .page-hero-photo img {
+      opacity: 0.18;
+    }
+    .page-hero-photo::after {
+      background: linear-gradient(
+        to top,
+        var(--color-hero-gradient-end) 0%,
+        var(--color-hero-gradient-end) 18%,
+        var(--color-hero-gradient-start) 70%
+      );
+    }
+  }
+</style>

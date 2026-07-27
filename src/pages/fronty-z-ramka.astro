@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import PageHeroPhoto from '../components/PageHeroPhoto.astro';
 import { ofertaVariants } from '../data/oferta';
 
 // Strona-przewodnik pod frazę „fronty z ramką" (GSC: 321 wyśw., poz. ~16,6 —
@@ -65,6 +66,7 @@ const breadcrumbLd = {
     <section class="section-padding pt-12 pb-12 md:pt-20 md:pb-16 relative overflow-hidden">
       <div class="absolute top-20 -left-32 w-96 h-96 rounded-full opacity-20 dark:opacity-10 blur-3xl pointer-events-none" style="background: radial-gradient(circle, #ae9070, transparent 70%);"></div>
       <div class="absolute -bottom-20 -right-32 w-96 h-96 rounded-full opacity-15 dark:opacity-10 blur-3xl pointer-events-none" style="background: radial-gradient(circle, #d4c5ae, transparent 70%);"></div>
+      <PageHeroPhoto src="/img/realizacje/ramka-60mm/ramka-60mm-witrynka-01.webp" position="55% 50%" />
 
       <div class="max-w-7xl mx-auto relative">
         <div class="max-w-3xl">
