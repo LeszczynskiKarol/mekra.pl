@@ -127,7 +127,7 @@
     animation: heroPhotoIn 1.2s cubic-bezier(0.4, 0, 0.2, 1) both;
   }
 
-  .dark .hero-photo img {
+  :global(.dark) .hero-photo img {
     opacity: 0.8;
     /* darken so light text reads and the photo melts into the dark canvas */
     filter: saturate(0.92) brightness(0.6) contrast(1.02);

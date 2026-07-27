@@ -45,7 +45,7 @@ const { src, position = '72% 45%' } = Astro.props;
     filter: saturate(1.03) brightness(1.04) contrast(0.98);
   }
 
-  .dark .page-hero-photo img {
+  :global(.dark) .page-hero-photo img {
     opacity: 0.8;
     /* darken so light text reads and the photo melts into the dark canvas */
     filter: saturate(0.92) brightness(0.6) contrast(1.02);
