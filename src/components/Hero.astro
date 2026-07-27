@@ -13,9 +13,12 @@
   <!-- Hero photo — front z ramką 36 mm (Grudziądz), zakotwiczony z prawej i wtopiony w tło strony -->
   <div class="hero-photo" aria-hidden="true">
     <picture>
-      <source srcset="/img/realizacje/ramka-36mm/ramka-36mm-grudziadz-40.webp" type="image/webp" />
+      <!-- Na telefonach tło to wash ~18% opacity — wystarczy mały, mocno skompresowany wariant -->
+      <source media="(max-width: 767px)" srcset="/img/hero/ramka-36mm-grudziadz-40-640.webp" />
       <img
-        src="/img/realizacje/ramka-36mm/ramka-36mm-grudziadz-40.webp"
+        src="/img/hero/ramka-36mm-grudziadz-40-1920.webp"
+        srcset="/img/hero/ramka-36mm-grudziadz-40-1280.webp 1280w, /img/hero/ramka-36mm-grudziadz-40-1440.webp 1440w, /img/hero/ramka-36mm-grudziadz-40-1920.webp 1920w"
+        sizes="100vw"
         alt=""
         width="1920"
         height="1280"

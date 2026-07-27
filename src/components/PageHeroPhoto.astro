@@ -11,18 +11,29 @@ interface Props {
   position?: string;
 }
 const { src, position = '72% 45%' } = Astro.props;
+
+// Odchudzone warianty generuje scripts/optimize-hero.mjs do /img/hero/
+// (nazwa pliku bez rozszerzenia + sufiks szerokości). Po dodaniu nowego
+// zdjęcia hero dopisz je do HEROES w tym skrypcie i odpal go ponownie.
+const base = `/img/hero/${src.split('/').pop()!.replace(/\.(webp|jpe?g|png)$/i, '')}`;
 ---
 
 <div class="page-hero-photo" aria-hidden="true">
-  <img
-    src={src}
-    alt=""
-    width="1920"
-    height="1280"
-    decoding="async"
-    fetchpriority="low"
-    style={`object-position: ${position};`}
-  />
+  <picture>
+    <!-- Na telefonach tło to wash ~18% opacity — wystarczy mały, mocno skompresowany wariant -->
+    <source media="(max-width: 767px)" srcset={`${base}-640.webp`} />
+    <img
+      src={`${base}-1920.webp`}
+      srcset={`${base}-1280.webp 1280w, ${base}-1440.webp 1440w, ${base}-1920.webp 1920w`}
+      sizes="100vw"
+      alt=""
+      width="1920"
+      height="1280"
+      decoding="async"
+      fetchpriority="low"
+      style={`object-position: ${position};`}
+    />
+  </picture>
 </div>
 
 <style>
