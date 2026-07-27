@@ -73,7 +73,7 @@ const frameTypes = [
             <picture>
               <source
                 type="image/webp"
-                srcset={`/${frame.image.replace('.jpg', '')}-400.webp 400w, /${frame.image.replace('.jpg', '')}-640.webp 640w, /${frame.image.replace('.jpg', '')}-900.webp 900w, /${frame.image.replace('.jpg', '')}-1280.webp 1280w`}
+                srcset={`/${frame.image.replace(/\.(jpg|webp)$/, '')}-400.webp 400w, /${frame.image.replace(/\.(jpg|webp)$/, '')}-640.webp 640w, /${frame.image.replace(/\.(jpg|webp)$/, '')}-900.webp 900w, /${frame.image.replace(/\.(jpg|webp)$/, '')}-1280.webp 1280w`}
                 sizes="(min-width: 1280px) 620px, (min-width: 640px) 45vw, 90vw"
               />
               <img
