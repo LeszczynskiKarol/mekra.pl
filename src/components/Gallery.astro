@@ -1,7 +1,10 @@
 ---
 import manifest from '../data/realizacje.json';
+import { portfolio } from '../data/portfolio';
 
-const { categories, items, counts } = manifest;
+// Category chrome (titles/subtitles/counts) stays with the generated manifest;
+// the gallery IMAGE data comes from the standardized single source (portfolio.ts).
+const { categories, counts } = manifest;
 
 /**
  * Build hero tiles for the bento grid — one tile per category, hero photo
@@ -45,14 +48,18 @@ const SIZE_LABEL = {
 
 const tiles = layoutOrder.map((slug) => {
   const cat = categories[slug];
-  const heroItem = items.find((it) => it.category === slug);
+  // Hero photo = first portfolio image of this category (same order as before).
+  const heroImg = portfolio.find((img) => img.category === slug);
+  // Derive the WebP sibling from the JPG src so the served URL is unchanged.
+  const heroWebp = heroImg ? heroImg.src.replace(/\.(jpe?g|png)$/i, '.webp') : undefined;
   return {
     slug,
     title: cat.title,
     subtitle: cat.subtitle,
     description: cat.description,
     count: cat.count,
-    heroItem,
+    heroImg,
+    heroWebp,
     span: SPAN[slug],
     label: SIZE_LABEL[slug],
   };
@@ -85,11 +92,11 @@ const totalCount = counts.total;
           style={`transition-delay: ${i * 0.08}s;`}
           aria-label={`Zobacz realizacje: ${tile.title} (${tile.count} zdjęć)`}
         >
-          {tile.heroItem && (
+          {tile.heroImg && (
             <picture>
-              <source srcset={tile.heroItem.paths.fullWebp} type="image/webp" />
+              <source srcset={tile.heroWebp} type="image/webp" />
               <img
-                src={tile.heroItem.paths.full}
+                src={tile.heroImg.src}
                 alt={`${tile.title} — ${tile.subtitle}`}
                 class="category-tile__img"
                 loading="lazy"
