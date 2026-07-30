@@ -150,6 +150,9 @@ export const handler = async () => {
         },
         Body: { Html: { Data: htmlBody, Charset: "UTF-8" } },
       },
+      // Ten sam configuration set co formularz — heartbeat ma sens tylko wtedy, gdy
+      // sprawdza tę samą ścieżkę, łącznie z raportowaniem odbić.
+      ConfigurationSetName: process.env.SES_CONFIG_SET || "mekra-events",
     });
     const sesResult = await ses.send(sesCmd);
 

@@ -17,6 +17,17 @@ const TO_EMAIL = "kontakt@mekra.pl";
 const FROM_EMAIL = "formularz@mekra.pl";
 const FROM_NAME = "Mekra.pl";
 
+// Configuration set kieruje zdarzenia dostarczenia na SNS (temat mekra-ses-events).
+// Bez tego odbicie na serwerze odbiorcy ginie po cichu: SES loguje "OK" po przyjęciu
+// wiadomości do wysyłki, a to, czy serwer docelowy ją przyjął, widać dopiero w zdarzeniu.
+const CONFIG_SET = process.env.SES_CONFIG_SET || "mekra-events";
+
+// Druga kopia leada na niezależnego dostawcę. 30.07.2026 zapytanie odbiło się na
+// serwerze cyber-folks (SES: Bounce, zero Delivery) i przepadło — jedynym śladem był
+// panel leadów. Kopia idzie kopertą (bez Cc/Bcc w nagłówkach), więc każdy odbiorca
+// ma osobną sesję SMTP: odrzucenie u jednego nie dotyka drugiego.
+const BACKUP_EMAIL = process.env.SES_BACKUP_TO || "karolleszczynskikorektor@gmail.com";
+
 // Załączniki wchodzą do maila jako realne pliki MIME, więc zostają w skrzynce
 // na zawsze i nie zależą od presigned URL (te wygasają razem z sesją roli Lambdy).
 // Powyżej progu SES odrzuciłby wiadomość (limit 40 MB na surowy mail, a base64
@@ -390,16 +401,21 @@ export const handler = async (event) => {
       files: inlineFiles,
     });
 
+    const destinations = BACKUP_EMAIL && BACKUP_EMAIL !== TO_EMAIL
+      ? [TO_EMAIL, BACKUP_EMAIL]
+      : [TO_EMAIL];
+
     const command = new SendRawEmailCommand({
       Source: `${FROM_NAME} <${FROM_EMAIL}>`,
-      Destinations: [TO_EMAIL],
+      Destinations: destinations,
       RawMessage: { Data: Buffer.from(rawMessage, "utf8") },
+      ConfigurationSetName: CONFIG_SET,
     });
 
     const sesResult = await ses.send(command);
     console.log(
       "SES OK MessageId:", sesResult.MessageId,
-      "to:", TO_EMAIL,
+      "to:", destinations.join(","),
       "replyTo:", email,
       "attached:", inlineFiles.length,
       "rawBytes:", Buffer.byteLength(rawMessage),
