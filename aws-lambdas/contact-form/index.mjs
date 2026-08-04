@@ -4,13 +4,16 @@
 
 import { SESClient, SendRawEmailCommand } from "@aws-sdk/client-ses";
 import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
+import { SecretsManagerClient, GetSecretValueCommand } from "@aws-sdk/client-secrets-manager";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import nodemailer from "nodemailer";
 import { randomUUID } from "node:crypto";
 
 const REGION = process.env.AWS_REGION || "eu-central-1";
 const SES_REGION = "us-east-1";
 const ses = new SESClient({ region: SES_REGION });
 const s3 = new S3Client({ region: REGION });
+const secrets = new SecretsManagerClient({ region: REGION });
 
 const BUCKET = process.env.BUCKET_NAME || "mekra-attachments";
 const TO_EMAIL = "kontakt@mekra.pl";
@@ -27,6 +30,56 @@ const CONFIG_SET = process.env.SES_CONFIG_SET || "mekra-events";
 // panel leadów. Kopia idzie kopertą (bez Cc/Bcc w nagłówkach), więc każdy odbiorca
 // ma osobną sesję SMTP: odrzucenie u jednego nie dotyka drugiego.
 const BACKUP_EMAIL = process.env.SES_BACKUP_TO || "karolleszczynskikorektor@gmail.com";
+
+// Poczta na kontakt@ NIE idzie już przez SES. Powód (04.08.2026): MX mekra.pl to
+// s1.cyber-folks.pl, który filtruje przez hostkarma.junkemailfilter.com, a tam
+// oflagowanych jest 15 z 16 adresów puli nadawczej SES (54.240.8.80–95; .88 wprost
+// na czarnej liście). SES losuje adres przy każdej wysyłce, więc leady ginęły
+// losowo — potwierdzony bounce 30.07 i 04.08. CyberFolks odmówił whitelisty
+// (zgłoszenie 04.08.2026), a delisting cudzych IP Amazona nie jest w naszej mocy.
+//
+// Zamiast tego logujemy się na ich własny serwer jako formularz@mekra.pl i wysyłamy
+// stamtąd: dostarczenie do kontakt@mekra.pl jest wtedy LOKALNE (ta sama maszyna),
+// więc żaden RBL nie jest w ogóle odpytywany. Hasło leży w Secrets Manager, nie
+// w zmiennych Lambdy — te są czytelne dla każdego z dostępem do konsoli.
+const SMTP_SECRET_ID = process.env.SMTP_SECRET_ID || "mekra/smtp-formularz";
+
+let smtpPromise = null;
+function getTransport() {
+  // Cache na czas życia kontenera: sekret i połączenie przeżywają kolejne wywołania.
+  // Przy błędzie czyścimy cache, żeby następne wywołanie spróbowało od nowa
+  // (inaczej jeden nieudany start zatruwałby kontener aż do recyklingu).
+  if (!smtpPromise) {
+    smtpPromise = secrets
+      .send(new GetSecretValueCommand({ SecretId: SMTP_SECRET_ID }))
+      .then((r) => {
+        const cfg = JSON.parse(r.SecretString);
+        return nodemailer.createTransport({
+          host: cfg.host,
+          port: cfg.port || 465,
+          secure: cfg.secure !== false,
+          auth: { user: cfg.user, pass: cfg.pass },
+          // Lambda ma 60 s timeoutu, a wysyłka to tylko część pracy — nie wolno
+          // przy niedostępnym serwerze zjeść całego budżetu i zgubić kopii na Gmailu.
+          connectionTimeout: 10000,
+          greetingTimeout: 10000,
+          socketTimeout: 20000,
+        });
+      })
+      .catch((err) => {
+        smtpPromise = null;
+        throw err;
+      });
+  }
+  return smtpPromise;
+}
+
+// Gotowy surowy MIME idzie na serwer bez przepakowania — nagłówki, załączniki
+// i Message-ID zostają dokładnie takie, jakie zbudował buildRawEmail.
+async function sendViaSmtp(raw, to) {
+  const transport = await getTransport();
+  return transport.sendMail({ envelope: { from: FROM_EMAIL, to: [to] }, raw });
+}
 
 // Załączniki wchodzą do maila jako realne pliki MIME, więc zostają w skrzynce
 // na zawsze i nie zależą od presigned URL (te wygasają razem z sesją roli Lambdy).
@@ -401,25 +454,59 @@ export const handler = async (event) => {
       files: inlineFiles,
     });
 
-    const destinations = BACKUP_EMAIL && BACKUP_EMAIL !== TO_EMAIL
-      ? [TO_EMAIL, BACKUP_EMAIL]
-      : [TO_EMAIL];
+    const rawBuffer = Buffer.from(rawMessage, "utf8");
+    const sendViaSes = (to) =>
+      ses.send(new SendRawEmailCommand({
+        Source: `${FROM_NAME} <${FROM_EMAIL}>`,
+        Destinations: [to],
+        RawMessage: { Data: rawBuffer },
+        ConfigurationSetName: CONFIG_SET,
+      }));
 
-    const command = new SendRawEmailCommand({
-      Source: `${FROM_NAME} <${FROM_EMAIL}>`,
-      Destinations: destinations,
-      RawMessage: { Data: Buffer.from(rawMessage, "utf8") },
-      ConfigurationSetName: CONFIG_SET,
-    });
+    // Dwa niezależne kanały równolegle — awaria jednego nie może dotknąć drugiego,
+    // dlatego allSettled, a nie all.
+    const backupEnabled = BACKUP_EMAIL && BACKUP_EMAIL !== TO_EMAIL;
+    const [primary, backup] = await Promise.allSettled([
+      sendViaSmtp(rawMessage, TO_EMAIL),
+      backupEnabled ? sendViaSes(BACKUP_EMAIL) : Promise.resolve(null),
+    ]);
 
-    const sesResult = await ses.send(command);
+    let primaryOk = primary.status === "fulfilled";
+    if (primaryOk) {
+      console.log("SMTP OK (cyber-folks) to:", TO_EMAIL, "messageId:", primary.value?.messageId);
+    } else {
+      // Awaryjnie i tak próbujemy SES-em: część puli nadawczej bywa przepuszczana,
+      // więc szansa na dostarczenie jest niezerowa i lepsza niż cisza.
+      console.error("SMTP FAIL to:", TO_EMAIL, primary.reason);
+      try {
+        const r = await sendViaSes(TO_EMAIL);
+        primaryOk = true;
+        console.warn("SES fallback uzyty dla:", TO_EMAIL, "MessageId:", r.MessageId);
+      } catch (err) {
+        console.error("SES fallback tez padl dla:", TO_EMAIL, err);
+      }
+    }
+
+    const backupOk = backup.status === "fulfilled";
+    if (backupEnabled && !backupOk) console.error("SES kopia FAIL:", BACKUP_EMAIL, backup.reason);
+
     console.log(
-      "SES OK MessageId:", sesResult.MessageId,
-      "to:", destinations.join(","),
+      "Lead wyslany — kontakt:", primaryOk ? "OK" : "BLAD",
+      "kopia:", backupEnabled ? (backupOk ? "OK" : "BLAD") : "wylaczona",
       "replyTo:", email,
       "attached:", inlineFiles.length,
-      "rawBytes:", Buffer.byteLength(rawMessage),
+      "rawBytes:", rawBuffer.length,
     );
+
+    // 500 tylko gdy lead nie dotarł ŻADNYM kanałem — wtedy front pokaże błąd
+    // i klient wie, że ma zadzwonić. Jeden działający kanał to sukces.
+    if (!primaryOk && !backupOk) {
+      return {
+        statusCode: 500,
+        headers,
+        body: JSON.stringify({ error: "Błąd wysyłania wiadomości" }),
+      };
+    }
 
     return {
       statusCode: 200,
