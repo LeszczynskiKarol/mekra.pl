@@ -1,0 +1,49 @@
+{
+  "title": "Fronty ramiakowe 18 mm — uniwersalne fronty kuchenne",
+  "description": "Fronty ramiakowe z ramką 18 mm. Współczesna elegancja, uniwersalna szerokość ramki. Płyta laminowana, akryl, ultramat. Producent frontów — Toruń, kujawsko-pomorskie.",
+  "slug": "ramka-18mm",
+  "order": 2,
+  "size": "18",
+  "unit": "mm",
+  "name": "Współczesna elegancja",
+  "subtitle": "Uniwersalna ramka 18 mm",
+  "text": "Ramka w nowoczesnej formie z wyraźniejszym akcentem. Łączy współczesne wzornictwo z wyczuwalną strukturą materiału.",
+  "intro": "Ramka 18 mm to nasz najbardziej uniwersalny wybór. Jest na tyle wyraźna, że nadaje frontowi charakter, ale na tyle wąska, żeby nie ciążyć w nowoczesnym wnętrzu. Sprawdza się w kuchni, w zabudowie pralni i w meblach na wymiar.",
+  "image": "/img/ramka18mm.webp",
+  "styles": ["Modern", "Współczesny", "Klasyka w odświeżonej formie", "Japandi"],
+  "rooms": ["Kuchnia", "Pralnia", "Garderoba", "Zabudowy meblowe"],
+  "items": [
+    {
+      "title": "Wyraźny rytm bez ciężaru",
+      "text": "Środkowa szerokość ramki to złoty środek — front jest geometrycznie czytelny, ale nie dominuje wnętrza."
+    },
+    {
+      "title": "Pasuje do większości projektów",
+      "text": "Jeśli nie wiesz, którą szerokość wybrać — 18 mm to bezpieczna decyzja, która wpasuje się w niemal każdy styl."
+    },
+    {
+      "title": "Skala faktury",
+      "text": "Na szerszej ramce wyraźniej widać strukturę głęboko strukturyzowanych płyt Saviola, Egger czy Forner Cleaf."
+    }
+  ],
+  "body": [
+    "Ramka 18 mm to najczęściej wybierana szerokość w naszej ofercie. Łączy dwa światy: dyskrecję nowoczesnych frontów oraz wyraźny detal, którego brakuje w jednolitych płytach. To rozwiązanie dla osób, które chcą frontu z charakterem, ale nie chcą wchodzić w pełną klasykę farmhouse.",
+    "W tej szerokości szczególnie pięknie wyglądają płyty o wyraźnej strukturze drewna oraz ultramaty pochłaniające światło. Ramka działa wtedy jak ramka obrazu — buduje kompozycję frontu.",
+    "Grubość frontu 21 mm, kompatybilność z zawiasami Blum, Häfele, Hettich. Klej PUR, dwustronny dekor i odporność na wilgoć — wszystko w standardzie."
+  ],
+  "bullets": [
+    "Najbardziej uniwersalna szerokość",
+    "Bezpieczny wybór do większości projektów",
+    "Wyraźny detal bez ciężaru klasyki",
+    "Idealna do struktur drewna i ultramatów",
+    "Sprawdza się w kuchni i w zabudowach pomocniczych"
+  ],
+  "bestFor": "Kuchnie współczesne z elementami klasyki, mieszkania w stylu japandi, zabudowy pomocnicze (pralnia, garderoba), projekty z głęboko strukturyzowanymi płytami.",
+  "keywords": [
+    "fronty ramiakowe 18mm",
+    "ramka 18mm kuchnia",
+    "fronty kuchenne uniwersalne",
+    "fronty laminowane na wymiar",
+    "fronty meblowe z ramką"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "title": "Fronty ramiakowe 60 mm — szafy, witrynki, lustro w ramce",
+  "description": "Fronty ramiakowe z ramką 60 mm. Pełna klasyka, lustro lub szkło wpuszczane w środek ramki. Alternatywa dla MDF lakierowanego. Producent szaf i witrynek — Toruń.",
+  "slug": "ramka-60mm",
+  "order": 4,
+  "size": "60",
+  "unit": "mm",
+  "name": "Pełna klasyka",
+  "subtitle": "Najszersza ramka 60 mm",
+  "text": "Standardowa, znana forma z frontów MDF lakierowanych — teraz w wersji z płyty laminowanej. Możliwość wpuszczenia lustra lub szkła w środek ramki.",
+  "intro": "Ramka 60 mm to pełna klasyka — najszersza w naszej ofercie, dedykowana szafom, witrynkom i zabudowom z lustrem lub szkłem. Tylko w tej szerokości oferujemy wpuszczenie lustra lub szkła bezpośrednio w środek ramki, zamiast standardowego montażu od tyłu frontu.",
+  "image": "/img/ramka60mm.webp",
+  "styles": ["Klasyka", "Hampton", "Glamour", "Eklektyka", "Vintage z lustrem"],
+  "rooms": ["Garderoba", "Sypialnia (szafy)", "Witrynki w salonie", "Wiatrołap", "Łazienka (szafki z lustrem)"],
+  "items": [
+    {
+      "title": "Lustro i szkło w środku ramki",
+      "text": "Tylko ramka 60 mm pozwala wpuścić lustro lub szkło bezpośrednio w środek frontu. Efekt jest znacznie lepszy niż w tradycyjnym montażu od tyłu — front wygląda jak jedna spójna płaszczyzna."
+    },
+    {
+      "title": "Charakter szafy z duszą",
+      "text": "Szerokość 60 mm daje pełen, klasyczny look — idealny do garderoby, szaf w sypialni, witrynek z porcelaną i wszystkich projektów z aspiracjami stylowymi."
+    },
+    {
+      "title": "Alternatywa dla MDF lakierowanego",
+      "text": "Identyczna forma jak w klasycznym MDF lakierowanym — z wielokrotnie większą odpornością i dwustronnym dekorem."
+    }
+  ],
+  "body": [
+    "Ramka 60 mm to nasz najszerszy wariant i jedyna szerokość, w której technicznie możliwe jest wpuszczenie lustra lub szkła w środek ramki. Standardowo w branży lustro montuje się od tyłu frontu — w naszej technologii 60 mm szkło lub lustro siedzi w wycięciu, dokładnie jak płycina w ramiaku. Efekt to gładka, spójna płaszczyzna bez wystających krawędzi.",
+    "Ważne: ramka bez środkowej płyciny (np. pod lustro) jest składana inną technologią i posiada widoczną linię łączenia w pionie po obu stronach frontu. To cecha techniczna, którą warto znać przed wyborem.",
+    "Ta szerokość ramki to bezpośrednia odpowiedź na fronty MDF lakierowane — ten sam wygląd, znacząco większa odporność, dwustronny dekor i bogatsza paleta wykończeń. Idealnie sprawdza się w garderobach, szafach sypialnianych, witrynkach i zabudowach łazienkowych."
+  ],
+  "bullets": [
+    "Jedyna ramka, w której wchodzi lustro/szkło w środek",
+    "Pełen klasyczny look — alternatywa dla MDF lakier",
+    "Doskonała do szaf, witrynek i garderób",
+    "Szeroka ramka — wyraźny detal, klasyczna kompozycja",
+    "Dwustronny dekor, klej PUR, kompatybilność z systemami premium"
+  ],
+  "bestFor": "Garderoby, szafy w sypialni, witrynki w salonie, zabudowy łazienkowe z lustrem, klasyczne meble z aspiracjami stylowymi, alternatywa dla drogiego MDF lakierowanego.",
+  "notFor": "Minimalistycznych kuchni otwartych na salon, gdzie szukasz dyskrecji — tam lepsza będzie ramka 7 lub 18 mm.",
+  "keywords": [
+    "fronty ramiakowe 60mm",
+    "fronty do szafy z lustrem",
+    "fronty witrynka klasyczna",
+    "fronty garderoby na wymiar",
+    "alternatywa MDF lakierowany"
+  ]
+}
