@@ -1,0 +1,80 @@
+{
+  "title": "Fronty z ramką (ramiakowe) — przewodnik po szerokościach i materiałach",
+  "description": "Fronty z ramką: czym są, jak są zbudowane i którą szerokość ramki wybrać — 7, 18, 36 czy 60 mm. Płyta laminowana, matowa i akrylowa, dwustronny dekor, klej PUR. Przewodnik od producenta.",
+  "sections": {
+    "hero": {
+      "image": "/img/realizacje/ramka-60mm/ramka-60mm-witrynka-01.webp",
+      "eyebrow": "Przewodnik",
+      "heading": "Fronty z ramką<br /> <span class=\"text-gradient\">bez tajemnic</span>",
+      "text": "Front z&nbsp;ramką — nazywany też frontem ramiakowym — to front zbudowany z&nbsp;widocznej <strong style=\"color: var(--color-text);\">ramki i&nbsp;środkowej płyciny</strong>. Ten prosty zabieg zmienia wszystko: gładka płaszczyzna zamienia się w&nbsp;rysunek, który niesie cały charakter kuchni. Poniżej wyjaśniamy, jak taki front jest zbudowany i&nbsp;jak wybrać szerokość ramki do swojego wnętrza."
+    },
+    "budowa": {
+      "eyebrow": "Konstrukcja",
+      "heading": "Jak zbudowany jest nasz front ramiakowy",
+      "items": [
+        {
+          "title": "Ramka + płycina, 21 mm",
+          "text": "Ramka ogranicza środkową płycinę i&nbsp;nadaje frontowi rysunek. Całość ma 21&nbsp;mm grubości i&nbsp;bez adaptacji pracuje na standardowych zawiasach Blum, Häfele i&nbsp;Hettich."
+        },
+        {
+          "title": "Dwustronny dekor",
+          "text": "Ramka, płycina i&nbsp;krawędzie są pokryte wybranym materiałem z&nbsp;obu stron — widok od wewnątrz szafki jest tak samo estetyczny, jak od frontu."
+        },
+        {
+          "title": "Krawędzie na klej PUR",
+          "text": "Wszystkie krawędzie oklejamy klejem poliuretanowym — wodoodpornym i&nbsp;odpornym na temperaturę, co w&nbsp;kuchni ma znaczenie codzienne."
+        },
+        {
+          "title": "Setki dekorów",
+          "text": "Płyty laminowane, matowe i&nbsp;akrylowe: struktury drewna, kamień, beton, unikolory — z&nbsp;wyczuwalną fakturą materiału i&nbsp;możliwą ramką w&nbsp;połysku."
+        }
+      ]
+    },
+    "szerokosci": {
+      "eyebrow": "Szerokości ramki",
+      "heading": "Którą ramkę wybrać?",
+      "text": "Szerokość ramki to najważniejsza decyzja projektowa przy frontach ramiakowych — od niej zależy, czy front będzie dyskretnym tłem, czy głównym bohaterem wnętrza.",
+      "caption": "W&nbsp;ramce 60&nbsp;mm można dodatkowo <a href=\"/oferta/ramka-60mm/\" class=\"font-medium hover:underline\" style=\"color: var(--color-accent);\">wpuścić lustro lub szkło w&nbsp;środek frontu</a>, a&nbsp;nietypowe projekty realizujemy jako <a href=\"/oferta/zabudowy/\" class=\"font-medium hover:underline\" style=\"color: var(--color-accent);\">zabudowy specjalne</a>."
+    },
+    "material": {
+      "eyebrow": "Materiał",
+      "heading": "Laminat czy lakier?",
+      "text": "Klasyczne fronty z&nbsp;ramką kojarzą się z&nbsp;MDF-em lakierowanym — my wykonujemy je z&nbsp;płyty laminowanej, którą uważamy za trwalszą alternatywę: wielokrotnie większa odporność na zarysowania, wyczuwalna faktura i&nbsp;dwustronny dekor. Lakier ma jednak swoje realne zalety — zestawiliśmy oba materiały uczciwie, punkt po punkcie.",
+      "ctaLabel": "Porównanie: laminat vs lakier"
+    },
+    "faq": {
+      "eyebrow": "FAQ",
+      "heading": "Najczęstsze pytania",
+      "items": [
+        {
+          "title": "Czym jest front z ramką (front ramiakowy)?",
+          "text": "To front meblowy zbudowany z widocznej ramki i środkowej płyciny — w odróżnieniu od gładkiego frontu płytowego ma wyraźny rysunek i rytm. W naszej technologii ramka, płycina i krawędzie są wykończone tym samym dekorem z obu stron frontu."
+        },
+        {
+          "title": "Czym front z ramką różni się od zwykłego frontu płytowego?",
+          "text": "Formą i charakterem: płytowy front to jedna gładka płaszczyzna, ramiakowy porządkuje bryłę ramką — od ledwie zauważalnych 7 mm po klasyczne 60 mm. Konstrukcyjnie nasz front ma 21 mm grubości i pracuje na standardowych zawiasach Blum, Häfele i Hettich."
+        },
+        {
+          "title": "Jakie szerokości ramki są dostępne?",
+          "text": "Cztery: 7 mm (minimalistyczna), 18 mm (uniwersalna), 36 mm (klasyczna proporcja) i 60 mm — w której można dodatkowo wpuścić lustro lub szkło w środek frontu. Do tego zabudowy specjalne na wymiar."
+        },
+        {
+          "title": "Czy fronty z ramką nadają się tylko do kuchni?",
+          "text": "Nie — poza kuchniami trafiają do szaf, łazienek, pralni i zabudów salonowych. Płyta laminowana dobrze znosi codzienną eksploatację, a setki dekorów pozwalają dopasować front do każdego wnętrza."
+        },
+        {
+          "title": "Ile kosztuje front z ramką?",
+          "text": "Od 350 zł/m² netto — ostateczna cena zależy od płyty, dekoru i szerokości ramki. Wycenę przygotowujemy po otrzymaniu wymiarów."
+        }
+      ]
+    },
+    "cta": {
+      "heading": "Zobacz fronty z ramką w realnych kuchniach",
+      "text": "Najwięcej mówią realizacje — a&nbsp;jeśli już wiesz, czego szukasz, przejdź do oferty albo poproś o&nbsp;wycenę.",
+      "items": [
+        { "label": "Zobacz realizacje", "href": "/realizacje/" },
+        { "label": "Oferta frontów ramiakowych", "href": "/oferta/" }
+      ]
+    }
+  }
+}

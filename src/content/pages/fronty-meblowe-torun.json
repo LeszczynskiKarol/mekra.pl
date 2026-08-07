@@ -1,0 +1,86 @@
+{
+  "title": "Fronty meblowe Toruń — producent frontów na wymiar",
+  "description": "Fronty meblowe w Toruniu prosto od producenta: fronty ramiakowe z płyty laminowanej, matowej i akrylowej w 4 szerokościach ramki. Pomiar, dowóz i montaż w Toruniu i okolicach, wysyłka w całej Polsce. Od 350 zł/m² netto.",
+  "sections": {
+    "hero": {
+      "image": "/img/realizacje/zabudowy/zabudowa-wino-01.webp",
+      "eyebrow": "Producent — Toruń",
+      "heading": "Fronty meblowe<br /> <span class=\"text-gradient\">Toruń</span>",
+      "text": "Szukasz frontów meblowych w&nbsp;Toruniu? Trafiłeś do źródła — jesteśmy <strong style=\"color: var(--color-text);\">producentem, nie pośrednikiem</strong>. Wytwarzamy <a href=\"/fronty-z-ramka/\" class=\"font-medium hover:underline\" style=\"color: var(--color-accent);\">fronty z&nbsp;ramką</a> z&nbsp;płyty laminowanej, matowej i&nbsp;akrylowej: na wymiar, z&nbsp;dwustronnym dekorem i&nbsp;krawędziami oklejanymi klejem PUR. W&nbsp;Toruniu i&nbsp;okolicach przyjedziemy na pomiar, dowieziemy i&nbsp;zamontujemy — a&nbsp;do reszty Polski wyślemy.",
+      "items": [
+        { "label": "Zamów wycenę", "href": "/#kontakt" },
+        { "label": "Zobacz realizacje", "href": "/realizacje/" }
+      ]
+    },
+    "szerokosci": {
+      "eyebrow": "Oferta",
+      "heading": "Cztery szerokości ramki, jedna jakość",
+      "text": "Od minimalistycznej linii 7&nbsp;mm po klasyczną ramkę 60&nbsp;mm z&nbsp;możliwością wpuszczenia lustra lub szkła — każdy front produkujemy w&nbsp;Toruniu, na wymiar.",
+      "caption": "Potrzebujesz czegoś nietypowego? Zobacz <a href=\"/oferta/zabudowy/\" class=\"font-medium hover:underline\" style=\"color: var(--color-accent);\">zabudowy specjalne</a> albo całą <a href=\"/oferta/\" class=\"font-medium hover:underline\" style=\"color: var(--color-accent);\">ofertę frontów ramiakowych</a>."
+    },
+    "lokalnie": {
+      "heading": "W Toruniu i okolicach",
+      "bullets": [
+        "— umówisz się na pomiar u&nbsp;siebie zamiast podawać wymiary,",
+        "— gotowe fronty dowozimy i&nbsp;montujemy na miejscu,",
+        "— dekory i&nbsp;próbki obejrzysz na żywo, nie na ekranie."
+      ]
+    },
+    "wysylkowo": {
+      "heading": "W całej Polsce",
+      "bullets": [
+        "— podajesz wymiary, my produkujemy i&nbsp;wysyłamy,",
+        "— otworowanie pod zawiasy przygotujemy na życzenie,",
+        "— stolarzy i&nbsp;studia mebli zapraszamy do <a href=\"/#wspolpraca\" class=\"font-medium hover:underline\" style=\"color: var(--color-accent);\">stałej współpracy</a>."
+      ]
+    },
+    "dlaczego": {
+      "eyebrow": "Dlaczego Mekra",
+      "heading": "Fronty prosto z produkcji",
+      "items": [
+        {
+          "title": "Dwustronny dekor",
+          "text": "Ramka, płycina i&nbsp;krawędzie wykończone tym samym dekorem z&nbsp;obu stron — front od wewnątrz szafki wygląda tak samo dobrze, jak od zewnątrz."
+        },
+        {
+          "title": "Klej PUR w standardzie",
+          "text": "Wszystkie krawędzie oklejamy klejem poliuretanowym — wodoodpornym i&nbsp;odpornym na temperaturę. Front grubości 21&nbsp;mm pracuje na standardowych zawiasach Blum, Häfele i&nbsp;Hettich."
+        },
+        {
+          "title": "Od 350 zł/m² netto",
+          "text": "Cena zależy od płyty, dekoru i&nbsp;szerokości ramki — bez marży pośrednika. Szczegóły w&nbsp;<a href=\"/cennik/\" class=\"font-medium hover:underline\" style=\"color: var(--color-accent);\">cenniku</a>."
+        }
+      ]
+    },
+    "faq": {
+      "eyebrow": "FAQ",
+      "heading": "Najczęstsze pytania",
+      "items": [
+        {
+          "title": "Czy obsługujecie tylko Toruń?",
+          "text": "Nie. Jesteśmy producentem z Torunia i tu odbywa się pomiar, dowóz i montaż (Toruń i okolice), ale fronty wysyłamy w całej Polsce — wielu naszych klientów to stolarze i studia mebli z innych województw."
+        },
+        {
+          "title": "Jakie fronty meblowe produkujecie?",
+          "text": "Fronty ramiakowe z płyty laminowanej, matowej i akrylowej — w czterech szerokościach ramki: 7, 18, 36 i 60 mm, plus zabudowy specjalne. Front ma grubość 21 mm, dwustronny dekor i krawędzie oklejane klejem PUR."
+        },
+        {
+          "title": "Czy przyjeżdżacie na pomiar?",
+          "text": "Tak — w Toruniu i okolicach można umówić się na pomiar, a gotowe fronty dowozimy i montujemy na miejscu. Spoza regionu wystarczy podać wymiary, resztę zrealizujemy wysyłkowo."
+        },
+        {
+          "title": "Ile kosztują fronty na wymiar?",
+          "text": "Ceny zaczynają się od 350 zł/m² netto i zależą od wybranej płyty, dekoru i szerokości ramki. Szczegóły znajdziesz w cenniku, a dokładną wycenę przygotowujemy po otrzymaniu wymiarów."
+        }
+      ]
+    },
+    "cta": {
+      "heading": "Porozmawiajmy o Twoich frontach",
+      "text": "Wyślij wymiary albo umów pomiar w&nbsp;Toruniu i&nbsp;okolicach — odpowiemy z&nbsp;konkretną wyceną.",
+      "items": [
+        { "label": "Zamów wycenę", "href": "/#kontakt" },
+        { "label": "Zobacz cennik", "href": "/cennik/" }
+      ]
+    }
+  }
+}
