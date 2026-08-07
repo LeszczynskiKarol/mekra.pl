@@ -1,0 +1,99 @@
+{
+  "title": "Fronty laminowane na wymiar — producent frontów meblowych",
+  "description": "Fronty laminowane na wymiar z każdej płyty dostępnej na rynku: Egger, Kronospan, Swiss Krono, Forner. Fronty ramiakowe 7–60 mm, dwustronny dekor, klej PUR. Od 350 zł/m². Producent — Toruń, wysyłka w całej Polsce.",
+  "sections": {
+    "breadcrumb": {
+      "items": [
+        { "label": "Strona główna", "href": "/" },
+        { "label": "Oferta", "href": "/oferta/" },
+        { "label": "Fronty laminowane" }
+      ]
+    },
+    "hero": {
+      "image": "/img/realizacje/ramka-18mm/ramka-18mm-rubinova-01.webp",
+      "eyebrow": "Materiał",
+      "heading": "Fronty laminowane<br /> <span class=\"text-gradient\">na wymiar, od producenta</span>",
+      "text": "Produkujemy fronty meblowe z&nbsp;każdej płyty laminowanej dostępnej na rynku — laminaty, folie PPV i&nbsp;akryle w&nbsp;połysku. Wszystkie w&nbsp;formie <a href=\"/oferta/\" class=\"font-medium hover:underline\" style=\"color: var(--color-accent);\">frontów ramiakowych</a> z&nbsp;ramką 7, 18, 36 lub 60&nbsp;mm, z&nbsp;dwustronnym dekorem i&nbsp;klejem PUR w&nbsp;standardzie. Toruń i&nbsp;okolice — wymiarowanie na miejscu, reszta Polski — wysyłka kurierem.",
+      "items": [
+        { "label": "Zamów wycenę", "href": "/#kontakt" },
+        { "label": "Zobacz cennik", "href": "/cennik/" }
+      ]
+    },
+    "zalety": {
+      "eyebrow": "Dlaczego laminat",
+      "heading": "Co dają fronty laminowane?",
+      "text": "Odporność, faktura i&nbsp;paleta dekorów, których nie da lakier ani folia. Porównanie z&nbsp;innymi materiałami znajdziesz na stronie <a href=\"/fronty-laminowane-czy-lakierowane/\" class=\"font-medium hover:underline\" style=\"color: var(--color-accent);\">fronty laminowane czy lakierowane</a>.",
+      "items": [
+        {
+          "title": "Najwyższa odporność",
+          "text": "Płyta laminowana to najtwardszy materiał dostępny na rynku meblowym — odporna na zarysowania, odbarwienia i uszkodzenia mechaniczne. Wielokrotnie twardsza niż lakier MDF."
+        },
+        {
+          "title": "Wyczuwalna faktura",
+          "text": "Gładka, perlistowa, super matowa, metalizowana, szczotkowana lub z wyczuwalną strukturą drewna — faktura frontu jest taka, jaki materiał wybierzesz."
+        },
+        {
+          "title": "Dwustronny dekor",
+          "text": "Obie strony frontu pokryte tym samym dekorem — od wewnątrz szafki front wygląda tak samo jak od zewnątrz. W lakierze widzisz kolor tylko z zewnątrz."
+        },
+        {
+          "title": "Klej PUR w standardzie",
+          "text": "Wszystkie krawędzie oklejamy wodoodpornym, odpornym na temperaturę klejem poliuretanowym PUR — bez dopłat. Fronty przy zmywarkach zabezpieczamy dodatkowo."
+        },
+        {
+          "title": "Setki dekorów",
+          "text": "Unikolory, reprodukcje drewna, kamienia i betonu. Płyty głęboko strukturyzowane (Saviola, Egger, Forner Cleaf) oraz maty i akryle (Forner, AGT) w trzech wykończeniach: ultramat, mat, połysk."
+        },
+        {
+          "title": "Ekologia i recykling",
+          "text": "Płyty laminowane w części pochodzą z recyklingu — wybierając fronty laminowane, stawiasz na odpowiedzialne rozwiązanie."
+        }
+      ]
+    },
+    "warianty": {
+      "eyebrow": "Wykonanie",
+      "heading": "Cztery szerokości ramki do wyboru",
+      "text": "Każdy front laminowany wykonujemy w&nbsp;formie ramiaka — wybierz szerokość ramki dopasowaną do stylu wnętrza.",
+      "ctaLabel": "Zobacz wariant"
+    },
+    "plyty": {
+      "eyebrow": "Płyty i dekory",
+      "heading": "Każda płyta laminowana z rynku",
+      "body": [
+        "Nie ograniczamy Cię do własnego katalogu — wykonamy fronty z&nbsp;każdej płyty laminowanej dostępnej na rynku. Na co dzień pracujemy na płytach <strong style=\"color: var(--color-text);\">Egger, Kronospan, Swiss Krono i&nbsp;Forner</strong>.",
+        "Do wyboru masz setki dekorów: unikolory, reprodukcje drewna, kamienia i&nbsp;betonu. Płyty głęboko strukturyzowane (Saviola, Egger, Forner Cleaf) oddają charakter prawdziwego drewna — strukturę czuć pod dłonią. Maty akrylowe i&nbsp;akryle (Forner, AGT) to jednolite wybarwienia w&nbsp;trzech wykończeniach: ultramat głęboko pochłaniający światło, klasyczny mat oraz połysk.",
+        "Wszystkie fronty mają grubość 21&nbsp;mm i&nbsp;pracują na standardowych zawiasach Blum, Häfele i&nbsp;Hettich. Zasady pielęgnacji laminatu i&nbsp;warunki gwarancji opisaliśmy w&nbsp;<a href=\"/warunki-gwarancji/\" class=\"font-medium hover:underline\" style=\"color: var(--color-accent);\">warunkach gwarancji</a>."
+      ]
+    },
+    "faq": {
+      "eyebrow": "FAQ",
+      "heading": "Najczęstsze pytania",
+      "items": [
+        {
+          "title": "Ile kosztują fronty laminowane na wymiar?",
+          "text": "Fronty ramiakowe z płyty laminowanej kosztują od 350 zł/m² netto — cena zależy od wybranego dekoru, dlatego każde zamówienie wyceniamy indywidualnie. Dopłaty dotyczą frontów ze szkłem lub lustrem oraz zacinania na 45°. Pełne stawki znajdziesz w cenniku."
+        },
+        {
+          "title": "Z jakich płyt laminowanych wykonujecie fronty?",
+          "text": "Z każdej płyty laminowanej dostępnej na rynku — laminaty, folie PPV i akryle w połysku. Pracujemy m.in. na płytach Egger, Kronospan, Swiss Krono i Forner, a w dekorach strukturalnych na kolekcjach Saviola i Forner Cleaf."
+        },
+        {
+          "title": "Czy wysyłacie fronty laminowane poza Toruń?",
+          "text": "Tak — gotowe fronty wysyłamy kurierem pod wskazany adres w całej Polsce. W promieniu 100 km od Torunia oferujemy również wymiarowanie na miejscu. Fronty ze szkłem lub lustrem o dużym gabarycie dostarczamy transportem dedykowanym."
+        },
+        {
+          "title": "Jaki jest czas realizacji zamówienia?",
+          "text": "Standardowo 8–10 tygodni od potwierdzenia specyfikacji. Minimum logistyczne to 4 m² — mniejsze zamówienia realizujemy z dopłatą 30% wartości zamówienia netto. Za słój przechodzący (zachowanie ciągłości usłojenia między frontami) doliczamy 20% wartości zamówienia netto."
+        }
+      ]
+    },
+    "cta": {
+      "heading": "Wyceń swoje fronty laminowane",
+      "text": "Wyślij wymiary lub opisz projekt — odpowiemy w&nbsp;24h z&nbsp;propozycją dekoru, szerokości ramki i&nbsp;wstępną wyceną.",
+      "items": [
+        { "label": "Zamów wycenę", "href": "/#kontakt" },
+        { "label": "Zobacz realizacje", "href": "/realizacje/" }
+      ]
+    }
+  }
+}
