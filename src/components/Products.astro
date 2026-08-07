@@ -1,62 +1,20 @@
 ---
-const frameTypes = [
-  {
-    size: '7',
-    unit: 'mm',
-    slug: 'ramka-7mm',
-    name: 'Nowoczesna linia',
-    description: 'Delikatne podkreślenie formy. Subtelna ramka, która nadaje frontom nowoczesny, minimalistyczny charakter. Idealna do kuchni w duchu skandynawskim i loftowym.',
-    style: 'Nowoczesny design',
-    image: 'img/ramka77mm.webp',
-    imageAlt: 'Front ramiakowy z ramką 7mm - nowoczesny design',
-  },
-  {
-    size: '18',
-    unit: 'mm',
-    slug: 'ramka-18mm',
-    name: 'Współczesna elegancja',
-    description: 'Ramka w nowoczesnej formie z wyraźniejszym akcentem. Łączy współczesne wzornictwo z wyczuwalną strukturą materiału. Uniwersalny wybór do kuchni i zabudów.',
-    style: 'Uniwersalna forma',
-    image: 'img/ramka18mm.webp',
-    imageAlt: 'Front ramiakowy z ramką 18mm - współczesna elegancja',
-  },
-  {
-    size: '36',
-    unit: 'mm',
-    slug: 'ramka-36mm',
-    name: 'Klasyczny szyk',
-    description: 'Idziemy w stronę klasyku — kuchni farmerskich, skandynawskich, prowansalskich. Szersza ramka nadaje meblom charakteru i przytulności tradycyjnych wnętrz.',
-    style: 'Styl farmhouse & skandynawski',
-    image: 'img/ramka36mm.webp',
-    imageAlt: 'Front ramiakowy z ramką 36mm - klasyczny styl farmhouse',
-  },
-  {
-    size: '60',
-    unit: 'mm',
-    slug: 'ramka-60mm',
-    name: 'Pełna klasyka',
-    description: 'Standardowa, znana forma z frontów MDF lakierowanych — teraz w wersji z płyty laminowanej. Możliwość wpuszczenia lustra lub szkła w środek ramki, zamiast standardowego montażu od tyłu.',
-    style: 'Klasyka z lustrem lub szkłem',
-    image: 'img/ramka60mm.webp',
-    imageAlt: 'Front ramiakowy z ramką 60mm - klasyczny front ze szkłem',
-  },
-];
+import content from '../content/pages/index.json';
+
+const oferta = content.sections.oferta;
+const ofertaCta = content.sections.ofertaCta;
+const lustroSzklo = content.sections.lustroSzklo;
+
+const frameTypes = oferta.items;
 ---
 
 <section id="oferta" class="section-spacing section-padding relative" style="background-color: var(--color-bg-secondary);">
   <div class="max-w-7xl mx-auto">
     <!-- Header -->
     <div class="text-center max-w-3xl mx-auto animate-on-scroll">
-      <span class="label-tag">Oferta</span>
-      <h2 class="mt-6 font-display text-3xl sm:text-4xl md:text-5xl tracking-tight" style="color: var(--color-text);">
-        Cztery szerokości ramek,<br />
-        <span class="text-gradient">nieograniczone możliwości</span>
-      </h2>
-      <p class="mt-6 text-base md:text-lg leading-relaxed font-body" style="color: var(--color-text-secondary);">
-        Każda ramka to inny charakter wnętrza. Od minimalizmu po pełną klasykę — dobierz szerokość
-        do swojego stylu. Wszystkie fronty mają grubość 21&nbsp;mm i&nbsp;pracują na standardowych
-        zawiasach Blum, Häfele i&nbsp;Hettich.
-      </p>
+      <span class="label-tag">{oferta.eyebrow}</span>
+      <h2 class="mt-6 font-display text-3xl sm:text-4xl md:text-5xl tracking-tight" style="color: var(--color-text);" set:html={oferta.heading} />
+      <p class="mt-6 text-base md:text-lg leading-relaxed font-body" style="color: var(--color-text-secondary);" set:html={oferta.text} />
     </div>
 
     <!-- Frame types grid -->
@@ -102,7 +60,7 @@ const frameTypes = [
               {frame.name}
             </h3>
             <p class="mt-2 text-sm leading-relaxed font-body" style="color: var(--color-text-secondary);">
-              {frame.description}
+              {frame.text}
             </p>
             <div class="mt-4 flex items-center justify-between gap-3">
               <span class="inline-flex items-center gap-1.5 text-xs font-heading font-medium" style="color: var(--color-accent);">
@@ -110,10 +68,10 @@ const frameTypes = [
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
                   <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
                 </svg>
-                {frame.style}
+                {frame.label}
               </span>
               <span class="inline-flex items-center gap-1 text-xs font-heading font-medium opacity-0 -translate-x-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" style="color: var(--color-accent);">
-                Szczegóły
+                {oferta.ctaLabel}
                 <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                 </svg>
@@ -169,13 +127,13 @@ const frameTypes = [
     <!-- Full offer CTA -->
     <div class="mt-12 text-center animate-on-scroll">
       <a href="/oferta/" class="inline-flex items-center gap-2 btn-primary">
-        <span>Zobacz pełną ofertę</span>
+        <span>{ofertaCta.ctaLabel}</span>
         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
         </svg>
       </a>
       <p class="mt-3 text-xs font-body" style="color: var(--color-text-muted);">
-        Pełne opisy wariantów, zabudowy specjalne i porównanie szerokości ramek
+        {ofertaCta.text}
       </p>
     </div>
 
@@ -189,13 +147,8 @@ const frameTypes = [
             </svg>
           </div>
           <div>
-            <h4 class="font-heading font-semibold text-sm" style="color: var(--color-text);">Lustro i szkło w ramce 60 mm</h4>
-            <p class="mt-2 text-sm leading-relaxed font-body" style="color: var(--color-text-secondary);">
-              W&nbsp;ramce 60&nbsp;mm istnieje możliwość wpuszczenia lustra lub szkła bezpośrednio w&nbsp;środek
-              ramki — bez standardowego montażu od tyłu frontu. To daje znacznie lepszy wygląd niż
-              tradycyjne rozwiązania. Ramka bez środkowej płyciny jest składana inną technologią
-              i&nbsp;posiada widoczną linię łączenia w&nbsp;pionie po obu stronach.
-            </p>
+            <h4 class="font-heading font-semibold text-sm" style="color: var(--color-text);">{lustroSzklo.heading}</h4>
+            <p class="mt-2 text-sm leading-relaxed font-body" style="color: var(--color-text-secondary);" set:html={lustroSzklo.text} />
           </div>
         </div>
       </div>

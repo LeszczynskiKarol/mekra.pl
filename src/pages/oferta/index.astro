@@ -5,6 +5,9 @@ import Footer from '../../components/Footer.astro';
 import PageHeroPhoto from '../../components/PageHeroPhoto.astro';
 import { ofertaVariants } from '../../data/oferta';
 import manifest from '../../data/realizacje.json';
+import content from '../../content/pages/oferta.json';
+
+const { sections } = content;
 
 const { categories, items } = manifest;
 
@@ -33,8 +36,8 @@ const jsonLd = {
 ---
 
 <BaseLayout
-  title="Fronty ramiakowe — fronty z ramką 7, 18, 36, 60 mm na wymiar"
-  description="Fronty ramiakowe (fronty z ramką) w 4 szerokościach: 7, 18, 36 i 60 mm + zabudowy na wymiar. Płyta laminowana, dwustronny dekor, klej PUR. Producent — Toruń, wysyłka w całej Polsce."
+  title={content.title}
+  description={content.description}
   canonicalUrl="https://www.mekra.pl/oferta/"
 >
   <Navbar />
@@ -45,21 +48,13 @@ const jsonLd = {
       <!-- Gradient orbs -->
       <div class="absolute top-20 -left-32 w-96 h-96 rounded-full opacity-20 dark:opacity-10 blur-3xl pointer-events-none" style="background: radial-gradient(circle, #ae9070, transparent 70%);"></div>
       <div class="absolute -bottom-20 -right-32 w-96 h-96 rounded-full opacity-15 dark:opacity-10 blur-3xl pointer-events-none" style="background: radial-gradient(circle, #d4c5ae, transparent 70%);"></div>
-      <PageHeroPhoto src="/img/realizacje/ramka-36mm/ramka-36mm-grudziadz-01.webp" position="72% 45%" />
+      <PageHeroPhoto src={sections.hero.image} position="72% 45%" />
 
       <div class="max-w-7xl mx-auto relative">
         <div class="max-w-3xl">
-          <span class="label-tag">Oferta</span>
-          <h1 class="mt-6 font-display text-4xl sm:text-5xl md:text-6xl tracking-tight leading-[1.05]" style="color: var(--color-text);">
-            Fronty ramiakowe<br />
-            <span class="text-gradient">w czterech szerokościach ramki</span>
-          </h1>
-          <p class="mt-6 text-base md:text-lg leading-relaxed font-body" style="color: var(--color-text-secondary);">
-            Fronty z&nbsp;ramką — nazywane też frontami ramkowymi lub ramiakowymi — produkujemy
-            w&nbsp;czterech szerokościach: 7, 18, 36 i&nbsp;60&nbsp;mm, a&nbsp;do tego zabudowy specjalne na wymiar.
-            Wszystkie fronty mają grubość 21&nbsp;mm, dwustronny dekor i klej PUR w&nbsp;standardzie.
-            Pasują na zawiasy Blum, Häfele i Hettich.
-          </p>
+          <span class="label-tag">{sections.hero.eyebrow}</span>
+          <h1 class="mt-6 font-display text-4xl sm:text-5xl md:text-6xl tracking-tight leading-[1.05]" style="color: var(--color-text);" set:html={sections.hero.heading} />
+          <p class="mt-6 text-base md:text-lg leading-relaxed font-body" style="color: var(--color-text-secondary);" set:html={sections.hero.text} />
         </div>
 
         <!-- Quick anchors -->
@@ -89,11 +84,10 @@ const jsonLd = {
       <div class="max-w-7xl mx-auto">
         <div class="text-center max-w-2xl mx-auto mb-12">
           <h2 class="font-display text-3xl sm:text-4xl tracking-tight" style="color: var(--color-text);">
-            Cztery szerokości ramek
+            {sections.warianty.heading}
           </h2>
           <p class="mt-4 text-base font-body leading-relaxed" style="color: var(--color-text-secondary);">
-            Każda ramka to inny charakter wnętrza. Kliknij wariant, żeby zobaczyć
-            opis, korzyści i pełną galerię realizacji.
+            {sections.warianty.text}
           </p>
         </div>
 
@@ -148,7 +142,7 @@ const jsonLd = {
                     ))}
                   </div>
                   <div class="mt-5 inline-flex items-center gap-1.5 text-sm font-heading font-medium" style="color: var(--color-accent);">
-                    <span>Zobacz wariant</span>
+                    <span>{sections.warianty.ctaLabel}</span>
                     <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                     </svg>
@@ -180,7 +174,7 @@ const jsonLd = {
                     {imgWebp && <source srcset={imgWebp} type="image/webp" />}
                     <img
                       src={imgSrc}
-                      alt="Zabudowa meblowa na wymiar — winiarnia"
+                      alt={sections.zabudowy.alt}
                       class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       loading="lazy"
                       decoding="async"
@@ -190,7 +184,7 @@ const jsonLd = {
               })()}
             </div>
             <div class="p-8 md:p-12 lg:p-16 flex flex-col justify-center">
-              <span class="label-tag">Wariant specjalny</span>
+              <span class="label-tag">{sections.zabudowy.eyebrow}</span>
               <h2 class="mt-5 font-display text-3xl sm:text-4xl tracking-tight" style="color: var(--color-text);">
                 {zabudowy.name}
               </h2>
@@ -205,7 +199,7 @@ const jsonLd = {
                 ))}
               </div>
               <div class="mt-8 inline-flex items-center gap-2 text-sm font-heading font-semibold" style="color: var(--color-accent);">
-                <span>Poznaj zabudowy</span>
+                <span>{sections.zabudowy.ctaLabel}</span>
                 <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                 </svg>
@@ -220,22 +214,20 @@ const jsonLd = {
     <section class="section-padding py-12 md:py-20" style="background-color: var(--color-bg-secondary);">
       <div class="max-w-7xl mx-auto">
         <div class="text-center max-w-2xl mx-auto mb-12">
-          <span class="label-tag">Porównanie</span>
+          <span class="label-tag">{sections.porownanie.eyebrow}</span>
           <h2 class="mt-6 font-display text-3xl sm:text-4xl tracking-tight" style="color: var(--color-text);">
-            Którą szerokość wybrać?
+            {sections.porownanie.heading}
           </h2>
-          <p class="mt-4 text-base font-body leading-relaxed" style="color: var(--color-text-secondary);">
-            Szybki przegląd — porównaj cztery szerokości ramek bok w&nbsp;bok.
-          </p>
+          <p class="mt-4 text-base font-body leading-relaxed" style="color: var(--color-text-secondary);" set:html={sections.porownanie.text} />
         </div>
 
         <div class="overflow-x-auto rounded-2xl" style="border: 1px solid var(--color-border); background-color: var(--color-card-bg);">
           <table class="w-full min-w-[720px]">
             <thead>
               <tr style="background-color: var(--color-bg-tertiary);">
-                <th class="text-left py-4 px-6 font-heading text-sm font-semibold" style="color: var(--color-text);">Wariant</th>
-                <th class="text-left py-4 px-6 font-heading text-sm font-semibold" style="color: var(--color-text);">Charakter</th>
-                <th class="text-left py-4 px-6 font-heading text-sm font-semibold" style="color: var(--color-text);">Najlepsze do</th>
+                <th class="text-left py-4 px-6 font-heading text-sm font-semibold" style="color: var(--color-text);">{sections.porownanie.bullets[0]}</th>
+                <th class="text-left py-4 px-6 font-heading text-sm font-semibold" style="color: var(--color-text);">{sections.porownanie.bullets[1]}</th>
+                <th class="text-left py-4 px-6 font-heading text-sm font-semibold" style="color: var(--color-text);">{sections.porownanie.bullets[2]}</th>
                 <th class="text-center py-4 px-6 font-heading text-sm font-semibold" style="color: var(--color-text);"></th>
               </tr>
             </thead>
@@ -257,7 +249,7 @@ const jsonLd = {
                   </td>
                   <td class="py-4 px-6 text-center">
                     <a href={`/oferta/${v.slug}/`} class="inline-flex items-center gap-1 text-sm font-heading font-medium hover:underline" style="color: var(--color-accent);">
-                      Szczegóły
+                      {sections.porownanie.ctaLabel}
                       <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                       </svg>
@@ -274,29 +266,12 @@ const jsonLd = {
     <!-- Czym są fronty ramiakowe — treść informacyjna -->
     <section class="section-padding py-12 md:py-20">
       <div class="max-w-3xl mx-auto">
-        <span class="label-tag">Warto wiedzieć</span>
+        <span class="label-tag">{sections.info.eyebrow}</span>
         <h2 class="mt-6 font-display text-3xl sm:text-4xl tracking-tight" style="color: var(--color-text);">
-          Czym są fronty ramiakowe?
+          {sections.info.heading}
         </h2>
         <div class="mt-6 space-y-4 text-base leading-relaxed font-body" style="color: var(--color-text-secondary);">
-          <p>
-            Front ramiakowy (inaczej front z&nbsp;ramką lub front ramkowy) składa się z&nbsp;ramy
-            i&nbsp;środkowej płyciny. Rama porządkuje geometrię frontu i&nbsp;nadaje mu charakter —
-            od dyskretnej linii 7&nbsp;mm po pełną klasykę 60&nbsp;mm z&nbsp;możliwością wpuszczenia
-            lustra lub szkła w&nbsp;środek ramki.
-          </p>
-          <p>
-            Nasze fronty wykonujemy z&nbsp;<a href="/oferta/fronty-laminowane/" class="font-medium hover:underline" style="color: var(--color-accent);">płyty laminowanej — dowolnej dostępnej na rynku</a>:
-            laminaty, folie PPV i&nbsp;akryle w&nbsp;połysku. Ramka, płycina i&nbsp;krawędzie są pokryte
-            tym samym dekorem z&nbsp;obu stron, a&nbsp;wszystkie krawędzie oklejamy wodoodpornym klejem
-            PUR. Jeśli zastanawiasz się nad wyborem między laminatem a&nbsp;lakierem, zobacz nasze
-            <a href="/fronty-laminowane-czy-lakierowane/" class="font-medium hover:underline" style="color: var(--color-accent);">porównanie frontów laminowanych i&nbsp;lakierowanych</a>.
-          </p>
-          <p>
-            Jesteśmy producentem z&nbsp;Torunia — w&nbsp;promieniu 100&nbsp;km wymiarujemy na miejscu,
-            a&nbsp;gotowe fronty wysyłamy kurierem po całej Polsce. Ceny zaczynają się od
-            350&nbsp;zł/m² netto — szczegóły znajdziesz w&nbsp;<a href="/cennik/" class="font-medium hover:underline" style="color: var(--color-accent);">cenniku frontów ramiakowych</a>.
-          </p>
+          {sections.info.body.map((p) => (<p set:html={p} />))}
         </div>
       </div>
     </section>
@@ -305,15 +280,12 @@ const jsonLd = {
     <section class="section-padding py-16 md:py-24">
       <div class="max-w-3xl mx-auto text-center">
         <h2 class="font-display text-3xl md:text-4xl tracking-tight" style="color: var(--color-text);">
-          Nie wiesz, którą szerokość wybrać?
+          {sections.cta.heading}
         </h2>
-        <p class="mt-4 text-base md:text-lg font-body leading-relaxed" style="color: var(--color-text-secondary);">
-          Doradzimy. Wyślij wymiary lub opisz wizję — odpowiemy w&nbsp;24h
-          z propozycją wariantu i&nbsp;wstępną wyceną.
-        </p>
+        <p class="mt-4 text-base md:text-lg font-body leading-relaxed" style="color: var(--color-text-secondary);" set:html={sections.cta.text} />
         <div class="mt-8 flex flex-wrap justify-center gap-3">
-          <a href="/#kontakt" class="btn-primary">Zamów wycenę</a>
-          <a href="/realizacje/" class="btn-secondary">Zobacz realizacje</a>
+          <a href={sections.cta.items[0].href} class="btn-primary">{sections.cta.items[0].label}</a>
+          <a href={sections.cta.items[1].href} class="btn-secondary">{sections.cta.items[1].label}</a>
         </div>
       </div>
     </section>

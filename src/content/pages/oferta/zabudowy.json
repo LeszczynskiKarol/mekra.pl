@@ -1,0 +1,50 @@
+{
+  "title": "Zabudowy meblowe na wymiar — winiarnie, regały, projekty nietypowe",
+  "description": "Zabudowy meblowe na wymiar: winiarnie, regały, ścianki TV, zabudowy pod skosami. Projekt + wymiarowanie + produkcja. Toruń i kujawsko-pomorskie.",
+  "slug": "zabudowy",
+  "order": 5,
+  "size": "★",
+  "unit": "",
+  "name": "Zabudowy specjalne",
+  "subtitle": "Mebel zaprojektowany do pomieszczenia",
+  "text": "Zabudowy nietypowe — winiarnie, regały, meble pod konkretne pomieszczenie. Projektujemy razem z Tobą i dopasowujemy do milimetra.",
+  "intro": "Czasem projekt nie mieści się w kategoriach „kuchnia\" czy „szafa\". Wtedy robimy zabudowy nietypowe: winiarnie z chłodzeniem, regały do gabinetów, ścianki TV, zabudowy pod skosami, meble na zamówienie pod konkretne pomieszczenie i jego ograniczenia.",
+  "image": "/img/realizacje/zabudowy/zabudowa-wino-01.webp",
+  "styles": ["Mebel na wymiar", "Projekt unikatowy", "Pod konkretne pomieszczenie"],
+  "rooms": ["Winiarnia w salonie", "Gabinet domowy", "Ścianka TV", "Zabudowy pod skosami", "Wnęki nietypowe"],
+  "items": [
+    {
+      "title": "Projekt pod pomieszczenie",
+      "text": "Wymiarujemy lub przyjmujemy Twoje wymiary i projektujemy mebel od zera. Nie wciskamy gotowych modułów — dopasowujemy się do milimetra."
+    },
+    {
+      "title": "Pełna swoboda materiałów",
+      "text": "Każda z ramek (7/18/36/60 mm) oraz pełna paleta dekorów płyt laminowanych, matowych, akrylowych — dobieramy do funkcji mebla."
+    },
+    {
+      "title": "Specjalne funkcje",
+      "text": "Chłodzenie wina, podświetlenie LED, szkło, lustro, sztywne półki na ciężkie kolekcje — łączymy stolarkę z technologią pod konkretną potrzebę."
+    }
+  ],
+  "body": [
+    "Zabudowy specjalne to projekty, w których funkcja jest tak samo ważna, jak wygląd. Robiliśmy winiarnie z chłodzeniem zintegrowanym z meblem, regały do bibliotek, ścianki TV z ukrytą wentylacją sprzętu, zabudowy pod skosami w poddaszach, gdzie żaden gotowy moduł by się nie wpasował.",
+    "Zaczynamy od rozmowy o funkcji — co ma trzymać, na co być odporne, jak się otwierać. Potem projektujemy konstrukcję, dobieramy ramkę i dekor pod estetykę pomieszczenia. Klient dostaje wizualizację przed produkcją.",
+    "Niezależnie od nietypowości projektu — standard wykonania jest ten sam: grubość frontu 21 mm, klej PUR, dwustronny dekor, kompatybilność z zawiasami Blum, Häfele i Hettich."
+  ],
+  "bullets": [
+    "Mebel zaprojektowany od zera pod Twoje pomieszczenie",
+    "Dowolna szerokość ramki w jednej zabudowie",
+    "Specjalne funkcje (chłodzenie, LED, szkło) wbudowane w projekt",
+    "Wizualizacja przed produkcją",
+    "Wymiarowanie na miejscu w promieniu 100 km od Torunia"
+  ],
+  "bestFor": "Winiarnie domowe, biblioteki i gabinety, ścianki TV, zabudowy pod skosami, wnęki nietypowe, każdy projekt, do którego gotowy moduł by nie pasował.",
+  "keywords": [
+    "zabudowy meblowe Toruń",
+    "meble na wymiar",
+    "winiarnia domowa",
+    "regały na wymiar",
+    "zabudowy pod skosami",
+    "ścianka TV na wymiar"
+  ]
+}

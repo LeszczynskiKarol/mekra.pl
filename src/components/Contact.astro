@@ -1,6 +1,13 @@
 ---
 // Contact section — connected to mekra-api (Lambda + SES)
+import content from '../content/pages/index.json';
+
 const API_URL = 'https://iedy003jrg.execute-api.eu-central-1.amazonaws.com';
+
+const kontakt = content.sections.kontakt;
+const czasOdpowiedzi = content.sections.kontaktCzasOdpowiedzi;
+const formularz = content.sections.kontaktFormularz;
+const sukces = content.sections.kontaktSukces;
 ---
 
 <section id="kontakt" class="section-spacing section-padding relative" style="background-color: var(--color-bg-secondary);">
@@ -8,17 +15,11 @@ const API_URL = 'https://iedy003jrg.execute-api.eu-central-1.amazonaws.com';
     <div class="grid lg:grid-cols-2 gap-12 lg:gap-20">
       <!-- Left: info -->
       <div class="animate-on-scroll">
-        <span class="label-tag">Kontakt</span>
+        <span class="label-tag">{kontakt.eyebrow}</span>
 
-        <h2 class="mt-6 font-display text-3xl sm:text-4xl md:text-5xl tracking-tight leading-tight" style="color: var(--color-text);">
-          Porozmawiajmy<br />
-          <span class="text-gradient">o Twoim projekcie</span>
-        </h2>
+        <h2 class="mt-6 font-display text-3xl sm:text-4xl md:text-5xl tracking-tight leading-tight" style="color: var(--color-text);" set:html={kontakt.heading} />
 
-        <p class="mt-6 text-base leading-relaxed font-body" style="color: var(--color-text-secondary);">
-          Wyślij wymiary, opisz swoją wizję lub po prostu zadzwoń.
-          Doradzimy najlepsze rozwiązanie i&nbsp;przygotujemy wycenę.
-        </p>
+        <p class="mt-6 text-base leading-relaxed font-body" style="color: var(--color-text-secondary);" set:html={kontakt.text} />
 
         <!-- Contact details -->
         <div class="mt-10 space-y-6">
@@ -29,10 +30,10 @@ const API_URL = 'https://iedy003jrg.execute-api.eu-central-1.amazonaws.com';
               </svg>
             </div>
             <div>
-              <div class="font-heading font-semibold text-sm" style="color: var(--color-text);">Telefon</div>
+              <div class="font-heading font-semibold text-sm" style="color: var(--color-text);">{kontakt.items[0].label}</div>
               <!-- TODO: Replace with actual phone -->
-              <a href="tel:+48792456094" class="text-base font-body transition-colors hover:text-[var(--color-accent)]" style="color: var(--color-text-secondary);">
-                792 456 094
+              <a href={kontakt.items[0].href} class="text-base font-body transition-colors hover:text-[var(--color-accent)]" style="color: var(--color-text-secondary);">
+                {kontakt.items[0].value}
               </a>
             </div>
           </div>
@@ -44,9 +45,9 @@ const API_URL = 'https://iedy003jrg.execute-api.eu-central-1.amazonaws.com';
               </svg>
             </div>
             <div>
-              <div class="font-heading font-semibold text-sm" style="color: var(--color-text);">Email</div>
-              <a href="mailto:kontakt@mekra.pl" class="text-base font-body transition-colors hover:text-[var(--color-accent)]" style="color: var(--color-text-secondary);">
-                kontakt@mekra.pl
+              <div class="font-heading font-semibold text-sm" style="color: var(--color-text);">{kontakt.items[1].label}</div>
+              <a href={kontakt.items[1].href} class="text-base font-body transition-colors hover:text-[var(--color-accent)]" style="color: var(--color-text-secondary);">
+                {kontakt.items[1].value}
               </a>
             </div>
           </div>
@@ -59,9 +60,9 @@ const API_URL = 'https://iedy003jrg.execute-api.eu-central-1.amazonaws.com';
               </svg>
             </div>
             <div>
-              <div class="font-heading font-semibold text-sm" style="color: var(--color-text);">Lokalizacja</div>
+              <div class="font-heading font-semibold text-sm" style="color: var(--color-text);">{kontakt.items[2].label}</div>
               <p class="text-base font-body" style="color: var(--color-text-secondary);">
-                Toruń, kujawsko-pomorskie
+                {kontakt.items[2].value}
               </p>
             </div>
           </div>
@@ -75,8 +76,8 @@ const API_URL = 'https://iedy003jrg.execute-api.eu-central-1.amazonaws.com';
             </svg>
           </div>
           <div>
-            <div class="font-heading font-semibold text-sm" style="color: var(--color-text);">Czas odpowiedzi</div>
-            <p class="text-sm font-body" style="color: var(--color-text-secondary);">Odpowiadamy na wiadomości w ciągu 24-48 godz.</p>
+            <div class="font-heading font-semibold text-sm" style="color: var(--color-text);">{czasOdpowiedzi.title}</div>
+            <p class="text-sm font-body" style="color: var(--color-text-secondary);">{czasOdpowiedzi.text}</p>
           </div>
         </div>
       </div>
@@ -84,9 +85,9 @@ const API_URL = 'https://iedy003jrg.execute-api.eu-central-1.amazonaws.com';
       <!-- Right: contact form -->
       <div class="animate-on-scroll" style="transition-delay: 0.2s;">
         <div class="card-base rounded-2xl p-6 md:p-10">
-          <h3 class="font-heading text-xl font-semibold" style="color: var(--color-text);">Szybka wycena</h3>
+          <h3 class="font-heading text-xl font-semibold" style="color: var(--color-text);">{formularz.heading}</h3>
           <p class="mt-2 text-sm font-body" style="color: var(--color-text-secondary);">
-            Opisz swoje potrzeby — odezwiemy się z wyceną
+            {formularz.text}
           </p>
 
           <!-- Success message -->
@@ -94,8 +95,8 @@ const API_URL = 'https://iedy003jrg.execute-api.eu-central-1.amazonaws.com';
             <svg class="w-12 h-12 mx-auto mb-3" style="color: #22c55e;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <h4 class="font-heading font-semibold text-lg" style="color: var(--color-text);">Wiadomość wysłana!</h4>
-            <p class="mt-1 text-sm font-body" style="color: var(--color-text-secondary);">Odpowiemy najszybciej jak to możliwe.</p>
+            <h4 class="font-heading font-semibold text-lg" style="color: var(--color-text);">{sukces.heading}</h4>
+            <p class="mt-1 text-sm font-body" style="color: var(--color-text-secondary);">{sukces.text}</p>
           </div>
 
           <!-- Error message -->
@@ -105,7 +106,7 @@ const API_URL = 'https://iedy003jrg.execute-api.eu-central-1.amazonaws.com';
 
           <form class="mt-8 space-y-5" id="contact-form">
             <div>
-              <label for="name" class="block text-sm font-heading font-medium mb-2" style="color: var(--color-text);">Imię i nazwisko</label>
+              <label for="name" class="block text-sm font-heading font-medium mb-2" style="color: var(--color-text);">{formularz.items[0].label}</label>
               <input
                 type="text"
                 id="name"
@@ -119,7 +120,7 @@ const API_URL = 'https://iedy003jrg.execute-api.eu-central-1.amazonaws.com';
 
             <div class="grid sm:grid-cols-2 gap-5">
               <div>
-                <label for="email" class="block text-sm font-heading font-medium mb-2" style="color: var(--color-text);">Email</label>
+                <label for="email" class="block text-sm font-heading font-medium mb-2" style="color: var(--color-text);">{formularz.items[1].label}</label>
                 <input
                   type="email"
                   id="email"
@@ -131,7 +132,7 @@ const API_URL = 'https://iedy003jrg.execute-api.eu-central-1.amazonaws.com';
                 />
               </div>
               <div>
-                <label for="phone" class="block text-sm font-heading font-medium mb-2" style="color: var(--color-text);">Telefon</label>
+                <label for="phone" class="block text-sm font-heading font-medium mb-2" style="color: var(--color-text);">{formularz.items[2].label}</label>
                 <input
                   type="tel"
                   id="phone"
@@ -144,7 +145,7 @@ const API_URL = 'https://iedy003jrg.execute-api.eu-central-1.amazonaws.com';
             </div>
 
             <div>
-              <label for="productType" class="block text-sm font-heading font-medium mb-2" style="color: var(--color-text);">Rodzaj frontu</label>
+              <label for="productType" class="block text-sm font-heading font-medium mb-2" style="color: var(--color-text);">{formularz.items[3].label}</label>
               <select
                 id="productType"
                 name="productType"
@@ -163,7 +164,7 @@ const API_URL = 'https://iedy003jrg.execute-api.eu-central-1.amazonaws.com';
             </div>
 
             <div>
-              <label for="dimensions" class="block text-sm font-heading font-medium mb-2" style="color: var(--color-text);">Wymiary (opcjonalnie)</label>
+              <label for="dimensions" class="block text-sm font-heading font-medium mb-2" style="color: var(--color-text);">{formularz.items[4].label}</label>
               <input
                 type="text"
                 id="dimensions"
@@ -175,7 +176,7 @@ const API_URL = 'https://iedy003jrg.execute-api.eu-central-1.amazonaws.com';
             </div>
 
             <div>
-              <label for="message" class="block text-sm font-heading font-medium mb-2" style="color: var(--color-text);">Wiadomość</label>
+              <label for="message" class="block text-sm font-heading font-medium mb-2" style="color: var(--color-text);">{formularz.items[5].label}</label>
               <textarea
                 id="message"
                 name="message"
@@ -190,7 +191,7 @@ const API_URL = 'https://iedy003jrg.execute-api.eu-central-1.amazonaws.com';
             <!-- File upload dropzone -->
             <div>
               <label for="file-input" class="block text-sm font-heading font-medium mb-2" style="color: var(--color-text);">
-                Załączniki
+                {formularz.items[6].label}
                 <span class="font-normal" style="color: var(--color-text-muted);">(opcjonalnie, maks. 10 MB/plik)</span>
               </label>
               <div
@@ -238,7 +239,7 @@ const API_URL = 'https://iedy003jrg.execute-api.eu-central-1.amazonaws.com';
             </button>
 
             <p class="text-xs text-center font-body" style="color: var(--color-text-muted);">
-              Wysyłając formularz, wyrażasz zgodę na kontakt w sprawie wyceny
+              {formularz.caption}
             </p>
           </form>
         </div>

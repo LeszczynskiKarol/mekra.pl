@@ -4,38 +4,24 @@ import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import PageHeroPhoto from '../components/PageHeroPhoto.astro';
 import { ofertaVariants } from '../data/oferta';
+import content from '../content/pages/fronty-meblowe-torun.json';
+
+const { sections } = content;
 
 // Strona lokalna pod frazy „fronty meblowe Toruń" / „fronty Toruń" (GSC: 625 wyśw.,
 // poz. ~21 bez dedykowanej strony). Wyłącznie deklaracje publikowane już w serwisie
 // (ServiceArea, oferta, cennik) — bez nowych obietnic produkcyjnych.
 const frameVariants = ofertaVariants.filter((v) => v.slug !== 'zabudowy');
 
-const faq = [
-  {
-    q: 'Czy obsługujecie tylko Toruń?',
-    a: 'Nie. Jesteśmy producentem z Torunia i tu odbywa się pomiar, dowóz i montaż (Toruń i okolice), ale fronty wysyłamy w całej Polsce — wielu naszych klientów to stolarze i studia mebli z innych województw.',
-  },
-  {
-    q: 'Jakie fronty meblowe produkujecie?',
-    a: 'Fronty ramiakowe z płyty laminowanej, matowej i akrylowej — w czterech szerokościach ramki: 7, 18, 36 i 60 mm, plus zabudowy specjalne. Front ma grubość 21 mm, dwustronny dekor i krawędzie oklejane klejem PUR.',
-  },
-  {
-    q: 'Czy przyjeżdżacie na pomiar?',
-    a: 'Tak — w Toruniu i okolicach można umówić się na pomiar, a gotowe fronty dowozimy i montujemy na miejscu. Spoza regionu wystarczy podać wymiary, resztę zrealizujemy wysyłkowo.',
-  },
-  {
-    q: 'Ile kosztują fronty na wymiar?',
-    a: 'Ceny zaczynają się od 350 zł/m² netto i zależą od wybranej płyty, dekoru i szerokości ramki. Szczegóły znajdziesz w cenniku, a dokładną wycenę przygotowujemy po otrzymaniu wymiarów.',
-  },
-];
+const faq = sections.faq.items;
 
 const faqLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: faq.map((f) => ({
     '@type': 'Question',
-    name: f.q,
-    acceptedAnswer: { '@type': 'Answer', text: f.a },
+    name: f.title,
+    acceptedAnswer: { '@type': 'Answer', text: f.text },
   })),
 };
 
@@ -50,8 +36,8 @@ const breadcrumbLd = {
 ---
 
 <BaseLayout
-  title="Fronty meblowe Toruń — producent frontów na wymiar"
-  description="Fronty meblowe w Toruniu prosto od producenta: fronty ramiakowe z płyty laminowanej, matowej i akrylowej w 4 szerokościach ramki. Pomiar, dowóz i montaż w Toruniu i okolicach, wysyłka w całej Polsce. Od 350 zł/m² netto."
+  title={content.title}
+  description={content.description}
   canonicalUrl="https://www.mekra.pl/fronty-meblowe-torun/"
 >
   <Navbar />
@@ -61,26 +47,16 @@ const breadcrumbLd = {
     <section class="section-padding pt-12 pb-12 md:pt-20 md:pb-16 relative overflow-hidden">
       <div class="absolute top-20 -left-32 w-96 h-96 rounded-full opacity-20 dark:opacity-10 blur-3xl pointer-events-none" style="background: radial-gradient(circle, #ae9070, transparent 70%);"></div>
       <div class="absolute -bottom-20 -right-32 w-96 h-96 rounded-full opacity-15 dark:opacity-10 blur-3xl pointer-events-none" style="background: radial-gradient(circle, #d4c5ae, transparent 70%);"></div>
-      <PageHeroPhoto src="/img/realizacje/zabudowy/zabudowa-wino-01.webp" position="60% 40%" />
+      <PageHeroPhoto src={sections.hero.image} position="60% 40%" />
 
       <div class="max-w-7xl mx-auto relative">
         <div class="max-w-3xl">
-          <span class="label-tag">Producent — Toruń</span>
-          <h1 class="mt-6 font-display text-4xl sm:text-5xl md:text-6xl tracking-tight leading-[1.05]" style="color: var(--color-text);">
-            Fronty meblowe<br />
-            <span class="text-gradient">Toruń</span>
-          </h1>
-          <p class="mt-6 text-base md:text-lg leading-relaxed font-body" style="color: var(--color-text-secondary);">
-            Szukasz frontów meblowych w&nbsp;Toruniu? Trafiłeś do źródła — jesteśmy
-            <strong style="color: var(--color-text);">producentem, nie pośrednikiem</strong>.
-            Wytwarzamy <a href="/fronty-z-ramka/" class="font-medium hover:underline" style="color: var(--color-accent);">fronty z&nbsp;ramką</a>
-            z&nbsp;płyty laminowanej, matowej i&nbsp;akrylowej: na wymiar, z&nbsp;dwustronnym dekorem
-            i&nbsp;krawędziami oklejanymi klejem PUR. W&nbsp;Toruniu i&nbsp;okolicach przyjedziemy
-            na pomiar, dowieziemy i&nbsp;zamontujemy — a&nbsp;do reszty Polski wyślemy.
-          </p>
+          <span class="label-tag">{sections.hero.eyebrow}</span>
+          <h1 class="mt-6 font-display text-4xl sm:text-5xl md:text-6xl tracking-tight leading-[1.05]" style="color: var(--color-text);" set:html={sections.hero.heading} />
+          <p class="mt-6 text-base md:text-lg leading-relaxed font-body" style="color: var(--color-text-secondary);" set:html={sections.hero.text} />
           <div class="mt-8 flex flex-wrap gap-3">
-            <a href="/#kontakt" class="btn-primary">Zamów wycenę</a>
-            <a href="/realizacje/" class="btn-secondary">Zobacz realizacje</a>
+            <a href={sections.hero.items[0].href} class="btn-primary">{sections.hero.items[0].label}</a>
+            <a href={sections.hero.items[1].href} class="btn-secondary">{sections.hero.items[1].label}</a>
           </div>
         </div>
       </div>
@@ -90,14 +66,11 @@ const breadcrumbLd = {
     <section class="section-padding py-12 md:py-20" style="background-color: var(--color-bg-secondary);">
       <div class="max-w-7xl mx-auto">
         <div class="max-w-3xl">
-          <span class="label-tag">Oferta</span>
+          <span class="label-tag">{sections.szerokosci.eyebrow}</span>
           <h2 class="mt-6 font-display text-3xl sm:text-4xl tracking-tight" style="color: var(--color-text);">
-            Cztery szerokości ramki, jedna jakość
+            {sections.szerokosci.heading}
           </h2>
-          <p class="mt-4 text-base font-body leading-relaxed" style="color: var(--color-text-secondary);">
-            Od minimalistycznej linii 7&nbsp;mm po klasyczną ramkę 60&nbsp;mm z&nbsp;możliwością
-            wpuszczenia lustra lub szkła — każdy front produkujemy w&nbsp;Toruniu, na wymiar.
-          </p>
+          <p class="mt-4 text-base font-body leading-relaxed" style="color: var(--color-text-secondary);" set:html={sections.szerokosci.text} />
         </div>
         <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {frameVariants.map((v) => (
@@ -108,11 +81,7 @@ const breadcrumbLd = {
             </a>
           ))}
         </div>
-        <p class="mt-6 text-sm font-body" style="color: var(--color-text-secondary);">
-          Potrzebujesz czegoś nietypowego? Zobacz
-          <a href="/oferta/zabudowy/" class="font-medium hover:underline" style="color: var(--color-accent);">zabudowy specjalne</a>
-          albo całą <a href="/oferta/" class="font-medium hover:underline" style="color: var(--color-accent);">ofertę frontów ramiakowych</a>.
-        </p>
+        <p class="mt-6 text-sm font-body" style="color: var(--color-text-secondary);" set:html={sections.szerokosci.caption} />
       </div>
     </section>
 
@@ -120,19 +89,15 @@ const breadcrumbLd = {
     <section class="section-padding py-12 md:py-20">
       <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-6">
         <div class="card-base rounded-2xl p-8">
-          <h2 class="font-heading text-xl font-semibold" style="color: var(--color-text);">W Toruniu i okolicach</h2>
+          <h2 class="font-heading text-xl font-semibold" style="color: var(--color-text);">{sections.lokalnie.heading}</h2>
           <ul class="mt-4 space-y-3 text-sm leading-relaxed font-body" style="color: var(--color-text-secondary);">
-            <li>— umówisz się na pomiar u&nbsp;siebie zamiast podawać wymiary,</li>
-            <li>— gotowe fronty dowozimy i&nbsp;montujemy na miejscu,</li>
-            <li>— dekory i&nbsp;próbki obejrzysz na żywo, nie na ekranie.</li>
+            {sections.lokalnie.bullets.map((b) => (<li set:html={b} />))}
           </ul>
         </div>
         <div class="card-base rounded-2xl p-8">
-          <h2 class="font-heading text-xl font-semibold" style="color: var(--color-text);">W całej Polsce</h2>
+          <h2 class="font-heading text-xl font-semibold" style="color: var(--color-text);">{sections.wysylkowo.heading}</h2>
           <ul class="mt-4 space-y-3 text-sm leading-relaxed font-body" style="color: var(--color-text-secondary);">
-            <li>— podajesz wymiary, my produkujemy i&nbsp;wysyłamy,</li>
-            <li>— otworowanie pod zawiasy przygotujemy na życzenie,</li>
-            <li>— stolarzy i&nbsp;studia mebli zapraszamy do <a href="/#wspolpraca" class="font-medium hover:underline" style="color: var(--color-accent);">stałej współpracy</a>.</li>
+            {sections.wysylkowo.bullets.map((b) => (<li set:html={b} />))}
           </ul>
         </div>
       </div>
@@ -142,34 +107,18 @@ const breadcrumbLd = {
     <section class="section-padding py-12 md:py-20" style="background-color: var(--color-bg-secondary);">
       <div class="max-w-5xl mx-auto">
         <div class="text-center mb-12">
-          <span class="label-tag">Dlaczego Mekra</span>
+          <span class="label-tag">{sections.dlaczego.eyebrow}</span>
           <h2 class="mt-6 font-display text-3xl sm:text-4xl tracking-tight" style="color: var(--color-text);">
-            Fronty prosto z produkcji
+            {sections.dlaczego.heading}
           </h2>
         </div>
         <div class="grid sm:grid-cols-3 gap-5">
-          <div class="card-base rounded-2xl p-6">
-            <h3 class="font-heading text-base font-semibold" style="color: var(--color-text);">Dwustronny dekor</h3>
-            <p class="mt-2 text-sm font-body leading-relaxed" style="color: var(--color-text-secondary);">
-              Ramka, płycina i&nbsp;krawędzie wykończone tym samym dekorem z&nbsp;obu stron —
-              front od wewnątrz szafki wygląda tak samo dobrze, jak od zewnątrz.
-            </p>
-          </div>
-          <div class="card-base rounded-2xl p-6">
-            <h3 class="font-heading text-base font-semibold" style="color: var(--color-text);">Klej PUR w standardzie</h3>
-            <p class="mt-2 text-sm font-body leading-relaxed" style="color: var(--color-text-secondary);">
-              Wszystkie krawędzie oklejamy klejem poliuretanowym — wodoodpornym
-              i&nbsp;odpornym na temperaturę. Front grubości 21&nbsp;mm pracuje na
-              standardowych zawiasach Blum, Häfele i&nbsp;Hettich.
-            </p>
-          </div>
-          <div class="card-base rounded-2xl p-6">
-            <h3 class="font-heading text-base font-semibold" style="color: var(--color-text);">Od 350 zł/m² netto</h3>
-            <p class="mt-2 text-sm font-body leading-relaxed" style="color: var(--color-text-secondary);">
-              Cena zależy od płyty, dekoru i&nbsp;szerokości ramki — bez marży pośrednika.
-              Szczegóły w&nbsp;<a href="/cennik/" class="font-medium hover:underline" style="color: var(--color-accent);">cenniku</a>.
-            </p>
-          </div>
+          {sections.dlaczego.items.map((item) => (
+            <div class="card-base rounded-2xl p-6">
+              <h3 class="font-heading text-base font-semibold" style="color: var(--color-text);">{item.title}</h3>
+              <p class="mt-2 text-sm font-body leading-relaxed" style="color: var(--color-text-secondary);" set:html={item.text} />
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -178,16 +127,16 @@ const breadcrumbLd = {
     <section class="section-padding py-12 md:py-20">
       <div class="max-w-3xl mx-auto">
         <div class="text-center mb-12">
-          <span class="label-tag">FAQ</span>
+          <span class="label-tag">{sections.faq.eyebrow}</span>
           <h2 class="mt-6 font-display text-3xl sm:text-4xl tracking-tight" style="color: var(--color-text);">
-            Najczęstsze pytania
+            {sections.faq.heading}
           </h2>
         </div>
         <div class="space-y-4">
           {faq.map((f) => (
             <div class="card-base rounded-2xl p-6 md:p-8">
-              <h3 class="font-heading text-base font-semibold" style="color: var(--color-text);">{f.q}</h3>
-              <p class="mt-3 text-sm leading-relaxed font-body" style="color: var(--color-text-secondary);">{f.a}</p>
+              <h3 class="font-heading text-base font-semibold" style="color: var(--color-text);">{f.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed font-body" style="color: var(--color-text-secondary);">{f.text}</p>
             </div>
           ))}
         </div>
@@ -198,15 +147,12 @@ const breadcrumbLd = {
     <section class="section-padding py-16 md:py-24" style="background-color: var(--color-bg-secondary);">
       <div class="max-w-3xl mx-auto text-center">
         <h2 class="font-display text-3xl md:text-4xl tracking-tight" style="color: var(--color-text);">
-          Porozmawiajmy o Twoich frontach
+          {sections.cta.heading}
         </h2>
-        <p class="mt-4 text-base md:text-lg font-body leading-relaxed" style="color: var(--color-text-secondary);">
-          Wyślij wymiary albo umów pomiar w&nbsp;Toruniu i&nbsp;okolicach —
-          odpowiemy z&nbsp;konkretną wyceną.
-        </p>
+        <p class="mt-4 text-base md:text-lg font-body leading-relaxed" style="color: var(--color-text-secondary);" set:html={sections.cta.text} />
         <div class="mt-8 flex flex-wrap justify-center gap-3">
-          <a href="/#kontakt" class="btn-primary">Zamów wycenę</a>
-          <a href="/cennik/" class="btn-secondary">Zobacz cennik</a>
+          <a href={sections.cta.items[0].href} class="btn-primary">{sections.cta.items[0].label}</a>
+          <a href={sections.cta.items[1].href} class="btn-secondary">{sections.cta.items[1].label}</a>
         </div>
       </div>
     </section>

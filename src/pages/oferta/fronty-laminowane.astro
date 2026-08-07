@@ -4,68 +4,23 @@ import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
 import PageHeroPhoto from '../../components/PageHeroPhoto.astro';
 import { ofertaVariants } from '../../data/oferta';
+import content from '../../content/pages/oferta/fronty-laminowane-page.json';
+
+const { sections } = content;
 
 const frameVariants = ofertaVariants.filter((v) => v.slug !== 'zabudowy');
 
-const zalety = [
-  {
-    title: 'Najwyższa odporność',
-    description:
-      'Płyta laminowana to najtwardszy materiał dostępny na rynku meblowym — odporna na zarysowania, odbarwienia i uszkodzenia mechaniczne. Wielokrotnie twardsza niż lakier MDF.',
-  },
-  {
-    title: 'Wyczuwalna faktura',
-    description:
-      'Gładka, perlistowa, super matowa, metalizowana, szczotkowana lub z wyczuwalną strukturą drewna — faktura frontu jest taka, jaki materiał wybierzesz.',
-  },
-  {
-    title: 'Dwustronny dekor',
-    description:
-      'Obie strony frontu pokryte tym samym dekorem — od wewnątrz szafki front wygląda tak samo jak od zewnątrz. W lakierze widzisz kolor tylko z zewnątrz.',
-  },
-  {
-    title: 'Klej PUR w standardzie',
-    description:
-      'Wszystkie krawędzie oklejamy wodoodpornym, odpornym na temperaturę klejem poliuretanowym PUR — bez dopłat. Fronty przy zmywarkach zabezpieczamy dodatkowo.',
-  },
-  {
-    title: 'Setki dekorów',
-    description:
-      'Unikolory, reprodukcje drewna, kamienia i betonu. Płyty głęboko strukturyzowane (Saviola, Egger, Forner Cleaf) oraz maty i akryle (Forner, AGT) w trzech wykończeniach: ultramat, mat, połysk.',
-  },
-  {
-    title: 'Ekologia i recykling',
-    description:
-      'Płyty laminowane w części pochodzą z recyklingu — wybierając fronty laminowane, stawiasz na odpowiedzialne rozwiązanie.',
-  },
-];
+const zalety = sections.zalety.items;
 
-const faq = [
-  {
-    q: 'Ile kosztują fronty laminowane na wymiar?',
-    a: 'Fronty ramiakowe z płyty laminowanej kosztują od 350 zł/m² netto — cena zależy od wybranego dekoru, dlatego każde zamówienie wyceniamy indywidualnie. Dopłaty dotyczą frontów ze szkłem lub lustrem oraz zacinania na 45°. Pełne stawki znajdziesz w cenniku.',
-  },
-  {
-    q: 'Z jakich płyt laminowanych wykonujecie fronty?',
-    a: 'Z każdej płyty laminowanej dostępnej na rynku — laminaty, folie PPV i akryle w połysku. Pracujemy m.in. na płytach Egger, Kronospan, Swiss Krono i Forner, a w dekorach strukturalnych na kolekcjach Saviola i Forner Cleaf.',
-  },
-  {
-    q: 'Czy wysyłacie fronty laminowane poza Toruń?',
-    a: 'Tak — gotowe fronty wysyłamy kurierem pod wskazany adres w całej Polsce. W promieniu 100 km od Torunia oferujemy również wymiarowanie na miejscu. Fronty ze szkłem lub lustrem o dużym gabarycie dostarczamy transportem dedykowanym.',
-  },
-  {
-    q: 'Jaki jest czas realizacji zamówienia?',
-    a: 'Standardowo 8–10 tygodni od potwierdzenia specyfikacji. Minimum logistyczne to 4 m² — mniejsze zamówienia realizujemy z dopłatą 30% wartości zamówienia netto. Za słój przechodzący (zachowanie ciągłości usłojenia między frontami) doliczamy 20% wartości zamówienia netto.',
-  },
-];
+const faq = sections.faq.items;
 
 const faqLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: faq.map((f) => ({
     '@type': 'Question',
-    name: f.q,
-    acceptedAnswer: { '@type': 'Answer', text: f.a },
+    name: f.title,
+    acceptedAnswer: { '@type': 'Answer', text: f.text },
   })),
 };
 
@@ -81,8 +36,8 @@ const breadcrumbLd = {
 ---
 
 <BaseLayout
-  title="Fronty laminowane na wymiar — producent frontów meblowych"
-  description="Fronty laminowane na wymiar z każdej płyty dostępnej na rynku: Egger, Kronospan, Swiss Krono, Forner. Fronty ramiakowe 7–60 mm, dwustronny dekor, klej PUR. Od 350 zł/m². Producent — Toruń, wysyłka w całej Polsce."
+  title={content.title}
+  description={content.description}
   canonicalUrl="https://www.mekra.pl/oferta/fronty-laminowane/"
 >
   <Navbar />
@@ -92,11 +47,11 @@ const breadcrumbLd = {
     <nav class="section-padding pt-6 pb-0" aria-label="Breadcrumb">
       <div class="max-w-7xl mx-auto">
         <ol class="flex flex-wrap items-center gap-2 text-xs font-body" style="color: var(--color-text-muted);">
-          <li><a href="/" class="hover:text-[var(--color-accent)] transition-colors">Strona główna</a></li>
+          <li><a href={sections.breadcrumb.items[0].href} class="hover:text-[var(--color-accent)] transition-colors">{sections.breadcrumb.items[0].label}</a></li>
           <li>›</li>
-          <li><a href="/oferta/" class="hover:text-[var(--color-accent)] transition-colors">Oferta</a></li>
+          <li><a href={sections.breadcrumb.items[1].href} class="hover:text-[var(--color-accent)] transition-colors">{sections.breadcrumb.items[1].label}</a></li>
           <li>›</li>
-          <li style="color: var(--color-text-secondary);">Fronty laminowane</li>
+          <li style="color: var(--color-text-secondary);">{sections.breadcrumb.items[2].label}</li>
         </ol>
       </div>
     </nav>
@@ -106,25 +61,16 @@ const breadcrumbLd = {
       <div class="absolute top-20 -left-32 w-96 h-96 rounded-full opacity-20 dark:opacity-10 blur-3xl pointer-events-none" style="background: radial-gradient(circle, #ae9070, transparent 70%);"></div>
       <div class="absolute -bottom-20 -right-32 w-96 h-96 rounded-full opacity-15 dark:opacity-10 blur-3xl pointer-events-none" style="background: radial-gradient(circle, #d4c5ae, transparent 70%);"></div>
 
-      <PageHeroPhoto src="/img/realizacje/ramka-18mm/ramka-18mm-rubinova-01.webp" position="72% 45%" />
+      <PageHeroPhoto src={sections.hero.image} position="72% 45%" />
 
       <div class="max-w-7xl mx-auto relative">
         <div class="max-w-3xl">
-          <span class="label-tag">Materiał</span>
-          <h1 class="mt-6 font-display text-4xl sm:text-5xl md:text-6xl tracking-tight leading-[1.05]" style="color: var(--color-text);">
-            Fronty laminowane<br />
-            <span class="text-gradient">na wymiar, od producenta</span>
-          </h1>
-          <p class="mt-6 text-base md:text-lg leading-relaxed font-body" style="color: var(--color-text-secondary);">
-            Produkujemy fronty meblowe z&nbsp;każdej płyty laminowanej dostępnej na rynku —
-            laminaty, folie PPV i&nbsp;akryle w&nbsp;połysku. Wszystkie w&nbsp;formie
-            <a href="/oferta/" class="font-medium hover:underline" style="color: var(--color-accent);">frontów ramiakowych</a>
-            z&nbsp;ramką 7, 18, 36 lub 60&nbsp;mm, z&nbsp;dwustronnym dekorem i&nbsp;klejem PUR
-            w&nbsp;standardzie. Toruń i&nbsp;okolice — wymiarowanie na miejscu, reszta Polski — wysyłka kurierem.
-          </p>
+          <span class="label-tag">{sections.hero.eyebrow}</span>
+          <h1 class="mt-6 font-display text-4xl sm:text-5xl md:text-6xl tracking-tight leading-[1.05]" style="color: var(--color-text);" set:html={sections.hero.heading} />
+          <p class="mt-6 text-base md:text-lg leading-relaxed font-body" style="color: var(--color-text-secondary);" set:html={sections.hero.text} />
           <div class="mt-8 flex flex-wrap gap-3">
-            <a href="/#kontakt" class="btn-primary">Zamów wycenę</a>
-            <a href="/cennik/" class="btn-secondary">Zobacz cennik</a>
+            <a href={sections.hero.items[0].href} class="btn-primary">{sections.hero.items[0].label}</a>
+            <a href={sections.hero.items[1].href} class="btn-secondary">{sections.hero.items[1].label}</a>
           </div>
         </div>
       </div>
@@ -134,22 +80,18 @@ const breadcrumbLd = {
     <section class="section-padding py-12 md:py-20" style="background-color: var(--color-bg-secondary);">
       <div class="max-w-7xl mx-auto">
         <div class="text-center max-w-2xl mx-auto mb-12">
-          <span class="label-tag">Dlaczego laminat</span>
+          <span class="label-tag">{sections.zalety.eyebrow}</span>
           <h2 class="mt-6 font-display text-3xl sm:text-4xl tracking-tight" style="color: var(--color-text);">
-            Co dają fronty laminowane?
+            {sections.zalety.heading}
           </h2>
-          <p class="mt-4 text-base font-body leading-relaxed" style="color: var(--color-text-secondary);">
-            Odporność, faktura i&nbsp;paleta dekorów, których nie da lakier ani folia.
-            Porównanie z&nbsp;innymi materiałami znajdziesz na stronie
-            <a href="/fronty-laminowane-czy-lakierowane/" class="font-medium hover:underline" style="color: var(--color-accent);">fronty laminowane czy lakierowane</a>.
-          </p>
+          <p class="mt-4 text-base font-body leading-relaxed" style="color: var(--color-text-secondary);" set:html={sections.zalety.text} />
         </div>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {zalety.map((z) => (
             <div class="card-base rounded-2xl p-6 md:p-8">
               <h3 class="font-heading text-lg font-semibold" style="color: var(--color-text);">{z.title}</h3>
-              <p class="mt-3 text-sm leading-relaxed font-body" style="color: var(--color-text-secondary);">{z.description}</p>
+              <p class="mt-3 text-sm leading-relaxed font-body" style="color: var(--color-text-secondary);">{z.text}</p>
             </div>
           ))}
         </div>
@@ -160,14 +102,11 @@ const breadcrumbLd = {
     <section class="section-padding py-12 md:py-20">
       <div class="max-w-7xl mx-auto">
         <div class="text-center max-w-2xl mx-auto mb-12">
-          <span class="label-tag">Wykonanie</span>
+          <span class="label-tag">{sections.warianty.eyebrow}</span>
           <h2 class="mt-6 font-display text-3xl sm:text-4xl tracking-tight" style="color: var(--color-text);">
-            Cztery szerokości ramki do wyboru
+            {sections.warianty.heading}
           </h2>
-          <p class="mt-4 text-base font-body leading-relaxed" style="color: var(--color-text-secondary);">
-            Każdy front laminowany wykonujemy w&nbsp;formie ramiaka — wybierz szerokość ramki
-            dopasowaną do stylu wnętrza.
-          </p>
+          <p class="mt-4 text-base font-body leading-relaxed" style="color: var(--color-text-secondary);" set:html={sections.warianty.text} />
         </div>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -182,7 +121,7 @@ const breadcrumbLd = {
               </h3>
               <p class="mt-2 text-sm leading-relaxed font-body" style="color: var(--color-text-secondary);">{v.tagline}</p>
               <div class="mt-4 inline-flex items-center gap-1.5 text-sm font-heading font-medium" style="color: var(--color-accent);">
-                <span>Zobacz wariant</span>
+                <span>{sections.warianty.ctaLabel}</span>
                 <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                 </svg>
@@ -196,28 +135,12 @@ const breadcrumbLd = {
     <!-- Płyty i dekory -->
     <section class="section-padding py-12 md:py-20" style="background-color: var(--color-bg-secondary);">
       <div class="max-w-3xl mx-auto">
-        <span class="label-tag">Płyty i dekory</span>
+        <span class="label-tag">{sections.plyty.eyebrow}</span>
         <h2 class="mt-6 font-display text-3xl sm:text-4xl tracking-tight" style="color: var(--color-text);">
-          Każda płyta laminowana z rynku
+          {sections.plyty.heading}
         </h2>
         <div class="mt-6 space-y-4 text-base leading-relaxed font-body" style="color: var(--color-text-secondary);">
-          <p>
-            Nie ograniczamy Cię do własnego katalogu — wykonamy fronty z&nbsp;każdej płyty laminowanej
-            dostępnej na rynku. Na co dzień pracujemy na płytach <strong style="color: var(--color-text);">Egger, Kronospan,
-            Swiss Krono i&nbsp;Forner</strong>.
-          </p>
-          <p>
-            Do wyboru masz setki dekorów: unikolory, reprodukcje drewna, kamienia i&nbsp;betonu.
-            Płyty głęboko strukturyzowane (Saviola, Egger, Forner Cleaf) oddają charakter prawdziwego
-            drewna — strukturę czuć pod dłonią. Maty akrylowe i&nbsp;akryle (Forner, AGT) to jednolite
-            wybarwienia w&nbsp;trzech wykończeniach: ultramat głęboko pochłaniający światło, klasyczny
-            mat oraz połysk.
-          </p>
-          <p>
-            Wszystkie fronty mają grubość 21&nbsp;mm i&nbsp;pracują na standardowych zawiasach Blum,
-            Häfele i&nbsp;Hettich. Zasady pielęgnacji laminatu i&nbsp;warunki gwarancji opisaliśmy
-            w&nbsp;<a href="/warunki-gwarancji/" class="font-medium hover:underline" style="color: var(--color-accent);">warunkach gwarancji</a>.
-          </p>
+          {sections.plyty.body.map((p) => (<p set:html={p} />))}
         </div>
       </div>
     </section>
@@ -226,16 +149,16 @@ const breadcrumbLd = {
     <section class="section-padding py-12 md:py-20">
       <div class="max-w-3xl mx-auto">
         <div class="text-center mb-12">
-          <span class="label-tag">FAQ</span>
+          <span class="label-tag">{sections.faq.eyebrow}</span>
           <h2 class="mt-6 font-display text-3xl sm:text-4xl tracking-tight" style="color: var(--color-text);">
-            Najczęstsze pytania
+            {sections.faq.heading}
           </h2>
         </div>
         <div class="space-y-4">
           {faq.map((f) => (
             <div class="card-base rounded-2xl p-6 md:p-8">
-              <h3 class="font-heading text-base font-semibold" style="color: var(--color-text);">{f.q}</h3>
-              <p class="mt-3 text-sm leading-relaxed font-body" style="color: var(--color-text-secondary);">{f.a}</p>
+              <h3 class="font-heading text-base font-semibold" style="color: var(--color-text);">{f.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed font-body" style="color: var(--color-text-secondary);">{f.text}</p>
             </div>
           ))}
         </div>
@@ -246,15 +169,12 @@ const breadcrumbLd = {
     <section class="section-padding py-16 md:py-24" style="background-color: var(--color-bg-secondary);">
       <div class="max-w-3xl mx-auto text-center">
         <h2 class="font-display text-3xl md:text-4xl tracking-tight" style="color: var(--color-text);">
-          Wyceń swoje fronty laminowane
+          {sections.cta.heading}
         </h2>
-        <p class="mt-4 text-base md:text-lg font-body leading-relaxed" style="color: var(--color-text-secondary);">
-          Wyślij wymiary lub opisz projekt — odpowiemy w&nbsp;24h z&nbsp;propozycją dekoru,
-          szerokości ramki i&nbsp;wstępną wyceną.
-        </p>
+        <p class="mt-4 text-base md:text-lg font-body leading-relaxed" style="color: var(--color-text-secondary);" set:html={sections.cta.text} />
         <div class="mt-8 flex flex-wrap justify-center gap-3">
-          <a href="/#kontakt" class="btn-primary">Zamów wycenę</a>
-          <a href="/realizacje/" class="btn-secondary">Zobacz realizacje</a>
+          <a href={sections.cta.items[0].href} class="btn-primary">{sections.cta.items[0].label}</a>
+          <a href={sections.cta.items[1].href} class="btn-secondary">{sections.cta.items[1].label}</a>
         </div>
       </div>
     </section>

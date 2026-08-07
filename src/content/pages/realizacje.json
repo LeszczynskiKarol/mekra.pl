@@ -1,0 +1,30 @@
+{
+  "title": "Realizacje — galeria frontów, kuchni, szaf i zabudów",
+  "description": "Galeria realizacji Mekra: kuchnie z frontami ramiakowymi 7mm, 18mm, 36mm, szafy z ramką 60mm i lustrami, zabudowy specjalne — winiarnie. Toruń i okolice.",
+  "sections": {
+    "hero": {
+      "eyebrow": "Galeria",
+      "heading": "Realizacje <span class=\"text-gradient\">w pełnym wymiarze</span>",
+      "text": "zdjęć z naszych ostatnich projektów. Każdy front, każdy detal — od kuchni przez szafy po nietypowe zabudowy. Filtruj po kategorii, powiększaj i porównuj."
+    },
+    "filtr": {
+      "label": "Wszystkie"
+    },
+    "projekty": {
+      "eyebrow": "Projekty",
+      "heading": "Wybrane realizacje — pełne case-study",
+      "text": "Każdy projekt to osobna podstrona ze wszystkimi zdjęciami, opisem i lokalizacją."
+    },
+    "galeria": {
+      "text": "Brak realizacji w tej kategorii."
+    },
+    "cta": {
+      "heading": "Podoba Ci się to, co widzisz?",
+      "text": "Każda z tych realizacji zaczęła się od rozmowy. Powiedz nam, co masz w głowie — oddzwonimy w 24h z wstępną wyceną.",
+      "items": [
+        { "label": "Zamów wycenę", "href": "/#kontakt" },
+        { "label": "Wróć na stronę główną", "href": "/" }
+      ]
+    }
+  }
+}

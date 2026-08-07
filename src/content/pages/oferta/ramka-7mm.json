@@ -1,0 +1,49 @@
+{
+  "title": "Fronty ramiakowe 7 mm — minimalistyczne fronty kuchenne",
+  "description": "Fronty ramiakowe z ramką 7 mm. Minimalistyczne, nowoczesne fronty kuchenne z płyty laminowanej. Setki dekorów, dwustronny dekor, klej PUR. Producent — Toruń.",
+  "slug": "ramka-7mm",
+  "order": 1,
+  "size": "7",
+  "unit": "mm",
+  "name": "Nowoczesna linia",
+  "subtitle": "Minimalistyczna ramka 7 mm",
+  "text": "Delikatne podkreślenie formy. Subtelna ramka, która nadaje frontom nowoczesny, minimalistyczny charakter.",
+  "intro": "Najwęższa z naszych ramek. 7 mm to ledwie zauważalna linia, która zostawia całą scenę dekorowi płyty — idealna do kuchni minimalistycznych, skandynawskich i loftowych, gdzie liczy się czystość formy.",
+  "image": "/img/ramka77mm.webp",
+  "styles": ["Minimalizm", "Skandynawski", "Loftowy", "Modern"],
+  "rooms": ["Kuchnia otwarta", "Salon z aneksem", "Pralnia", "Łazienka"],
+  "items": [
+    {
+      "title": "Delikatna geometria",
+      "text": "Ramka 7 mm to subtelna linia, która porządkuje front bez przesłaniania struktury płyty. Świetnie wygląda zarówno w unikolorach, jak i w głębokich strukturach drewna."
+    },
+    {
+      "title": "Wąska, ale nadal ramka",
+      "text": "W przeciwieństwie do gładkich frontów płytowych dostajesz wyraźny rytm i charakter — bez ciężaru klasycznej, szerokiej ramki."
+    },
+    {
+      "title": "Pełna paleta dekorów",
+      "text": "Maty, akryle, struktura drewna, kamień, beton — dowolny dekor z oferty płyt laminowanych, matowych i akrylowych pasuje do tej ramki."
+    }
+  ],
+  "body": [
+    "Ramka 7 mm powstała z myślą o klientach, którzy chcą frontu ramiakowego, ale nie chcą rezygnować z minimalistycznego języka kuchni. To rozwiązanie pośrednie między płytowym frontem a klasyczną ramką — wąska ramka delikatnie ogranicza środkową płycinę, dając wrażenie uporządkowania bez ciężkiej klasyki.",
+    "W naszej technologii ramka, środkowa płycina i krawędzie są wykończone tym samym dekorem z obu stron. Front jest dwustronnie pokryty wybranym materiałem, więc widok od wewnątrz szafki jest tak samo estetyczny, jak od zewnątrz.",
+    "Front ma grubość 21 mm i bezproblemowo pracuje na standardowych zawiasach Blum, Häfele i Hettich. Wszystkie krawędzie są oklejane klejem poliuretanowym PUR — wodoodpornym i odpornym na temperaturę."
+  ],
+  "bullets": [
+    "Najnowocześniejszy wygląd z całej oferty",
+    "Wyczuwalna struktura materiału",
+    "Dwustronny dekor — od wewnątrz tak samo jak od zewnątrz",
+    "Klej PUR i odporność na wilgoć w standardzie",
+    "Setki dekorów do wyboru"
+  ],
+  "bestFor": "Kuchnie otwarte na salon, projekty w stylu skandynawskim i loftowym, mieszkania, gdzie front ma być obecny, ale dyskretny.",
+  "keywords": [
+    "fronty ramiakowe 7mm",
+    "wąska ramka kuchnia",
+    "fronty minimalistyczne",
+    "nowoczesne fronty kuchenne",
+    "fronty ramiakowe z płyty"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "sections": {
+    "breadcrumb": {
+      "items": [
+        { "label": "Strona główna", "href": "/" },
+        { "label": "Realizacje", "href": "/realizacje/" }
+      ]
+    },
+    "hero": {
+      "eyebrow": "Realizacja",
+      "label": "zdjęć",
+      "items": [
+        { "label": "Zamów wycenę", "href": "/#kontakt" },
+        { "label": "Zobacz wariant" }
+      ]
+    },
+    "opis": {
+      "eyebrow": "O tej realizacji",
+      "heading": "Co znajdziesz w tym projekcie"
+    },
+    "galeria": {
+      "eyebrow": "Galeria",
+      "heading": "Wszystkie zdjęcia"
+    },
+    "nawigacja": {
+      "items": [
+        { "label": "← Poprzednia realizacja" },
+        { "label": "Następna realizacja →" }
+      ]
+    },
+    "cta": {
+      "heading": "Chcesz podobny projekt?",
+      "text": "Wyślij wymiary lub opisz, co masz w&nbsp;głowie. Odpowiemy w&nbsp;24h z propozycją dekoru i&nbsp;wstępną wyceną.",
+      "items": [
+        { "label": "Zamów wycenę", "href": "/#kontakt" },
+        { "label": "Wszystkie realizacje", "href": "/realizacje/" }
+      ]
+    }
+  }
+}

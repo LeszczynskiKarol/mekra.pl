@@ -1,0 +1,46 @@
+{
+  "title": "Fronty ramiakowe — fronty z ramką 7, 18, 36, 60 mm na wymiar",
+  "description": "Fronty ramiakowe (fronty z ramką) w 4 szerokościach: 7, 18, 36 i 60 mm + zabudowy na wymiar. Płyta laminowana, dwustronny dekor, klej PUR. Producent — Toruń, wysyłka w całej Polsce.",
+  "sections": {
+    "hero": {
+      "image": "/img/realizacje/ramka-36mm/ramka-36mm-grudziadz-01.webp",
+      "eyebrow": "Oferta",
+      "heading": "Fronty ramiakowe<br /> <span class=\"text-gradient\">w czterech szerokościach ramki</span>",
+      "text": "Fronty z&nbsp;ramką — nazywane też frontami ramkowymi lub ramiakowymi — produkujemy w&nbsp;czterech szerokościach: 7, 18, 36 i&nbsp;60&nbsp;mm, a&nbsp;do tego zabudowy specjalne na wymiar. Wszystkie fronty mają grubość 21&nbsp;mm, dwustronny dekor i klej PUR w&nbsp;standardzie. Pasują na zawiasy Blum, Häfele i Hettich."
+    },
+    "warianty": {
+      "heading": "Cztery szerokości ramek",
+      "text": "Każda ramka to inny charakter wnętrza. Kliknij wariant, żeby zobaczyć opis, korzyści i pełną galerię realizacji.",
+      "ctaLabel": "Zobacz wariant"
+    },
+    "zabudowy": {
+      "eyebrow": "Wariant specjalny",
+      "alt": "Zabudowa meblowa na wymiar — winiarnia",
+      "ctaLabel": "Poznaj zabudowy"
+    },
+    "porownanie": {
+      "eyebrow": "Porównanie",
+      "heading": "Którą szerokość wybrać?",
+      "text": "Szybki przegląd — porównaj cztery szerokości ramek bok w&nbsp;bok.",
+      "bullets": ["Wariant", "Charakter", "Najlepsze do"],
+      "ctaLabel": "Szczegóły"
+    },
+    "info": {
+      "eyebrow": "Warto wiedzieć",
+      "heading": "Czym są fronty ramiakowe?",
+      "body": [
+        "Front ramiakowy (inaczej front z&nbsp;ramką lub front ramkowy) składa się z&nbsp;ramy i&nbsp;środkowej płyciny. Rama porządkuje geometrię frontu i&nbsp;nadaje mu charakter — od dyskretnej linii 7&nbsp;mm po pełną klasykę 60&nbsp;mm z&nbsp;możliwością wpuszczenia lustra lub szkła w&nbsp;środek ramki.",
+        "Nasze fronty wykonujemy z&nbsp;<a href=\"/oferta/fronty-laminowane/\" class=\"font-medium hover:underline\" style=\"color: var(--color-accent);\">płyty laminowanej — dowolnej dostępnej na rynku</a>: laminaty, folie PPV i&nbsp;akryle w&nbsp;połysku. Ramka, płycina i&nbsp;krawędzie są pokryte tym samym dekorem z&nbsp;obu stron, a&nbsp;wszystkie krawędzie oklejamy wodoodpornym klejem PUR. Jeśli zastanawiasz się nad wyborem między laminatem a&nbsp;lakierem, zobacz nasze <a href=\"/fronty-laminowane-czy-lakierowane/\" class=\"font-medium hover:underline\" style=\"color: var(--color-accent);\">porównanie frontów laminowanych i&nbsp;lakierowanych</a>.",
+        "Jesteśmy producentem z&nbsp;Torunia — w&nbsp;promieniu 100&nbsp;km wymiarujemy na miejscu, a&nbsp;gotowe fronty wysyłamy kurierem po całej Polsce. Ceny zaczynają się od 350&nbsp;zł/m² netto — szczegóły znajdziesz w&nbsp;<a href=\"/cennik/\" class=\"font-medium hover:underline\" style=\"color: var(--color-accent);\">cenniku frontów ramiakowych</a>."
+      ]
+    },
+    "cta": {
+      "heading": "Nie wiesz, którą szerokość wybrać?",
+      "text": "Doradzimy. Wyślij wymiary lub opisz wizję — odpowiemy w&nbsp;24h z propozycją wariantu i&nbsp;wstępną wyceną.",
+      "items": [
+        { "label": "Zamów wycenę", "href": "/#kontakt" },
+        { "label": "Zobacz realizacje", "href": "/realizacje/" }
+      ]
+    }
+  }
+}

@@ -1,5 +1,8 @@
 ---
 // About section
+import content from '../content/pages/index.json';
+
+const oNas = content.sections.oNas;
 ---
 
 <section id="o-nas" class="section-spacing section-padding relative overflow-hidden">
@@ -7,28 +10,12 @@
     <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
       <!-- Text -->
       <div class="animate-on-scroll">
-        <span class="label-tag">O firmie</span>
+        <span class="label-tag">{oNas.eyebrow}</span>
 
-        <h2 class="mt-6 font-display text-3xl sm:text-4xl md:text-5xl tracking-tight leading-tight" style="color: var(--color-text);">
-          Z pasji do wnętrz —<br/>
-          <span class="text-gradient">w odpowiedzi na potrzeby</span>
-        </h2>
+        <h2 class="mt-6 font-display text-3xl sm:text-4xl md:text-5xl tracking-tight leading-tight" style="color: var(--color-text);" set:html={oNas.heading} />
 
         <div class="mt-8 space-y-5 text-base leading-relaxed font-body" style="color: var(--color-text-secondary);">
-          <p>
-            <strong class="font-semibold" style="color: var(--color-text);">Mekra</strong> to firma, która powstała
-            i&nbsp;przerodziła się z&nbsp;pasji do wnętrz w&nbsp;realne rozwiązania dopasowane do potrzeb
-            i&nbsp;oczekiwań naszych klientów. Wiemy, że front meblowy to nie tylko element funkcjonalny.
-            To pierwsza rzecz, którą widzisz i&nbsp;dotykasz każdego dnia.
-          </p>
-          <p>
-            Pracujemy w dwóch głównych technologiach. Pierwsza to płyta laminowana — z pełną paletą dekorów: unikolory, reprodukcje drewna, kamienia, betonu i&nbsp;innych materiałów. Korzystamy z&nbsp;płyt renomowanych producentów, takich jak Saviola, Egger, Forner Cleaf czy Nieman — w&nbsp;tym z&nbsp;płyt głęboko strukturyzowanych, które oddają charakter prawdziwego drewna. Druga to płyta powlekana matą akrylową lub akrylem (marki takie jak Forner, AGT) — to dwie odrębne technologie, dostępne wyłącznie w&nbsp;jednolitych wybarwieniach, w&nbsp;wariantach ultramat, mat i&nbsp;połysk. Każdy materiał dobieramy pod kątem trwałości, estetyki i&nbsp;Twoich indywidualnych oczekiwań. Niezależnie od wybranej technologii, każdy nasz front jest oklejany wodoodpornym klejem poliuretanowym PUR — w&nbsp;standardzie, bez dopłat.
-          </p>
-          <p>
-            Nasze fronty przeszły szereg testów przedprodukcyjnych — na wyginanie, odkształcanie, wilgotność
-            i&nbsp;zachlapanie. Dzięki temu z&nbsp;pełną odpowiedzialnością potwierdzamy: wytrzymają próbę
-            czasu i&nbsp;codziennego użytkowania.
-          </p>
+          {oNas.body.map((p) => (<p set:html={p} />))}
         </div>
       </div>
 
@@ -43,8 +30,8 @@
                 sizes="(min-width: 1024px) 500px, (min-width: 640px) 80vw, 90vw"
               />
               <img
-                src="img/mekra-produkcja.webp"
-                alt="Produkcja frontów ramiakowych Mekra"
+                src={oNas.image}
+                alt={oNas.alt}
                 width="800"
                 height="1000"
                 class="w-full h-full object-cover"
@@ -55,8 +42,8 @@
           </div>
           <!-- Floating badge -->
           <div class="absolute -bottom-6 -left-6 md:-left-8 card-base rounded-2xl p-5 md:p-6">
-            <div class="font-display text-2xl md:text-3xl" style="color: var(--color-accent);">Jakość</div>
-            <div class="text-sm font-body mt-1" style="color: var(--color-text-secondary);">potwierdzona testami</div>
+            <div class="font-display text-2xl md:text-3xl" style="color: var(--color-accent);">{oNas.value}</div>
+            <div class="text-sm font-body mt-1" style="color: var(--color-text-secondary);">{oNas.caption}</div>
           </div>
         </div>
       </div>

@@ -1,5 +1,9 @@
 ---
 // Service area section
+import content from '../content/pages/index.json';
+
+const zasieg = content.sections.zasieg;
+const zasiegUslug = content.sections.zasiegUslug;
 ---
 
 <section class="section-spacing section-padding relative">
@@ -7,39 +11,22 @@
     <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
       <!-- Content -->
       <div class="animate-on-scroll">
-        <span class="label-tag">Zamów z wymiarem</span>
+        <span class="label-tag">{zasieg.eyebrow}</span>
 
-        <h2 class="mt-6 font-display text-3xl sm:text-4xl md:text-5xl tracking-tight leading-tight" style="color: var(--color-text);">
-          Toruń i&nbsp;okolice —<br />
-          <span class="text-gradient">wymierzymy i&nbsp;dostarczymy</span>
-        </h2>
+        <h2 class="mt-6 font-display text-3xl sm:text-4xl md:text-5xl tracking-tight leading-tight" style="color: var(--color-text);" set:html={zasieg.heading} />
 
         <div class="mt-8 space-y-5 text-base leading-relaxed font-body" style="color: var(--color-text-secondary);">
-          <p>
-            Oferujemy kompleksową obsługę — od pomiaru, przez produkcję, po dostawę
-            i&nbsp;montaż. Wymiarowanie dostępne jest wyłącznie na terenie Torunia i&nbsp;okolic. Klienci spoza tego obszaru mogą zamówić fronty podając własne wymiary.
-          </p>
-          <p>
-            W&nbsp;Toruniu i&nbsp;okolicach oferujemy również wymianę frontów wraz z&nbsp;zawiasami jako usługę — możemy przyjechać i&nbsp;zamontować fronty na miejscu. Wszystkie fronty można zamówić z&nbsp;otworowaniem na zawiasy z&nbsp;wymiarem klienta.
-          </p>
-          <p>
-            Standardowa grubość naszych frontów to 21&nbsp;mm z&nbsp;ramką 3&nbsp;mm. Przy wymianie samych frontów może wystąpić niewielka różnica w&nbsp;płaszczyźnie względem standardowych frontów 18-19&nbsp;mm — informujemy o&nbsp;tym na etapie wyceny.
-          </p>
+          {zasieg.body.map((p) => (<p set:html={p} />))}
         </div>
 
         <!-- Service steps -->
         <div class="mt-10 space-y-4">
-          {[
-            { step: '01', title: 'Kontakt i wycena', desc: 'Podaj wymiary lub umów się na pomiar (Toruń i okolice)' },
-            { step: '02', title: 'Dobór materiału', desc: 'Wybierz płytę, kolor, szerokość ramki i grubość frontu' },
-            { step: '03', title: 'Produkcja', desc: 'Precyzyjna realizacja zamówienia z otworowaniem na życzenie' },
-            { step: '04', title: 'Dostawa i montaż', desc: 'Dowozimy i montujemy na miejscu (Toruń i okolice)' },
-          ].map((item, i) => (
+          {zasieg.items.map((item, i) => (
             <div class="flex items-start gap-4 group">
-              <span class="flex-shrink-0 font-display text-2xl" style="color: var(--color-accent); opacity: 0.5;">{item.step}</span>
+              <span class="flex-shrink-0 font-display text-2xl" style="color: var(--color-accent); opacity: 0.5;">{item.id}</span>
               <div>
                 <h4 class="font-heading font-semibold text-sm" style="color: var(--color-text);">{item.title}</h4>
-                <p class="text-sm font-body" style="color: var(--color-text-secondary);">{item.desc}</p>
+                <p class="text-sm font-body" style="color: var(--color-text-secondary);">{item.text}</p>
               </div>
             </div>
           ))}
@@ -56,24 +43,18 @@
             </svg>
           </div>
 
-          <h3 class="mt-6 font-display text-2xl" style="color: var(--color-text);">Zasięg usług</h3>
+          <h3 class="mt-6 font-display text-2xl" style="color: var(--color-text);">{zasiegUslug.heading}</h3>
 
           <div class="mt-6 space-y-3">
-            <div class="rounded-xl p-4" style="background-color: var(--color-bg-tertiary); border: 1px solid var(--color-border);">
-              <div class="font-heading font-semibold text-sm" style="color: var(--color-accent);">Pomiar + dostawa + montaż + wymiana</div>
-              <div class="text-sm font-body mt-1" style="color: var(--color-text-secondary);">Toruń i okolice</div>
-            </div>
-            <div class="rounded-xl p-4" style="background-color: var(--color-bg-tertiary); border: 1px solid var(--color-border);">
-              <div class="font-heading font-semibold text-sm" style="color: var(--color-accent);">Dostawa frontów</div>
-              <div class="text-sm font-body mt-1" style="color: var(--color-text-secondary);">Województwo kujawsko-pomorskie</div>
-            </div>
-            <div class="rounded-xl p-4" style="background-color: var(--color-bg-tertiary); border: 1px solid var(--color-border);">
-              <div class="font-heading font-semibold text-sm" style="color: var(--color-accent);">Wysyłka na wymiar klienta</div>
-              <div class="text-sm font-body mt-1" style="color: var(--color-text-secondary);">Cała Polska — bez pomiaru, na podstawie podanych wymiarów</div>
-            </div>
+            {zasiegUslug.items.map((item) => (
+              <div class="rounded-xl p-4" style="background-color: var(--color-bg-tertiary); border: 1px solid var(--color-border);">
+                <div class="font-heading font-semibold text-sm" style="color: var(--color-accent);">{item.label}</div>
+                <div class="text-sm font-body mt-1" style="color: var(--color-text-secondary);">{item.text}</div>
+              </div>
+            ))}
           </div>
 
-          <a href="#kontakt" class="mt-8 btn-primary inline-flex">Zamów pomiar</a>
+          <a href="#kontakt" class="mt-8 btn-primary inline-flex">{zasiegUslug.ctaLabel}</a>
         </div>
       </div>
     </div>

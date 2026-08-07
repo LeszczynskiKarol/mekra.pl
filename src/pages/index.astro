@@ -11,11 +11,12 @@ import Collaboration from '../components/Collaboration.astro';
 import ServiceArea from '../components/ServiceArea.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
+import content from '../content/pages/index.json';
 ---
 
 <BaseLayout
-  title="Strona Główna"
-  description="Mekra — producent frontów ramiakowych z płyty laminowanej. Ramki 7, 18, 36, 60 mm. Fronty kuchenne na wymiar, fronty do IKEA. Toruń i okolice."
+  title={content.title}
+  description={content.description}
 >
   <Navbar />
   <main>
