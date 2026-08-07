@@ -1,0 +1,131 @@
+{
+  "title": "Warunki techniczne i gwarancyjne — fronty ramiakowe Mekra",
+  "description": "Warunki techniczne i gwarancyjne frontów ramiakowych Mekra: parametry techniczne, standardy oceny jakości, zasady pielęgnacji laminatu, 2-letnia gwarancja i procedura reklamacyjna.",
+  "sections": {
+    "hero": {
+      "image": "/img/mekra-produkcja.webp",
+      "eyebrow": "Dla klienta",
+      "heading": "Warunki techniczne<br /> <span class=\"text-gradient\">i gwarancyjne</span>",
+      "text": "Wszystko, co warto wiedzieć o&nbsp;parametrach naszych frontów, standardach oceny jakości, prawidłowej pielęgnacji laminatu oraz zasadach gwarancji i&nbsp;reklamacji.",
+      "items": [
+        { "label": "Normy jakościowe", "href": "#normy" },
+        { "label": "Pielęgnacja", "href": "#pielegnacja" },
+        { "label": "Gwarancja", "href": "#gwarancja" },
+        { "label": "Zwroty", "href": "#zwroty" }
+      ],
+      "ctaLabel": "Pobierz dokument PDF"
+    },
+    "normy": {
+      "eyebrow": "01 · Normy jakościowe i produkcyjne",
+      "heading": "Parametry techniczne frontów",
+      "items": [
+        {
+          "title": "Krzywizna frontu",
+          "value": "±1 mm",
+          "text": "Standardowa dopuszczalna krzywizna (strzałka ugięcia) frontu o wysokości poniżej 800 mm."
+        },
+        {
+          "title": "Tolerancja wymiarowa",
+          "value": "±1 mm",
+          "text": "Margines tolerancji szerokości i wysokości gotowego produktu."
+        },
+        {
+          "title": "Oklejanie krawędzi",
+          "value": "Klej PUR",
+          "text": "Wszystkie produkty oklejamy wilgocioodpornym klejem poliuretanowym PUR."
+        },
+        {
+          "title": "Fronty wysokie",
+          "value": "> 800 mm",
+          "text": "Przy elementach powyżej 800 mm wysokości (i szerokości powyżej 600 mm) wymagane są okucia napinające lub zwiększona liczba zawiasów — konstrukcja ramkowa z płyty laminowanej nie gwarantuje wtedy pełnej sztywności."
+        }
+      ]
+    },
+    "estetyka": {
+      "heading": "Wybarwienie i&nbsp;estetyka",
+      "text": "Laminowanie to proces technologiczny, który dopuszcza pewne naturalne odchylenia:",
+      "bullets": [
+        "Możliwe są rozbieżności między próbnikiem lub wzornikiem a produktem finalnym.",
+        "Naturalne są różnice w połyskliwości i teksturze między powierzchnią płyty a materiałem ramek wykończeniowych.",
+        "Rozbieżności kolorystyczne w obrębie tej samej grupy dekorów to cecha technologiczna procesu laminowania — nie stanowią podstawy do roszczeń."
+      ]
+    },
+    "ocena": {
+      "heading": "Jak oceniamy jakość powierzchni?",
+      "items": [
+        { "label": "Norma", "text": "Dopuszczalność mikrowad powierzchniowych na laminacie określa norma DIN EN 14323 (oświetlenie 800–1000 luksów)." },
+        { "label": "Pozycja", "text": "Element oceniany jest w pozycji docelowej (pionowej lub poziomej), przy rozproszonym świetle dziennym." },
+        { "label": "Odległość", "text": "Obserwacja z odległości od 0,5 m do 1,0 m — zgodnie z wewnętrznym standardem opartym na wytycznych PN-F-06001-3." },
+        { "label": "Kryterium", "text": "Za wadę uznaje się jedynie defekty widoczne nieuzbrojonym okiem w powyższych warunkach. Zmiana kąta patrzenia przy nieruchomym elemencie jest dopuszczalna." }
+      ]
+    },
+    "pielegnacja": {
+      "eyebrow": "02 · Eksploatacja i pielęgnacja",
+      "heading": "Jak dbać o&nbsp;fronty laminowane?",
+      "text": "Przy płytach laminowanych z&nbsp;ramkami kluczowe jest unikanie nadmiaru wilgoci w&nbsp;miejscach łączeń. Poza tym pielęgnacja jest prosta — wystarczy trzymać się kilku zasad."
+    },
+    "pielegnacjaZalecenia": {
+      "heading": "Zalecamy",
+      "bullets": [
+        "Do codziennego czyszczenia używaj miękkich, bezszwowych ściereczek z mikrowłókna.",
+        "Najbezpieczniejszy środek na co dzień to słaby roztwór wody z mydłem (stężenie ok. 1%).",
+        "Stosuj zasadę „suchej krawędzi\": po czyszczeniu na mokro od razu wytrzyj front do sucha, szczególnie szczeliny przy nakładanych ramkach — to chroni płytę przed pęcznieniem.",
+        "Powierzchnie połyskowe odświeżaj dedykowanymi mleczkami polimerowymi — tworzą warstwę antystatyczną i chronią przed odciskami palców.",
+        "Do powierzchni matowych używaj środków dedykowanych do matu, które nie nabłyszczają i wspomagają powłokę Anti-Fingerprint.",
+        "Resztki kleju lub tłuszczu usuwaj profesjonalnymi środkami czyszczącymi — zawsze po próbie w niewidocznym miejscu.",
+        "Uporczywy osad na frontach matowych możesz usunąć preparatem intensywnym: niewielką ilość nanieś na wilgotną mikrofibrę, przetrzyj bez szorowania, zmyj wodą i wytrzyj do sucha. Nie stosuj do codziennej pielęgnacji."
+      ]
+    },
+    "pielegnacjaZakazy": {
+      "heading": "Czego unikać? (zakazy gwarancyjne)",
+      "bullets": [
+        "Nie rozpakowuj paczek ostrymi nożami ani narzędziami punktowymi — ryzyko przecięcia folii i trwałego uszkodzenia laminatu lub ramy jest wysokie.",
+        "Nie pisz po folii ani po frontach mazakami, długopisami czy markerami — barwniki mogą trwale wniknąć w laminat (szczególnie matowy).",
+        "Nie używaj szorstkich gąbek (druciaków) ani ręczników papierowych — matowią laminat.",
+        "Nie stosuj środków ze ścierniwem (mleczka z piaskiem), rozpuszczalników, octu ani silnych kwasów.",
+        "Nie czyść frontów płynami do szyb z alkoholem — mogą powodować smugi i mikrospękania na ramkach.",
+        "Nie używaj wosków i nabłyszczaczy meblowych nieprzeznaczonych do laminatów — zostawiają tłuste, trudne do usunięcia warstwy."
+      ]
+    },
+    "gwarancja": {
+      "eyebrow": "03 · Warunki gwarancji",
+      "heading": "Gwarancja Mekra",
+      "items": [
+        {
+          "title": "Okres gwarancji",
+          "value": "2 lata",
+          "text": "Udzielamy 2-letniej gwarancji na nasze wyroby. Bieg gwarancji rozpoczyna się w dniu wystawienia dokumentu sprzedaży."
+        },
+        {
+          "title": "Weryfikacja przy odbiorze",
+          "value": "14 dni",
+          "text": "Sprawdź towar pod kątem ilości, wymiarów i wad widocznych w ciągu 14 dni od dostawy. Obróbka mechaniczna (wiercenie, cięcie) frontu z wadą jawną oznacza akceptację towaru i utratę prawa do reklamacji w tym zakresie."
+        },
+        {
+          "title": "Procedura reklamacyjna",
+          "value": "Pisemnie",
+          "text": "Reklamację zgłoś pisemnie wraz z dokumentacją zdjęciową. Zastrzegamy sobie prawo do oględzin reklamowanego elementu w naszej siedzibie."
+        },
+        {
+          "title": "Zakres odpowiedzialności",
+          "value": "Wartość produktu",
+          "text": "Odpowiedzialność Mekra ogranicza się do wartości reklamowanego produktu. Nie pokrywamy kosztów montażu, transportu wtórnego ani przestojów."
+        }
+      ]
+    },
+    "zwroty": {
+      "eyebrow": "04 · Produkty na wymiar i zwroty",
+      "heading": "Produkcja na indywidualne zamówienie",
+      "body": [
+        "Wszystkie produkty Mekra wytwarzamy na indywidualne zamówienie, według specyfikacji klienta — pod konkretny wymiar i&nbsp;kolor. Z&nbsp;tego powodu <strong style=\"color: var(--color-text);\"> zwrot zamówionych frontów nie jest możliwy</strong>.",
+        "Zgodnie z&nbsp;art. 38 pkt 3 Ustawy o&nbsp;prawach konsumenta, prawo do odstąpienia od umowy zawartej na odległość nie przysługuje w&nbsp;przypadku zamówień dotyczących rzeczy nieprefabrykowanych, wyprodukowanych według specyfikacji konsumenta lub służących zaspokojeniu jego zindywidualizowanych potrzeb.",
+        "Masz wątpliwości co do wymiarów lub dekoru? Skontaktuj się z&nbsp;nami przed złożeniem zamówienia — doradzimy i&nbsp;pomożemy uniknąć pomyłek."
+      ],
+      "items": [
+        { "label": "Skontaktuj się", "href": "/#kontakt" },
+        { "label": "Zobacz cennik", "href": "/cennik/" },
+        { "label": "Pobierz PDF", "href": "/docs/warunki-techniczne-i-gwarancyjne-mekra.pdf" }
+      ]
+    }
+  }
+}

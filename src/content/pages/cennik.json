@@ -1,0 +1,125 @@
+{
+  "title": "Cennik frontów ramiakowych — fronty od 350 zł/m²",
+  "description": "Cennik frontów ramiakowych Mekra: fronty 7/18/36/60 mm od 350 zł/m² netto, fronty ze szkłem i lustrem, zacinanie na 45°. Klej PUR w standardzie, dostawa w całej Polsce.",
+  "sections": {
+    "hero": {
+      "image": "/img/realizacje/ramka-18mm/ramka-18mm-rubinova-05.webp",
+      "eyebrow": "Cennik",
+      "heading": "Ile kosztują<br /> <span class=\"text-gradient\">fronty ramiakowe?</span>",
+      "text": "Solidna konstrukcja frontów ramiakowych z&nbsp;trwałej płyty laminowanej — odporna na wilgoć i&nbsp;uszkodzenia, łatwa w&nbsp;pielęgnacji. Wykonamy je z&nbsp;każdej płyty laminowanej dostępnej na rynku: laminaty, folie PPV i&nbsp;akryle w&nbsp;połysku.",
+      "ctaLabel": "Pobierz cennik PDF"
+    },
+    "pozycjaGlowna": {
+      "eyebrow": "Pozycja podstawowa",
+      "name": "Fronty ramiakowe",
+      "sizes": "7 / 18 / 36 / 60 mm",
+      "value": "od 350 zł",
+      "unit": "m² netto",
+      "text": "Cena zależna od wybranego dekoru — każde zamówienie wyceniamy indywidualnie.",
+      "ctaLabel": "Zamów wycenę"
+    },
+    "dodatki": {
+      "eyebrow": "Opcje dodatkowe",
+      "heading": "Szkło, lustro i&nbsp;dopłaty",
+      "text": "Kwoty doliczane do ceny pojedynczego frontu lub całego zamówienia. Wszystkie ceny są cenami netto.",
+      "items": [
+        {
+          "name": "Front ze szkłem (mały)",
+          "value": "+190 zł",
+          "unit": "netto / front",
+          "text": "Front ramiakowy z wpuszczonym szkłem w rozmiarze szafek kuchennych.",
+          "type": "glass"
+        },
+        {
+          "name": "Front z lustrem (mały)",
+          "value": "+250 zł",
+          "unit": "netto / front",
+          "text": "Front ramiakowy z wpuszczonym lustrem w rozmiarze szafek kuchennych.",
+          "type": "mirror"
+        },
+        {
+          "name": "Front ze szkłem (duży)",
+          "value": "+300 zł",
+          "unit": "netto / front",
+          "text": "Front ramiakowy z wpuszczonym szkłem w rozmiarze frontów szaf.",
+          "type": "glass"
+        },
+        {
+          "name": "Front z lustrem (duży)",
+          "value": "+400 zł",
+          "unit": "netto / front",
+          "text": "Front ramiakowy z wpuszczonym lustrem w rozmiarze frontów szaf.",
+          "type": "mirror"
+        },
+        {
+          "name": "Zacinanie na 45°",
+          "value": "+60 zł",
+          "unit": "netto / front",
+          "text": "Kwotę doliczamy do ceny pojedynczego frontu zacinanego pod kątem.",
+          "type": "angle"
+        },
+        {
+          "name": "Zamówienie poniżej 4 m²",
+          "value": "+30%",
+          "unit": "wartości zamówienia netto",
+          "text": "Dopłata do zamówienia poniżej minimum logistycznego (4 m²).",
+          "type": "minimum"
+        },
+        {
+          "name": "Słój przechodzący",
+          "value": "+20%",
+          "unit": "wartości zamówienia netto",
+          "text": "Dopłata za zachowanie ciągłości usłojenia — rysunek dekoru przechodzi płynnie przez sąsiednie fronty.",
+          "type": "grain"
+        }
+      ]
+    },
+    "info": {
+      "eyebrow": "Warto wiedzieć",
+      "heading": "Co jest wliczone<br />w&nbsp;cenę?",
+      "text": "Kilka rzeczy, które u&nbsp;nas dostajesz w&nbsp;standardzie — i&nbsp;kilka, o&nbsp;których warto pamiętać przy planowaniu zamówienia.",
+      "items": [
+        {
+          "title": "Klej PUR w standardzie",
+          "text": "Wszystkie fronty oklejamy wilgocioodpornym klejem PUR — bez dopłat."
+        },
+        {
+          "title": "Czas realizacji 8–10 tygodni",
+          "text": "Tyle standardowo czeka się na zamówienie od potwierdzenia specyfikacji."
+        },
+        {
+          "title": "Dostawa pod Twój adres",
+          "text": "Fronty wysyłamy kurierem. Koszt dostawy szacujemy po złożeniu zamówienia."
+        },
+        {
+          "title": "Transport dedykowany dla dużych gabarytów",
+          "text": "Fronty z lustrem lub szkłem o dużym gabarycie dostarczamy transportem dedykowanym, nie przesyłką kurierską."
+        },
+        {
+          "title": "Dowolna płyta z rynku",
+          "text": "Wykonamy fronty z każdej płyty laminowanej dostępnej na rynku — laminaty, folie PPV i akryle w połysku."
+        },
+        {
+          "title": "Sprawdzeni producenci płyt",
+          "text": "Pracujemy na płytach Egger, Kronospan, Swiss Krono i Forner."
+        }
+      ]
+    },
+    "infoCta": {
+      "items": [
+        { "label": "Zamów wycenę", "href": "/#kontakt" },
+        { "label": "Zobacz ofertę", "href": "/oferta/" }
+      ]
+    },
+    "cta": {
+      "heading": "Chcesz znać dokładną cenę?",
+      "text": "Cena frontów zależy od wybranego dekoru, więc każdy projekt wyceniamy indywidualnie. Wyślij wymiary i&nbsp;wybrany dekor — odpowiemy z&nbsp;konkretną wyceną.",
+      "items": [
+        { "label": "Zamów wycenę", "href": "/#kontakt" },
+        { "label": "Zadzwoń: 792 456 094", "href": "tel:+48792456094" },
+        { "label": "Pobierz cennik PDF", "href": "/docs/cennik-mekra.pdf" }
+      ],
+      "caption": "Podane ceny są cenami netto i&nbsp;mają charakter orientacyjny — nie stanowią oferty handlowej w&nbsp;rozumieniu Kodeksu cywilnego."
+    }
+  }
+}
