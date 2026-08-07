@@ -1,5 +1,5 @@
 {
-  "title": "Fronty z ramką (ramiakowe) — przewodnik po szerokościach i materiałach",
+  "title": "Fronty z ramką (ramiakowe) — przewodnik po szerokościach i materiałach (test CMS mekra)",
   "description": "Fronty z ramką: czym są, jak są zbudowane i którą szerokość ramki wybrać — 7, 18, 36 czy 60 mm. Płyta laminowana, matowa i akrylowa, dwustronny dekor, klej PUR. Przewodnik od producenta.",
   "sections": {
     "hero": {
@@ -72,8 +72,14 @@
       "heading": "Zobacz fronty z ramką w realnych kuchniach",
       "text": "Najwięcej mówią realizacje — a&nbsp;jeśli już wiesz, czego szukasz, przejdź do oferty albo poproś o&nbsp;wycenę.",
       "items": [
-        { "label": "Zobacz realizacje", "href": "/realizacje/" },
-        { "label": "Oferta frontów ramiakowych", "href": "/oferta/" }
+        {
+          "label": "Zobacz realizacje",
+          "href": "/realizacje/"
+        },
+        {
+          "label": "Oferta frontów ramiakowych",
+          "href": "/oferta/"
+        }
       ]
     }
   }
