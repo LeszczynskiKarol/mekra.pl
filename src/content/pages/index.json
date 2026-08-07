@@ -1,5 +1,236 @@
 {
   "title": "Strona Główna",
   "description": "Mekra — producent frontów ramiakowych z płyty laminowanej. Ramki 7, 18, 36, 60 mm. Fronty kuchenne na wymiar, fronty do IKEA. Toruń i okolice.",
-  "sections": {}
+  "sections": {
+    "hero": {
+      "eyebrow": "Producent frontów ramiakowych",
+      "heading": "Charakter wnętrza",
+      "subtitle": "zaczyna się od frontu",
+      "intro": "Fronty ramiakowe z płyty laminowanej, matowej i akrylowej — producent Toruń",
+      "text": "Tworzymy fronty ramiakowe z&nbsp;płyty laminowanej, matowej i akrylowej. Dostarczamy przetestowane rozwiązania, które dodają wnętrzom uroku — z&nbsp;odpornością, jakiej nie znajdziesz w&nbsp;tradycyjnych ramiakowych rozwiązaniach.",
+      "image": "/img/hero/ramka-36mm-grudziadz-40-1920.webp",
+      "items": [
+        { "label": "Poznaj ofertę", "href": "#oferta" },
+        { "label": "Zamów wycenę", "href": "#kontakt" }
+      ]
+    },
+    "heroStatystyki": {
+      "items": [
+        { "value": "4", "label": "Rodzaje ramek", "text": "7 / 18 / 36 / 60 mm" },
+        { "value": "21<span class=\"text-xl\"> mm</span>", "label": "Grubość frontu", "text": "z ramką 3&nbsp;mm w&nbsp;standardzie" },
+        { "value": "100%", "label": "Przetestowane", "text": "Wilgoć, odkształcenia, zachlapania" },
+        { "label": "Eco-friendly", "text": "Płyty częściowo z recyklingu" }
+      ]
+    },
+    "oNas": {
+      "eyebrow": "O firmie",
+      "heading": "Z pasji do wnętrz —<br/> <span class=\"text-gradient\">w odpowiedzi na potrzeby</span>",
+      "body": [
+        "<strong class=\"font-semibold\" style=\"color: var(--color-text);\">Mekra</strong> to firma, która powstała i&nbsp;przerodziła się z&nbsp;pasji do wnętrz w&nbsp;realne rozwiązania dopasowane do potrzeb i&nbsp;oczekiwań naszych klientów. Wiemy, że front meblowy to nie tylko element funkcjonalny. To pierwsza rzecz, którą widzisz i&nbsp;dotykasz każdego dnia.",
+        "Pracujemy w dwóch głównych technologiach. Pierwsza to płyta laminowana — z pełną paletą dekorów: unikolory, reprodukcje drewna, kamienia, betonu i&nbsp;innych materiałów. Korzystamy z&nbsp;płyt renomowanych producentów, takich jak Saviola, Egger, Forner Cleaf czy Nieman — w&nbsp;tym z&nbsp;płyt głęboko strukturyzowanych, które oddają charakter prawdziwego drewna. Druga to płyta powlekana matą akrylową lub akrylem (marki takie jak Forner, AGT) — to dwie odrębne technologie, dostępne wyłącznie w&nbsp;jednolitych wybarwieniach, w&nbsp;wariantach ultramat, mat i&nbsp;połysk. Każdy materiał dobieramy pod kątem trwałości, estetyki i&nbsp;Twoich indywidualnych oczekiwań. Niezależnie od wybranej technologii, każdy nasz front jest oklejany wodoodpornym klejem poliuretanowym PUR — w&nbsp;standardzie, bez dopłat.",
+        "Nasze fronty przeszły szereg testów przedprodukcyjnych — na wyginanie, odkształcanie, wilgotność i&nbsp;zachlapanie. Dzięki temu z&nbsp;pełną odpowiedzialnością potwierdzamy: wytrzymają próbę czasu i&nbsp;codziennego użytkowania."
+      ],
+      "image": "img/mekra-produkcja.webp",
+      "alt": "Produkcja frontów ramiakowych Mekra",
+      "value": "Jakość",
+      "caption": "potwierdzona testami"
+    },
+    "oferta": {
+      "eyebrow": "Oferta",
+      "heading": "Cztery szerokości ramek,<br /> <span class=\"text-gradient\">nieograniczone możliwości</span>",
+      "text": "Każda ramka to inny charakter wnętrza. Od minimalizmu po pełną klasykę — dobierz szerokość do swojego stylu. Wszystkie fronty mają grubość 21&nbsp;mm i&nbsp;pracują na standardowych zawiasach Blum, Häfele i&nbsp;Hettich.",
+      "ctaLabel": "Szczegóły",
+      "items": [
+        {
+          "size": "7",
+          "unit": "mm",
+          "slug": "ramka-7mm",
+          "name": "Nowoczesna linia",
+          "text": "Delikatne podkreślenie formy. Subtelna ramka, która nadaje frontom nowoczesny, minimalistyczny charakter. Idealna do kuchni w duchu skandynawskim i loftowym.",
+          "label": "Nowoczesny design",
+          "image": "img/ramka77mm.webp",
+          "imageAlt": "Front ramiakowy z ramką 7mm - nowoczesny design"
+        },
+        {
+          "size": "18",
+          "unit": "mm",
+          "slug": "ramka-18mm",
+          "name": "Współczesna elegancja",
+          "text": "Ramka w nowoczesnej formie z wyraźniejszym akcentem. Łączy współczesne wzornictwo z wyczuwalną strukturą materiału. Uniwersalny wybór do kuchni i zabudów.",
+          "label": "Uniwersalna forma",
+          "image": "img/ramka18mm.webp",
+          "imageAlt": "Front ramiakowy z ramką 18mm - współczesna elegancja"
+        },
+        {
+          "size": "36",
+          "unit": "mm",
+          "slug": "ramka-36mm",
+          "name": "Klasyczny szyk",
+          "text": "Idziemy w stronę klasyku — kuchni farmerskich, skandynawskich, prowansalskich. Szersza ramka nadaje meblom charakteru i przytulności tradycyjnych wnętrz.",
+          "label": "Styl farmhouse & skandynawski",
+          "image": "img/ramka36mm.webp",
+          "imageAlt": "Front ramiakowy z ramką 36mm - klasyczny styl farmhouse"
+        },
+        {
+          "size": "60",
+          "unit": "mm",
+          "slug": "ramka-60mm",
+          "name": "Pełna klasyka",
+          "text": "Standardowa, znana forma z frontów MDF lakierowanych — teraz w wersji z płyty laminowanej. Możliwość wpuszczenia lustra lub szkła w środek ramki, zamiast standardowego montażu od tyłu.",
+          "label": "Klasyka z lustrem lub szkłem",
+          "image": "img/ramka60mm.webp",
+          "imageAlt": "Front ramiakowy z ramką 60mm - klasyczny front ze szkłem"
+        }
+      ]
+    },
+    "ofertaCta": {
+      "ctaLabel": "Zobacz pełną ofertę",
+      "text": "Pełne opisy wariantów, zabudowy specjalne i porównanie szerokości ramek"
+    },
+    "lustroSzklo": {
+      "heading": "Lustro i szkło w ramce 60 mm",
+      "text": "W&nbsp;ramce 60&nbsp;mm istnieje możliwość wpuszczenia lustra lub szkła bezpośrednio w&nbsp;środek ramki — bez standardowego montażu od tyłu frontu. To daje znacznie lepszy wygląd niż tradycyjne rozwiązania. Ramka bez środkowej płyciny jest składana inną technologią i&nbsp;posiada widoczną linię łączenia w&nbsp;pionie po obu stronach."
+    },
+    "korzysci": {
+      "eyebrow": "Korzyści",
+      "heading": "Dlaczego płyta laminowana<br /> <span class=\"text-gradient\">to przyszłość frontów?</span>",
+      "text": "To odpowiedź na potrzeby rynku. Wielokrotnie twardsze niż lakier MDF, bez wad frontów foliowanych, gdzie odkleja się płaszczyzna i&nbsp;nie czuć faktury. Wyczuwalna faktura i&nbsp;dwustronny dekor w&nbsp;standardzie.",
+      "items": [
+        {
+          "title": "Najwyższa odporność",
+          "text": "Płyta laminowana to najtwardszy materiał dostępny na rynku meblowym. Odporna na zarysowania, odbarwienia i uszkodzenia mechaniczne — wielokrotnie twardsze niż lakier MDF, bez wad frontów foliowanych, gdzie odkleja się płaszczyzna i nie czuć faktury."
+        },
+        {
+          "title": "Wyczuwalna faktura",
+          "text": "W zależności od wybranej płyty faktura może być gładka, perlistowa, super matowa, metalizowana, szczotkowana lub z wyczuwalną strukturą drewna czy innych naturalnych materiałów. W naszych frontach faktura materiału jest taka, jaki materiał zostanie wybrany. Efekt premium, który poczujesz pod dłonią."
+        },
+        {
+          "title": "Dwustronny dekor",
+          "text": "W naszych frontach obie strony pokryte są tym samym dekorem — zarówno widoczna, jak i wewnętrzna. W przypadku lakieru widzisz kolor tylko z zewnątrz, a od środka MDF jest biały lub czarny. Dodatkowy atut: fronty ramiakowe w wykończeniu połyskowym — opcja, której praktycznie nikt inny na rynku nie oferuje, bo ramek lakierowanych w połysku mało kto jest w stanie wykonać."
+        },
+        {
+          "title": "Ekologia i recykling",
+          "text": "Płyty laminowane w części pochodzą z recyklingu, co idealnie wpisuje się w świadomą konsumpcję. Wybierając nasze fronty, stawiasz na odpowiedzialne rozwiązanie."
+        },
+        {
+          "title": "Bogactwo dekorów",
+          "text": "Płyty laminowane oferują setki dekorów — unikolory, reprodukcje drewna, kamienia, betonu i innych materiałów. Płyty głęboko strukturyzowane (Saviola, Egger, Forner Cleaf) oddają charakter prawdziwego drewna. Maty akrylowe i akryle (Forner, AGT) to z kolei jednolite wybarwienia w trzech wykończeniach: ultramat głęboko pochłaniający światło, klasyczny mat oraz połysk."
+        },
+        {
+          "title": "Klej PUR w standardzie",
+          "text": "Wszystkie nasze fronty oklejane są klejem poliuretanowym PUR — wodoodpornym i odpornym na wysoką temperaturę. To standard, nie dopłata. Dzięki temu front trzyma się płaszczyzny nawet w trudnych warunkach. Fronty narażone na bezpośredni kontakt z wodą — przy zmywarkach i ociekarkach — zabezpieczamy dodatkowo. Testowaliśmy je w bezpośrednim kontakcie z wodą."
+        }
+      ]
+    },
+    "porownanie": {
+      "heading": "Porównanie materiałów",
+      "text": "Zobacz, jak nasze fronty wypadają na tle konkurencji",
+      "bullets": ["Materiał", "Odporność", "Faktura", "Cena", "Paleta kolorów", "Ramki", "Eko"],
+      "items": [
+        { "name": "Płyta laminowana", "odpornosc": 5, "faktura": 5, "cena": 3, "kolory": 5, "ramki": true, "ekologia": true },
+        { "name": "MDF lakierowany", "odpornosc": 2, "faktura": 2, "cena": 5, "kolory": 2, "ramki": true, "ekologia": false },
+        { "name": "Folia PCV", "odpornosc": 1, "faktura": 1, "cena": 4, "kolory": 4, "ramki": true, "ekologia": false }
+      ],
+      "body": [
+        "<strong class=\"font-semibold\" style=\"color: var(--color-text);\">Fronty foliowane — brak faktury i&nbsp;problem z&nbsp;trwałością.</strong> Fronty pokrywane folią PCV umożliwiają wykonanie ramki, jednak nie odczujesz pod palcami żadnej struktury — folia to gładkie, bezfakturowe pokrycie, gdzie nie czuć faktury. W&nbsp;naszych frontach faktura materiału jest taka, jaki materiał zostanie wybrany — jeśli wybierzesz płytę z&nbsp;wyraźną fakturą drewna, poczujesz ją pod dłonią. Ponadto fronty foliowane w&nbsp;miejscach narażonych na wilgoć i&nbsp;wysoką temperaturę (okolice zmywarki, piekarnika) mają tendencję do odparzeń — odkleja się płaszczyzna.",
+        "<strong class=\"font-semibold\" style=\"color: var(--color-text);\">MDF lakierowany — estetyka kosztem odporności.</strong> Zaletą lakieru jest zalana krawędź (malowana w&nbsp;całości, nie doklejana) oraz możliwość wykonania dowolnych zdobień i&nbsp;sztukaterii. Jednak lakier jest delikatny — łatwo go zarysować i&nbsp;uszkodzić od uderzeń. Nasze fronty z&nbsp;płyty laminowanej są wielokrotnie twardsze, a&nbsp;dekor widoczny jest z&nbsp;obu stron — nie tylko od frontu. Lakier jest jednobarwny, co znacząco ogranicza paletę kolorów. Co więcej, ramki w&nbsp;wykończeniu połyskowym są w&nbsp;technologii lakierowanej praktycznie niemożliwe do wykonania — u&nbsp;nas to standardowa opcja."
+      ],
+      "caption": "Więcej o&nbsp;materiale: <a href=\"/oferta/fronty-laminowane/\" class=\"font-medium hover:underline\" style=\"color: var(--color-accent);\">fronty laminowane na wymiar</a> &nbsp;·&nbsp; <a href=\"/fronty-laminowane-czy-lakierowane/\" class=\"font-medium hover:underline\" style=\"color: var(--color-accent);\">fronty laminowane czy lakierowane — porównanie</a>"
+    },
+    "realizacje": {
+      "eyebrow": "Realizacje",
+      "heading": "Tak wyglądają<br /> <span class=\"text-gradient\">nasze ramki w Twoich wnętrzach</span>",
+      "text": "realizacji posegregowanych według szerokości ramki — od minimalistycznych 7&nbsp;mm po pełną klasykę 60&nbsp;mm. Kliknij kategorię, żeby zobaczyć wszystko.",
+      "ctaLabel": "Zobacz wszystkie realizacje"
+    },
+    "ikea": {
+      "eyebrow": "Dla właścicieli mebli IKEA",
+      "heading": "Fronty ramiakowe<br /> <span class=\"text-gradient\">do Twojej kuchni z&nbsp;IKEA</span>",
+      "image": "/img/realizacje/ramka-36mm/ramka-36mm-grudziadz-01.webp",
+      "alt": "Kuchnia z frontami ramiakowymi Mekra dopasowanymi do korpusów IKEA",
+      "body": [
+        "Szukasz sposobu, aby nadać meblom z&nbsp;IKEA niepowtarzalny charakter? Zamów u&nbsp;nas fronty ramiakowe na wymiar i&nbsp;odmień swoją kuchnię bez konieczności wymiany całych mebli.",
+        "Nasze fronty pasują do korpusów IKEA — wystarczy podać wymiary lub zamówić wymiarowanie u&nbsp;nas. Otrzymujesz produkt premium w&nbsp;cenie znacznie niższej niż kompletna wymiana zabudowy."
+      ],
+      "ctaLabel": "Zamów fronty do IKEA",
+      "text": "<strong class=\"font-semibold\" style=\"color: var(--color-text);\">Ważne:</strong> Nasze fronty mają grubość 21&nbsp;mm (standardowe IKEA to 18-19&nbsp;mm). Przy wymianie samych frontów może wystąpić niewielka różnica w&nbsp;płaszczyźnie — informujemy o&nbsp;tym na etapie wyceny."
+    },
+    "wspolpraca": {
+      "eyebrow": "Współpraca",
+      "heading": "Dla kogo<br /> <span class=\"text-gradient\">pracujemy?</span>",
+      "items": [
+        {
+          "title": "Klienci indywidualni",
+          "text": "Szukasz frontów do nowej kuchni, szafy czy zabudowy? Doradzimy, wymierzymy i wyprodukujemy fronty idealnie dopasowane do Twojego wnętrza. Możliwość wymiany samych frontów bez ruszania korpusów.",
+          "bullets": ["Wycena na podstawie wymiarów", "Pomiar u klienta", "Montaż i wymiana frontów", "Doradztwo materiałowe"]
+        },
+        {
+          "title": "Stolarze",
+          "text": "Rozszerz swoją ofertę o fronty ramiakowe z płyty laminowanej. Współpracujemy z warsztatami stolarskimi w regionie — dostarczamy gotowe fronty do Twoich korpusów.",
+          "bullets": ["Hurtowe warunki cenowe", "Szybka realizacja zleceń", "Wsparcie techniczne", "Regularny łańcuch dostaw"]
+        },
+        {
+          "title": "Projektanci wnętrz",
+          "text": "Oferujemy szkolenia produktowe i pełne wsparcie przy wdrażaniu frontów ramiakowych w Twoich projektach. Idealna alternatywa dla lakierów — z lepszą trwałością i niższą ceną.",
+          "bullets": ["Szkolenia produktowe", "Próbki materiałów", "Wsparcie przy projektach", "Konkurencyjna alternatywa dla lakieru"]
+        }
+      ]
+    },
+    "zasieg": {
+      "eyebrow": "Zamów z wymiarem",
+      "heading": "Toruń i&nbsp;okolice —<br /> <span class=\"text-gradient\">wymierzymy i&nbsp;dostarczymy</span>",
+      "body": [
+        "Oferujemy kompleksową obsługę — od pomiaru, przez produkcję, po dostawę i&nbsp;montaż. Wymiarowanie dostępne jest wyłącznie na terenie Torunia i&nbsp;okolic. Klienci spoza tego obszaru mogą zamówić fronty podając własne wymiary.",
+        "W&nbsp;Toruniu i&nbsp;okolicach oferujemy również wymianę frontów wraz z&nbsp;zawiasami jako usługę — możemy przyjechać i&nbsp;zamontować fronty na miejscu. Wszystkie fronty można zamówić z&nbsp;otworowaniem na zawiasy z&nbsp;wymiarem klienta.",
+        "Standardowa grubość naszych frontów to 21&nbsp;mm z&nbsp;ramką 3&nbsp;mm. Przy wymianie samych frontów może wystąpić niewielka różnica w&nbsp;płaszczyźnie względem standardowych frontów 18-19&nbsp;mm — informujemy o&nbsp;tym na etapie wyceny."
+      ],
+      "items": [
+        { "id": "01", "title": "Kontakt i wycena", "text": "Podaj wymiary lub umów się na pomiar (Toruń i okolice)" },
+        { "id": "02", "title": "Dobór materiału", "text": "Wybierz płytę, kolor, szerokość ramki i grubość frontu" },
+        { "id": "03", "title": "Produkcja", "text": "Precyzyjna realizacja zamówienia z otworowaniem na życzenie" },
+        { "id": "04", "title": "Dostawa i montaż", "text": "Dowozimy i montujemy na miejscu (Toruń i okolice)" }
+      ]
+    },
+    "zasiegUslug": {
+      "heading": "Zasięg usług",
+      "items": [
+        { "label": "Pomiar + dostawa + montaż + wymiana", "text": "Toruń i okolice" },
+        { "label": "Dostawa frontów", "text": "Województwo kujawsko-pomorskie" },
+        { "label": "Wysyłka na wymiar klienta", "text": "Cała Polska — bez pomiaru, na podstawie podanych wymiarów" }
+      ],
+      "ctaLabel": "Zamów pomiar"
+    },
+    "kontakt": {
+      "eyebrow": "Kontakt",
+      "heading": "Porozmawiajmy<br /> <span class=\"text-gradient\">o Twoim projekcie</span>",
+      "text": "Wyślij wymiary, opisz swoją wizję lub po prostu zadzwoń. Doradzimy najlepsze rozwiązanie i&nbsp;przygotujemy wycenę.",
+      "items": [
+        { "label": "Telefon", "value": "792 456 094", "href": "tel:+48792456094" },
+        { "label": "Email", "value": "kontakt@mekra.pl", "href": "mailto:kontakt@mekra.pl" },
+        { "label": "Lokalizacja", "value": "Toruń, kujawsko-pomorskie" }
+      ]
+    },
+    "kontaktCzasOdpowiedzi": {
+      "title": "Czas odpowiedzi",
+      "text": "Odpowiadamy na wiadomości w ciągu 24-48 godz."
+    },
+    "kontaktFormularz": {
+      "heading": "Szybka wycena",
+      "text": "Opisz swoje potrzeby — odezwiemy się z wyceną",
+      "items": [
+        { "id": "name", "label": "Imię i nazwisko" },
+        { "id": "email", "label": "Email" },
+        { "id": "phone", "label": "Telefon" },
+        { "id": "productType", "label": "Rodzaj frontu" },
+        { "id": "dimensions", "label": "Wymiary (opcjonalnie)" },
+        { "id": "message", "label": "Wiadomość" },
+        { "id": "attachments", "label": "Załączniki" }
+      ],
+      "caption": "Wysyłając formularz, wyrażasz zgodę na kontakt w sprawie wyceny"
+    },
+    "kontaktSukces": {
+      "heading": "Wiadomość wysłana!",
+      "text": "Odpowiemy najszybciej jak to możliwe."
+    }
+  }
 }

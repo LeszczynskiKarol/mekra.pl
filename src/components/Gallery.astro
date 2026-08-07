@@ -1,6 +1,9 @@
 ---
 import manifest from '../data/realizacje.json';
 import { portfolio } from '../data/portfolio';
+import content from '../content/pages/index.json';
+
+const realizacjeSekcja = content.sections.realizacje;
 
 // Category chrome (titles/subtitles/counts) stays with the generated manifest;
 // the gallery IMAGE data comes from the standardized single source (portfolio.ts).
@@ -72,14 +75,10 @@ const totalCount = counts.total;
   <div class="max-w-7xl mx-auto">
     <!-- Header -->
     <div class="text-center max-w-3xl mx-auto animate-on-scroll">
-      <span class="label-tag">Realizacje</span>
-      <h2 class="mt-6 font-display text-3xl sm:text-4xl md:text-5xl tracking-tight" style="color: var(--color-text);">
-        Tak wyglądają<br />
-        <span class="text-gradient">nasze ramki w Twoich wnętrzach</span>
-      </h2>
+      <span class="label-tag">{realizacjeSekcja.eyebrow}</span>
+      <h2 class="mt-6 font-display text-3xl sm:text-4xl md:text-5xl tracking-tight" style="color: var(--color-text);" set:html={realizacjeSekcja.heading} />
       <p class="mt-6 text-base md:text-lg leading-relaxed font-body" style="color: var(--color-text-secondary);">
-        {totalCount} realizacji posegregowanych według szerokości ramki — od minimalistycznych
-        7&nbsp;mm po pełną klasykę 60&nbsp;mm. Kliknij kategorię, żeby zobaczyć wszystko.
+        {totalCount} <Fragment set:html={realizacjeSekcja.text} />
       </p>
     </div>
 
@@ -137,7 +136,7 @@ const totalCount = counts.total;
         href="/realizacje/"
         class="inline-flex items-center gap-2 btn-primary"
       >
-        <span>Zobacz wszystkie realizacje ({totalCount})</span>
+        <span>{realizacjeSekcja.ctaLabel} ({totalCount})</span>
         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
         </svg>
