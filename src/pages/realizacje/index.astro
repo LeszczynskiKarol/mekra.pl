@@ -4,6 +4,9 @@ import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
 import manifest from '../../data/realizacje.json';
 import { projects } from '../../data/projects';
+import content from '../../content/pages/realizacje.json';
+
+const { sections } = content;
 
 const { items, categories, counts } = manifest;
 
@@ -37,7 +40,7 @@ const firstImage = items[0]?.paths.full ?? '/og-image.jpg';
 ---
 
 <BaseLayout
-  title="Realizacje — galeria frontów, kuchni, szaf i zabudów"
+  title={content.title}
   description={`Galeria ${totalCount} realizacji Mekra: kuchnie z frontami ramiakowymi 7mm, 18mm, 36mm, szafy z ramką 60mm i lustrami, zabudowy specjalne — winiarnie. Toruń i okolice.`}
   ogImage={`https://www.mekra.pl${firstImage}`}
   canonicalUrl="https://www.mekra.pl/realizacje/"
@@ -49,14 +52,10 @@ const firstImage = items[0]?.paths.full ?? '/og-image.jpg';
     <section class="section-padding pt-12 pb-8 md:pt-20 md:pb-12">
       <div class="max-w-7xl mx-auto">
         <div class="max-w-3xl">
-          <span class="label-tag">Galeria</span>
-          <h1 class="mt-6 font-display text-4xl sm:text-5xl md:text-6xl tracking-tight leading-[1.05]" style="color: var(--color-text);">
-            Realizacje <span class="text-gradient">w pełnym wymiarze</span>
-          </h1>
+          <span class="label-tag">{sections.hero.eyebrow}</span>
+          <h1 class="mt-6 font-display text-4xl sm:text-5xl md:text-6xl tracking-tight leading-[1.05]" style="color: var(--color-text);" set:html={sections.hero.heading} />
           <p class="mt-6 text-base md:text-lg leading-relaxed font-body" style="color: var(--color-text-secondary);">
-            {totalCount} zdjęć z naszych ostatnich projektów. Każdy front, każdy detal —
-            od kuchni przez szafy po nietypowe zabudowy. Filtruj po kategorii,
-            powiększaj i porównuj.
+            {totalCount} {sections.hero.text}
           </p>
         </div>
       </div>
@@ -70,7 +69,7 @@ const firstImage = items[0]?.paths.full ?? '/og-image.jpg';
           data-filter="all"
           aria-pressed="true"
         >
-          Wszystkie <span class="opacity-60 ml-1">({totalCount})</span>
+          {sections.filtr.label} <span class="opacity-60 ml-1">({totalCount})</span>
         </button>
         {categorySlugs.map((slug) => (
           <button
@@ -89,12 +88,12 @@ const firstImage = items[0]?.paths.full ?? '/og-image.jpg';
       <div class="max-w-7xl mx-auto">
         <div class="flex items-end justify-between gap-6 mb-8">
           <div>
-            <span class="label-tag">Projekty</span>
+            <span class="label-tag">{sections.projekty.eyebrow}</span>
             <h2 class="mt-4 font-display text-2xl sm:text-3xl md:text-4xl tracking-tight" style="color: var(--color-text);">
-              Wybrane realizacje — pełne case-study
+              {sections.projekty.heading}
             </h2>
             <p class="mt-3 text-sm md:text-base font-body" style="color: var(--color-text-secondary);">
-              Każdy projekt to osobna podstrona ze wszystkimi zdjęciami, opisem i lokalizacją.
+              {sections.projekty.text}
             </p>
           </div>
         </div>
@@ -174,7 +173,7 @@ const firstImage = items[0]?.paths.full ?? '/og-image.jpg';
         </div>
 
         <p id="gallery-empty" class="text-center py-12 font-body hidden" style="color: var(--color-text-muted);">
-          Brak realizacji w tej kategorii.
+          {sections.galeria.text}
         </p>
       </div>
     </section>
@@ -183,15 +182,14 @@ const firstImage = items[0]?.paths.full ?? '/og-image.jpg';
     <section class="section-padding py-16 md:py-24" style="background-color: var(--color-bg-secondary);">
       <div class="max-w-3xl mx-auto text-center">
         <h2 class="font-display text-3xl md:text-4xl tracking-tight" style="color: var(--color-text);">
-          Podoba Ci się to, co widzisz?
+          {sections.cta.heading}
         </h2>
         <p class="mt-4 text-base md:text-lg font-body leading-relaxed" style="color: var(--color-text-secondary);">
-          Każda z tych realizacji zaczęła się od rozmowy. Powiedz nam, co masz w głowie —
-          oddzwonimy w 24h z wstępną wyceną.
+          {sections.cta.text}
         </p>
         <div class="mt-8 flex flex-wrap justify-center gap-3">
-          <a href="/#kontakt" class="btn-primary">Zamów wycenę</a>
-          <a href="/" class="btn-secondary">Wróć na stronę główną</a>
+          <a href={sections.cta.items[0].href} class="btn-primary">{sections.cta.items[0].label}</a>
+          <a href={sections.cta.items[1].href} class="btn-secondary">{sections.cta.items[1].label}</a>
         </div>
       </div>
     </section>

@@ -5,6 +5,9 @@ import Footer from '../../components/Footer.astro';
 import manifest from '../../data/realizacje.json';
 import { projects } from '../../data/projects';
 import { ofertaVariants } from '../../data/oferta';
+import content from '../../content/pages/realizacje-projekt.json';
+
+const { sections } = content;
 
 export function getStaticPaths() {
   return projects.map((p) => ({
@@ -75,9 +78,9 @@ const seoDescription = `${project.intro} ${photoCount} zdjęć, realizacja Mekra
     <nav class="section-padding pt-6 pb-4" aria-label="Breadcrumb">
       <div class="max-w-7xl mx-auto">
         <ol class="flex flex-wrap items-center gap-2 text-xs font-body" style="color: var(--color-text-muted);">
-          <li><a href="/" class="hover:text-[var(--color-accent)] transition-colors">Strona główna</a></li>
+          <li><a href={sections.breadcrumb.items[0].href} class="hover:text-[var(--color-accent)] transition-colors">{sections.breadcrumb.items[0].label}</a></li>
           <li>›</li>
-          <li><a href="/realizacje/" class="hover:text-[var(--color-accent)] transition-colors">Realizacje</a></li>
+          <li><a href={sections.breadcrumb.items[1].href} class="hover:text-[var(--color-accent)] transition-colors">{sections.breadcrumb.items[1].label}</a></li>
           <li>›</li>
           <li style="color: var(--color-text-secondary);">{project.subtitle}</li>
         </ol>
@@ -90,7 +93,7 @@ const seoDescription = `${project.intro} ${photoCount} zdjęć, realizacja Mekra
         <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           <div class="lg:col-span-6">
             <span class="label-tag">
-              Realizacja
+              {sections.hero.eyebrow}
               {project.location && (
                 <span class="ml-1 font-heading font-semibold" style="color: var(--color-accent);">{project.location}</span>
               )}
@@ -99,16 +102,16 @@ const seoDescription = `${project.intro} ${photoCount} zdjęć, realizacja Mekra
               {project.title}
             </h1>
             <p class="mt-4 text-lg font-body" style="color: var(--color-text-secondary);">
-              {project.subtitle} — {photoCount} zdjęć
+              {project.subtitle} — {photoCount} {sections.hero.label}
             </p>
             <p class="mt-6 text-base md:text-lg leading-relaxed font-body" style="color: var(--color-text-secondary);">
               {project.intro}
             </p>
             <div class="mt-8 flex flex-wrap gap-3">
-              <a href="/#kontakt" class="btn-primary">Zamów wycenę</a>
+              <a href={sections.hero.items[0].href} class="btn-primary">{sections.hero.items[0].label}</a>
               {ofertaVariant && (
                 <a href={`/oferta/${ofertaVariant.slug}/`} class="btn-secondary">
-                  Zobacz wariant {ofertaVariant.size}{ofertaVariant.unit}
+                  {sections.hero.items[1].label} {ofertaVariant.size}{ofertaVariant.unit}
                 </a>
               )}
             </div>
@@ -146,9 +149,9 @@ const seoDescription = `${project.intro} ${photoCount} zdjęć, realizacja Mekra
     <!-- Long-form description -->
     <section class="section-padding py-12 md:py-20" style="background-color: var(--color-bg-secondary);">
       <div class="max-w-3xl mx-auto">
-        <span class="label-tag">O tej realizacji</span>
+        <span class="label-tag">{sections.opis.eyebrow}</span>
         <h2 class="mt-4 font-display text-2xl sm:text-3xl md:text-4xl tracking-tight" style="color: var(--color-text);">
-          Co znajdziesz w tym projekcie
+          {sections.opis.heading}
         </h2>
         <div class="mt-8 space-y-5 text-base md:text-lg font-body leading-relaxed" style="color: var(--color-text-secondary);">
           {project.body.map((p) => (<p>{p}</p>))}
@@ -161,9 +164,9 @@ const seoDescription = `${project.intro} ${photoCount} zdjęć, realizacja Mekra
       <div class="max-w-7xl mx-auto">
         <div class="flex items-end justify-between gap-6 mb-10">
           <div>
-            <span class="label-tag">Galeria</span>
+            <span class="label-tag">{sections.galeria.eyebrow}</span>
             <h2 class="mt-4 font-display text-2xl sm:text-3xl md:text-4xl tracking-tight" style="color: var(--color-text);">
-              Wszystkie zdjęcia ({photoCount})
+              {sections.galeria.heading} ({photoCount})
             </h2>
           </div>
         </div>
@@ -199,13 +202,13 @@ const seoDescription = `${project.intro} ${photoCount} zdjęć, realizacja Mekra
     <section class="section-padding py-12 md:py-16" style="background-color: var(--color-bg-secondary);">
       <div class="max-w-5xl mx-auto grid sm:grid-cols-2 gap-6">
         <a href={`/realizacje/${prevProject.slug}/`} class="card-base rounded-2xl p-6 group">
-          <div class="text-xs uppercase tracking-[0.15em] font-body" style="color: var(--color-text-muted);">← Poprzednia realizacja</div>
+          <div class="text-xs uppercase tracking-[0.15em] font-body" style="color: var(--color-text-muted);">{sections.nawigacja.items[0].label}</div>
           <div class="mt-3 font-heading text-lg font-semibold" style="color: var(--color-text);">
             {prevProject.title}
           </div>
         </a>
         <a href={`/realizacje/${nextProject.slug}/`} class="card-base rounded-2xl p-6 group text-right">
-          <div class="text-xs uppercase tracking-[0.15em] font-body" style="color: var(--color-text-muted);">Następna realizacja →</div>
+          <div class="text-xs uppercase tracking-[0.15em] font-body" style="color: var(--color-text-muted);">{sections.nawigacja.items[1].label}</div>
           <div class="mt-3 font-heading text-lg font-semibold" style="color: var(--color-text);">
             {nextProject.title}
           </div>
@@ -217,14 +220,12 @@ const seoDescription = `${project.intro} ${photoCount} zdjęć, realizacja Mekra
     <section class="section-padding py-16 md:py-24">
       <div class="max-w-3xl mx-auto text-center">
         <h2 class="font-display text-3xl md:text-4xl tracking-tight" style="color: var(--color-text);">
-          Chcesz podobny projekt?
+          {sections.cta.heading}
         </h2>
-        <p class="mt-4 text-base md:text-lg font-body leading-relaxed" style="color: var(--color-text-secondary);">
-          Wyślij wymiary lub opisz, co masz w&nbsp;głowie. Odpowiemy w&nbsp;24h z propozycją dekoru i&nbsp;wstępną wyceną.
-        </p>
+        <p class="mt-4 text-base md:text-lg font-body leading-relaxed" style="color: var(--color-text-secondary);" set:html={sections.cta.text} />
         <div class="mt-8 flex flex-wrap justify-center gap-3">
-          <a href="/#kontakt" class="btn-primary">Zamów wycenę</a>
-          <a href="/realizacje/" class="btn-secondary">Wszystkie realizacje</a>
+          <a href={sections.cta.items[0].href} class="btn-primary">{sections.cta.items[0].label}</a>
+          <a href={sections.cta.items[1].href} class="btn-secondary">{sections.cta.items[1].label}</a>
         </div>
       </div>
     </section>
