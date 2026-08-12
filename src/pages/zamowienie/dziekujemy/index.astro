@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+
+// Strona podziękowania po zamówieniu:
+//  - ?session_id=cs_...  → opłacone zamówienie Stripe (konwersja GA4 `purchase`)
+//  - ?type=probki        → zamówienie próbek (bez płatności)
+// Wejście bez parametrów przekierowuje do kreatora.
+---
+
+<BaseLayout
+  title="Dziękujemy za zamówienie"
+  description="Twoje zamówienie w Mekra zostało przyjęte."
+  noindex={true}
+>
+  <Navbar />
+
+  <main class="pt-20 md:pt-24" style="background-color: var(--color-bg);">
+    <section class="section-padding pt-12 pb-24 md:pt-20 md:pb-32 relative overflow-hidden">
+      <div class="absolute top-20 -left-32 w-96 h-96 rounded-full opacity-20 dark:opacity-10 blur-3xl pointer-events-none" style="background: radial-gradient(circle, #ae9070, transparent 70%);"></div>
+
+      <div class="max-w-2xl mx-auto relative text-center">
+        <div class="w-16 h-16 mx-auto rounded-2xl flex items-center justify-center" style="background-color: var(--color-bg-tertiary); color: var(--color-accent);">
+          <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+
+        <h1 class="mt-7 font-display text-3xl sm:text-4xl md:text-5xl tracking-tight" style="color: var(--color-text);">
+          <span id="thanks-heading">Dziękujemy za zamówienie!</span>
+        </h1>
+        <p id="thanks-text" class="mt-4 text-base md:text-lg font-body leading-relaxed" style="color: var(--color-text-secondary);">
+          Płatność została przyjęta. Potwierdzenie zamówienia wysłaliśmy na Twój adres e-mail.
+        </p>
+
+        <div id="order-box" class="mt-8 card-base rounded-2xl p-6 text-left" hidden>
+          <p class="text-xs font-heading font-semibold uppercase tracking-widest" style="color: var(--color-text-muted);">Twoje zamówienie</p>
+          <p id="order-line" class="mt-2 font-heading text-base font-semibold" style="color: var(--color-text);"></p>
+          <div class="mt-3 pt-3 flex items-baseline justify-between" style="border-top: 1px solid var(--color-border);">
+            <span class="text-sm font-body" style="color: var(--color-text-secondary);">Zapłacono (brutto)</span>
+            <span id="order-gross" class="font-display text-2xl" style="color: var(--color-accent);"></span>
+          </div>
+          <p id="order-ref" class="mt-3 text-2xs font-body break-all" style="color: var(--color-text-muted);"></p>
+        </div>
+
+        <div class="mt-10 grid sm:grid-cols-3 gap-4 text-left">
+          <div class="card-base rounded-2xl p-5">
+            <p class="font-heading text-sm font-semibold" style="color: var(--color-text);">1 · Potwierdzenie</p>
+            <p class="mt-1.5 text-xs font-body leading-relaxed" style="color: var(--color-text-secondary);">Skontaktujemy się, aby potwierdzić specyfikację i wymiary frontów.</p>
+          </div>
+          <div class="card-base rounded-2xl p-5">
+            <p class="font-heading text-sm font-semibold" style="color: var(--color-text);">2 · Produkcja</p>
+            <p class="mt-1.5 text-xs font-body leading-relaxed" style="color: var(--color-text-secondary);">Standardowy czas realizacji to 8–10 tygodni od potwierdzenia specyfikacji.</p>
+          </div>
+          <div class="card-base rounded-2xl p-5">
+            <p class="font-heading text-sm font-semibold" style="color: var(--color-text);">3 · Dostawa</p>
+            <p class="mt-1.5 text-xs font-body leading-relaxed" style="color: var(--color-text-secondary);">Koszt i termin dostawy kurierem potwierdzimy przed wysyłką.</p>
+          </div>
+        </div>
+
+        <div class="mt-10 flex flex-wrap justify-center gap-3">
+          <a href="/" class="btn-primary">Wracam na stronę główną</a>
+          <a href="/realizacje/" class="btn-secondary">Zobacz nasze realizacje</a>
+        </div>
+
+        <p class="mt-8 text-xs font-body" style="color: var(--color-text-muted);">
+          Pytania? Zadzwoń: <a href="tel:+48792456094" class="underline" style="color: var(--color-accent);">792 456 094</a>
+          albo napisz: <a href="mailto:kontakt@mekra.pl" class="underline" style="color: var(--color-accent);">kontakt@mekra.pl</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+
+  <style is:global>
+    [hidden] { display: none !important; }
+  </style>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const sessionId = params.get('session_id');
+    const isProbki = params.get('type') === 'probki';
+    const STORAGE_KEY = 'mekra-order-v1';
+
+    function track(name: string, p: Record<string, any> = {}) {
+      try { (window as any).gtag?.('event', name, p); } catch { /* ignore */ }
+    }
+
+    if (isProbki) {
+      document.getElementById('thanks-heading')!.textContent = 'Dziękujemy — próbki już w drodze do realizacji!';
+      document.getElementById('thanks-text')!.textContent =
+        'Zamówienie próbek dotarło do nas. Potwierdzimy je mailowo wraz z kosztem i terminem wysyłki.';
+    } else if (sessionId) {
+      let pending: any = null;
+      try { pending = JSON.parse(localStorage.getItem('mekra-order-pending') || 'null'); } catch { /* ignore */ }
+
+      // konwersja purchase — raz na sesję płatności (guard na reload strony)
+      let tracked = null;
+      try { tracked = localStorage.getItem('mekra-order-tracked'); } catch { /* ignore */ }
+      if (tracked !== sessionId) {
+        track('purchase', {
+          transaction_id: sessionId,
+          currency: 'PLN',
+          value: pending?.gross ?? undefined,
+          items: pending?.items?.length ? pending.items : (pending?.item ? [pending.item] : undefined),
+        });
+        try { localStorage.setItem('mekra-order-tracked', sessionId); } catch { /* ignore */ }
+      }
+
+      const items = pending?.items?.length ? pending.items : (pending?.item ? [pending.item] : []);
+      if (items.length) {
+        document.getElementById('order-box')!.hidden = false;
+        const label = items.length === 1
+          ? `${items[0].item_name} (${items[0].item_brand})`
+          : items.map((it: any) => it.item_name.replace('Fronty ramiakowe — ', '')).join(' + ');
+        document.getElementById('order-line')!.textContent =
+          `${label} · ${Number(pending.m2).toLocaleString('pl-PL', { maximumFractionDigits: 2 })} m²`;
+        document.getElementById('order-gross')!.textContent =
+          pending.gross.toLocaleString('pl-PL', { maximumFractionDigits: 2 }) + ' zł';
+      }
+      document.getElementById('order-ref')!.textContent = `Nr referencyjny płatności: ${sessionId}`;
+      document.getElementById('order-ref')!.hidden = false;
+
+      // formularz można wyczyścić — zamówienie jest opłacone
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+        localStorage.removeItem('mekra-order-pending');
+      } catch { /* ignore */ }
+    } else {
+      // bezpośrednie wejście — nic tu po Tobie
+      window.location.replace('/zamowienie/');
+    }
+  </script>
+</BaseLayout>

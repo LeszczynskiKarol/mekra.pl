@@ -1,0 +1,1352 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import { PRODUCENCI, ZESTAWY_PROBEK, PRICING } from '../../data/zamowienie';
+
+// Strona robocza kreatora zamówień — na razie bez linku w nawigacji i noindex.
+// Dane do skryptu klienckiego przekazujemy przez <script type="application/json">.
+const clientData = {
+  producenci: PRODUCENCI.map(({ id, name, sheetFormat, sheetAreaM2 }) => ({ id, name, sheetFormat, sheetAreaM2 })),
+  pricing: PRICING,
+  zestawy: ZESTAWY_PROBEK.map(({ id, name, price }) => ({ id, name, price })),
+  apiBase: 'https://iedy003jrg.execute-api.eu-central-1.amazonaws.com',
+};
+---
+
+<BaseLayout
+  title="Zamówienie online"
+  description="Zamów próbki lub fronty ramiakowe na wymiar — skonfiguruj zamówienie online i poznaj wycenę od ręki."
+  noindex={true}
+>
+  <Navbar />
+
+  <main class="pt-20 md:pt-24" style="background-color: var(--color-bg);">
+    <!-- Wizard -->
+    <section class="section-padding pt-6 md:pt-8 pb-24 md:pb-32">
+      <div class="max-w-5xl mx-auto">
+
+        <!-- Kompaktowa belka: tytuł + reset -->
+        <div class="mb-6 md:mb-8 flex items-center justify-between gap-4 flex-wrap">
+          <h1 class="font-display text-xl sm:text-2xl tracking-tight" style="color: var(--color-text);">
+            Zamówienie <span class="text-gradient">online</span>
+          </h1>
+          <button type="button" id="btn-reset" class="inline-flex items-center gap-1.5 text-xs font-heading font-medium transition-colors hover:opacity-80" style="color: var(--color-text-muted);" title="Wyczyść formularz i zacznij od początku" hidden>
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" /></svg>
+            Zacznij od nowa
+          </button>
+        </div>
+
+        <!-- Progress -->
+        <nav id="wizard-progress" class="mb-8 md:mb-10 flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap" aria-label="Postęp zamówienia"></nav>
+
+        <!-- ====================================================== STEP: TYP -->
+        <section data-step="type" class="wizard-step">
+          <h2 class="font-display text-2xl sm:text-3xl tracking-tight text-center" style="color: var(--color-text);">Co chcesz zamówić?</h2>
+          <p class="mt-3 text-sm md:text-base font-body text-center" style="color: var(--color-text-secondary);">Wybierz jedną z opcji, aby przejść dalej.</p>
+
+          <div class="mt-8 grid sm:grid-cols-2 gap-5 md:gap-6">
+            <button type="button" class="choice-card card-base rounded-3xl p-7 md:p-9 text-left" data-choose-type="samples">
+              <div class="w-12 h-12 rounded-2xl flex items-center justify-center mb-5" style="background-color: var(--color-bg-tertiary); color: var(--color-accent);">
+                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 01-1.125-1.125v-3.75zM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-8.25zM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-2.25z" />
+                </svg>
+              </div>
+              <h3 class="font-heading text-xl font-semibold" style="color: var(--color-text);">Zamów próbki</h3>
+              <p class="mt-2 text-sm font-body leading-relaxed" style="color: var(--color-text-secondary);">
+                Gotowe zestawy próbek przygotowane przez Mekra — zobacz i dotknij jakości
+                naszych frontów, zanim zamówisz na wymiar.
+              </p>
+              <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-heading font-semibold" style="color: var(--color-accent);">
+                Wybieram próbki
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+              </span>
+            </button>
+
+            <button type="button" class="choice-card card-base rounded-3xl p-7 md:p-9 text-left" data-choose-type="custom">
+              <div class="w-12 h-12 rounded-2xl flex items-center justify-center mb-5" style="background-color: var(--color-bg-tertiary); color: var(--color-accent);">
+                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085" />
+                </svg>
+              </div>
+              <h3 class="font-heading text-xl font-semibold" style="color: var(--color-text);">Zamówienie na wymiar</h3>
+              <p class="mt-2 text-sm font-body leading-relaxed" style="color: var(--color-text-secondary);">
+                Fronty ramiakowe z wybranej przez Ciebie płyty. Wskaż producenta, dekor
+                i metraż — cena wyliczy się automatycznie.
+              </p>
+              <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-heading font-semibold" style="color: var(--color-accent);">
+                Konfiguruję fronty
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+              </span>
+            </button>
+          </div>
+        </section>
+
+        <!-- =================================================== STEP: PRÓBKI -->
+        <section data-step="samples" class="wizard-step" hidden>
+          <h2 class="font-display text-2xl sm:text-3xl tracking-tight text-center" style="color: var(--color-text);">Wybierz zestaw próbek</h2>
+          <p class="mt-3 text-sm md:text-base font-body text-center max-w-2xl mx-auto" style="color: var(--color-text-secondary);">
+            Próbki przygotowujemy sami — nie musisz wybierać materiału ani producenta.
+            Koszt i wysyłkę potwierdzimy przy realizacji.
+          </p>
+
+          <div class="mt-8 grid sm:grid-cols-2 gap-5 max-w-3xl mx-auto">
+            {ZESTAWY_PROBEK.map((z) => (
+              <button type="button" class="choice-card card-base rounded-2xl p-6 md:p-7 text-left" data-choose-sample={z.id}>
+                <h3 class="font-heading text-lg font-semibold" style="color: var(--color-text);">{z.name}</h3>
+                <p class="mt-2 text-sm font-body leading-relaxed" style="color: var(--color-text-secondary);">{z.text}</p>
+                <div class="mt-5 pt-4 flex items-baseline gap-2" style="border-top: 1px solid var(--color-border);">
+                  {z.price !== null ? (
+                    <>
+                      <span class="font-display text-2xl" style="color: var(--color-accent);">{z.price} zł</span>
+                      <span class="text-xs font-heading font-medium tracking-wider uppercase" style="color: var(--color-text-muted);">netto</span>
+                    </>
+                  ) : (
+                    <span class="text-xs font-heading font-medium tracking-wider uppercase" style="color: var(--color-text-muted);">Koszt potwierdzimy przy realizacji</span>
+                  )}
+                </div>
+              </button>
+            ))}
+          </div>
+        </section>
+
+        <!-- ================================================ STEP: PRODUCENT -->
+        <section data-step="producer" class="wizard-step" hidden>
+          <h2 class="font-display text-2xl sm:text-3xl tracking-tight text-center" style="color: var(--color-text);">Wybierz producenta płyty</h2>
+          <p class="mt-3 text-sm md:text-base font-body text-center max-w-2xl mx-auto" style="color: var(--color-text-secondary);">
+            Pracujemy na płytach sprawdzonych producentów. Cena frontu zależy od wybranego
+            arkusza — w następnym kroku zobaczysz katalog dekorów.
+          </p>
+
+          <div class="mt-8 grid sm:grid-cols-2 gap-5">
+            {PRODUCENCI.map((p) => (
+              <button type="button" class="choice-card card-base rounded-2xl p-6 md:p-7 text-left" data-choose-producer={p.id}>
+                <div class="flex items-start justify-between gap-4">
+                  <div>
+                    <h3 class="font-heading text-xl font-semibold" style="color: var(--color-text);">{p.name}</h3>
+                    <p class="mt-1.5 text-sm font-body leading-relaxed" style="color: var(--color-text-secondary);">{p.tagline}</p>
+                  </div>
+                  <span class="label-tag whitespace-nowrap">{p.arkusze.length} dekorów</span>
+                </div>
+                <p class="mt-4 text-xs font-heading font-medium tracking-wider uppercase" style="color: var(--color-text-muted);">
+                  Arkusz {p.sheetFormat} mm · ok. {p.sheetAreaM2} m²
+                </p>
+              </button>
+            ))}
+          </div>
+        </section>
+
+        <!-- ================================================== STEP: KATALOG -->
+        <section data-step="catalog" class="wizard-step" hidden>
+          <div class="text-center">
+            <span class="label-tag">Katalog: <span id="catalog-producer-name" class="normal-case"></span></span>
+            <h2 class="mt-5 font-display text-2xl sm:text-3xl tracking-tight" style="color: var(--color-text);">Wybierz dekor arkusza</h2>
+            <p class="mt-3 text-sm md:text-base font-body max-w-2xl mx-auto" style="color: var(--color-text-secondary);">
+              Cena arkusza wliczana jest do wyceny. Katalog ma charakter poglądowy —
+              wykonamy fronty z każdej płyty dostępnej na rynku.
+            </p>
+          </div>
+
+          <div class="mt-8 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
+            <div class="relative flex-1 max-w-sm">
+              <svg class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" style="color: var(--color-text-muted);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
+              <input id="catalog-search" type="search" placeholder="Szukaj dekoru lub kodu…"
+                class="w-full pl-10 pr-4 py-2.5 rounded-xl text-sm font-body outline-none transition-colors"
+                style="background-color: var(--color-card-bg); border: 1.5px solid var(--color-border); color: var(--color-text);" />
+            </div>
+            <div id="catalog-filters" class="flex gap-2 flex-wrap"></div>
+          </div>
+
+          {PRODUCENCI.map((p) => (
+            <div class="catalog-grid mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" data-producer-catalog={p.id} hidden>
+              {p.arkusze.map((a) => (
+                <button
+                  type="button"
+                  class="decor-tile choice-card card-base rounded-2xl overflow-hidden text-left"
+                  data-choose-sheet
+                  data-code={a.code}
+                  data-name={a.name}
+                  data-finish={a.finish}
+                  data-price={a.price}
+                  data-search={`${a.code} ${a.name} ${a.finish}`.toLowerCase()}
+                >
+                  <div class="h-28 md:h-32 relative" style={`background: ${a.swatch};`}>
+                    <span
+                      class="absolute bottom-2 left-2 px-2 py-0.5 rounded-md text-2xs font-heading font-semibold tracking-wide"
+                      style={a.dark
+                        ? 'background: rgba(255,255,255,.88); color:#1f2937;'
+                        : 'background: rgba(31,41,55,.78); color:#fff;'}
+                    >{a.code}</span>
+                  </div>
+                  <div class="p-4">
+                    <h3 class="font-heading text-sm font-semibold leading-snug" style="color: var(--color-text);">{a.name}</h3>
+                    <p class="mt-0.5 text-xs font-body capitalize" style="color: var(--color-text-muted);">{a.finish}</p>
+                    <p class="mt-2.5 text-sm font-heading font-semibold" style="color: var(--color-accent);">
+                      {a.price} zł <span class="text-2xs font-medium uppercase tracking-wider" style="color: var(--color-text-muted);">netto / arkusz</span>
+                    </p>
+                  </div>
+                </button>
+              ))}
+            </div>
+          ))}
+
+          <p id="catalog-empty" class="mt-10 text-center text-sm font-body" style="color: var(--color-text-muted);" hidden>
+            Brak dekorów pasujących do wyszukiwania.
+          </p>
+        </section>
+
+        <!-- ================================================== STEP: METRAŻ -->
+        <section data-step="details" class="wizard-step" hidden>
+          <div class="grid lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] gap-8 lg:gap-10 items-start">
+            <div class="space-y-6">
+              <div>
+                <h2 class="font-display text-2xl sm:text-3xl tracking-tight" style="color: var(--color-text);">Formatki i opcje</h2>
+                <p class="mt-2 text-sm md:text-base font-body" style="color: var(--color-text-secondary);">
+                  Podaj wymiary frontów — powierzchnia i wycena liczą się na bieżąco.
+                </p>
+              </div>
+
+              <!-- Pozycje zamówienia (dekory) -->
+              <div class="card-base rounded-2xl p-5">
+                <div class="flex items-center justify-between gap-3">
+                  <p class="text-xs font-heading font-medium tracking-wider uppercase" style="color: var(--color-text-muted);">Dekory w zamówieniu</p>
+                  <button type="button" id="btn-add-position" class="inline-flex items-center gap-1.5 text-sm font-heading font-semibold transition-colors hover:opacity-80" style="color: var(--color-accent);">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                    Dodaj kolejny dekor
+                  </button>
+                </div>
+                <div id="positions-list" class="mt-3 space-y-2"></div>
+                <p class="mt-3 text-2xs font-body" style="color: var(--color-text-muted);">
+                  Formatki i grubość ramki poniżej dotyczą podświetlonego dekoru — kliknij pozycję, aby ją edytować.
+                  Wykonanie (150 zł/m²) i minimum logistyczne liczymy od sumy całego zamówienia.
+                </p>
+              </div>
+
+              <!-- Formatki + powierzchnia -->
+              <div class="card-base rounded-2xl p-6">
+                <p class="font-heading text-base font-semibold" style="color: var(--color-text);">Formatki frontów</p>
+                <p class="mt-1 text-xs font-body" style="color: var(--color-text-secondary);">
+                  Wymiary w milimetrach. Powierzchnię wyliczamy automatycznie z listy formatek.
+                </p>
+
+                <div id="formatki-head" class="mt-4 grid grid-cols-[1fr_1fr_4rem_4rem_1.75rem] gap-2 px-0.5 text-2xs font-heading font-medium uppercase tracking-wider" style="color: var(--color-text-muted);">
+                  <span>Szerokość [mm]</span><span>Wysokość [mm]</span><span>Ilość</span><span class="text-right">m²</span><span></span>
+                </div>
+                <div id="formatki-rows" class="mt-1.5 space-y-2"></div>
+                <button type="button" id="btn-add-row" class="mt-3 inline-flex items-center gap-1.5 text-sm font-heading font-semibold transition-colors hover:opacity-80" style="color: var(--color-accent);">
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                  Dodaj formatkę
+                </button>
+
+                <p id="hardware-note" class="mt-3 text-xs font-body px-3 py-2 rounded-lg" style="background-color: var(--color-bg-tertiary); color: var(--color-accent);" hidden>
+                  Fronty powyżej 800 mm wysokości lub 600 mm szerokości wymagają okuć napinających albo zwiększonej liczby zawiasów — uwzględnimy to przy potwierdzeniu specyfikacji.
+                </p>
+
+                <label class="mt-4 flex items-start gap-2.5 cursor-pointer text-sm font-body" style="color: var(--color-text-secondary);">
+                  <input type="checkbox" id="m2-manual-toggle" class="mt-0.5 w-4 h-4 rounded accent-[#866751] flex-shrink-0" />
+                  <span>Nie znam jeszcze dokładnych wymiarów — podam samą powierzchnię, a formatki doślę po zamówieniu.</span>
+                </label>
+
+                <div id="manual-m2-box" class="mt-4 flex items-center gap-3" hidden>
+                  <button type="button" class="m2-btn" data-m2-delta="-1" aria-label="Zmniejsz o 1 m²">−</button>
+                  <div class="relative">
+                    <input id="input-m2" type="number" min="0.5" step="0.5" value="5" inputmode="decimal"
+                      class="w-28 text-center py-2.5 rounded-xl text-lg font-heading font-semibold outline-none"
+                      style="background-color: var(--color-bg-secondary); border: 1.5px solid var(--color-border); color: var(--color-text);" />
+                    <span class="absolute -bottom-5 left-0 right-0 text-center text-2xs font-heading uppercase tracking-widest" style="color: var(--color-text-muted);">m²</span>
+                  </div>
+                  <button type="button" class="m2-btn" data-m2-delta="1" aria-label="Zwiększ o 1 m²">+</button>
+                </div>
+
+                <div class="mt-5 pt-4 flex items-baseline justify-between" style="border-top: 1px solid var(--color-border);">
+                  <span class="font-heading text-sm font-semibold uppercase tracking-wider" style="color: var(--color-text);">Powierzchnia frontów</span>
+                  <span id="m2-display" class="font-display text-2xl" style="color: var(--color-accent);">0 m²</span>
+                </div>
+                <p class="mt-1 text-xs font-body" style="color: var(--color-text-muted);">
+                  Minimum logistyczne to {PRICING.minM2} m² — poniżej doliczamy +{PRICING.belowMinPct}% wartości zamówienia.
+                </p>
+                <p id="min-warning" class="mt-3 text-xs font-body px-3 py-2 rounded-lg" style="background-color: var(--color-bg-tertiary); color: var(--color-accent);" hidden>
+                  Zamówienie poniżej {PRICING.minM2} m² — doliczona zostanie dopłata +{PRICING.belowMinPct}% wartości zamówienia netto.
+                </p>
+                <p id="m2-error" class="mt-3 text-xs font-body" style="color: #b4443c;" hidden>
+                  Każdy dekor w zamówieniu musi mieć wybrany materiał i formatki (albo podaną powierzchnię).
+                  Uzupełnij lub usuń niekompletne pozycje, żeby przejść dalej.
+                </p>
+              </div>
+
+              <!-- Ramka -->
+              <div class="card-base rounded-2xl p-6">
+                <p class="font-heading text-base font-semibold" style="color: var(--color-text);">Grubość ramki</p>
+                <div class="mt-3 flex flex-wrap gap-2" id="ramka-options">
+                  {PRICING.ramki.map((r, i) => (
+                    <button type="button" class={`ramka-chip${i === 1 ? ' is-selected' : ''}`} data-ramka={r}>{r}</button>
+                  ))}
+                </div>
+              </div>
+
+              <!-- Dodatki -->
+              <div class="card-base rounded-2xl p-6">
+                <p class="font-heading text-base font-semibold" style="color: var(--color-text);">Opcje dodatkowe</p>
+                <p class="mt-1 text-xs font-body" style="color: var(--color-text-secondary);">Zgodnie z cennikiem — podaj liczbę frontów dla wybranych opcji.</p>
+                <div class="mt-4 space-y-3">
+                  {PRICING.addons.map((a) => (
+                    <div class="flex items-center justify-between gap-4 py-2" style="border-bottom: 1px solid var(--color-border);">
+                      <div class="min-w-0">
+                        <p class="font-heading text-sm font-semibold" style="color: var(--color-text);">{a.name}</p>
+                        <p class="text-xs font-body" style="color: var(--color-text-muted);">+{a.price} {a.unit}</p>
+                      </div>
+                      <input type="number" min="0" step="1" value="0" inputmode="numeric" data-addon={a.id} data-addon-price={a.price}
+                        class="w-16 text-center py-1.5 rounded-lg text-sm font-heading font-semibold outline-none flex-shrink-0"
+                        style="background-color: var(--color-bg-secondary); border: 1.5px solid var(--color-border); color: var(--color-text);" />
+                    </div>
+                  ))}
+                  <label class="flex items-center justify-between gap-4 py-2 cursor-pointer">
+                    <div>
+                      <p class="font-heading text-sm font-semibold" style="color: var(--color-text);">Słój przechodzący</p>
+                      <p class="text-xs font-body" style="color: var(--color-text-muted);">Ciągłość usłojenia między frontami · +{PRICING.grainMatchPct}% wartości zamówienia netto</p>
+                    </div>
+                    <input id="input-grain" type="checkbox" class="w-5 h-5 rounded accent-[#866751] flex-shrink-0" />
+                  </label>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Wycena live -->
+            <aside class="lg:sticky lg:top-28">
+              <div class="card-base rounded-3xl p-6 md:p-7">
+                <span class="label-tag">Twoja wycena</span>
+                <dl id="price-breakdown" class="mt-5 space-y-2.5 text-sm font-body"></dl>
+                <div class="mt-5 pt-5 flex items-baseline justify-between" style="border-top: 1px solid var(--color-border);">
+                  <dt class="font-heading text-sm font-semibold uppercase tracking-wider" style="color: var(--color-text);">Razem netto</dt>
+                  <dd id="price-total-net" class="font-display text-3xl" style="color: var(--color-accent);"></dd>
+                </div>
+                <div class="mt-1 flex items-baseline justify-between text-sm font-body" style="color: var(--color-text-secondary);">
+                  <span>Razem brutto (VAT {PRICING.vatPct}%)</span>
+                  <span id="price-total-gross" class="font-heading font-semibold"></span>
+                </div>
+                <p class="mt-4 text-2xs font-body leading-relaxed" style="color: var(--color-text-muted);">
+                  Wycena orientacyjna na podstawie cennika — nie stanowi oferty handlowej.
+                  Koszt dostawy szacujemy po złożeniu zamówienia. Czas realizacji: 8–10 tygodni.
+                </p>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <!-- ==================================================== STEP: DANE -->
+        <section data-step="contact" class="wizard-step" hidden>
+          <h2 class="font-display text-2xl sm:text-3xl tracking-tight text-center" style="color: var(--color-text);">Dane do zamówienia</h2>
+          <p class="mt-3 text-sm md:text-base font-body text-center" style="color: var(--color-text-secondary);">Wszystkie pola oznaczone * są wymagane.</p>
+
+          <form id="contact-form" class="mt-8 max-w-2xl mx-auto card-base rounded-3xl p-6 md:p-8 grid sm:grid-cols-2 gap-5" novalidate>
+            <div class="sm:col-span-2">
+              <label class="form-label" for="f-name">Imię i nazwisko *</label>
+              <input class="form-input" id="f-name" name="name" type="text" autocomplete="name" required />
+            </div>
+            <div>
+              <label class="form-label" for="f-email">E-mail *</label>
+              <input class="form-input" id="f-email" name="email" type="email" autocomplete="email" required />
+            </div>
+            <div>
+              <label class="form-label" for="f-phone">Telefon *</label>
+              <input class="form-input" id="f-phone" name="phone" type="tel" autocomplete="tel" required />
+            </div>
+            <div class="sm:col-span-2">
+              <label class="form-label" for="f-street">Ulica i numer *</label>
+              <input class="form-input" id="f-street" name="street" type="text" autocomplete="street-address" required />
+            </div>
+            <div>
+              <label class="form-label" for="f-zip">Kod pocztowy *</label>
+              <input class="form-input" id="f-zip" name="zip" type="text" autocomplete="postal-code" required />
+            </div>
+            <div>
+              <label class="form-label" for="f-city">Miejscowość *</label>
+              <input class="form-input" id="f-city" name="city" type="text" autocomplete="address-level2" required />
+            </div>
+            <div class="sm:col-span-2">
+              <label class="form-label" for="f-nip">NIP <span style="color: var(--color-text-muted);">(jeśli faktura na firmę)</span></label>
+              <input class="form-input" id="f-nip" name="nip" type="text" inputmode="numeric" />
+            </div>
+            <div class="sm:col-span-2">
+              <label class="form-label" for="f-notes">Uwagi do zamówienia</label>
+              <textarea class="form-input resize-y" id="f-notes" name="notes" rows="3"></textarea>
+            </div>
+            <label class="sm:col-span-2 flex items-start gap-3 cursor-pointer text-xs font-body leading-relaxed" style="color: var(--color-text-secondary);">
+              <input id="f-consent" type="checkbox" class="mt-0.5 w-4 h-4 rounded accent-[#866751] flex-shrink-0" required />
+              <span>Wyrażam zgodę na przetwarzanie moich danych osobowych w celu obsługi zamówienia, zgodnie z <a href="/polityka-prywatnosci/" class="underline" style="color: var(--color-accent);">polityką prywatności</a>. *</span>
+            </label>
+            <p id="form-error" class="sm:col-span-2 text-sm font-body" style="color: #b4443c;" hidden>Uzupełnij wymagane pola oznaczone gwiazdką.</p>
+          </form>
+        </section>
+
+        <!-- ============================================= STEP: PODSUMOWANIE -->
+        <section data-step="summary" class="wizard-step" hidden>
+          <h2 class="font-display text-2xl sm:text-3xl tracking-tight text-center" style="color: var(--color-text);">Podsumowanie zamówienia</h2>
+          <p class="mt-3 text-sm md:text-base font-body text-center max-w-2xl mx-auto" style="color: var(--color-text-secondary);">
+            Sprawdź, czy wszystko się zgadza. Płatności online i wybór kuriera podłączymy
+            wkrótce — na razie zamówienie trafi do nas mailem, a my potwierdzimy je zwrotnie.
+          </p>
+
+          <div id="summary-card" class="mt-8 max-w-2xl mx-auto card-base rounded-3xl p-6 md:p-8"></div>
+
+          <div class="mt-8 flex flex-wrap justify-center gap-3">
+            <button type="button" id="btn-pay" class="btn-primary">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" /></svg>
+              <span id="btn-pay-label">Zamawiam i płacę</span>
+            </button>
+            <button type="button" id="btn-submit-samples" class="btn-primary" hidden>
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" /></svg>
+              <span id="btn-samples-label">Wysyłam zamówienie próbek</span>
+            </button>
+            <a id="summary-mailto" href="#" class="btn-secondary">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
+              Wolę wysłać mailem
+            </a>
+          </div>
+          <p id="pay-error" class="mt-4 text-center text-sm font-body" style="color: #b4443c;" hidden>
+            Nie udało się rozpocząć płatności. Spróbuj ponownie albo wyślij zamówienie mailem.
+          </p>
+          <p class="mt-4 text-center text-2xs font-body" style="color: var(--color-text-muted);">
+            Płatność online obsługuje Stripe (karta, BLIK). Po opłaceniu potwierdzimy zamówienie mailowo.
+          </p>
+        </section>
+
+        <!-- Nawigacja kroków -->
+        <div id="wizard-nav" class="mt-10 flex items-center justify-between" hidden>
+          <button type="button" id="btn-back" class="btn-secondary">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" /></svg>
+            Wstecz
+          </button>
+          <button type="button" id="btn-next" class="btn-primary">
+            Dalej
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+
+  <!-- Modal potwierdzenia resetu formularza -->
+  <div id="reset-modal" class="fixed inset-0 z-50 flex items-center justify-center px-5" hidden>
+    <div id="reset-backdrop" class="absolute inset-0" style="background: rgba(15, 17, 21, 0.45); backdrop-filter: blur(4px);"></div>
+    <div class="relative card-base rounded-3xl p-7 md:p-8 max-w-md w-full" style="animation: wizardFadeUp 0.3s ease-out; transform: none;" role="dialog" aria-modal="true" aria-labelledby="reset-title">
+      <div class="w-12 h-12 rounded-2xl flex items-center justify-center mb-5" style="background-color: var(--color-bg-tertiary); color: var(--color-accent);">
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+        </svg>
+      </div>
+      <h3 id="reset-title" class="font-display text-2xl tracking-tight" style="color: var(--color-text);">Zacząć od nowa?</h3>
+      <p class="mt-2.5 text-sm font-body leading-relaxed" style="color: var(--color-text-secondary);">
+        Wyczyścimy cały formularz — wybrany dekor, formatki, opcje i dane kontaktowe.
+        Tej operacji nie da się cofnąć.
+      </p>
+      <div class="mt-7 flex flex-wrap gap-3 justify-end">
+        <button type="button" id="reset-cancel" class="btn-secondary">Anuluj</button>
+        <button type="button" id="reset-confirm" class="btn-primary">Tak, wyczyść</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pasek z sumą (mobile, kroki wyceny) -->
+  <div id="mobile-total-bar" class="fixed bottom-0 inset-x-0 z-40 lg:hidden px-5 py-3 flex items-center justify-between" style="background-color: var(--color-card-bg); border-top: 1px solid var(--color-border); box-shadow: 0 -4px 20px var(--color-card-shadow);" hidden>
+    <div>
+      <p class="text-2xs font-heading uppercase tracking-widest" style="color: var(--color-text-muted);">Razem netto</p>
+      <p id="mobile-total" class="font-display text-xl leading-tight" style="color: var(--color-accent);"></p>
+    </div>
+    <p class="text-2xs font-body text-right max-w-[45%]" style="color: var(--color-text-muted);">wycena orientacyjna,<br />aktualizowana na bieżąco</p>
+  </div>
+
+  <script type="application/json" id="order-data" set:html={JSON.stringify(clientData)} />
+
+  <style is:global>
+    /* Tailwindowe klasy display (flex/grid) wygrywałyby z atrybutem [hidden] */
+    [hidden] { display: none !important; }
+
+    @keyframes wizardFadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .choice-card { cursor: pointer; }
+    .choice-card.is-selected {
+      border-color: var(--color-accent) !important;
+      box-shadow: 0 0 0 2px var(--color-accent), 0 8px 30px var(--color-card-shadow) !important;
+    }
+    .wizard-step { animation: wizardFadeUp 0.5s ease-out; }
+
+    .progress-dot {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.35rem 0.8rem; border-radius: 9999px;
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      font-family: 'Outfit', system-ui, sans-serif;
+      background-color: var(--color-bg-tertiary); color: var(--color-text-muted);
+      border: 1px solid var(--color-border);
+      transition: all 0.3s ease;
+    }
+    .progress-dot .num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 1.15rem; height: 1.15rem; border-radius: 9999px; font-size: 0.62rem;
+      background-color: var(--color-card-bg); color: var(--color-text-muted);
+      border: 1px solid var(--color-border);
+    }
+    .progress-dot.is-active { background-color: var(--color-accent); color: #fff; border-color: var(--color-accent); }
+    .progress-dot.is-active .num { background-color: rgba(255,255,255,.2); color: #fff; border-color: transparent; }
+    .progress-dot.is-done { color: var(--color-accent); border-color: var(--color-border-hover); cursor: pointer; }
+    .progress-dot.is-done .num { background-color: var(--color-accent); color: #fff; border-color: transparent; }
+    .progress-sep { width: 1rem; height: 1px; background-color: var(--color-border); }
+
+    .fmt-input {
+      width: 100%; padding: 0.55rem 0.6rem; border-radius: 0.6rem;
+      font-size: 0.875rem; font-weight: 600; text-align: center; outline: none;
+      font-family: 'Outfit', system-ui, sans-serif;
+      background-color: var(--color-bg-secondary);
+      border: 1.5px solid var(--color-border);
+      color: var(--color-text);
+      transition: border-color 0.2s ease;
+      -moz-appearance: textfield;
+    }
+    .fmt-input::-webkit-outer-spin-button, .fmt-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .fmt-input:focus { border-color: var(--color-accent); }
+
+    .position-item {
+      display: flex; align-items: center; gap: 0.65rem;
+      padding: 0.55rem 0.7rem; border-radius: 0.75rem;
+      border: 1.5px solid var(--color-border);
+      background-color: var(--color-bg-secondary);
+      cursor: pointer; transition: all 0.2s ease;
+    }
+    .position-item:hover { border-color: var(--color-border-hover); }
+    .position-item.is-active {
+      border-color: var(--color-accent);
+      background-color: var(--color-card-bg);
+      box-shadow: 0 0 0 1px var(--color-accent);
+    }
+    .pos-swatch {
+      width: 1.9rem; height: 1.9rem; border-radius: 0.5rem; flex-shrink: 0;
+      border: 1px solid var(--color-border);
+    }
+
+    .row-del {
+      width: 1.75rem; height: 1.75rem; border-radius: 0.5rem;
+      font-size: 1rem; line-height: 1;
+      color: var(--color-text-muted);
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+    }
+    .row-del:hover { color: #b4443c; border-color: #b4443c; }
+
+    .m2-btn {
+      width: 2.75rem; height: 2.75rem; border-radius: 0.75rem;
+      font-size: 1.25rem; font-weight: 600; line-height: 1;
+      background-color: var(--color-bg-tertiary); color: var(--color-text);
+      border: 1.5px solid var(--color-border); transition: all 0.2s ease;
+    }
+    .m2-btn:hover { border-color: var(--color-accent); color: var(--color-accent); }
+
+    .ramka-chip {
+      padding: 0.45rem 1rem; border-radius: 9999px;
+      font-size: 0.8rem; font-weight: 600;
+      font-family: 'Outfit', system-ui, sans-serif;
+      background-color: var(--color-bg-tertiary); color: var(--color-text-secondary);
+      border: 1.5px solid var(--color-border); transition: all 0.2s ease; cursor: pointer;
+    }
+    .ramka-chip:hover { border-color: var(--color-accent); color: var(--color-accent); }
+    .ramka-chip.is-selected { background-color: var(--color-accent); color: #fff; border-color: var(--color-accent); }
+
+    .filter-chip {
+      padding: 0.4rem 0.9rem; border-radius: 9999px;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+      font-family: 'Outfit', system-ui, sans-serif;
+      background-color: var(--color-bg-tertiary); color: var(--color-text-secondary);
+      border: 1px solid var(--color-border); transition: all 0.2s ease; cursor: pointer;
+    }
+    .filter-chip.is-selected { background-color: var(--color-accent); color: #fff; border-color: var(--color-accent); }
+
+    .form-label {
+      display: block; margin-bottom: 0.4rem;
+      font-size: 0.8rem; font-weight: 600;
+      font-family: 'Outfit', system-ui, sans-serif;
+      color: var(--color-text);
+    }
+    .form-input {
+      width: 100%; padding: 0.7rem 1rem; border-radius: 0.75rem;
+      font-size: 0.875rem; outline: none;
+      background-color: var(--color-bg-secondary);
+      border: 1.5px solid var(--color-border);
+      color: var(--color-text);
+      transition: border-color 0.2s ease;
+    }
+    .form-input:focus { border-color: var(--color-accent); }
+    .form-input.is-invalid { border-color: #b4443c; }
+
+    #catalog-search:focus { border-color: var(--color-accent); }
+  </style>
+
+  <script>
+    // ==================== Kreator zamówień — logika kliencka ====================
+    const DATA = JSON.parse(document.getElementById('order-data')!.textContent!);
+    const PRICING = DATA.pricing;
+
+    type StepId = 'type' | 'samples' | 'producer' | 'catalog' | 'details' | 'contact' | 'summary';
+
+    const FLOWS: Record<string, StepId[]> = {
+      samples: ['type', 'samples', 'contact', 'summary'],
+      custom: ['type', 'producer', 'catalog', 'details', 'contact', 'summary'],
+    };
+    const STEP_LABELS: Record<StepId, string> = {
+      type: 'Typ', samples: 'Próbki', producer: 'Producent',
+      catalog: 'Dekor', details: 'Wymiary', contact: 'Dane', summary: 'Podsumowanie',
+    };
+
+    type Formatka = { w: number; h: number; qty: number };
+    type Producer = { id: string; name: string; sheetFormat: string; sheetAreaM2: number };
+    type Sheet = { code: string; name: string; finish: string; price: number; swatch: string };
+    // Pozycja zamówienia = jeden dekor + jego formatki. Zamówienie może mieć
+    // wiele pozycji (różne dekory / producenci) — marża 150 zł/m², minimum 4 m²
+    // i słój przechodzący liczą się od SUMY całego zamówienia.
+    type Position = {
+      producer: Producer | null;
+      sheet: Sheet | null;
+      ramka: string;
+      formatki: Formatka[];
+      m2Mode: 'formatki' | 'manual';
+      m2: number;
+    };
+    const newPosition = (): Position => ({
+      producer: null, sheet: null, ramka: '18 mm',
+      formatki: [{ w: 0, h: 0, qty: 1 }], m2Mode: 'formatki', m2: 0,
+    });
+    const state = {
+      type: null as null | 'samples' | 'custom',
+      sampleSet: null as null | { id: string; name: string },
+      positions: [newPosition()] as Position[],
+      active: 0,
+      addons: {} as Record<string, number>,
+      grain: false,
+      contact: {} as Record<string, string>,
+    };
+    const pos = () => state.positions[state.active];
+    const donePositions = () => state.positions.filter((p) => p.sheet && p.m2 > 0);
+    const totalM2 = () => Math.round(state.positions.reduce((s, p) => s + (p.sheet ? p.m2 : 0), 0) * 100) / 100;
+    let currentStep: StepId = 'type';
+
+    const $ = <T extends HTMLElement = HTMLElement>(sel: string) => document.querySelector(sel) as T;
+    const $$ = <T extends HTMLElement = HTMLElement>(sel: string) => Array.from(document.querySelectorAll(sel)) as T[];
+
+    // --------------------------------------------- persystencja (localStorage)
+    const STORAGE_KEY = 'mekra-order-v2'; // v2: model pozycji (wiele dekorów w zamówieniu)
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ state, currentStep }));
+      } catch { /* prywatny tryb / brak miejsca — trudno */ }
+      updateResetVisibility();
+    }
+
+    function updateResetVisibility() {
+      $('#btn-reset').hidden = state.type === null;
+    }
+
+    function restoreState() {
+      let saved: any = null;
+      try { saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null'); } catch { /* ignore */ }
+      if (!saved || !saved.state || !saved.state.type) return;
+      Object.assign(state, saved.state);
+
+      // sanityzacja pozycji po odczycie
+      if (!Array.isArray(state.positions) || !state.positions.length) state.positions = [newPosition()];
+      state.positions.forEach((p) => {
+        if (!Array.isArray(p.formatki) || !p.formatki.length) p.formatki = [{ w: 0, h: 0, qty: 1 }];
+        if (p.m2Mode !== 'manual') p.m2Mode = 'formatki';
+        if (!p.ramka) p.ramka = '18 mm';
+      });
+      if (typeof state.active !== 'number' || !state.positions[state.active]) state.active = 0;
+
+      // odtworzenie zaznaczeń w UI
+      $$('[data-choose-type]').forEach((b) => b.classList.toggle('is-selected', b.dataset.chooseType === state.type));
+      if (state.sampleSet) $$('[data-choose-sample]').forEach((b) => b.classList.toggle('is-selected', b.dataset.chooseSample === state.sampleSet!.id));
+      syncProducerSelection();
+      for (const [id, qty] of Object.entries(state.addons)) {
+        const el = document.querySelector(`[data-addon="${id}"]`) as HTMLInputElement | null;
+        if (el) el.value = String(qty);
+      }
+      ($('#input-grain') as HTMLInputElement).checked = state.grain;
+      const form = $('#contact-form') as HTMLFormElement;
+      for (const f of CONTACT_FIELDS) {
+        const el = form.elements.namedItem(f) as HTMLInputElement | HTMLTextAreaElement | null;
+        if (el && state.contact[f]) el.value = state.contact[f];
+      }
+      // zgody RODO celowo nie przywracamy — ma być zaznaczona świadomie
+
+      const step = saved.currentStep as StepId | undefined;
+      if (step && FLOWS[state.type!].includes(step)) goTo(step);
+    }
+
+    // Modal „Zacznij od nowa" — spójny ze stroną zamiast systemowego confirm().
+    const resetModal = $('#reset-modal');
+    const closeResetModal = () => { resetModal.hidden = true; };
+    $('#btn-reset').addEventListener('click', () => {
+      resetModal.hidden = false;
+      ($('#reset-cancel') as HTMLButtonElement).focus();
+    });
+    $('#reset-cancel').addEventListener('click', closeResetModal);
+    $('#reset-backdrop').addEventListener('click', closeResetModal);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !resetModal.hidden) closeResetModal();
+    });
+    $('#reset-confirm').addEventListener('click', () => {
+      try { localStorage.removeItem(STORAGE_KEY); } catch { /* ignore */ }
+      location.reload();
+    });
+
+    // bez sztucznych ",00" — grosze tylko gdy naprawdę występują
+    const fmt = (n: number) =>
+      n.toLocaleString('pl-PL', { minimumFractionDigits: 0, maximumFractionDigits: 2 }) + ' zł';
+
+    const flow = () => FLOWS[state.type ?? 'custom'];
+    const stepIndex = (s: StepId) => flow().indexOf(s);
+
+    // ---------------------------------------------------------------- wycena
+    // Wycena obejmuje WSZYSTKIE kompletne pozycje (dekor + m² > 0). Arkusze
+    // liczone per pozycja, wykonanie/minimum/słój — od sumy m² zamówienia.
+    function calcPrice() {
+      const list = donePositions();
+      if (!list.length) return null;
+      const m2 = totalM2();
+      const posLines = list.map((p) => {
+        const sheets = Math.max(1, Math.ceil(p.m2 / p.producer!.sheetAreaM2));
+        return { name: p.sheet!.name, code: p.sheet!.code, producerName: p.producer!.name,
+          ramka: p.ramka, m2: p.m2, sheets, sheetPrice: p.sheet!.price, sheetsCost: sheets * p.sheet!.price };
+      });
+      const sheetsCost = posLines.reduce((s, l) => s + l.sheetsCost, 0);
+      const laborCost = m2 * PRICING.m2Fee;
+
+      let addonsCost = 0;
+      const addonLines: { label: string; value: number }[] = [];
+      for (const a of PRICING.addons) {
+        const qty = state.addons[a.id] || 0;
+        if (qty > 0) {
+          const v = qty * a.price;
+          addonsCost += v;
+          addonLines.push({ label: `${a.name} × ${qty}`, value: v });
+        }
+      }
+
+      const base = sheetsCost + laborCost + addonsCost;
+      const grainCost = state.grain ? (base * PRICING.grainMatchPct) / 100 : 0;
+      const belowMin = m2 > 0 && m2 < PRICING.minM2 ? (base * PRICING.belowMinPct) / 100 : 0;
+      const net = base + grainCost + belowMin;
+      const gross = net * (1 + PRICING.vatPct / 100);
+
+      return { m2, posLines, sheetsCost, laborCost, addonLines, grainCost, belowMin, net, gross };
+    }
+
+    function renderPrice() {
+      const rows: string[] = [];
+      const row = (label: string, value: string, muted = false) =>
+        `<div class="flex items-baseline justify-between gap-3">
+          <dt style="color: var(--color-text-${muted ? 'muted' : 'secondary'});">${label}</dt>
+          <dd class="font-heading font-semibold whitespace-nowrap" style="color: var(--color-text);">${value}</dd>
+        </div>`;
+
+      const p = calcPrice();
+      if (!p) {
+        $('#price-breakdown').innerHTML = row('Uzupełnij formatki, aby zobaczyć wycenę', '');
+        $('#price-total-net').textContent = '—';
+        $('#price-total-gross').textContent = '—';
+        $('#mobile-total').textContent = '—';
+        $('#min-warning').hidden = true;
+        saveState();
+        return;
+      }
+
+      for (const l of p.posLines) {
+        rows.push(row(`Arkusze ${p.posLines.length > 1 ? `(${l.name})` : ''}: ${l.sheets} × ${fmt(l.sheetPrice)}`, fmt(l.sheetsCost)));
+      }
+      rows.push(row(`Wykonanie: ${fmtM2(p.m2)} m² × ${fmt(PRICING.m2Fee)}`, fmt(p.laborCost)));
+      for (const l of p.addonLines) rows.push(row(l.label, fmt(l.value)));
+      if (p.grainCost > 0) rows.push(row(`Słój przechodzący (+${PRICING.grainMatchPct}%)`, fmt(p.grainCost)));
+      if (p.belowMin > 0) rows.push(row(`Dopłata poniżej ${PRICING.minM2} m² (+${PRICING.belowMinPct}%)`, fmt(p.belowMin)));
+
+      $('#price-breakdown').innerHTML = rows.join('');
+      $('#price-total-net').textContent = fmt(p.net);
+      $('#price-total-gross').textContent = fmt(p.gross);
+      $('#mobile-total').textContent = fmt(p.net);
+      $('#min-warning').hidden = !(p.m2 > 0 && p.m2 < PRICING.minM2);
+      saveState();
+    }
+
+    // ------------------------------------------------------------- nawigacja
+    function renderProgress() {
+      const steps = flow();
+      const nav = $('#wizard-progress');
+      nav.innerHTML = '';
+      steps.forEach((s, i) => {
+        if (i > 0) {
+          const sep = document.createElement('span');
+          sep.className = 'progress-sep';
+          nav.appendChild(sep);
+        }
+        const idx = stepIndex(currentStep);
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'progress-dot' + (s === currentStep ? ' is-active' : i < idx ? ' is-done' : '');
+        dot.innerHTML = `<span class="num">${i < idx ? '✓' : i + 1}</span><span class="hidden sm:inline">${STEP_LABELS[s]}</span>`;
+        if (i < idx) dot.addEventListener('click', () => goTo(s));
+        else dot.disabled = s !== currentStep;
+        nav.appendChild(dot);
+      });
+    }
+
+    function canLeave(step: StepId): boolean {
+      if (step === 'type') return state.type !== null;
+      if (step === 'samples') return state.sampleSet !== null;
+      if (step === 'producer') return pos().producer !== null;
+      if (step === 'catalog') return pos().sheet !== null;
+      // dalej można iść, gdy KAŻDA pozycja jest kompletna (dekor + metraż)
+      if (step === 'details') return state.positions.every((p) => p.sheet && p.m2 > 0) && totalM2() > 0;
+      if (step === 'contact') return validateContact();
+      return true;
+    }
+
+    function goTo(step: StepId) {
+      currentStep = step;
+      $$('.wizard-step').forEach((el) => { el.hidden = el.dataset.step !== step; });
+
+      // przygotowanie kroków
+      if (step === 'producer') syncProducerSelection();
+      if (step === 'catalog') prepareCatalog();
+      if (step === 'details') prepareDetails();
+      if (step === 'summary') renderSummary();
+
+      // nawigacja dolna
+      const nav = $('#wizard-nav');
+      const isFirst = step === 'type';
+      const isLast = step === 'summary';
+      nav.hidden = isFirst;
+      $('#btn-back').style.visibility = isFirst ? 'hidden' : 'visible';
+      ($('#btn-next') as HTMLButtonElement).hidden = isLast;
+
+      $('#mobile-total-bar').hidden = !(state.type === 'custom' && (step === 'details'));
+
+      renderProgress();
+      saveState();
+      track('zamowienie_step', { step, order_type: state.type ?? 'unset' });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function next() {
+      if (!canLeave(currentStep)) {
+        if (currentStep === 'contact') $('#form-error').hidden = false;
+        if (currentStep === 'details') $('#m2-error').hidden = false;
+        return;
+      }
+      const steps = flow();
+      const i = steps.indexOf(currentStep);
+      if (i < steps.length - 1) goTo(steps[i + 1]);
+    }
+    function back() {
+      const steps = flow();
+      const i = steps.indexOf(currentStep);
+      if (i > 0) goTo(steps[i - 1]);
+    }
+
+    $('#btn-next').addEventListener('click', next);
+    $('#btn-back').addEventListener('click', back);
+    $$('[data-goto]').forEach((el) => el.addEventListener('click', () => goTo(el.dataset.goto as StepId)));
+
+    // --------------------------------------------------------------- krok: typ
+    $$('[data-choose-type]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        state.type = btn.dataset.chooseType as 'samples' | 'custom';
+        $$('[data-choose-type]').forEach((b) => b.classList.toggle('is-selected', b === btn));
+        setTimeout(next, 180);
+      });
+    });
+
+    // ------------------------------------------------------------ krok: próbki
+    $$('[data-choose-sample]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const z = DATA.zestawy.find((x: any) => x.id === btn.dataset.chooseSample);
+        state.sampleSet = z ? { id: z.id, name: z.name } : null;
+        $$('[data-choose-sample]').forEach((b) => b.classList.toggle('is-selected', b === btn));
+        setTimeout(next, 180);
+      });
+    });
+
+    // --------------------------------------------------------- krok: producent
+    function syncProducerSelection() {
+      $$('[data-choose-producer]').forEach((b) =>
+        b.classList.toggle('is-selected', b.dataset.chooseProducer === pos().producer?.id));
+    }
+
+    $$('[data-choose-producer]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const p = DATA.producenci.find((x: any) => x.id === btn.dataset.chooseProducer);
+        if (pos().producer?.id !== p.id) pos().sheet = null; // zmiana producenta = reset dekoru
+        pos().producer = p;
+        syncProducerSelection();
+        setTimeout(next, 180);
+      });
+    });
+
+    // ----------------------------------------------------------- krok: katalog
+    let activeFinish = 'wszystkie';
+
+    function prepareCatalog() {
+      if (!pos().producer) return;
+      $('#catalog-producer-name').textContent = pos().producer!.name;
+      $$('.catalog-grid').forEach((g) => { g.hidden = g.dataset.producerCatalog !== pos().producer!.id; });
+
+      // chipy wykończeń dla aktywnego katalogu
+      const grid = $(`[data-producer-catalog="${pos().producer!.id}"]`);
+      const finishes = ['wszystkie', ...new Set($$('.decor-tile').filter((t) => grid.contains(t)).map((t) => t.dataset.finish!))];
+      const filters = $('#catalog-filters');
+      filters.innerHTML = '';
+      activeFinish = 'wszystkie';
+      finishes.forEach((f) => {
+        const chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'filter-chip' + (f === activeFinish ? ' is-selected' : '');
+        chip.textContent = f;
+        chip.addEventListener('click', () => {
+          activeFinish = f;
+          $$('#catalog-filters .filter-chip').forEach((c) => c.classList.toggle('is-selected', c === chip));
+          filterCatalog();
+        });
+        filters.appendChild(chip);
+      });
+
+      ($('#catalog-search') as HTMLInputElement).value = '';
+      filterCatalog();
+
+      // zaznaczenie aktualnego wyboru
+      $$('.decor-tile').forEach((t) =>
+        t.classList.toggle('is-selected', !!pos().sheet && grid.contains(t) && t.dataset.code === pos().sheet!.code));
+    }
+
+    function filterCatalog() {
+      if (!pos().producer) return;
+      const grid = $(`[data-producer-catalog="${pos().producer!.id}"]`);
+      const q = ($('#catalog-search') as HTMLInputElement).value.trim().toLowerCase();
+      let visible = 0;
+      $$('.decor-tile').forEach((t) => {
+        if (!grid.contains(t)) return;
+        const show = (activeFinish === 'wszystkie' || t.dataset.finish === activeFinish)
+          && (!q || t.dataset.search!.includes(q));
+        t.hidden = !show;
+        if (show) visible++;
+      });
+      $('#catalog-empty').hidden = visible > 0;
+    }
+
+    $('#catalog-search').addEventListener('input', filterCatalog);
+
+    $$('[data-choose-sheet]').forEach((tile) => {
+      tile.addEventListener('click', () => {
+        pos().sheet = {
+          code: tile.dataset.code!,
+          name: tile.dataset.name!,
+          finish: tile.dataset.finish!,
+          price: Number(tile.dataset.price),
+          swatch: (tile.querySelector('div') as HTMLElement).style.background,
+        };
+        $$('.decor-tile').forEach((t) => t.classList.toggle('is-selected', t === tile));
+        setTimeout(next, 180);
+      });
+    });
+
+    // -------------------------------------------------- krok: formatki/wymiary
+    const m2Input = $('#input-m2') as HTMLInputElement;
+    const fmtM2 = (n: number) => n.toLocaleString('pl-PL', { maximumFractionDigits: 2 });
+    const rowM2 = (r: Formatka) => (r.w >= 50 && r.w <= 2800 && r.h >= 50 && r.h <= 2800 && r.qty >= 1)
+      ? (r.w * r.h * r.qty) / 1e6 : 0;
+
+    // ------- lista pozycji (dekorów) na kroku wymiarów -------
+    function renderPositions() {
+      const box = $('#positions-list');
+      box.innerHTML = '';
+      state.positions.forEach((p, i) => {
+        const item = document.createElement('div');
+        item.className = 'position-item' + (i === state.active ? ' is-active' : '');
+        const label = p.sheet
+          ? `${p.sheet.name} · ${p.sheet.code} <span style="color: var(--color-text-muted);">(${p.producer!.name})</span>`
+          : '<span style="color: var(--color-text-muted);">— dekor nie wybrany —</span>';
+        item.innerHTML = `
+          <span class="pos-swatch" style="background: ${p.sheet?.swatch || 'var(--color-bg-tertiary)'};"></span>
+          <span class="flex-1 min-w-0 text-sm font-heading font-semibold truncate" style="color: var(--color-text);">${label}</span>
+          <span class="text-xs font-heading font-semibold whitespace-nowrap" style="color: var(--color-text-secondary);">${p.m2 > 0 ? fmtM2(p.m2) + ' m²' : '—'}</span>
+          <button type="button" class="pos-edit text-xs font-heading font-semibold" style="color: var(--color-accent);">Zmień dekor</button>
+          ${state.positions.length > 1 ? '<button type="button" class="pos-del row-del" title="Usuń pozycję" aria-label="Usuń pozycję">×</button>' : ''}`;
+        item.addEventListener('click', () => {
+          if (state.active !== i) { state.active = i; prepareDetails(); }
+        });
+        (item.querySelector('.pos-edit') as HTMLButtonElement).addEventListener('click', (e) => {
+          e.stopPropagation();
+          state.active = i;
+          goTo(p.producer ? 'catalog' : 'producer');
+        });
+        item.querySelector('.pos-del')?.addEventListener('click', (e) => {
+          e.stopPropagation();
+          state.positions.splice(i, 1);
+          if (state.active >= state.positions.length) state.active = state.positions.length - 1;
+          prepareDetails();
+        });
+        box.appendChild(item);
+      });
+    }
+
+    $('#btn-add-position').addEventListener('click', () => {
+      state.positions.push(newPosition());
+      state.active = state.positions.length - 1;
+      goTo('producer');
+    });
+
+    function applyM2Mode() {
+      const manual = pos().m2Mode === 'manual';
+      ($('#m2-manual-toggle') as HTMLInputElement).checked = manual;
+      $('#manual-m2-box').hidden = !manual;
+      $('#formatki-head').hidden = manual;
+      $('#formatki-rows').hidden = manual;
+      $('#btn-add-row').hidden = manual;
+    }
+
+    function renderFormatki() {
+      const box = $('#formatki-rows');
+      box.innerHTML = '';
+      pos().formatki.forEach((r, i) => {
+        const row = document.createElement('div');
+        row.className = 'grid grid-cols-[1fr_1fr_4rem_4rem_1.75rem] gap-2 items-center';
+        row.innerHTML = `
+          <input type="number" class="fmt-input" data-f="w" min="50" max="2800" step="1" inputmode="numeric" placeholder="596" value="${r.w || ''}">
+          <input type="number" class="fmt-input" data-f="h" min="50" max="2800" step="1" inputmode="numeric" placeholder="715" value="${r.h || ''}">
+          <input type="number" class="fmt-input" data-f="qty" min="1" max="500" step="1" inputmode="numeric" value="${r.qty || 1}">
+          <span class="row-m2 text-sm font-heading font-semibold text-right" style="color: var(--color-text-secondary);">—</span>
+          <button type="button" class="row-del" title="Usuń formatkę" aria-label="Usuń formatkę">×</button>`;
+        row.querySelectorAll('input').forEach((inp) => {
+          inp.addEventListener('input', () => {
+            (r as any)[(inp as HTMLInputElement).dataset.f!] = parseInt((inp as HTMLInputElement).value, 10) || 0;
+            updateRowM2(row, r);
+            recomputeM2();
+          });
+        });
+        (row.querySelector('.row-del') as HTMLButtonElement).addEventListener('click', () => {
+          pos().formatki.splice(i, 1);
+          if (!pos().formatki.length) pos().formatki.push({ w: 0, h: 0, qty: 1 });
+          renderFormatki();
+          recomputeM2();
+        });
+        box.appendChild(row);
+        updateRowM2(row, r);
+      });
+    }
+
+    function updateRowM2(rowEl: HTMLElement, r: Formatka) {
+      const m = rowM2(r);
+      (rowEl.querySelector('.row-m2') as HTMLElement).textContent = m ? fmtM2(m) : '—';
+    }
+
+    function recomputeM2() {
+      const p = pos();
+      if (p.m2Mode === 'formatki') {
+        const sum = p.formatki.reduce((s, r) => s + rowM2(r), 0);
+        p.m2 = Math.round(sum * 100) / 100;
+      } else {
+        p.m2 = parseFloat(m2Input.value.replace(',', '.')) || 0;
+      }
+      const total = totalM2();
+      $('#m2-display').innerHTML = state.positions.length > 1
+        ? `${fmtM2(p.m2)} m² <span class="text-sm font-body" style="color: var(--color-text-muted);">· razem ${fmtM2(total)} m²</span>`
+        : fmtM2(p.m2) + ' m²';
+      $('#hardware-note').hidden = !(p.m2Mode === 'formatki'
+        && p.formatki.some((r) => rowM2(r) > 0 && (r.w > 600 || r.h > 800)));
+      if (state.positions.every((x) => x.sheet && x.m2 > 0)) $('#m2-error').hidden = true;
+      renderPositions();
+      renderPrice(); // renderPrice woła saveState
+    }
+
+    function prepareDetails() {
+      applyM2Mode();
+      m2Input.value = pos().m2Mode === 'manual' && pos().m2 > 0 ? String(pos().m2) : m2Input.value;
+      $$('#ramka-options .ramka-chip').forEach((c) => c.classList.toggle('is-selected', c.dataset.ramka === pos().ramka));
+      renderFormatki();
+      recomputeM2();
+    }
+
+    $('#btn-add-row').addEventListener('click', () => {
+      pos().formatki.push({ w: 0, h: 0, qty: 1 });
+      renderFormatki();
+      recomputeM2();
+      const last = $('#formatki-rows').lastElementChild?.querySelector('input') as HTMLInputElement | null;
+      last?.focus();
+    });
+
+    $('#m2-manual-toggle').addEventListener('change', (e) => {
+      pos().m2Mode = (e.target as HTMLInputElement).checked ? 'manual' : 'formatki';
+      applyM2Mode();
+      recomputeM2();
+    });
+
+    m2Input.addEventListener('input', recomputeM2);
+    $$('[data-m2-delta]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const v = Math.max(0.5, (parseFloat(m2Input.value) || 0) + Number(btn.dataset.m2Delta));
+        m2Input.value = String(v);
+        recomputeM2();
+      });
+    });
+
+    $$('#ramka-options .ramka-chip').forEach((chip) => {
+      chip.addEventListener('click', () => {
+        pos().ramka = chip.dataset.ramka!;
+        $$('#ramka-options .ramka-chip').forEach((c) => c.classList.toggle('is-selected', c === chip));
+        saveState();
+      });
+    });
+
+    $$('[data-addon]').forEach((input) => {
+      input.addEventListener('input', () => {
+        state.addons[(input as HTMLInputElement).dataset.addon!] =
+          Math.max(0, parseInt((input as HTMLInputElement).value) || 0);
+        renderPrice();
+      });
+    });
+
+    ($('#input-grain') as HTMLInputElement).addEventListener('change', (e) => {
+      state.grain = (e.target as HTMLInputElement).checked;
+      renderPrice();
+    });
+
+    // -------------------------------------------------------------- krok: dane
+    const CONTACT_FIELDS = ['name', 'email', 'phone', 'street', 'zip', 'city', 'nip', 'notes'];
+
+    $('#contact-form').addEventListener('input', () => {
+      const form = $('#contact-form') as HTMLFormElement;
+      CONTACT_FIELDS.forEach((f) => {
+        const el = form.elements.namedItem(f) as HTMLInputElement | HTMLTextAreaElement | null;
+        if (el) state.contact[f] = el.value.trim();
+      });
+      saveState();
+    });
+
+    function validateContact(): boolean {
+      let ok = true;
+      const form = $('#contact-form') as HTMLFormElement;
+      CONTACT_FIELDS.forEach((f) => {
+        const el = form.elements.namedItem(f) as HTMLInputElement | HTMLTextAreaElement | null;
+        if (!el) return;
+        state.contact[f] = el.value.trim();
+        const invalid = el.hasAttribute('required') && !el.value.trim()
+          || (f === 'email' && el.value.trim() !== '' && !/^\S+@\S+\.\S+$/.test(el.value.trim()));
+        el.classList.toggle('is-invalid', invalid);
+        if (invalid) ok = false;
+      });
+      const consent = $('#f-consent') as HTMLInputElement;
+      if (!consent.checked) ok = false;
+      if (ok) $('#form-error').hidden = true;
+      return ok;
+    }
+
+    // ------------------------------------------------------ krok: podsumowanie
+    function summaryRow(label: string, value: string) {
+      return `<div class="flex items-start justify-between gap-4 py-2.5" style="border-bottom: 1px solid var(--color-border);">
+        <span class="text-sm font-body" style="color: var(--color-text-secondary);">${label}</span>
+        <span class="text-sm font-heading font-semibold text-right" style="color: var(--color-text);">${value}</span>
+      </div>`;
+    }
+
+    function renderSummary() {
+      const c = state.contact;
+      const rows: string[] = [];
+      let mailBody = '';
+
+      if (state.type === 'samples') {
+        rows.push(summaryRow('Rodzaj zamówienia', 'Próbki'));
+        rows.push(summaryRow('Zestaw', state.sampleSet?.name ?? '—'));
+        rows.push(summaryRow('Koszt', 'potwierdzimy przy realizacji'));
+        mailBody = `ZAMÓWIENIE PRÓBEK — mekra.pl\n\nZestaw: ${state.sampleSet?.name}\n`;
+      } else {
+        const p = calcPrice()!;
+        const list = donePositions();
+        rows.push(summaryRow('Rodzaj zamówienia', `Fronty na wymiar${list.length > 1 ? ` · ${list.length} dekory` : ''}`));
+
+        mailBody = `ZAMÓWIENIE — FRONTY NA WYMIAR — mekra.pl\n`;
+        list.forEach((posItem, i) => {
+          const line = p.posLines[i];
+          const fmts = posItem.m2Mode === 'formatki' ? posItem.formatki.filter((r) => rowM2(r) > 0) : [];
+          if (list.length > 1) rows.push(`<p class="mt-5 mb-1 text-xs font-heading font-semibold uppercase tracking-widest" style="color: var(--color-text-muted);">Pozycja ${i + 1}</p>`);
+          rows.push(summaryRow('Dekor', `${posItem.sheet!.name} · ${posItem.sheet!.code} (${posItem.producer!.name}, ${posItem.sheet!.finish})`));
+          rows.push(summaryRow('Grubość ramki', posItem.ramka));
+          rows.push(summaryRow('Powierzchnia', `${fmtM2(posItem.m2)} m²`));
+          rows.push(summaryRow(`Arkusze (${posItem.producer!.sheetFormat} mm)`, `${line.sheets} × ${fmt(line.sheetPrice)} = ${fmt(line.sheetsCost)}`));
+          rows.push(summaryRow('Formatki', fmts.length
+            ? fmts.map((r) => `${r.w} × ${r.h} mm — ${r.qty} szt.`).join('<br>')
+            : 'do uzupełnienia po zamówieniu'));
+
+          mailBody += `\nPOZYCJA ${i + 1}\n`
+            + `Dekor: ${posItem.sheet!.name} ${posItem.sheet!.code} (${posItem.producer!.name}, ${posItem.sheet!.finish})\n`
+            + `Ramka: ${posItem.ramka}\n`
+            + `Powierzchnia: ${fmtM2(posItem.m2)} m²\n`
+            + `Arkusze: ${line.sheets} szt.\n`
+            + (fmts.length ? `Formatki:\n${fmts.map((r) => `${r.w} × ${r.h} mm — ${r.qty} szt.`).join('\n')}\n` : `Formatki: do uzupełnienia po zamówieniu\n`);
+        });
+
+        rows.push(`<p class="mt-5 mb-1 text-xs font-heading font-semibold uppercase tracking-widest" style="color: var(--color-text-muted);">Całe zamówienie</p>`);
+        rows.push(summaryRow(`Wykonanie (${fmtM2(p.m2)} m² × ${fmt(PRICING.m2Fee)})`, fmt(p.laborCost)));
+        for (const l of p.addonLines) rows.push(summaryRow(l.label, fmt(l.value)));
+        if (p.grainCost > 0) rows.push(summaryRow('Słój przechodzący (+20%)', fmt(p.grainCost)));
+        if (p.belowMin > 0) rows.push(summaryRow(`Dopłata poniżej ${PRICING.minM2} m²`, fmt(p.belowMin)));
+
+        rows.push(`<div class="flex items-baseline justify-between pt-4 mt-1">
+          <span class="font-heading text-sm font-semibold uppercase tracking-wider" style="color: var(--color-text);">Razem netto</span>
+          <span class="font-display text-3xl" style="color: var(--color-accent);">${fmt(p.net)}</span>
+        </div>
+        <div class="flex items-baseline justify-between mt-1">
+          <span class="text-sm font-body" style="color: var(--color-text-secondary);">Razem brutto (VAT ${PRICING.vatPct}%)</span>
+          <span class="text-sm font-heading font-semibold" style="color: var(--color-text);">${fmt(p.gross)}</span>
+        </div>`);
+
+        mailBody += `\nCAŁE ZAMÓWIENIE\n`
+          + `Wykonanie: ${fmtM2(p.m2)} m² × ${fmt(PRICING.m2Fee)} = ${fmt(p.laborCost)}\n`
+          + p.addonLines.map((l) => `${l.label}: ${fmt(l.value)}\n`).join('')
+          + (state.grain ? `Słój przechodzący: tak\n` : '')
+          + `Razem netto: ${fmt(p.net)}\nRazem brutto: ${fmt(p.gross)}\n`;
+      }
+
+      rows.push(`<p class="mt-6 mb-1 text-xs font-heading font-semibold uppercase tracking-widest" style="color: var(--color-text-muted);">Dane zamawiającego</p>`);
+      rows.push(summaryRow('Imię i nazwisko', c.name ?? ''));
+      rows.push(summaryRow('Kontakt', `${c.email ?? ''}<br>${c.phone ?? ''}`));
+      rows.push(summaryRow('Adres dostawy', `${c.street ?? ''}, ${c.zip ?? ''} ${c.city ?? ''}`));
+      if (c.nip) rows.push(summaryRow('NIP', c.nip));
+      if (c.notes) rows.push(summaryRow('Uwagi', c.notes));
+
+      $('#summary-card').innerHTML = rows.join('');
+
+      mailBody += `\nDANE ZAMAWIAJĄCEGO\n${c.name}\n${c.email} · ${c.phone}\n${c.street}, ${c.zip} ${c.city}\n`
+        + (c.nip ? `NIP: ${c.nip}\n` : '')
+        + (c.notes ? `Uwagi: ${c.notes}\n` : '')
+        + `\n(Zamówienie złożone przez formularz na mekra.pl — wycena orientacyjna wg cennika.)`;
+
+      const subject = state.type === 'samples'
+        ? 'Zamówienie próbek — mekra.pl'
+        : 'Zamówienie frontów na wymiar — mekra.pl';
+      ($('#summary-mailto') as HTMLAnchorElement).href =
+        `mailto:kontakt@mekra.pl?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(mailBody)}`;
+
+      // próbki idą bez płatności; fronty na wymiar przez Stripe
+      $('#btn-pay').hidden = state.type !== 'custom';
+      $('#btn-submit-samples').hidden = state.type !== 'samples';
+      $('#pay-error').hidden = true;
+    }
+
+    // ------------------------------------------------- płatność / wysyłka / GA4
+    function track(name: string, params: Record<string, any> = {}) {
+      try { (window as any).gtag?.('event', name, params); } catch { /* ignore */ }
+    }
+
+    function buildOrderPayload() {
+      return {
+        type: state.type,
+        sampleSet: state.sampleSet,
+        positions: donePositions().map((p) => ({
+          producer: { id: p.producer!.id, name: p.producer!.name, sheetFormat: p.producer!.sheetFormat, sheetAreaM2: p.producer!.sheetAreaM2 },
+          sheet: { code: p.sheet!.code, name: p.sheet!.name, finish: p.sheet!.finish, price: p.sheet!.price },
+          ramka: p.ramka,
+          m2: p.m2,
+          m2Mode: p.m2Mode,
+          formatki: p.m2Mode === 'formatki' ? p.formatki.filter((r) => rowM2(r) > 0) : [],
+        })),
+        addons: state.addons,
+        grain: state.grain,
+        contact: state.contact,
+      };
+    }
+
+    async function postOrder(path: string) {
+      const res = await fetch(DATA.apiBase + path, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(buildOrderPayload()),
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    }
+
+    $('#btn-pay').addEventListener('click', async () => {
+      const btn = $('#btn-pay') as HTMLButtonElement;
+      const p = calcPrice();
+      if (!p) return;
+      $('#pay-error').hidden = true;
+      btn.disabled = true;
+      $('#btn-pay-label').textContent = 'Przekierowuję do płatności…';
+      const gaItems = donePositions().map((posItem) => ({
+        item_id: posItem.sheet!.code,
+        item_name: `Fronty ramiakowe — ${posItem.sheet!.name}`,
+        item_brand: posItem.producer!.name,
+        quantity: posItem.m2,
+      }));
+      track('begin_checkout', {
+        currency: 'PLN',
+        value: Math.round(p.gross * 100) / 100,
+        items: gaItems,
+      });
+      try {
+        const { url } = await postOrder('/order/session');
+        if (!url) throw new Error('Brak URL sesji płatności');
+        // dane do konwersji purchase na stronie podziękowania
+        try {
+          localStorage.setItem('mekra-order-pending', JSON.stringify({
+            gross: Math.round(p.gross * 100) / 100,
+            net: Math.round(p.net * 100) / 100,
+            m2: p.m2,
+            items: gaItems,
+          }));
+        } catch { /* ignore */ }
+        window.location.href = url; // stan zostaje w localStorage na wypadek anulowania
+      } catch (e) {
+        console.error('Checkout error:', e);
+        $('#pay-error').hidden = false;
+        btn.disabled = false;
+        $('#btn-pay-label').textContent = 'Zamawiam i płacę';
+      }
+    });
+
+    $('#btn-submit-samples').addEventListener('click', async () => {
+      const btn = $('#btn-submit-samples') as HTMLButtonElement;
+      $('#pay-error').hidden = true;
+      btn.disabled = true;
+      $('#btn-samples-label').textContent = 'Wysyłam…';
+      try {
+        await postOrder('/order/submit');
+        track('generate_lead', { lead_type: 'probki' });
+        try { localStorage.removeItem(STORAGE_KEY); } catch { /* ignore */ }
+        window.location.href = '/zamowienie/dziekujemy/?type=probki';
+      } catch (e) {
+        console.error('Samples order error:', e);
+        $('#pay-error').hidden = false;
+        btn.disabled = false;
+        $('#btn-samples-label').textContent = 'Wysyłam zamówienie próbek';
+      }
+    });
+
+    // powrót z anulowanej płatności Stripe — stan i dane czekają w localStorage
+    const urlParams = new URLSearchParams(location.search);
+    if (urlParams.get('payment') === 'cancelled') {
+      history.replaceState(null, '', location.pathname);
+      const note = document.createElement('p');
+      note.className = 'mb-6 text-center text-sm font-body px-4 py-3 rounded-xl';
+      note.style.cssText = 'background-color: var(--color-bg-tertiary); color: var(--color-accent); border: 1px solid var(--color-border);';
+      note.textContent = 'Płatność została anulowana — Twoje zamówienie i dane zostały zapamiętane. Możesz dokończyć płatność, kiedy zechcesz.';
+      $('#wizard-progress').before(note);
+      track('payment_cancelled');
+    }
+
+    // start — najpierw próba przywrócenia stanu (np. powrót z płatności / reload)
+    restoreState();
+    renderProgress();
+    updateResetVisibility();
+  </script>
+</BaseLayout>
