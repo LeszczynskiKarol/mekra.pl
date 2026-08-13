@@ -201,14 +201,26 @@ const FONTS_URL = 'https://fonts.googleapis.com/css2?family=DM+Serif+Display:ita
   <body class="min-h-screen overflow-x-hidden">
     <slot />
 
-    <!-- Click-to-call tracking — fires `phone_call` on any tel: link (Contact, Footer, …) -->
+    <!-- Kontakt bezposredni — `phone_call` na tel: i `email_click` na mailto:.
+         Mail jest u nas glownym kanalem zapytan (wiekszosc ludzi pisze zamiast
+         wypelniac formularz), wiec bez tego drugiego zdarzenia GA4 nie widzi
+         wiekszosci konwersji — panel pokazywal leady w skrzynce przy zerze
+         konwersji. Oba trzeba miec oznaczone jako zdarzenia kluczowe w GA4. -->
     <script is:inline>
       document.addEventListener('click', function (e) {
-        var a = e.target.closest && e.target.closest('a[href^="tel:"]');
-        if (!a) return;
-        if (typeof gtag === 'function') {
+        if (typeof gtag !== 'function' || !e.target.closest) return;
+        var tel = e.target.closest('a[href^="tel:"]');
+        if (tel) {
           gtag('event', 'phone_call', {
-            'phone_number': a.getAttribute('href').replace('tel:', ''),
+            'phone_number': tel.getAttribute('href').replace('tel:', ''),
+          });
+          return;
+        }
+        var mail = e.target.closest('a[href^="mailto:"]');
+        if (mail) {
+          gtag('event', 'email_click', {
+            'email_address': mail.getAttribute('href').replace('mailto:', '').split('?')[0],
+            'link_url': location.pathname,
           });
         }
       }, { passive: true });
