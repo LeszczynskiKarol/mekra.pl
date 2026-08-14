@@ -258,6 +258,11 @@ function formatSize(bytes) {
 // (konto klient) — autoryzacja wspólnym kluczem orderKey, nie IAM.
 // ============================================================================
 
+// Katalog dekorów (generowany z cenników dostawców, patrz scripts/dekory/).
+// Cena arkusza NIE jest brana z przeglądarki — front mógłby przysłać 1 zł.
+// Klucz: "<producent>|<kod>|<struktura>" (lowercase).
+import DEKORY from "./dekory-prices.json" with { type: "json" };
+
 const PANEL_API = process.env.PANEL_API || "https://elk3bw9gj4.execute-api.eu-central-1.amazonaws.com";
 const STRIPE_SECRET_ID = process.env.STRIPE_SECRET_ID || "mekra/stripe";
 
@@ -313,18 +318,25 @@ function normPositions(list) {
     .map((p) => {
       const formatki = normFormatki(p?.formatki);
       const m2 = formatki.length ? formatkiM2(formatki) : Math.round(((Number(p?.m2) || 0)) * 100) / 100;
+      const producerId = String(p?.producer?.id || "").slice(0, 40).toLowerCase();
+      const code = String(p?.sheet?.code || "").slice(0, 40);
+      const finish = String(p?.sheet?.finish || "").slice(0, 40);
+      // cena ORAZ powierzchnia arkusza z KATALOGU, nie z requestu
+      // (Forner ma arkusze 2800×1250/1300, reszta 2800×2070)
+      const entry = DEKORY.prices[`${producerId}|${code.toLowerCase()}|${finish.toLowerCase()}`];
+      const [catalogPrice, catalogArea] = Array.isArray(entry) ? entry : [entry, 5.8];
       return {
         producer: {
-          id: String(p?.producer?.id || "").slice(0, 40),
+          id: producerId,
           name: String(p?.producer?.name || "").slice(0, 60),
-          sheetFormat: String(p?.producer?.sheetFormat || "").slice(0, 30),
-          sheetAreaM2: Number(p?.producer?.sheetAreaM2) || 5.8,
+          sheetFormat: String(p?.producer?.sheetFormat || "").slice(0, 40),
+          sheetAreaM2: Number(catalogArea) || 5.8,
         },
         sheet: {
-          code: String(p?.sheet?.code || "").slice(0, 40),
+          code, finish,
           name: String(p?.sheet?.name || "").slice(0, 80),
-          finish: String(p?.sheet?.finish || "").slice(0, 40),
-          price: Number(p?.sheet?.price) || 0,
+          price: typeof catalogPrice === "number" ? catalogPrice : 0,
+          area: Number(catalogArea) || 5.8,
         },
         ramka: String(p?.ramka || "").slice(0, 20),
         formatki, m2Mode: formatki.length ? "formatki" : "manual", m2,
@@ -341,7 +353,7 @@ function computeOrderPricing(positions, addons, grain) {
   const m2 = Math.round(positions.reduce((s, p) => s + p.m2, 0) * 100) / 100;
   if (m2 <= 0 || m2 > ORDER_PRICING.maxM2) return null;
   const posLines = positions.map((p) => {
-    const sheets = Math.max(1, Math.ceil(p.m2 / p.producer.sheetAreaM2));
+    const sheets = Math.max(1, Math.ceil(p.m2 / (p.sheet.area || p.producer.sheetAreaM2)));
     return { name: p.sheet.name, code: p.sheet.code, producerName: p.producer.name,
       m2: p.m2, sheets, sheetPrice: p.sheet.price, sheetsCost: sheets * p.sheet.price };
   });
@@ -391,8 +403,12 @@ function validContact(c) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(c.email));
 }
 
-// bez sztucznych ",00" — grosze tylko gdy naprawdę występują (spójnie z formularzem)
-const zl = (n) => (Number(n) || 0).toLocaleString("pl-PL", { minimumFractionDigits: 0, maximumFractionDigits: 2 }) + " zł";
+// Pełne złotówki bez końcówki (824 zł), grosze zawsze dwucyfrowo (824,40 zł) — jak w formularzu.
+const zl = (n) => {
+  const v = Math.round((Number(n) || 0) * 100) / 100;
+  const dec = Number.isInteger(v) ? 0 : 2;
+  return v.toLocaleString("pl-PL", { minimumFractionDigits: dec, maximumFractionDigits: dec }) + " zł";
+};
 const m2pl = (v) => (Number(v) || 0).toLocaleString("pl-PL", { maximumFractionDigits: 2 });
 
 function orderRow(label, value) {

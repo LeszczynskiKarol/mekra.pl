@@ -117,8 +117,11 @@ import Footer from '../../../components/Footer.astro';
           : items.map((it: any) => it.item_name.replace('Fronty ramiakowe — ', '')).join(' + ');
         document.getElementById('order-line')!.textContent =
           `${label} · ${Number(pending.m2).toLocaleString('pl-PL', { maximumFractionDigits: 2 })} m²`;
+        // pełne złotówki bez końcówki, grosze zawsze dwucyfrowo
+        const g = Math.round((Number(pending.gross) || 0) * 100) / 100;
+        const gd = Number.isInteger(g) ? 0 : 2;
         document.getElementById('order-gross')!.textContent =
-          pending.gross.toLocaleString('pl-PL', { maximumFractionDigits: 2 }) + ' zł';
+          g.toLocaleString('pl-PL', { minimumFractionDigits: gd, maximumFractionDigits: gd }) + ' zł';
       }
       document.getElementById('order-ref')!.textContent = `Nr referencyjny płatności: ${sessionId}`;
       document.getElementById('order-ref')!.hidden = false;

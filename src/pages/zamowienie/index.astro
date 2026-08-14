@@ -2,13 +2,20 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
-import { PRODUCENCI, ZESTAWY_PROBEK, PRICING } from '../../data/zamowienie';
+import { PRODUCENCI, ZESTAWY_PROBEK, PRICING, RODZINY, KATALOG_UPDATED } from '../../data/zamowienie';
 
 // Strona robocza kreatora zamówień — na razie bez linku w nawigacji i noindex.
-// Dane do skryptu klienckiego przekazujemy przez <script type="application/json">.
+// Katalog (499 dekorów) renderujemy po stronie klienta z tego JSON-a — wersja
+// serwerowa dawałaby setki kilobajtów HTML-a, z czego widać jednorazowo garść.
 const clientData = {
-  producenci: PRODUCENCI.map(({ id, name, sheetFormat, sheetAreaM2 }) => ({ id, name, sheetFormat, sheetAreaM2 })),
+  producenci: PRODUCENCI.map(({ id, name, logo, sheetFormat, sheetAreaM2, arkusze }) => ({
+    id, name, logo, sheetFormat, sheetAreaM2,
+    arkusze: arkusze.map((a) => ({
+      c: a.code, n: a.name, s: a.finish, pr: a.price, a: a.area, fm: a.format, f: a.family, i: a.img,
+    })),
+  })),
   pricing: PRICING,
+  rodziny: RODZINY,
   zestawy: ZESTAWY_PROBEK.map(({ id, name, price }) => ({ id, name, price })),
   apiBase: 'https://iedy003jrg.execute-api.eu-central-1.amazonaws.com',
 };
@@ -122,14 +129,20 @@ const clientData = {
             {PRODUCENCI.map((p) => (
               <button type="button" class="choice-card card-base rounded-2xl p-6 md:p-7 text-left" data-choose-producer={p.id}>
                 <div class="flex items-start justify-between gap-4">
-                  <div>
-                    <h3 class="font-heading text-xl font-semibold" style="color: var(--color-text);">{p.name}</h3>
-                    <p class="mt-1.5 text-sm font-body leading-relaxed" style="color: var(--color-text-secondary);">{p.tagline}</p>
+                  <div class="min-w-0">
+                    <img src={p.logo} alt={`Logo ${p.name}`} width="130" height="26" loading="lazy" decoding="async" class="producer-logo" />
+                    <p class="mt-3 text-sm font-body leading-relaxed" style="color: var(--color-text-secondary);">{p.tagline}</p>
                   </div>
                   <span class="label-tag whitespace-nowrap">{p.arkusze.length} dekorów</span>
                 </div>
-                <p class="mt-4 text-xs font-heading font-medium tracking-wider uppercase" style="color: var(--color-text-muted);">
-                  Arkusz {p.sheetFormat} mm · ok. {p.sheetAreaM2} m²
+                <p class="mt-4 text-sm font-heading font-semibold" style="color: var(--color-accent);">
+                  Płyta od {Math.round(Math.min(...p.arkusze.map((a) => a.price / a.area)))} zł/m²
+                  <span class="font-medium" style="color: var(--color-text-muted);">
+                    do {Math.round(Math.max(...p.arkusze.map((a) => a.price / a.area)))} zł/m² netto
+                  </span>
+                </p>
+                <p class="mt-1 text-xs font-heading font-medium tracking-wider uppercase" style="color: var(--color-text-muted);">
+                  Arkusz {p.sheetFormat} mm
                 </p>
               </button>
             ))}
@@ -139,11 +152,15 @@ const clientData = {
         <!-- ================================================== STEP: KATALOG -->
         <section data-step="catalog" class="wizard-step" hidden>
           <div class="text-center">
-            <span class="label-tag">Katalog: <span id="catalog-producer-name" class="normal-case"></span></span>
+            <span class="label-tag inline-flex items-center gap-2">
+              Katalog:
+              <img id="catalog-producer-logo" src="" alt="" class="catalog-logo" hidden />
+              <span id="catalog-producer-name" class="normal-case sr-only"></span>
+            </span>
             <h2 class="mt-5 font-display text-2xl sm:text-3xl tracking-tight" style="color: var(--color-text);">Wybierz dekor arkusza</h2>
             <p class="mt-3 text-sm md:text-base font-body max-w-2xl mx-auto" style="color: var(--color-text-secondary);">
-              Cena arkusza wliczana jest do wyceny. Katalog ma charakter poglądowy —
-              wykonamy fronty z każdej płyty dostępnej na rynku.
+              Cena arkusza wliczana jest do wyceny. Nie znalazłeś swojego dekoru?
+              Wykonamy fronty z każdej płyty dostępnej na rynku — napisz nam, czego szukasz.
             </p>
           </div>
 
@@ -154,41 +171,24 @@ const clientData = {
                 class="w-full pl-10 pr-4 py-2.5 rounded-xl text-sm font-body outline-none transition-colors"
                 style="background-color: var(--color-card-bg); border: 1.5px solid var(--color-border); color: var(--color-text);" />
             </div>
-            <div id="catalog-filters" class="flex gap-2 flex-wrap"></div>
+            <div class="flex gap-2 flex-wrap items-center">
+              <div id="catalog-filters" class="flex gap-2 flex-wrap"></div>
+              <select id="catalog-sort" aria-label="Sortowanie dekorów"
+                class="px-3 py-2 rounded-xl text-xs font-heading font-semibold outline-none cursor-pointer"
+                style="background-color: var(--color-card-bg); border: 1.5px solid var(--color-border); color: var(--color-text);">
+                <option value="price-asc">Cena: od najtańszych</option>
+                <option value="price-desc">Cena: od najdroższych</option>
+                <option value="name">Nazwa A–Z</option>
+              </select>
+            </div>
           </div>
 
-          {PRODUCENCI.map((p) => (
-            <div class="catalog-grid mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" data-producer-catalog={p.id} hidden>
-              {p.arkusze.map((a) => (
-                <button
-                  type="button"
-                  class="decor-tile choice-card card-base rounded-2xl overflow-hidden text-left"
-                  data-choose-sheet
-                  data-code={a.code}
-                  data-name={a.name}
-                  data-finish={a.finish}
-                  data-price={a.price}
-                  data-search={`${a.code} ${a.name} ${a.finish}`.toLowerCase()}
-                >
-                  <div class="h-28 md:h-32 relative" style={`background: ${a.swatch};`}>
-                    <span
-                      class="absolute bottom-2 left-2 px-2 py-0.5 rounded-md text-2xs font-heading font-semibold tracking-wide"
-                      style={a.dark
-                        ? 'background: rgba(255,255,255,.88); color:#1f2937;'
-                        : 'background: rgba(31,41,55,.78); color:#fff;'}
-                    >{a.code}</span>
-                  </div>
-                  <div class="p-4">
-                    <h3 class="font-heading text-sm font-semibold leading-snug" style="color: var(--color-text);">{a.name}</h3>
-                    <p class="mt-0.5 text-xs font-body capitalize" style="color: var(--color-text-muted);">{a.finish}</p>
-                    <p class="mt-2.5 text-sm font-heading font-semibold" style="color: var(--color-accent);">
-                      {a.price} zł <span class="text-2xs font-medium uppercase tracking-wider" style="color: var(--color-text-muted);">netto / arkusz</span>
-                    </p>
-                  </div>
-                </button>
-              ))}
-            </div>
-          ))}
+          <div id="catalog-grid" class="mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+
+          <div class="mt-8 text-center">
+            <button type="button" id="catalog-more" class="btn-secondary" hidden>Pokaż kolejne dekory</button>
+            <p id="catalog-count" class="mt-4 text-xs font-body" style="color: var(--color-text-muted);"></p>
+          </div>
 
           <p id="catalog-empty" class="mt-10 text-center text-sm font-body" style="color: var(--color-text-muted);" hidden>
             Brak dekorów pasujących do wyszukiwania.
@@ -511,6 +511,32 @@ const clientData = {
     .fmt-input::-webkit-outer-spin-button, .fmt-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
     .fmt-input:focus { border-color: var(--color-accent); }
 
+    /* Logo producenta: sprowadzone do jednej barwy, żeby cztery różne
+       kolorystyki nie kłóciły się ze sobą i były czytelne w obu motywach. */
+    /* Wspólna szerokość, nie wysokość — logotypy mają bardzo różne proporcje
+       (Swiss Krono jest 7× szersze niż wysokie, Egger 3×) i dopiero wyrównanie
+       do jednej szerokości daje im podobną wagę optyczną. */
+    .producer-logo {
+      width: 130px; height: auto; max-height: 34px;
+      object-fit: contain; object-position: left center;
+      filter: brightness(0);
+      opacity: 0.82;
+      transition: opacity 0.2s ease;
+    }
+    .choice-card:hover .producer-logo, .choice-card.is-selected .producer-logo { opacity: 1; }
+    .dark .producer-logo { filter: brightness(0) invert(1); opacity: 0.9; }
+
+    .catalog-logo {
+      width: 74px; height: auto; max-height: 18px; object-fit: contain;
+      filter: brightness(0); opacity: 0.75; vertical-align: middle;
+    }
+    /* nazwa producenta zostaje w DOM dla czytników ekranu — wizualnie wystarcza logo */
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+    }
+    .dark .catalog-logo { filter: brightness(0) invert(1); opacity: 0.85; }
+
     .position-item {
       display: flex; align-items: center; gap: 0.65rem;
       padding: 0.55rem 0.7rem; border-radius: 0.75rem;
@@ -602,8 +628,8 @@ const clientData = {
     };
 
     type Formatka = { w: number; h: number; qty: number };
-    type Producer = { id: string; name: string; sheetFormat: string; sheetAreaM2: number };
-    type Sheet = { code: string; name: string; finish: string; price: number; swatch: string };
+    type Producer = { id: string; name: string; logo: string; sheetFormat: string; sheetAreaM2: number };
+    type Sheet = { code: string; name: string; finish: string; price: number; img: string; area: number; format?: string };
     // Pozycja zamówienia = jeden dekor + jego formatki. Zamówienie może mieć
     // wiele pozycji (różne dekory / producenci) — marża 150 zł/m², minimum 4 m²
     // i słój przechodzący liczą się od SUMY całego zamówienia.
@@ -702,9 +728,12 @@ const clientData = {
       location.reload();
     });
 
-    // bez sztucznych ",00" — grosze tylko gdy naprawdę występują
-    const fmt = (n: number) =>
-      n.toLocaleString('pl-PL', { minimumFractionDigits: 0, maximumFractionDigits: 2 }) + ' zł';
+    // Pełne złotówki bez końcówki (824 zł), grosze zawsze dwucyfrowo (824,40 zł).
+    const fmt = (n: number) => {
+      const v = Math.round((Number(n) || 0) * 100) / 100;
+      const dec = Number.isInteger(v) ? 0 : 2;
+      return v.toLocaleString('pl-PL', { minimumFractionDigits: dec, maximumFractionDigits: dec }) + ' zł';
+    };
 
     const flow = () => FLOWS[state.type ?? 'custom'];
     const stepIndex = (s: StepId) => flow().indexOf(s);
@@ -717,7 +746,8 @@ const clientData = {
       if (!list.length) return null;
       const m2 = totalM2();
       const posLines = list.map((p) => {
-        const sheets = Math.max(1, Math.ceil(p.m2 / p.producer!.sheetAreaM2));
+        // Forner ma mniejsze arkusze niż reszta — powierzchnia idzie z dekoru.
+        const sheets = Math.max(1, Math.ceil(p.m2 / (p.sheet!.area || p.producer!.sheetAreaM2)));
         return { name: p.sheet!.name, code: p.sheet!.code, producerName: p.producer!.name,
           ramka: p.ramka, m2: p.m2, sheets, sheetPrice: p.sheet!.price, sheetsCost: sheets * p.sheet!.price };
       });
@@ -894,69 +924,122 @@ const clientData = {
     });
 
     // ----------------------------------------------------------- krok: katalog
-    let activeFinish = 'wszystkie';
+    // Katalog liczy ~500 dekorów, więc kafelki budujemy z JSON-a partiami
+    // (PAGE na raz) — inaczej pierwszy render dławi się setkami węzłów DOM.
+    type Arkusz = { c: string; n: string; s: string; pr: number; a: number; fm: string; f: string; i: string };
+    const PAGE = 48;
+    let activeFamily = 'wszystkie';
+    let shown = PAGE;
+    let searchTimer: number | undefined;
+
+    const m2Price = (a: Arkusz) => a.pr / (a.a || pos().producer?.sheetAreaM2 || 5.8);
+
+    function catalogSource(): Arkusz[] {
+      return (pos().producer as any)?.arkusze || [];
+    }
+
+    function matching(): Arkusz[] {
+      const q = ($('#catalog-search') as HTMLInputElement).value.trim().toLowerCase();
+      const list = catalogSource().filter((a) =>
+        (activeFamily === 'wszystkie' || a.f === activeFamily)
+        && (!q || `${a.c} ${a.n} ${a.s}`.toLowerCase().includes(q)));
+      const sort = ($('#catalog-sort') as HTMLSelectElement).value;
+      return list.slice().sort((a, b) =>
+        sort === 'price-desc' ? b.pr - a.pr
+        : sort === 'name' ? a.n.localeCompare(b.n, 'pl')
+        : a.pr - b.pr);
+    }
+
+    function tileHtml(a: Arkusz, selected: boolean) {
+      return `<button type="button" class="decor-tile choice-card card-base rounded-2xl overflow-hidden text-left${selected ? ' is-selected' : ''}"
+          data-code="${a.c}" data-name="${a.n.replace(/"/g, '&quot;')}" data-finish="${a.s}" data-price="${a.pr}" data-area="${a.a}" data-format="${a.fm}" data-img="${a.i}">
+        <div class="relative">
+          <img src="${a.i}" alt="Dekor ${a.n}" width="360" height="270" loading="lazy" decoding="async"
+               class="w-full h-28 md:h-32 object-cover" style="background-color: var(--color-bg-tertiary);">
+          <span class="absolute bottom-2 left-2 px-2 py-0.5 rounded-md text-2xs font-heading font-semibold tracking-wide"
+                style="background: rgba(31,41,55,.78); color:#fff;">${a.c} ${a.s}</span>
+        </div>
+        <div class="p-4">
+          <h3 class="font-heading text-sm font-semibold leading-snug" style="color: var(--color-text);">${a.n}</h3>
+          <p class="mt-2 text-sm font-heading font-semibold" style="color: var(--color-accent);">
+            ${fmt(a.pr)} <span class="text-2xs font-medium uppercase tracking-wider" style="color: var(--color-text-muted);">netto / arkusz</span>
+          </p>
+          <p class="text-2xs font-body" style="color: var(--color-text-muted);">${fmt(Math.round(m2Price(a) * 100) / 100)} / m²</p>
+        </div>
+      </button>`;
+    }
+
+    function renderCatalog() {
+      const list = matching();
+      const slice = list.slice(0, shown);
+      const sel = pos().sheet?.code;
+      $('#catalog-grid').innerHTML = slice.map((a) => tileHtml(a, a.c === sel)).join('');
+      $('#catalog-empty').hidden = list.length > 0;
+      ($('#catalog-more') as HTMLButtonElement).hidden = list.length <= shown;
+      $('#catalog-count').textContent = list.length
+        ? `Pokazano ${slice.length} z ${list.length} dekorów`
+        : '';
+    }
 
     function prepareCatalog() {
       if (!pos().producer) return;
       $('#catalog-producer-name').textContent = pos().producer!.name;
-      $$('.catalog-grid').forEach((g) => { g.hidden = g.dataset.producerCatalog !== pos().producer!.id; });
+      const logo = $('#catalog-producer-logo') as HTMLImageElement;
+      logo.src = pos().producer!.logo;
+      logo.alt = `Logo ${pos().producer!.name}`;
+      logo.hidden = !pos().producer!.logo;
 
-      // chipy wykończeń dla aktywnego katalogu
-      const grid = $(`[data-producer-catalog="${pos().producer!.id}"]`);
-      const finishes = ['wszystkie', ...new Set($$('.decor-tile').filter((t) => grid.contains(t)).map((t) => t.dataset.finish!))];
+      // chipy rodzin dekorów dostępnych u tego producenta
+      const families = ['wszystkie', ...Array.from(new Set(catalogSource().map((a) => a.f)))];
       const filters = $('#catalog-filters');
       filters.innerHTML = '';
-      activeFinish = 'wszystkie';
-      finishes.forEach((f) => {
+      activeFamily = 'wszystkie';
+      families.forEach((f) => {
         const chip = document.createElement('button');
         chip.type = 'button';
-        chip.className = 'filter-chip' + (f === activeFinish ? ' is-selected' : '');
-        chip.textContent = f;
+        chip.className = 'filter-chip' + (f === activeFamily ? ' is-selected' : '');
+        chip.textContent = f === 'wszystkie' ? 'wszystkie' : (DATA.rodziny[f] || f);
         chip.addEventListener('click', () => {
-          activeFinish = f;
+          activeFamily = f;
+          shown = PAGE;
           $$('#catalog-filters .filter-chip').forEach((c) => c.classList.toggle('is-selected', c === chip));
-          filterCatalog();
+          renderCatalog();
         });
         filters.appendChild(chip);
       });
 
       ($('#catalog-search') as HTMLInputElement).value = '';
-      filterCatalog();
-
-      // zaznaczenie aktualnego wyboru
-      $$('.decor-tile').forEach((t) =>
-        t.classList.toggle('is-selected', !!pos().sheet && grid.contains(t) && t.dataset.code === pos().sheet!.code));
+      shown = PAGE;
+      renderCatalog();
     }
 
-    function filterCatalog() {
-      if (!pos().producer) return;
-      const grid = $(`[data-producer-catalog="${pos().producer!.id}"]`);
-      const q = ($('#catalog-search') as HTMLInputElement).value.trim().toLowerCase();
-      let visible = 0;
-      $$('.decor-tile').forEach((t) => {
-        if (!grid.contains(t)) return;
-        const show = (activeFinish === 'wszystkie' || t.dataset.finish === activeFinish)
-          && (!q || t.dataset.search!.includes(q));
-        t.hidden = !show;
-        if (show) visible++;
-      });
-      $('#catalog-empty').hidden = visible > 0;
-    }
+    $('#catalog-search').addEventListener('input', () => {
+      clearTimeout(searchTimer);
+      searchTimer = window.setTimeout(() => { shown = PAGE; renderCatalog(); }, 180);
+    });
 
-    $('#catalog-search').addEventListener('input', filterCatalog);
+    $('#catalog-more').addEventListener('click', () => {
+      shown += PAGE;
+      renderCatalog();
+    });
 
-    $$('[data-choose-sheet]').forEach((tile) => {
-      tile.addEventListener('click', () => {
-        pos().sheet = {
-          code: tile.dataset.code!,
-          name: tile.dataset.name!,
-          finish: tile.dataset.finish!,
-          price: Number(tile.dataset.price),
-          swatch: (tile.querySelector('div') as HTMLElement).style.background,
-        };
-        $$('.decor-tile').forEach((t) => t.classList.toggle('is-selected', t === tile));
-        setTimeout(next, 180);
-      });
+    $('#catalog-sort').addEventListener('change', () => { shown = PAGE; renderCatalog(); });
+
+    // delegacja — kafelki powstają dynamicznie
+    $('#catalog-grid').addEventListener('click', (e) => {
+      const tile = (e.target as HTMLElement).closest('.decor-tile') as HTMLElement | null;
+      if (!tile) return;
+      pos().sheet = {
+        code: tile.dataset.code!,
+        name: tile.dataset.name!,
+        finish: tile.dataset.finish!,
+        price: Number(tile.dataset.price),
+        area: Number(tile.dataset.area) || pos().producer!.sheetAreaM2,
+        format: tile.dataset.format || pos().producer!.sheetFormat,
+        img: tile.dataset.img!,
+      };
+      $$('.decor-tile').forEach((t) => t.classList.toggle('is-selected', t === tile));
+      setTimeout(next, 180);
     });
 
     // -------------------------------------------------- krok: formatki/wymiary
@@ -976,7 +1059,9 @@ const clientData = {
           ? `${p.sheet.name} · ${p.sheet.code} <span style="color: var(--color-text-muted);">(${p.producer!.name})</span>`
           : '<span style="color: var(--color-text-muted);">— dekor nie wybrany —</span>';
         item.innerHTML = `
-          <span class="pos-swatch" style="background: ${p.sheet?.swatch || 'var(--color-bg-tertiary)'};"></span>
+          ${p.sheet?.img
+            ? `<img class="pos-swatch object-cover" src="${p.sheet.img}" alt="" width="60" height="60" loading="lazy">`
+            : '<span class="pos-swatch" style="background: var(--color-bg-tertiary);"></span>'}
           <span class="flex-1 min-w-0 text-sm font-heading font-semibold truncate" style="color: var(--color-text);">${label}</span>
           <span class="text-xs font-heading font-semibold whitespace-nowrap" style="color: var(--color-text-secondary);">${p.m2 > 0 ? fmtM2(p.m2) + ' m²' : '—'}</span>
           <button type="button" class="pos-edit text-xs font-heading font-semibold" style="color: var(--color-accent);">Zmień dekor</button>
@@ -1181,7 +1266,7 @@ const clientData = {
           rows.push(summaryRow('Dekor', `${posItem.sheet!.name} · ${posItem.sheet!.code} (${posItem.producer!.name}, ${posItem.sheet!.finish})`));
           rows.push(summaryRow('Grubość ramki', posItem.ramka));
           rows.push(summaryRow('Powierzchnia', `${fmtM2(posItem.m2)} m²`));
-          rows.push(summaryRow(`Arkusze (${posItem.producer!.sheetFormat} mm)`, `${line.sheets} × ${fmt(line.sheetPrice)} = ${fmt(line.sheetsCost)}`));
+          rows.push(summaryRow(`Arkusze (${posItem.sheet!.format || posItem.producer!.sheetFormat} mm)`, `${line.sheets} × ${fmt(line.sheetPrice)} = ${fmt(line.sheetsCost)}`));
           rows.push(summaryRow('Formatki', fmts.length
             ? fmts.map((r) => `${r.w} × ${r.h} mm — ${r.qty} szt.`).join('<br>')
             : 'do uzupełnienia po zamówieniu'));
