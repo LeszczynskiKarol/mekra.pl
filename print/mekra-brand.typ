@@ -48,7 +48,7 @@
   text(font: f-heading, weight: 500, size: 7pt, fill: c-accent, tracking: 1.5pt, upper(txt)),
 )
 
-// Mała pigułka z rozmiarem ramki (np. "7 mm")
+// Mała pigułka z rozmiarem ramki (np. "12 mm")
 #let chip(txt) = box(
   fill: c-bg-3, stroke: 0.5pt + c-border, radius: 100pt,
   inset: (x: 8pt, y: 4.5pt),

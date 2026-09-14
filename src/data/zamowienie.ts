@@ -58,7 +58,7 @@ export const PRICING = {
     { id: 'mirrorLarge', name: 'Front z lustrem — duży',  text: 'Wpuszczone lustro, rozmiar frontów szaf.', price: 400, unit: 'zł netto / front' },
     { id: 'angle45',     name: 'Zacinanie na 45°',        text: 'Doliczane do każdego frontu zacinanego pod kątem.', price: 60, unit: 'zł netto / front' },
   ],
-  ramki: ['7 mm', '18 mm', '36 mm', '60 mm'],
+  ramki: ['12 mm', '18 mm', '36 mm', '60 mm'],
 };
 
 // --- Zestawy próbek ---------------------------------------------------------
@@ -68,7 +68,7 @@ export const ZESTAWY_PROBEK: ZestawProbek[] = [
   {
     id: 'probki-standard',
     name: 'Próbnik standardowy',
-    text: 'Gotowy zestaw próbek frontów ramiakowych przygotowany przez Mekra — przekrój ramek 7/18/36/60 mm i popularnych dekorów.',
+    text: 'Gotowy zestaw próbek frontów ramiakowych przygotowany przez Mekra — przekrój ramek 12/18/36/60 mm i popularnych dekorów.',
     price: null,
   },
   {

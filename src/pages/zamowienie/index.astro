@@ -282,6 +282,10 @@ const clientData = {
                     <button type="button" class={`ramka-chip${i === 1 ? ' is-selected' : ''}`} data-ramka={r}>{r}</button>
                   ))}
                 </div>
+                <p class="mt-3 text-2xs font-body" style="color: var(--color-text-muted);">
+                  Potrzebujesz innej szerokości? Ramkę o dowolnej szerokości (od 12 mm) wykonamy na indywidualne zamówienie —
+                  napisz na <a href="mailto:kontakt@mekra.pl" class="underline">kontakt@mekra.pl</a> lub zadzwoń: <a href="tel:+48792456094" class="underline">792 456 094</a>.
+                </p>
               </div>
 
               <!-- Dodatki -->
@@ -688,6 +692,7 @@ const clientData = {
         if (!Array.isArray(p.formatki) || !p.formatki.length) p.formatki = [{ w: 0, h: 0, qty: 1 }];
         if (p.m2Mode !== 'manual') p.m2Mode = 'formatki';
         if (!p.ramka) p.ramka = '18 mm';
+        if (p.ramka === '7 mm') p.ramka = '12 mm'; // stan zapisany przed zmianą najwęższej ramki
       });
       if (typeof state.active !== 'number' || !state.positions[state.active]) state.active = 0;
 

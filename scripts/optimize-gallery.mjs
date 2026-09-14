@@ -6,7 +6,7 @@
  * variants in public/img/realizacje/<category>/<slug>.{jpg,webp} plus
  * 800w thumbnails, and writes a manifest at src/data/realizacje.json.
  *
- * Categories mirror the offer in Products.astro (frame sizes 7/18/36/60 mm
+ * Categories mirror the offer in Products.astro (frame sizes 12/18/36/60 mm
  * plus "zabudowy specjalne" for one-offs).
  *
  * Run:  node scripts/optimize-gallery.mjs
@@ -25,9 +25,9 @@ const MANIFEST = path.join(ROOT, "src", "data", "realizacje.json");
 
 const FOLDER_MAP = {
   "FOTO 7 MM BRAK ZDJEC": {
-    category: "ramka-7mm",
-    project: "Front z ramką 7 mm",
-    projectSlug: "ramka-7mm",
+    category: "ramka-12mm",
+    project: "Front z ramką 12 mm",
+    projectSlug: "ramka-12mm",
   },
   "RAMKA 18 RUBINOVA": {
     category: "ramka-18mm",
@@ -62,12 +62,12 @@ const FOLDER_MAP = {
 };
 
 /**
- * Order matters: filter / bento display order. Mirrors the offer (7 → 18 → 36 → 60),
+ * Order matters: filter / bento display order. Mirrors the offer (12 → 18 → 36 → 60),
  * with "zabudowy specjalne" pinned at the end.
  */
 const CATEGORY_META = {
-  "ramka-7mm": {
-    title: "Ramka 7 mm",
+  "ramka-12mm": {
+    title: "Ramka 12 mm",
     subtitle: "Nowoczesna linia",
     description:
       "Delikatne podkreślenie formy. Minimalistyczna ramka — duch skandynawski i loftowy.",

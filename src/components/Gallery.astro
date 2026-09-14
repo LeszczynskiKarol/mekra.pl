@@ -18,9 +18,9 @@ const { categories, counts } = manifest;
  *
  *   Desktop (12 cols):                   Mobile (1 col):
  *   ┌──────────────┬──────┐               ┌──────────────┐
- *   │              │ 7mm  │               │   36 mm      │
+ *   │              │ 12mm │               │   36 mm      │
  *   │   36 mm      ├──────┤               ├──────────────┤
- *   │   (hero)     │ 18mm │               │   7 mm       │
+ *   │   (hero)     │ 18mm │               │   12 mm      │
  *   ├───────┬──────┴──────┤               ├──────────────┤
  *   │ 60mm  │  zabudowy   │               │   18 mm      │
  *   └───────┴─────────────┘               ├──────────────┤
@@ -29,12 +29,12 @@ const { categories, counts } = manifest;
  *                                         │   zabudowy   │
  *                                         └──────────────┘
  */
-const layoutOrder = ['ramka-36mm', 'ramka-7mm', 'ramka-18mm', 'ramka-60mm', 'zabudowy'];
+const layoutOrder = ['ramka-36mm', 'ramka-12mm', 'ramka-18mm', 'ramka-60mm', 'zabudowy'];
 
 // span classes per category slug
 const SPAN = {
   'ramka-36mm':  'lg:col-span-8 lg:row-span-2',
-  'ramka-7mm':   'lg:col-span-4 lg:row-span-1',
+  'ramka-12mm':  'lg:col-span-4 lg:row-span-1',
   'ramka-18mm':  'lg:col-span-4 lg:row-span-1',
   'ramka-60mm':  'lg:col-span-5 lg:row-span-1',
   'zabudowy':    'lg:col-span-7 lg:row-span-1',
@@ -42,7 +42,7 @@ const SPAN = {
 
 // frame size big label (extracted from category)
 const SIZE_LABEL = {
-  'ramka-7mm':  { size: '7',  unit: 'mm' },
+  'ramka-12mm': { size: '12', unit: 'mm' },
   'ramka-18mm': { size: '18', unit: 'mm' },
   'ramka-36mm': { size: '36', unit: 'mm' },
   'ramka-60mm': { size: '60', unit: 'mm' },

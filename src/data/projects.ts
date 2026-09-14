@@ -23,7 +23,7 @@ export const projects: Project[] = [
       'Pełna kuchnia z frontami ramiakowymi 18 mm w dekorze Rubinova. 17 zdjęć z gotowej realizacji — meble pod sufit, wyspa, zabudowa kolumnowa.',
     body: [
       'Projekt Rubinova to pełna zabudowa kuchni z naszymi frontami ramiakowymi w wariancie 18 mm. Klient wybrał uniwersalną szerokość ramki, która równie dobrze pasuje do nowoczesnych i klasycznych aranżacji — bez ciężaru pełnej klasyki, ale z wyraźnym charakterem.',
-      'Wszystkie fronty wykonaliśmy z płyty laminowanej w dekorze Rubinova. Standardowa grubość 21 mm, ramka 3 mm, klej PUR. Front jest dwustronnie pokryty dekorem — od wewnątrz szafki wygląda tak samo jak od zewnątrz.',
+      'Wszystkie fronty wykonaliśmy z płyty laminowanej w dekorze Rubinova. Standardowa grubość 22 mm (płyta 18 mm + ramka 4 mm), klej PUR. Front jest dwustronnie pokryty dekorem — od wewnątrz szafki wygląda tak samo jak od zewnątrz.',
       'Zabudowa obejmuje kolumny pod zabudowę AGD, wyspę z frontami od dwóch stron, szafki górne pod sufit oraz panele maskujące. Wszystkie korpusy współpracują z zawiasami Blum.',
     ],
     keywords: ['kuchnia rubinova', 'fronty ramiakowe 18mm', 'kuchnia z wyspą', 'fronty laminowane Mekra'],
@@ -68,7 +68,7 @@ export const projects: Project[] = [
     body: [
       'Ramka 60 mm to nasza najszersza forma — pełna klasyka, masywny rytm. Stosowana głównie w szafach garderobianych, witrynkach i frontach w klasycznych jadalniach.',
       'Standardowa płycina (zamiast lustra) daje pełne pole dekoru — laminowanego, matowego lub akrylowego. Wszystkie warianty dekoru, które mamy w ofercie płyt, są dostępne również dla ramki 60 mm.',
-      'Klient otrzymuje front 21 mm na zawiasy Blum, dwustronnie pokryty dekorem, z krawędziami klejonymi PUR.',
+      'Klient otrzymuje front 22 mm na zawiasy Blum, dwustronnie pokryty dekorem, z krawędziami klejonymi PUR.',
     ],
     keywords: ['szafa klasyczna', 'fronty ramiakowe 60mm', 'szafa ramka 60mm', 'klasyczne fronty meblowe'],
   },
@@ -81,24 +81,24 @@ export const projects: Project[] = [
       'Witrynki kuchenne i jadalniane z frontami ramiakowymi 60 mm — szkło lub szkło ozdobne wpuszczone w środek ramki, alternatywa dla MDF lakierowanego.',
     body: [
       'W tym wariancie zamiast standardowej płyciny w środek ramki 60 mm wpuszczamy szkło — bezbarwne, ornamentowe lub matowe. Najczęściej spotykane rozwiązanie w witrynkach kuchennych, kredensach i komodach.',
-      'Konstrukcja jest identyczna jak w wariancie z lustrem — front 21 mm, ramka dwustronnie pokryta dekorem, szkło mocowane od strony wewnętrznej. Możliwe wykonanie z dowolnym dekorem ramki z naszej oferty.',
+      'Konstrukcja jest identyczna jak w wariancie z lustrem — front 22 mm, ramka dwustronnie pokryta dekorem, szkło mocowane od strony wewnętrznej. Możliwe wykonanie z dowolnym dekorem ramki z naszej oferty.',
       'Witrynka ze szkłem to klasyk — dobrze pracuje w aranżacjach prowansalskich, farmhouse i klasycznych. Alternatywa dla witryn z MDF lakierowanego o większej trwałości i odporności na wilgoć.',
     ],
     keywords: ['witrynka kuchenna', 'witrynka ze szkłem', 'fronty witrynki', 'witrynka ramiakowa', 'witrynka klasyczna'],
   },
   {
-    slug: 'ramka-7mm',
-    category: 'ramka-7mm',
-    title: 'Kuchnie minimalistyczne — fronty ramiakowe 7 mm',
-    subtitle: 'Galeria realizacji z najwęższą ramką 7 mm',
+    slug: 'ramka-12mm',
+    category: 'ramka-12mm',
+    title: 'Kuchnie minimalistyczne — fronty ramiakowe 12 mm',
+    subtitle: 'Galeria realizacji z najwęższą ramką 12 mm',
     intro:
-      '19 zdjęć z realizacji w wariancie ramki 7 mm — najwęższej w naszej ofercie. Minimalistyczna linia, idealna do kuchni nowoczesnych i skandynawskich.',
+      '19 zdjęć z realizacji w wariancie ramki 12 mm — najwęższej w naszej ofercie. Minimalistyczna linia, idealna do kuchni nowoczesnych i skandynawskich.',
     body: [
-      'Ramka 7 mm to nasza najbardziej minimalistyczna forma — ledwie zauważalna linia, która porządkuje front bez przesłaniania dekoru płyty. Wybierana najczęściej do kuchni w stylu skandynawskim, loftowym i nowoczesnym.',
-      'W tej galerii znajdziesz realizacje w różnych dekorach — od jednolitych unikolorów po struktury drewna i akryle. Każda z nich pokazuje, jak 7 mm ramki potrafi nadać charakter bez efektu "klasycznej" stolarki.',
-      'Konstrukcja jest taka sama jak we wszystkich naszych frontach ramiakowych: 21 mm grubości, dwustronny dekor, klej PUR, kompatybilność z systemami Blum, Häfele i Hettich.',
+      'Ramka 12 mm to nasza najbardziej minimalistyczna forma — wąska linia, która porządkuje front bez przesłaniania dekoru płyty. Wybierana najczęściej do kuchni w stylu skandynawskim, loftowym i nowoczesnym.',
+      'W tej galerii znajdziesz realizacje w różnych dekorach — od jednolitych unikolorów po struktury drewna i akryle. Każda z nich pokazuje, jak 12 mm ramki potrafi nadać charakter bez efektu "klasycznej" stolarki.',
+      'Konstrukcja jest taka sama jak we wszystkich naszych frontach ramiakowych: 22 mm grubości (płyta 18 mm + ramka 4 mm), dwustronny dekor, klej PUR, kompatybilność z systemami Blum, Häfele i Hettich.',
     ],
-    keywords: ['fronty ramiakowe 7mm', 'kuchnia minimalistyczna', 'kuchnia skandynawska', 'wąska ramka kuchenna', 'fronty 7mm realizacje'],
+    keywords: ['fronty ramiakowe 12mm', 'kuchnia minimalistyczna', 'kuchnia skandynawska', 'wąska ramka kuchenna', 'fronty 12mm realizacje'],
   },
   {
     slug: 'zabudowa-wino',

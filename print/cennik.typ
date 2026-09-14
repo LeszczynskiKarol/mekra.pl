@@ -34,7 +34,7 @@
       #v(9pt)
       #text(font: f-display, size: 20pt, fill: c-text)[Fronty ramiakowe]
       #v(8pt)
-      #stack(dir: ltr, spacing: 5pt, chip[7 mm], chip[18 mm], chip[36 mm], chip[60 mm])
+      #stack(dir: ltr, spacing: 5pt, chip[12 mm], chip[18 mm], chip[36 mm], chip[60 mm])
       #v(9pt)
       #text(font: f-body, size: 8.2pt, fill: c-text-2)[
         Cena zależna od wybranego dekoru — każde zamówienie \

@@ -1,6 +1,6 @@
 {
   "title": "Strona Główna",
-  "description": "Mekra — producent frontów ramiakowych z płyty laminowanej. Ramki 7, 18, 36, 60 mm. Fronty kuchenne na wymiar, fronty do IKEA. Toruń i okolice.",
+  "description": "Mekra — producent frontów ramiakowych z płyty laminowanej. Ramki 12, 18, 36, 60 mm lub dowolna szerokość na zamówienie. Fronty kuchenne na wymiar, fronty do IKEA. Toruń i okolice.",
   "sections": {
     "hero": {
       "eyebrow": "Producent frontów ramiakowych",
@@ -16,8 +16,8 @@
     },
     "heroStatystyki": {
       "items": [
-        { "value": "4", "label": "Rodzaje ramek", "text": "7 / 18 / 36 / 60 mm" },
-        { "value": "21<span class=\"text-xl\"> mm</span>", "label": "Grubość frontu", "text": "z ramką 3&nbsp;mm w&nbsp;standardzie" },
+        { "value": "4", "label": "Rodzaje ramek", "text": "12 / 18 / 36 / 60 mm" },
+        { "value": "22<span class=\"text-xl\"> mm</span>", "label": "Grubość frontu", "text": "płyta 18&nbsp;mm + ramka 4&nbsp;mm" },
         { "value": "100%", "label": "Przetestowane", "text": "Wilgoć, odkształcenia, zachlapania" },
         { "label": "Eco-friendly", "text": "Płyty częściowo z recyklingu" }
       ]
@@ -38,18 +38,18 @@
     "oferta": {
       "eyebrow": "Oferta",
       "heading": "Cztery szerokości ramek,<br /> <span class=\"text-gradient\">nieograniczone możliwości</span>",
-      "text": "Każda ramka to inny charakter wnętrza. Od minimalizmu po pełną klasykę — dobierz szerokość do swojego stylu. Wszystkie fronty mają grubość 21&nbsp;mm i&nbsp;pracują na standardowych zawiasach Blum, Häfele i&nbsp;Hettich.",
+      "text": "Każda ramka to inny charakter wnętrza. Od minimalizmu po pełną klasykę — dobierz szerokość do swojego stylu, a&nbsp;jeśli żadna nie pasuje — na indywidualne zamówienie wykonamy ramkę o&nbsp;dowolnej szerokości (od 12&nbsp;mm). Wszystkie fronty mają grubość 22&nbsp;mm (płyta 18&nbsp;mm + ramka 4&nbsp;mm) i&nbsp;pracują na standardowych zawiasach Blum, Häfele i&nbsp;Hettich.",
       "ctaLabel": "Szczegóły",
       "items": [
         {
-          "size": "7",
+          "size": "12",
           "unit": "mm",
-          "slug": "ramka-7mm",
+          "slug": "ramka-12mm",
           "name": "Nowoczesna linia",
           "text": "Delikatne podkreślenie formy. Subtelna ramka, która nadaje frontom nowoczesny, minimalistyczny charakter. Idealna do kuchni w duchu skandynawskim i loftowym.",
           "label": "Nowoczesny design",
           "image": "img/ramka77mm.webp",
-          "imageAlt": "Front ramiakowy z ramką 7mm - nowoczesny design"
+          "imageAlt": "Front ramiakowy z ramką 12mm - nowoczesny design"
         },
         {
           "size": "18",
@@ -140,7 +140,7 @@
     "realizacje": {
       "eyebrow": "Realizacje",
       "heading": "Tak wyglądają<br /> <span class=\"text-gradient\">nasze ramki w Twoich wnętrzach</span>",
-      "text": "realizacji posegregowanych według szerokości ramki — od minimalistycznych 7&nbsp;mm po pełną klasykę 60&nbsp;mm. Kliknij kategorię, żeby zobaczyć wszystko.",
+      "text": "realizacji posegregowanych według szerokości ramki — od minimalistycznych 12&nbsp;mm po pełną klasykę 60&nbsp;mm. Kliknij kategorię, żeby zobaczyć wszystko.",
       "ctaLabel": "Zobacz wszystkie realizacje"
     },
     "ikea": {
@@ -153,7 +153,7 @@
         "Nasze fronty pasują do korpusów IKEA — wystarczy podać wymiary lub zamówić wymiarowanie u&nbsp;nas. Otrzymujesz produkt premium w&nbsp;cenie znacznie niższej niż kompletna wymiana zabudowy."
       ],
       "ctaLabel": "Zamów fronty do IKEA",
-      "text": "<strong class=\"font-semibold\" style=\"color: var(--color-text);\">Ważne:</strong> Nasze fronty mają grubość 21&nbsp;mm (standardowe IKEA to 18-19&nbsp;mm). Przy wymianie samych frontów może wystąpić niewielka różnica w&nbsp;płaszczyźnie — informujemy o&nbsp;tym na etapie wyceny."
+      "text": "<strong class=\"font-semibold\" style=\"color: var(--color-text);\">Ważne:</strong> Nasze fronty mają grubość 22&nbsp;mm (standardowe IKEA to 18-19&nbsp;mm). Przy wymianie samych frontów może wystąpić niewielka różnica w&nbsp;płaszczyźnie — informujemy o&nbsp;tym na etapie wyceny."
     },
     "wspolpraca": {
       "eyebrow": "Współpraca",
@@ -182,7 +182,7 @@
       "body": [
         "Oferujemy kompleksową obsługę — od pomiaru, przez produkcję, po dostawę i&nbsp;montaż. Wymiarowanie dostępne jest wyłącznie na terenie Torunia i&nbsp;okolic. Klienci spoza tego obszaru mogą zamówić fronty podając własne wymiary.",
         "W&nbsp;Toruniu i&nbsp;okolicach oferujemy również wymianę frontów wraz z&nbsp;zawiasami jako usługę — możemy przyjechać i&nbsp;zamontować fronty na miejscu. Wszystkie fronty można zamówić z&nbsp;otworowaniem na zawiasy z&nbsp;wymiarem klienta.",
-        "Standardowa grubość naszych frontów to 21&nbsp;mm z&nbsp;ramką 3&nbsp;mm. Przy wymianie samych frontów może wystąpić niewielka różnica w&nbsp;płaszczyźnie względem standardowych frontów 18-19&nbsp;mm — informujemy o&nbsp;tym na etapie wyceny."
+        "Standardowa grubość naszych frontów to 22&nbsp;mm — płyta 18&nbsp;mm i&nbsp;ramka 4&nbsp;mm. Przy wymianie samych frontów może wystąpić niewielka różnica w&nbsp;płaszczyźnie względem standardowych frontów 18-19&nbsp;mm — informujemy o&nbsp;tym na etapie wyceny."
       ],
       "items": [
         { "id": "01", "title": "Kontakt i wycena", "text": "Podaj wymiary lub umów się na pomiar (Toruń i okolice)" },
