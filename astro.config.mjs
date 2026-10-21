@@ -10,6 +10,8 @@ export default defineConfig({
       lastmod: new Date(),
       changefreq: "weekly",
       priority: 0.7,
+      // Kreator zamówień jest za hasłem (Basic Auth w funkcji CloudFront).
+      filter: (page) => !page.includes("/zamowienie/"),
       serialize(item) {
         if (item.url === "https://www.mekra.pl/") item.priority = 1.0;
         return item;

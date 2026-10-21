@@ -1,6 +1,6 @@
 {
-  "title": "Cennik frontów ramiakowych — fronty od 350 zł/m²",
-  "description": "Cennik frontów ramiakowych Mekra: fronty 12/18/36/60 mm od 350 zł/m² netto, fronty ze szkłem i lustrem, zacinanie na 45°. Klej PUR w standardzie, dostawa w całej Polsce.",
+  "title": "Cennik frontów ramiakowych — fronty od 500 zł/m²",
+  "description": "Cennik frontów ramiakowych Mekra: fronty 12/18/36/60 mm od 500 zł/m² netto, fronty ze szkłem i lustrem, zacinanie na 45°. Klej PUR w standardzie, dostawa w całej Polsce.",
   "sections": {
     "hero": {
       "image": "/img/realizacje/ramka-18mm/ramka-18mm-rubinova-05.webp",
@@ -12,8 +12,8 @@
     "pozycjaGlowna": {
       "eyebrow": "Pozycja podstawowa",
       "name": "Fronty ramiakowe",
-      "sizes": "7 / 18 / 36 / 60 mm",
-      "value": "od 350 zł",
+      "sizes": "12 / 18 / 36 / 60 mm",
+      "value": "od 500 zł",
       "unit": "m² netto",
       "text": "Cena zależna od wybranego dekoru — każde zamówienie wyceniamy indywidualnie.",
       "ctaLabel": "Zamów wycenę"

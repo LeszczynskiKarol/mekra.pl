@@ -43,7 +43,7 @@
     ],
     [
       #align(right)[
-        #text(font: f-display, size: 34pt, fill: c-accent)[od 350 zł]
+        #text(font: f-display, size: 34pt, fill: c-accent)[od 500 zł]
         #v(2pt)
         #text(font: f-heading, weight: 500, size: 7.5pt, fill: c-muted, tracking: 1.4pt)[\/ M² NETTO]
       ]

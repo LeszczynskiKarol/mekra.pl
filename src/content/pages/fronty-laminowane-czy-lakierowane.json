@@ -18,7 +18,7 @@
         { "name": "Ramka w połysku", "text": "Standardowa opcja", "value": "Praktycznie niemożliwa do wykonania", "type": "laminat" },
         { "name": "Krawędź frontu", "text": "Doklejana, oklejana klejem PUR", "value": "Zalana — malowana w całości", "type": "lakier" },
         { "name": "Zdobienia i sztukaterie", "text": "Ograniczone do formy ramiaka", "value": "Dowolne frezowania i zdobienia", "type": "lakier" },
-        { "name": "Cena", "text": "Od 350 zł/m² netto", "value": "Zwykle tańszy w prostych formach", "type": "lakier" }
+        { "name": "Cena", "text": "Od 500 zł/m² netto", "value": "Zwykle tańszy w prostych formach", "type": "lakier" }
       ],
       "caption": "Kolorem oznaczono materiał, który w danej kategorii wypada lepiej."
     },

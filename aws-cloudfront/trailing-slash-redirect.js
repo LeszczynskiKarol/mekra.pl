@@ -2,10 +2,16 @@
 // 1. Stałe przekierowania 301 dla adresów, które zmieniły slug (REDIRECTS).
 // 2. If the URI has no trailing slash AND no file extension, 301 → URI + '/'.
 // Keeps query string intact. Skips root '/'.
+// 3. Kreator /zamowienie/ jest jeszcze niepubliczny — chroni go HTTP Basic Auth.
+//    Repo jest publiczne, więc w kodzie zostaje placeholder; prawdziwe
+//    login:hasło (SSM /mekra/ZAMOWIENIE_BASIC_AUTH) wstawia publish.sh.
 var REDIRECTS = {
   '/oferta/ramka-7mm/': '/oferta/ramka-12mm/',
   '/realizacje/ramka-7mm/': '/realizacje/ramka-12mm/'
 };
+
+var PROTECTED_PREFIX = '/zamowienie';
+var BASIC_AUTH = 'Basic __ZAMOWIENIE_BASIC_AUTH__';
 
 function buildQs(querystring) {
   return querystring && Object.keys(querystring).length
@@ -29,9 +35,28 @@ function redirect(location) {
   };
 }
 
+function unauthorized() {
+  return {
+    statusCode: 401,
+    statusDescription: 'Unauthorized',
+    headers: {
+      'www-authenticate': { value: 'Basic realm="Mekra", charset="UTF-8"' },
+      'cache-control': { value: 'no-store' },
+      'x-robots-tag': { value: 'noindex' }
+    }
+  };
+}
+
 function handler(event) {
   var request = event.request;
   var uri = request.uri;
+
+  if (uri === PROTECTED_PREFIX || uri.indexOf(PROTECTED_PREFIX + '/') === 0) {
+    var auth = request.headers.authorization;
+    if (!auth || auth.value !== BASIC_AUTH) {
+      return unauthorized();
+    }
+  }
 
   var key = uri.endsWith('/') ? uri : uri + '/';
   if (REDIRECTS[key]) {
